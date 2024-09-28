@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import { store } from './app/store'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import crmTheme from './theme/crmTheme'
+import './utils/i18n'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
