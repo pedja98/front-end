@@ -8,16 +8,16 @@ import {
   StyledCenterBackgroundContainer,
 } from '../../styles/common'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { SignInProps } from '../../interfaces/signIn'
-// import { useTranslation } from 'react-i18next'
+import { SignInRequest } from '../../types/auth'
+import { useLoginMutation } from '../../app/apis/gw.api'
 
 const SignIn = () => {
-  const [signInData, setSignInData] = useState<SignInProps>({
+  const [signInRequest, setSignInRequest] = useState<SignInRequest>({
     username: '',
     password: '',
   })
-  // const { t } = useTranslation()
-  // console.log(t('key'))
+  const [login] = useLoginMutation()
+
   const signInButtonRef = useRef<HTMLButtonElement>(null)
   useEffect(() => {
     if (signInButtonRef.current) {
@@ -26,10 +26,18 @@ const SignIn = () => {
   }, [])
 
   const handleChange =
-    (field: keyof typeof signInData) =>
+    (field: keyof typeof signInRequest) =>
     (event: SelectChangeEvent<unknown> | ChangeEvent<HTMLInputElement | { value: unknown }>) => {
-      setSignInData({ ...signInData, [field]: event.target.value as string })
+      setSignInRequest({ ...signInRequest, [field]: event.target.value as string })
     }
+
+  const handleSignIn = async () => {
+    try {
+      await login(signInRequest).unwrap()
+    } catch (err) {
+      console.error('Login failed', err)
+    }
+  }
 
   return (
     <StyledCenterBackgroundContainer>
@@ -50,7 +58,7 @@ const SignIn = () => {
           <FormTextFieldStyled
             id='username'
             label='Korisničko ime'
-            value={signInData.username}
+            value={signInRequest.username}
             onChange={handleChange('username')}
             sx={{ m: 1 }}
           />
@@ -58,13 +66,13 @@ const SignIn = () => {
             id='password'
             label='Lozinka'
             type='password'
-            value={signInData.password}
+            value={signInRequest.password}
             onChange={handleChange('password')}
             sx={{ m: 1 }}
           />
         </FormCartContextStyled>
         <FormCartActionStyled>
-          <FormButtonStyled sx={{ m: 1 }} ref={signInButtonRef}>
+          <FormButtonStyled sx={{ m: 1 }} ref={signInButtonRef} onClick={handleSignIn}>
             Prijavi se
           </FormButtonStyled>
         </FormCartActionStyled>
