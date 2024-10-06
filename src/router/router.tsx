@@ -1,4 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom'
-import SignIn from '../components/auth/SignIn'
+import Login from '../pages/login/Login'
 
-export default createBrowserRouter([{ path: '/', element: <SignIn /> }])
+export default createBrowserRouter([{ path: '/', element: <Login /> }])

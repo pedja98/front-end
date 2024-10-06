@@ -1,11 +1,11 @@
 import { UserTypes } from './user'
 
-export interface SignInRequest {
+export interface AuthRequest {
   username: string
   password: string
 }
 
-export interface SignInResponse {
+export interface AuthResponse {
   token: string
   type: UserTypes
 }

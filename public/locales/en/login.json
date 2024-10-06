@@ -1,0 +1,9 @@
+{
+    "welcome": "WELCOME",
+    "login": "Login",
+    "userNotFound": "User not found",
+    "wrongPassword": "Incorrect password. Please try again",
+    "username": "Username",
+    "password": "Password"
+  }
+  

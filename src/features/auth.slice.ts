@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { SignInResponse } from '../types/auth'
+import { AuthResponse } from '../types/auth'
 import { gwApi } from '../app/apis/gw.api'
 import { InitialState as AuthInitialState } from '../constants/auth'
 
@@ -15,7 +15,7 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(gwApi.endpoints.login.matchFulfilled, (state, { payload }: PayloadAction<SignInResponse>) => {
+      .addMatcher(gwApi.endpoints.login.matchFulfilled, (state, { payload }: PayloadAction<AuthResponse>) => {
         state.token = payload.token
         state.userType = payload.type
         state.isAuthenticated = true

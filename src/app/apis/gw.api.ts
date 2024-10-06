@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { SignInRequest, SignInResponse } from '../../types/auth'
+import { AuthRequest, AuthResponse } from '../../types/auth'
 
 export const gwApi = createApi({
   reducerPath: 'gwApi',
@@ -7,7 +7,7 @@ export const gwApi = createApi({
     baseUrl: `${process.env.REACT_APP_GW_API}`,
   }),
   endpoints: (builder) => ({
-    login: builder.mutation<SignInResponse, SignInRequest>({
+    login: builder.mutation<AuthResponse, AuthRequest>({
       query: (credentials) => ({
         url: '/auth/login',
         method: 'POST',

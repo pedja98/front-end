@@ -1,10 +1,10 @@
 export interface Notification {
   key: number
   text: string
-  type: NotificationType
+  type: NotificationTypeEnum
 }
 
-export enum NotificationType {
+export enum NotificationTypeEnum {
   Default = 'default',
   Error = 'error',
   Success = 'success',
@@ -12,4 +12,4 @@ export enum NotificationType {
   Info = 'info',
 }
 
-export type SetNotificationProps = { text: string; type: NotificationType }
+export type SetNotificationProps = { text: string; type: NotificationTypeEnum }

@@ -8,34 +8,48 @@ import {
   StyledCenterBackgroundContainer,
 } from '../../styles/common'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { SignInRequest } from '../../types/auth'
+import { AuthRequest } from '../../types/auth'
 import { useLoginMutation } from '../../app/apis/gw.api'
+import { useAppDispatch } from '../../app/hooks'
+import { setNotification } from '../../features/notifications.slice'
+import { NotificationTypeEnum } from '../../types/notification'
+import { ApiException } from '../../types/exception'
+import { useTranslation } from 'react-i18next'
 
-const SignIn = () => {
-  const [signInRequest, setSignInRequest] = useState<SignInRequest>({
+const Login = () => {
+  const [loginRequest, setLoginRequest] = useState<AuthRequest>({
     username: '',
     password: '',
   })
   const [login] = useLoginMutation()
+  const dispatch = useAppDispatch()
+  const loginButtonRef = useRef<HTMLButtonElement>(null)
+  const { t } = useTranslation(['login'])
 
-  const signInButtonRef = useRef<HTMLButtonElement>(null)
   useEffect(() => {
-    if (signInButtonRef.current) {
-      signInButtonRef.current.focus()
+    if (loginButtonRef.current) {
+      loginButtonRef.current.focus()
     }
   }, [])
 
   const handleChange =
-    (field: keyof typeof signInRequest) =>
+    (field: keyof typeof loginRequest) =>
     (event: SelectChangeEvent<unknown> | ChangeEvent<HTMLInputElement | { value: unknown }>) => {
-      setSignInRequest({ ...signInRequest, [field]: event.target.value as string })
+      setLoginRequest({ ...loginRequest, [field]: event.target.value as string })
     }
 
-  const handleSignIn = async () => {
+  const handleLogin = async () => {
     try {
-      await login(signInRequest).unwrap()
+      await login(loginRequest).unwrap()
     } catch (err) {
-      console.error('Login failed', err)
+      const errorResponse = err as { data: ApiException }
+      const errorCode = errorResponse.data?.error
+      dispatch(
+        setNotification({
+          text: t(errorCode),
+          type: NotificationTypeEnum.Error,
+        }),
+      )
     }
   }
 
@@ -53,27 +67,27 @@ const SignIn = () => {
       >
         <FormCartContextStyled>
           <Root>
-            <Typography variant='h5'>DOBRODOŠLI</Typography>
+            <Typography variant='h5'>{t('welcome')}</Typography>
           </Root>
           <FormTextFieldStyled
             id='username'
-            label='Korisničko ime'
-            value={signInRequest.username}
+            label={t('username')}
+            value={loginRequest.username}
             onChange={handleChange('username')}
             sx={{ m: 1 }}
           />
           <FormTextFieldStyled
             id='password'
-            label='Lozinka'
+            label={t('password')}
             type='password'
-            value={signInRequest.password}
+            value={loginRequest.password}
             onChange={handleChange('password')}
             sx={{ m: 1 }}
           />
         </FormCartContextStyled>
         <FormCartActionStyled>
-          <FormButtonStyled sx={{ m: 1 }} ref={signInButtonRef} onClick={handleSignIn}>
-            Prijavi se
+          <FormButtonStyled sx={{ m: 1 }} ref={loginButtonRef} onClick={handleLogin}>
+            {t('login')}
           </FormButtonStyled>
         </FormCartActionStyled>
       </Card>
@@ -81,4 +95,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default Login
