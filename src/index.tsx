@@ -9,7 +9,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import crmTheme from './theme/crmTheme'
 import './utils/i18n'
 import { SnackbarProvider } from 'notistack'
-import Notification from './components/notification/Notification'
+import Notification from './components/Notification'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

@@ -6,7 +6,7 @@ import { gwApi } from './apis/gw.api'
 const rootReducer = combineReducers({
   [gwApi.reducerPath]: gwApi.reducer,
   notifications: notificationsReducer,
-  authReducer,
+  auth: authReducer,
 })
 
 export const store = configureStore({

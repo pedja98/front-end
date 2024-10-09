@@ -4,6 +4,7 @@
     "userNotFound": "User not found",
     "wrongPassword": "Incorrect password. Please try again",
     "username": "Username",
-    "password": "Password"
+    "password": "Password",
+    "fillAllFields": "Pleas fill all fields to login"
   }
   

@@ -8,23 +8,15 @@ const authSlice = createSlice({
   initialState: AuthInitialState,
   reducers: {
     logout: (state) => {
-      state.token = null
-      state.userType = undefined
-      state.isAuthenticated = false
+      state.token = undefined
+      state.type = undefined
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addMatcher(gwApi.endpoints.login.matchFulfilled, (state, { payload }: PayloadAction<AuthResponse>) => {
-        state.token = payload.token
-        state.userType = payload.type
-        state.isAuthenticated = true
-        state.error = null
-      })
-      .addMatcher(gwApi.endpoints.login.matchRejected, (state, { error }) => {
-        state.error = error.message || 'Login failed'
-        state.isAuthenticated = false
-      })
+    builder.addMatcher(gwApi.endpoints.login.matchFulfilled, (state, { payload }: PayloadAction<AuthResponse>) => {
+      state.token = payload.token
+      state.type = payload.type
+    })
   },
 })
 

@@ -6,15 +6,16 @@ import {
   FormTextFieldStyled,
   Root,
   StyledCenterBackgroundContainer,
-} from '../../styles/common'
+} from '../styles/common'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { AuthRequest } from '../../types/auth'
-import { useLoginMutation } from '../../app/apis/gw.api'
-import { useAppDispatch } from '../../app/hooks'
-import { setNotification } from '../../features/notifications.slice'
-import { NotificationTypeEnum } from '../../types/notification'
-import { ApiException } from '../../types/exception'
+import { AuthRequest } from '../types/auth'
+import { useLoginMutation } from '../app/apis/gw.api'
+import { useAppDispatch } from '../app/hooks'
+import { setNotification } from '../features/notifications.slice'
+import { NotificationTypeEnum } from '../types/notification'
+import { ApiException } from '../types/exception'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [loginRequest, setLoginRequest] = useState<AuthRequest>({
@@ -25,6 +26,7 @@ const Login = () => {
   const dispatch = useAppDispatch()
   const loginButtonRef = useRef<HTMLButtonElement>(null)
   const { t } = useTranslation(['login'])
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (loginButtonRef.current) {
@@ -40,7 +42,17 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
+      if (!loginRequest.username && !loginRequest.password) {
+        dispatch(
+          setNotification({
+            text: t('fillAllFields'),
+            type: NotificationTypeEnum.Error,
+          }),
+        )
+        return
+      }
       await login(loginRequest).unwrap()
+      navigate('/home')
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = errorResponse.data?.error
