@@ -25,7 +25,7 @@ const Login = () => {
   const [login] = useLoginMutation()
   const dispatch = useAppDispatch()
   const loginButtonRef = useRef<HTMLButtonElement>(null)
-  const { t } = useTranslation(['login'])
+  const { t } = useTranslation(['login', 'general'])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      if (!loginRequest.username && !loginRequest.password) {
+      if (!loginRequest.username || !loginRequest.password) {
         dispatch(
           setNotification({
             text: t('fillAllFields'),
@@ -55,7 +55,7 @@ const Login = () => {
       navigate('/home')
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = errorResponse.data?.error
+      const errorCode = errorResponse.data?.error || 'general:unknowError'
       dispatch(
         setNotification({
           text: t(errorCode),

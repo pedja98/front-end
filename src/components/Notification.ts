@@ -17,6 +17,7 @@ const Notification = () => {
           vertical: 'top',
           horizontal: 'left',
         },
+        autoHideDuration: 5000,
       })
       dispatch(removeNotification(key))
     })
