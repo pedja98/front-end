@@ -6,11 +6,11 @@ export interface AuthRequest {
 }
 
 export interface AuthResponse {
-  token: string | undefined | null
+  username: string | undefined | null
   type: UserTypes | undefined | null
 }
 
 export interface AuthState {
-  token: string | undefined | null
+  username: string | undefined | null
   type: UserTypes | undefined | null
 }

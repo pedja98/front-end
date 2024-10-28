@@ -8,13 +8,13 @@ const authSlice = createSlice({
   initialState: AuthInitialState,
   reducers: {
     logout: (state) => {
-      state.token = undefined
+      state.username = undefined
       state.type = undefined
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(gwApi.endpoints.login.matchFulfilled, (state, { payload }: PayloadAction<AuthResponse>) => {
-      state.token = payload.token
+      state.username = payload.username
       state.type = payload.type
     })
   },

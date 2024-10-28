@@ -8,8 +8,8 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const token = useSelector((state: RootState) => state.auth.token)
-  return token ? element : <Navigate to='/' />
+  const username = useSelector((state: RootState) => state.auth.username)
+  return username ? element : <Navigate to='/' />
 }
 
 export default ProtectedRoute
