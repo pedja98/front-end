@@ -7,19 +7,27 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: AuthInitialState,
   reducers: {
-    logout: (state) => {
-      state.username = undefined
-      state.type = undefined
+    setAuthDataFromLocalStorage: (state) => {
+      const auth = localStorage.getItem('currentUser')
+        ? JSON.parse(String(localStorage.getItem('currentUser')))
+        : undefined
+      if (auth) {
+        state.username = auth.username
+        state.type = auth.type
+        state.language = auth.language
+      }
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(gwApi.endpoints.login.matchFulfilled, (state, { payload }: PayloadAction<AuthResponse>) => {
       state.username = payload.username
       state.type = payload.type
+      state.language = payload.language
+      localStorage.setItem('currentUser', JSON.stringify(state))
     })
   },
 })
 
-export const { logout } = authSlice.actions
+export const { setAuthDataFromLocalStorage } = authSlice.actions
 
 export default authSlice.reducer
