@@ -1,5 +1,12 @@
+import { Grid } from '@mui/material'
+import Navbar from '../components/Navbar'
+
 const Home = () => {
-  return <div>J</div>
+  return (
+    <Grid>
+      <Navbar />
+    </Grid>
+  )
 }
 
 export default Home

@@ -1,3 +1,13 @@
 {
-    "unknowError": "Unknown Error"
+  "unknowError": "Unknown Error",
+  "navbarLinks": {
+    "home": "Home",
+    "companies": "Companies",
+    "contacts": "Contacts",
+    "customerSessions": "Customer sessions",
+    "opportunities": "Opportunities",
+    "offers": "Offers",
+    "contracts": "Contracts",
+    "shops": "Shops"
+  }
 }

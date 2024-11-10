@@ -1,3 +1,13 @@
 {
-    "unknowError": "Nepoznata greška"
+  "unknowError": "Nepoznata greška",
+  "navbarLinks": {
+    "home": "Početna",
+    "companies": "Kompanije",
+    "contacts": "Kontakti",
+    "customerSessions": "Sesije sa korisnikom",
+    "opportunities": "Mogućnosti",
+    "offers": "Ponude",
+    "contracts": "Ugovori",
+    "shops": "Prodavnice"
+  }
 }
