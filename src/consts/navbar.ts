@@ -7,4 +7,7 @@ export const NavbarLinks = [
   'offers',
   'contracts',
   'shops',
+  'userActions',
 ]
+
+export const NavbarFadeMenueOptions = ['editProfile', 'reports', 'logout']

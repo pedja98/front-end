@@ -9,5 +9,10 @@
     "offers": "Offers",
     "contracts": "Contracts",
     "shops": "Shops"
+  },
+  "navbarFadeMenueOptions": {
+    "editProfile": "Edit Profile",
+    "reports": "Reports",
+    "logout": "Logout"
   }
 }

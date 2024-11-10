@@ -52,7 +52,7 @@ const Login = () => {
         return
       }
       await login(loginRequest).unwrap()
-      navigate('/home')
+      navigate('/index')
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = errorResponse.data?.error || 'general:unknowError'

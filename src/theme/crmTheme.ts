@@ -1,11 +1,5 @@
 import { createTheme } from '@mui/material/styles'
-import {
-  TernaryColor,
-  PrimaryThemeColor,
-  SecondaryThemeColor,
-  QuaternaryColor,
-  WhiteTeamColor,
-} from '../constants/common'
+import { TernaryColor, PrimaryThemeColor, SecondaryThemeColor, QuaternaryColor, WhiteTeamColor } from '../consts/common'
 
 export default createTheme({
   palette: {

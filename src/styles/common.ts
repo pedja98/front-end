@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles'
-import { TernaryColor, PrimaryThemeColor, WhiteTeamColor } from '../constants/common'
+import { TernaryColor, PrimaryThemeColor, WhiteTeamColor } from '../consts/common'
 import { Button, CardActions, CardContent, TextField } from '@mui/material'
 
 export const StyledBackgroundContainer = styled('div')(() => ({

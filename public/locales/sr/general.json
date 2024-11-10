@@ -9,5 +9,10 @@
     "offers": "Ponude",
     "contracts": "Ugovori",
     "shops": "Prodavnice"
+  },
+  "navbarFadeMenueOptions": {
+    "editProfile": "Izmeni profil",
+    "reports": "Izveštaji",
+    "logout": "Izloguj se"
   }
 }

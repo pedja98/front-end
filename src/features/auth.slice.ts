@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AuthResponse } from '../types/auth'
 import { gwApi } from '../app/apis/gw.api'
-import { InitialState as AuthInitialState } from '../constants/auth'
+import { InitialState as AuthInitialState } from '../consts/auth'
 
 const authSlice = createSlice({
   name: 'auth',

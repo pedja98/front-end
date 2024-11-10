@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useAppDispatch } from '../app/hooks'
 import { setAuthDataFromLocalStorage } from '../features/auth.slice'
 import { AuthState } from '../types/auth'
 
-interface ProtectedRouteProps {
+interface IndexProtectedRouteProps {
   element: JSX.Element
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
+const IndexProtectedRoute: FC<IndexProtectedRouteProps> = ({ element }) => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(setAuthDataFromLocalStorage())
@@ -19,4 +19,4 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
   return auth.username ? element : <Navigate to='/' />
 }
 
-export default ProtectedRoute
+export default IndexProtectedRoute
