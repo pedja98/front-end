@@ -1,6 +1,6 @@
 {
   "welcome": "WELCOME",
-  "login": "Login",
+  "loginButtonText": "Login",
   "userNotFound": "User not found",
   "wrongPassword": "Incorrect password. Please try again",
   "username": "Username",

@@ -1,27 +1,34 @@
-import React, { useState } from 'react'
+import { FC, MouseEvent, useState } from 'react'
 import Menu from '@mui/material/Menu'
 import Fade from '@mui/material/Fade'
-import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { NavbarFadeMenueOptions } from '../consts/navbar'
 import { NavbarUserOptionsButtonStyled, NavbarUserOptionsMenuItemStyled } from '../styles/navbar'
 import { useTranslation } from 'react-i18next'
+import { NavbarOptionsEnum } from '../types/navbar'
+import { Grid } from '@mui/material'
 import { useLogoutMutation } from '../app/apis/gw.api'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { useNavigate } from 'react-router-dom'
-import { NavbarFadeMenueOptionsEnum } from '../types/navbar'
-import { ApiException } from '../types/exception'
 import { setNotification } from '../features/notifications.slice'
 import { NotificationTypeEnum } from '../types/notification'
+import { ApiException } from '../types/exception'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
-const NavbarFadeMenu = () => {
+interface Props {
+  menuOptions: NavbarOptionsEnum[]
+  mainComponentText: string
+}
+
+const NavbarFadeMenu: FC<Props> = (props): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const [logout] = useLogoutMutation()
   const open = Boolean(anchorEl)
-  const username = useAppSelector((state) => state.auth.username) as string
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const [logout] = useLogoutMutation()
+  const username = useAppSelector((state) => state.auth.username) as string
   const dispatch = useAppDispatch()
 
-  const handleMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
+  const handleMouseEnter = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -30,7 +37,7 @@ const NavbarFadeMenu = () => {
   }
 
   const handleClick = async (option: string) => {
-    if (option === NavbarFadeMenueOptionsEnum.Logout) {
+    if (option === NavbarOptionsEnum.Logout) {
       try {
         const messageCode = `general:${(await logout({ username }).unwrap()).message}`
         dispatch(
@@ -55,15 +62,23 @@ const NavbarFadeMenu = () => {
   }
 
   return (
-    <div>
+    <Grid
+      sx={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'flex-end',
+      }}
+    >
       <NavbarUserOptionsButtonStyled
         id='fade-button'
         aria-controls={open ? 'fade-menu' : undefined}
         aria-haspopup='true'
         aria-expanded={open ? 'true' : undefined}
         onMouseEnter={handleMouseEnter}
+        style={{ width: '90%' }}
+        endIcon={<KeyboardArrowDownIcon />}
       >
-        {username}
+        {props.mainComponentText}
       </NavbarUserOptionsButtonStyled>
       <Menu
         id='fade-menu'
@@ -76,18 +91,18 @@ const NavbarFadeMenu = () => {
         onClose={handleMouseLeave}
         TransitionComponent={Fade}
       >
-        {NavbarFadeMenueOptions.map((option) => (
+        {props.menuOptions.map((option) => (
           <NavbarUserOptionsMenuItemStyled
             key={option}
             onClick={() => {
               handleClick(option)
             }}
           >
-            {t(`general:navbarFadeMenueOptions.${option}`)}
+            {t(`general:navbarLinks.${option}`)}
           </NavbarUserOptionsMenuItemStyled>
         ))}
       </Menu>
-    </div>
+    </Grid>
   )
 }
 

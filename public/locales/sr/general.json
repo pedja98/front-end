@@ -1,6 +1,7 @@
 {
   "unknowError": "Nepoznata greška",
   "logoutSuccessfully": "Uspešno ste se izlogovali",
+  "moreOptions": "Još",
   "navbarLinks": {
     "home": "Početna",
     "companies": "Kompanije",
@@ -9,9 +10,7 @@
     "opportunities": "Mogućnosti",
     "offers": "Ponude",
     "contracts": "Ugovori",
-    "shops": "Prodavnice"
-  },
-  "navbarFadeMenueOptions": {
+    "shops": "Prodavnice",
     "editProfile": "Izmeni profil",
     "reports": "Izveštaji",
     "logout": "Izloguj se"

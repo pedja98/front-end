@@ -1,6 +1,6 @@
 {
   "welcome": "DOBRODOŠLI",
-  "login": "Prijavite se",
+  "loginButtonText": "Prijavite se",
   "userNotFound": "Korisnik nije pronađen",
   "wrongPassword": "Pogrešna lozinka. Molimo Vas pokušajte ponovo",
   "username": "Korisničko ime",

@@ -1,6 +1,7 @@
 {
   "unknowError": "Unknown Error",
   "logoutSuccessfully": "You have logged out successfully",
+  "moreOptions": "More",
   "navbarLinks": {
     "home": "Home",
     "companies": "Companies",
@@ -9,9 +10,7 @@
     "opportunities": "Opportunities",
     "offers": "Offers",
     "contracts": "Contracts",
-    "shops": "Shops"
-  },
-  "navbarFadeMenueOptions": {
+    "shops": "Shops",
     "editProfile": "Edit Profile",
     "reports": "Reports",
     "logout": "Logout"

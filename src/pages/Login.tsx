@@ -79,18 +79,18 @@ const Login = () => {
       >
         <FormCartContextStyled>
           <Root>
-            <Typography variant='h5'>{t('welcome')}</Typography>
+            <Typography variant='h5'>{t('login:welcome')}</Typography>
           </Root>
           <FormTextFieldStyled
             id='username'
-            label={t('username')}
+            label={t('login:username')}
             value={loginRequest.username}
             onChange={handleChange('username')}
             sx={{ m: 1 }}
           />
           <FormTextFieldStyled
             id='password'
-            label={t('password')}
+            label={t('login:password')}
             type='password'
             value={loginRequest.password}
             onChange={handleChange('password')}
@@ -99,7 +99,7 @@ const Login = () => {
         </FormCartContextStyled>
         <FormCartActionStyled>
           <FormButtonStyled sx={{ m: 1 }} ref={loginButtonRef} onClick={handleLogin}>
-            {t('login')}
+            {t('login:loginButtonText')}
           </FormButtonStyled>
         </FormCartActionStyled>
       </Card>
