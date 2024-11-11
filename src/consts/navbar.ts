@@ -1,3 +1,5 @@
+import { NavbarFadeMenueOptionsEnum } from '../types/navbar'
+
 export const NavbarLinks = [
   'home',
   'companies',
@@ -10,4 +12,8 @@ export const NavbarLinks = [
   'userActions',
 ]
 
-export const NavbarFadeMenueOptions = ['editProfile', 'reports', 'logout']
+export const NavbarFadeMenueOptions = [
+  NavbarFadeMenueOptionsEnum.EditProfile,
+  NavbarFadeMenueOptionsEnum.Reports,
+  NavbarFadeMenueOptionsEnum.Logout,
+]

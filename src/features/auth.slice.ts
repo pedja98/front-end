@@ -19,12 +19,21 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(gwApi.endpoints.login.matchFulfilled, (state, { payload }: PayloadAction<AuthResponse>) => {
-      state.username = payload.username
-      state.type = payload.type
-      state.language = payload.language
-      localStorage.setItem('currentUser', JSON.stringify(state))
-    })
+    builder
+      .addMatcher(gwApi.endpoints.login.matchFulfilled, (state, { payload }: PayloadAction<AuthResponse>) => {
+        state.username = payload.username
+        state.type = payload.type
+        state.language = payload.language
+        localStorage.setItem('currentUser', JSON.stringify(state))
+      })
+      .addMatcher(gwApi.endpoints.logout.matchFulfilled, (state) => {
+        Object.assign(state, {
+          username: AuthInitialState.username,
+          type: AuthInitialState.type,
+          language: AuthInitialState.language,
+        })
+        localStorage.removeItem('currentUser')
+      })
   },
 })
 
