@@ -17,7 +17,7 @@ const NavbarFadeMenu = () => {
   const [logout] = useLogoutMutation()
   const open = Boolean(anchorEl)
   const username = useAppSelector((state) => state.auth.username) as string
-  const { t } = useTranslation('general')
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -32,7 +32,7 @@ const NavbarFadeMenu = () => {
   const handleClick = async (option: string) => {
     if (option === NavbarFadeMenueOptionsEnum.Logout) {
       try {
-        const messageCode = await (await logout({ username }).unwrap()).message
+        const messageCode = `general:${(await logout({ username }).unwrap()).message}`
         dispatch(
           setNotification({
             text: t(messageCode),
@@ -83,7 +83,7 @@ const NavbarFadeMenu = () => {
               handleClick(option)
             }}
           >
-            {t(`navbarFadeMenueOptions.${option}`)}
+            {t(`general:navbarFadeMenueOptions.${option}`)}
           </NavbarUserOptionsMenuItemStyled>
         ))}
       </Menu>

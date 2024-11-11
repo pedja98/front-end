@@ -5,7 +5,7 @@ import { NavbarLinkStyled } from '../styles/navbar'
 import NavbarFadeMenu from './NavbarFadeMenu'
 
 const Navbar = () => {
-  const { t } = useTranslation('general')
+  const { t } = useTranslation()
   return (
     <Grid container style={{ height: '50px', backgroundColor: 'black' }}>
       {NavbarLinks.map((navbarLink, index) =>
@@ -13,7 +13,7 @@ const Navbar = () => {
           <NavbarFadeMenu key={navbarLink} />
         ) : (
           <NavbarLinkStyled key={navbarLink} to={`/index`}>
-            {t(`navbarLinks.${navbarLink}`)}
+            {t(`general:navbarLinks.${navbarLink}`)}
           </NavbarLinkStyled>
         ),
       )}
