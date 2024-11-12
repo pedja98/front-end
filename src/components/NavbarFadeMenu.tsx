@@ -4,7 +4,7 @@ import Fade from '@mui/material/Fade'
 import { NavbarUserOptionsButtonStyled, NavbarUserOptionsMenuItemStyled } from '../styles/navbar'
 import { useTranslation } from 'react-i18next'
 import { NavbarOptionsEnum } from '../types/navbar'
-import { Grid } from '@mui/material'
+import Grid from '@mui/material/Grid'
 import { useLogoutMutation } from '../app/apis/gw.api'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { useNavigate } from 'react-router-dom'
@@ -12,6 +12,7 @@ import { setNotification } from '../features/notifications.slice'
 import { NotificationTypeEnum } from '../types/notification'
 import { ApiException } from '../types/exception'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import { getRoutePrefixFromCodeString } from '../helpers/common'
 
 interface Props {
   menuOptions: NavbarOptionsEnum[]
@@ -57,7 +58,10 @@ const NavbarFadeMenu: FC<Props> = (props): JSX.Element => {
           }),
         )
       }
+      return
     }
+
+    navigate(`/index/${getRoutePrefixFromCodeString(option)}`)
     setAnchorEl(null)
   }
 

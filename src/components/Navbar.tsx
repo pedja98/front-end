@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { NavbarLinkStyled } from '../styles/navbar'
 import NavbarFadeMenu from './NavbarFadeMenu'
 import { useAppSelector } from '../app/hooks'
+import { getRoutePrefixFromCodeString } from '../helpers/common'
 
 const Navbar = () => {
   const { t } = useTranslation()
@@ -21,7 +22,7 @@ const Navbar = () => {
       <Grid container style={{ width: menuOptionsWidth }}>
         {isLargeScreen ? (
           NavbarLinks.map((navbarLink) => (
-            <NavbarLinkStyled key={navbarLink} to={`/index`}>
+            <NavbarLinkStyled key={navbarLink} to={`/index/${getRoutePrefixFromCodeString(navbarLink)}`}>
               {t(`general:navbarLinks.${navbarLink}`)}
             </NavbarLinkStyled>
           ))

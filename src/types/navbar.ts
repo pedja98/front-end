@@ -8,6 +8,6 @@ export enum NavbarOptionsEnum {
   Contracts = 'contracts',
   Shops = 'shops',
   EditProfile = 'editProfile',
-  Reports = 'reports',
+  Catalogue = 'catalogue',
   Logout = 'logout',
 }

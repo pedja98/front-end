@@ -13,6 +13,6 @@ export const NavbarLinks = [
 
 export const NavbarFadeMenueOptions = [
   NavbarOptionsEnum.EditProfile,
-  NavbarOptionsEnum.Reports,
+  NavbarOptionsEnum.Catalogue,
   NavbarOptionsEnum.Logout,
 ]
