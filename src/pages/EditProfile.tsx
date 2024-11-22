@@ -9,7 +9,15 @@ const EditProfile = () => {
   if (isLoading) {
     return <Spinner />
   }
-  return <Grid>{currentUserData?.firstName}</Grid>
+  return (
+    <Grid>
+      <Grid>{currentUserData?.firstName}</Grid>
+      <Grid>{currentUserData?.lastName}</Grid>
+      <Grid>{currentUserData?.email}</Grid>
+      <Grid>{currentUserData?.phone}</Grid>
+      <Grid>{currentUserData?.language}</Grid>
+    </Grid>
+  )
 }
 
 export default EditProfile
