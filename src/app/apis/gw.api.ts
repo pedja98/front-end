@@ -1,16 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { AuthRequest, AuthResponse, AuthState } from '../../types/auth'
-import { RootState } from '../store'
+import { AuthRequest, AuthResponse } from '../../types/auth'
+import { getCurrentUser } from '../../helpers/common'
 
 export const gwApi = createApi({
   reducerPath: 'gwApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.REACT_APP_GW_API}`,
-    prepareHeaders: (headers, { getState }) => {
-      const auth = (getState() as RootState).auth as AuthState
-      if (auth?.username && auth?.type) {
-        headers.set('x-username', auth.username)
-        headers.set('x-user-type', String(auth.type))
+    prepareHeaders: (headers) => {
+      const currentUser = getCurrentUser()
+      if (currentUser?.username && currentUser?.type) {
+        headers.set('x-username', currentUser.username)
+        headers.set('x-user-type', String(currentUser.type))
       }
       return headers
     },

@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles'
 import { TernaryColor, PrimaryThemeColor, WhiteTeamColor } from '../consts/common'
-import { Button, CardActions, CardContent, TextField } from '@mui/material'
+import { Button, CardActions, CardContent, CircularProgress, TextField } from '@mui/material'
 
 export const StyledBackgroundContainer = styled('div')(() => ({
   backgroundColor: PrimaryThemeColor,
@@ -149,3 +149,9 @@ export const ActionButtonBigStyled = styled(Button)(() => ({
   height: 35,
   fontSize: '15px',
 }))
+
+export const CenteredCircularProgress = styled(CircularProgress)({
+  width: '80px !important',
+  height: '80px !important',
+  color: 'black !important',
+})
