@@ -6,21 +6,45 @@ export enum UserTypes {
   MANAGER,
 }
 
-export interface User {
-  firstName: string
-  lastName: string
-  email: string
-  username: string
-  phone: string
-  type: UserTypes
-  language: Language
-  shopId: number
-  shopName: string
-  salesmen: string
-  createdById: number
-  createdByUsername: string
-  modifiedById: number
-  modifiedByUsername: string
-  dateCreated: Date
-  dateModified: Date
+export interface FetchUserResponse {
+  firstName?: string
+  lastName?: string
+  email?: string
+  username?: string
+  phone?: string
+  type?: UserTypes
+  language?: Language
+  shopId?: number
+  shopName?: string
+  salesmen?: string
+  createdById?: number
+  createdByUsername?: string
+  modifiedById?: number
+  modifiedByUsername?: string
+  dateCreated?: Date
+  dateModified?: Date
+}
+
+export interface UserState {
+  firstName?: string
+  lastName?: string
+  email?: string
+  username?: string
+  phone?: string
+  type?: UserTypes
+  language?: Language
+  shopId?: number
+  shopName?: string
+  salesmen?: string
+  createdById?: number
+  createdByUsername?: string
+  modifiedById?: number
+  modifiedByUsername?: string
+  dateCreated?: Date
+  dateModified?: Date
+}
+
+export interface UpdateAttributePayload {
+  attribute: string
+  value?: string | UserTypes | Language | Date
 }

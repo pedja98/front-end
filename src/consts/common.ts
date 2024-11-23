@@ -1,6 +1,6 @@
 import { Language } from '../types/common'
 
-export const PrimaryThemeColor = '#8a8888'
+export const PrimaryThemeColor = '#6e6e6e'
 
 export const SecondaryThemeColor = '#454444'
 

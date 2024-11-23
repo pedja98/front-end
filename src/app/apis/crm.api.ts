@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { User } from '../../types/user'
+import { FetchUserResponse } from '../../types/user'
 import { getCurrentUser } from '../../helpers/common'
 
 export const crmApi = createApi({
@@ -16,7 +16,7 @@ export const crmApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getUserByUsername: builder.query<User, string>({
+    getUserByUsername: builder.query<FetchUserResponse, string>({
       query: (username) => `/users/${username}`,
     }),
   }),
