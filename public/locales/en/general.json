@@ -3,6 +3,8 @@
   "logoutSuccessfully": "You have logged out successfully",
   "moreOptions": "More",
   "saveButtonText": "Save changes",
+  "emailFormatError": "Email is not in correct format",
+  "phoneFormatError": "Phone is not in correct format",
   "fillAllFields": "Please fill in all fields",
   "entityUpdateError": "Error occures while updating",
   "navbarLinks": {

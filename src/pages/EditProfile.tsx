@@ -3,7 +3,7 @@ import { useGetUserByUsernameQuery, useUpdateUserMutation } from '../app/apis/cr
 import Spinner from '../components/Spinner'
 import { getCurrentUser } from '../helpers/common'
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
-import { Languages } from '../consts/common'
+import { EmailPattern, Languages, PhonePattern } from '../consts/common'
 import { Language } from '../types/common'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent } from 'react'
@@ -31,6 +31,26 @@ const EditProfile = () => {
   }
 
   const handleSaveChanges = async () => {
+    if (!EmailPattern.test(String(currentUserData.email))) {
+      dispatch(
+        setNotification({
+          text: t('general:emailFormatError'),
+          type: NotificationTypeEnum.Warning,
+        }),
+      )
+      return
+    }
+
+    if (!PhonePattern.test(String(currentUserData.phone))) {
+      dispatch(
+        setNotification({
+          text: t('general:phoneFormatError'),
+          type: NotificationTypeEnum.Warning,
+        }),
+      )
+      return
+    }
+
     try {
       const userData = {
         firstName: currentUserData.firstName,

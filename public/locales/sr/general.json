@@ -2,6 +2,8 @@
   "unknowError": "Nepoznata greška",
   "logoutSuccessfully": "Uspešno ste se izlogovali",
   "saveButtonText": "Sačuvaj izmene",
+  "emailFormatError": "Email nije u odgovarajućem formatu",
+  "phoneFormatError": "Telefon nije u odgovarajućem formatu",
   "moreOptions": "Još",
   "fillAllFields": "Molimo Vas da popunite sva polja",
   "entityUpdateError": "Nastala je greška pri ažuriranju podataka",

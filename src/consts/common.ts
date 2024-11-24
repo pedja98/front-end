@@ -14,3 +14,7 @@ export const Languages: Record<Language, Language> = {
   EN: 'EN',
   SR: 'SR',
 }
+
+export const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+export const PhonePattern = /^\+?\d+$/
