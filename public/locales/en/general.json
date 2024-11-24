@@ -3,6 +3,8 @@
   "logoutSuccessfully": "You have logged out successfully",
   "moreOptions": "More",
   "saveButtonText": "Save changes",
+  "fillAllFields": "Please fill in all fields",
+  "entityUpdateError": "Error occures while updating",
   "navbarLinks": {
     "home": "Home",
     "companies": "Companies",

@@ -3,6 +3,8 @@
   "logoutSuccessfully": "Uspešno ste se izlogovali",
   "saveButtonText": "Sačuvaj izmene",
   "moreOptions": "Još",
+  "fillAllFields": "Molimo Vas da popunite sva polja",
+  "entityUpdateError": "Nastala je greška pri ažuriranju podataka",
   "navbarLinks": {
     "home": "Početna",
     "companies": "Kompanije",

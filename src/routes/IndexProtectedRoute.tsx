@@ -9,12 +9,12 @@ interface IndexProtectedRouteProps {
 }
 
 const IndexProtectedRoute: FC<IndexProtectedRouteProps> = ({ element }) => {
-  const currentUser = getCurrentUser()
+  const currentUser = getCurrentUser() ?? undefined
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(setAuthDataFromLocalStorage())
-  }, [])
-  return currentUser.username ? element : <Navigate to='/' />
+  })
+  return currentUser && currentUser.username ? element : <Navigate to='/' />
 }
 
 export default IndexProtectedRoute

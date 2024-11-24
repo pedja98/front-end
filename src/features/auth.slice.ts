@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AuthResponse } from '../types/auth'
 import { gwApi } from '../app/apis/gw.api'
 import { InitialState as AuthInitialState } from '../consts/auth'
+import { UpdateAttributePayload } from '../types/common'
 
 const authSlice = createSlice({
   name: 'auth',
@@ -15,6 +16,20 @@ const authSlice = createSlice({
         state.username = auth.username
         state.type = auth.type
         state.language = auth.language
+      }
+    },
+    updateAuthAttribute: (state, { payload }: PayloadAction<UpdateAttributePayload>) => {
+      const { attribute, value } = payload
+      const auth = localStorage.getItem('currentUser')
+        ? JSON.parse(String(localStorage.getItem('currentUser')))
+        : undefined
+
+      const newAuth = { ...auth, [attribute]: value }
+      localStorage.setItem('currentUser', JSON.stringify(newAuth))
+
+      return {
+        ...state,
+        [attribute]: value,
       }
     },
   },
@@ -37,6 +52,6 @@ const authSlice = createSlice({
   },
 })
 
-export const { setAuthDataFromLocalStorage } = authSlice.actions
+export const { setAuthDataFromLocalStorage, updateAuthAttribute } = authSlice.actions
 
 export default authSlice.reducer

@@ -4,6 +4,5 @@
   "userNotFound": "Korisnik nije pronađen",
   "wrongPassword": "Pogrešna lozinka. Molimo Vas pokušajte ponovo",
   "username": "Korisničko ime",
-  "password": "Lozinka",
-  "fillAllFields": "Neophodno je da popunite sva polja"
+  "password": "Lozinka"
 }

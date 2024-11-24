@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { FetchUserResponse } from '../../types/user'
+import { FetchUserResponse, UserState } from '../../types/user'
 import { getCurrentUser } from '../../helpers/common'
 
 export const crmApi = createApi({
@@ -19,7 +19,14 @@ export const crmApi = createApi({
     getUserByUsername: builder.query<FetchUserResponse, string>({
       query: (username) => `/users/${username}`,
     }),
+    updateUser: builder.mutation<{ message: string }, { username: string; user: Partial<UserState> }>({
+      query: ({ username, user }) => ({
+        url: `/users/${username}`,
+        method: 'PUT',
+        body: user,
+      }),
+    }),
   }),
 })
 
-export const { useGetUserByUsernameQuery } = crmApi
+export const { useGetUserByUsernameQuery, useUpdateUserMutation } = crmApi

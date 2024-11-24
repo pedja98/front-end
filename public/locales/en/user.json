@@ -3,5 +3,6 @@
   "lastName": "Last name",
   "email": "Email",
   "phone": "Phone",
-  "language": "Language"
+  "language": "Language",
+  "userUpdated": "User data has been successfully updated"
 }

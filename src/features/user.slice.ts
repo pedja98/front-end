@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { crmApi } from '../app/apis/crm.api'
-import { FetchUserResponse, UpdateAttributePayload } from '../types/user'
+import { FetchUserResponse } from '../types/user'
+import { UpdateAttributePayload } from '../types/common'
 import { InitialState as UserInitialState } from '../consts/user'
 
 const userSlice = createSlice({
   name: 'user',
   initialState: UserInitialState,
   reducers: {
-    setUserAttribute: (state, { payload }: PayloadAction<UpdateAttributePayload>) => {
+    updateUserAttribute: (state, { payload }: PayloadAction<UpdateAttributePayload>) => {
       const { attribute, value } = payload
       return {
         ...state,
@@ -25,5 +26,5 @@ const userSlice = createSlice({
   },
 })
 
-export const { setUserAttribute } = userSlice.actions
+export const { updateUserAttribute } = userSlice.actions
 export default userSlice.reducer

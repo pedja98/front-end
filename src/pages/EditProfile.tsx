@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid'
-import { useGetUserByUsernameQuery } from '../app/apis/crm.api'
+import { useGetUserByUsernameQuery, useUpdateUserMutation } from '../app/apis/crm.api'
 import Spinner from '../components/Spinner'
 import { getCurrentUser } from '../helpers/common'
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
@@ -8,21 +8,84 @@ import { Language } from '../types/common'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { setUserAttribute } from '../features/user.slice'
+import { updateUserAttribute } from '../features/user.slice'
+import { ApiException } from '../types/exception'
+import { setNotification } from '../features/notifications.slice'
+import { NotificationTypeEnum } from '../types/notification'
+import { useNavigate } from 'react-router-dom'
+import { updateAuthAttribute } from '../features/auth.slice'
 
 const EditProfile = () => {
-  const { isLoading } = useGetUserByUsernameQuery(String(getCurrentUser().username))
+  const { isLoading: getUserByUsernameLoading } = useGetUserByUsernameQuery(String(getCurrentUser().username))
+  const [updateUser, { isLoading: updateUserLoading }] = useUpdateUserMutation()
+
   const currentUserData = useAppSelector((state) => state.user)
+  const currentLanguage = useAppSelector((state) => state.auth.language)
+
   const { t } = useTranslation()
-
-  if (isLoading) {
-    return <Spinner />
-  }
-
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
-    dispatch(setUserAttribute({ attribute: event.target.name, value: event.target.value }))
+    dispatch(updateUserAttribute({ attribute: event.target.name, value: event.target.value }))
+  }
+
+  const handleSaveChanges = async () => {
+    try {
+      const userData = {
+        firstName: currentUserData.firstName,
+        lastName: currentUserData.lastName,
+        email: currentUserData.email,
+        phone: currentUserData.phone,
+        type: currentUserData.type,
+        language: currentUserData.language,
+      }
+
+      if (Object.values(userData).some((userDataValue) => !String(userDataValue).trim())) {
+        dispatch(
+          setNotification({
+            text: t('general:fillAllFields'),
+            type: NotificationTypeEnum.Warning,
+          }),
+        )
+        return
+      }
+
+      const messageCode = `user:${
+        (
+          await updateUser({
+            username: String(currentUserData.username),
+            user: userData,
+          }).unwrap()
+        ).message
+      }`
+
+      if (currentLanguage !== currentUserData.language) {
+        dispatch(updateAuthAttribute({ attribute: 'language', value: currentUserData.language }))
+      }
+
+      dispatch(
+        setNotification({
+          text: t(messageCode),
+          type: NotificationTypeEnum.Success,
+        }),
+      )
+
+      navigate('/index')
+    } catch (err) {
+      const errorResponse = err as { data: ApiException }
+      const errorCode = `user:${errorResponse.data?.error}` || 'general:unknowError'
+      dispatch(
+        setNotification({
+          text: t(errorCode),
+          type: NotificationTypeEnum.Error,
+        }),
+      )
+    }
+  }
+
+  if (getUserByUsernameLoading || updateUserLoading) {
+    return <Spinner />
   }
 
   return (
@@ -103,7 +166,9 @@ const EditProfile = () => {
         </FormControl>
       </Grid>
       <Grid item sx={{ width: '40%' }}>
-        <Button sx={{ width: '100%' }}>{t('general:saveButtonText')}</Button>
+        <Button sx={{ width: '100%' }} onClick={handleSaveChanges}>
+          {t('general:saveButtonText')}
+        </Button>
       </Grid>
     </Grid>
   )

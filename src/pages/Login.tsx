@@ -7,7 +7,7 @@ import {
   Root,
   StyledCenterBackgroundContainer,
 } from '../styles/common'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { AuthRequest } from '../types/auth'
 import { useLoginMutation } from '../app/apis/gw.api'
 import { useAppDispatch } from '../app/hooks'
@@ -24,15 +24,8 @@ const Login = () => {
   })
   const [login] = useLoginMutation()
   const dispatch = useAppDispatch()
-  const loginButtonRef = useRef<HTMLButtonElement>(null)
   const { t } = useTranslation()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (loginButtonRef.current) {
-      loginButtonRef.current.focus()
-    }
-  }, [])
 
   const handleChange =
     (field: keyof typeof loginRequest) =>
@@ -45,7 +38,7 @@ const Login = () => {
       if (!loginRequest.username || !loginRequest.password) {
         dispatch(
           setNotification({
-            text: t('login:fillAllFields'),
+            text: t('general:fillAllFields'),
             type: NotificationTypeEnum.Error,
           }),
         )
@@ -98,7 +91,7 @@ const Login = () => {
           />
         </FormCartContextStyled>
         <FormCartActionStyled>
-          <FormButtonStyled sx={{ m: 1 }} ref={loginButtonRef} onClick={handleLogin}>
+          <FormButtonStyled sx={{ m: 1 }} onClick={handleLogin}>
             {t('login:loginButtonText')}
           </FormButtonStyled>
         </FormCartActionStyled>

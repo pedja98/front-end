@@ -43,8 +43,3 @@ export interface UserState {
   dateCreated?: Date
   dateModified?: Date
 }
-
-export interface UpdateAttributePayload {
-  attribute: string
-  value?: string | UserTypes | Language | Date
-}

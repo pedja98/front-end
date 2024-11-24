@@ -3,5 +3,6 @@
   "lastName": "Prezime",
   "email": "Email",
   "phone": "Telefon",
-  "language": "Jezik"
+  "language": "Jezik",
+  "userUpdated": "Korisnički podaci su uspešno ažurirani"
 }
