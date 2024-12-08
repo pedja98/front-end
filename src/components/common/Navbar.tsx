@@ -1,12 +1,12 @@
 import React from 'react'
 import Grid from '@mui/material/Grid'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { NavbarFadeMenueOptions, NavbarLinks } from '../consts/navbar'
+import { NavbarFadeMenueOptions, NavbarLinks } from '../../consts/navbar'
 import { useTranslation } from 'react-i18next'
-import { NavbarLinkStyled } from '../styles/navbar'
+import { NavbarLinkStyled } from '../../styles/navbar'
 import NavbarFadeMenu from './NavbarFadeMenu'
-import { useAppSelector } from '../app/hooks'
-import { getRoutePrefixFromCodeString } from '../helpers/common'
+import { useAppSelector } from '../../app/hooks'
+import { getRoutePrefixFromCodeString } from '../../helpers/common'
 
 const Navbar = () => {
   const { t } = useTranslation()

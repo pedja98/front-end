@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid'
-import { CenteredCircularProgress } from '../styles/common'
+import { CenteredCircularProgress } from '../../styles/common'
 
 const Spinner = () => {
   return (

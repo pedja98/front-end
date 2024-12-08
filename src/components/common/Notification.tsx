@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSnackbar } from 'notistack'
-import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { removeNotification, selectNotifications } from '../features/notifications.slice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { removeNotification, selectNotifications } from '../../features/notifications.slice'
 
 const Notification = () => {
   const notifications = useAppSelector(selectNotifications)
