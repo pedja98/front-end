@@ -17,3 +17,15 @@ export interface AuthState {
   type: UserTypes | undefined | null
   language: Language
 }
+
+export interface ChangePasswordRequest {
+  username: string
+  oldPassword: string
+  newPassword: string
+}
+
+export interface ChangePasswordFormProps {
+  currentPassword: string
+  newPassword: string
+  confirmNewPassword: string
+}

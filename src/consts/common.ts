@@ -18,3 +18,5 @@ export const Languages: Record<Language, Language> = {
 export const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export const PhonePattern = /^\+?\d+$/
+
+export const PasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/

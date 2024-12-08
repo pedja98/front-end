@@ -94,7 +94,7 @@ const EditUser = () => {
       navigate('/index')
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `user:${errorResponse.data?.error}` || 'general:unknowError'
+      const errorCode = `user:${errorResponse.data}` || 'general:unknowError'
       dispatch(
         setNotification({
           text: t(errorCode),
