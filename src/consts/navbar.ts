@@ -11,8 +11,11 @@ export const NavbarLinks = [
   NavbarOptionsEnum.Shops,
 ]
 
-export const NavbarFadeMenueOptions = [
+export const NavbarFadeMenueUserOptions = [NavbarOptionsEnum.EditProfile, NavbarOptionsEnum.Logout]
+
+export const NavbarFadeMenueAdminOptions = [
   NavbarOptionsEnum.EditProfile,
   NavbarOptionsEnum.Catalogue,
+  NavbarOptionsEnum.UserManagment,
   NavbarOptionsEnum.Logout,
 ]

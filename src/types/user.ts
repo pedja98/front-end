@@ -1,9 +1,9 @@
 import { Language } from './common'
 
 export enum UserTypes {
-  ADMIN,
-  SALESMAN,
-  MANAGER,
+  ADMIN = 'ADMIN',
+  SALESMAN = 'SALESMAN',
+  MANAGER = 'MANAGER',
 }
 
 export interface FetchUserResponse {

@@ -1,12 +1,13 @@
 import React from 'react'
 import Grid from '@mui/material/Grid'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { NavbarFadeMenueOptions, NavbarLinks } from '../../consts/navbar'
+import { NavbarFadeMenueAdminOptions, NavbarFadeMenueUserOptions, NavbarLinks } from '../../consts/navbar'
 import { useTranslation } from 'react-i18next'
 import { NavbarLinkStyled } from '../../styles/navbar'
 import NavbarFadeMenu from './NavbarFadeMenu'
 import { useAppSelector } from '../../app/hooks'
 import { getRoutePrefixFromCodeString } from '../../helpers/common'
+import { UserTypes } from '../../types/user'
 
 const Navbar = () => {
   const { t } = useTranslation()
@@ -15,7 +16,10 @@ const Navbar = () => {
   const menuOptionsWidth = isLargeScreen ? '90%' : '35%'
   const userOptionsWidth = isLargeScreen ? '10%' : '35%'
 
-  const authUsername = useAppSelector((state) => state.auth.username) as string
+  const auth = useAppSelector((state) => state.auth)
+
+  const navbarFadeMenueOptions =
+    auth.type === UserTypes.ADMIN ? NavbarFadeMenueAdminOptions : NavbarFadeMenueUserOptions
 
   return (
     <Grid container style={{ backgroundColor: 'black', width: '100%' }}>
@@ -31,7 +35,7 @@ const Navbar = () => {
         )}
       </Grid>
       <Grid style={{ width: userOptionsWidth }}>
-        <NavbarFadeMenu menuOptions={NavbarFadeMenueOptions} mainComponentText={authUsername} />
+        <NavbarFadeMenu menuOptions={navbarFadeMenueOptions} mainComponentText={String(auth.username)} />
       </Grid>
     </Grid>
   )

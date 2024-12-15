@@ -7,6 +7,10 @@
   "moreOptions": "Još",
   "fillAllFields": "Molimo Vas da popunite sva polja",
   "entityUpdateError": "Nastala je greška pri ažuriranju podataka",
+  "pageNotFound": "STRANICA NIJE PRONADJENA",
+  "backToPreviousPage": "Vrati me na predhodnu stranicu",
+  "create": "Napravi",
+  "search": "Pretraži",
   "navbarLinks": {
     "home": "Početna",
     "companies": "Kompanije",
@@ -16,6 +20,7 @@
     "offers": "Ponude",
     "contracts": "Ugovori",
     "shops": "Prodavnice",
+    "userManagment": "Upravljanje korisnicima",
     "editProfile": "Izmeni profil",
     "catalogue": "Katalog",
     "logout": "Izloguj se"

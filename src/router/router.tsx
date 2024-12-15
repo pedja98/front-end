@@ -13,6 +13,10 @@ import Shops from '../pages/Shops'
 import EditProfile from '../pages/EditProfile'
 import Catalogue from '../pages/Catalogue'
 import Contacts from '../pages/Contacts'
+import NotFound from '../pages/NotFound'
+import UserManagment from '../pages/UserManagment'
+import CreateUser from '../components/user/CreateUser'
+import EntityIndex from '../pages/EntityIndex'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<Login />} /> },
@@ -27,10 +31,19 @@ export default createBrowserRouter([
       { path: 'customer-sessions', element: <CustomerSessions /> },
       { path: 'opportunities', element: <Opportunities /> },
       { path: 'offers', element: <Offers /> },
+      {
+        path: 'user-managment',
+        element: <UserManagment />,
+        children: [
+          { index: true, element: <EntityIndex /> },
+          { path: 'create', element: <CreateUser /> },
+        ],
+      },
       { path: 'contracts', element: <Contracts /> },
       { path: 'shops', element: <Shops /> },
       { path: 'edit-profile', element: <EditProfile /> },
       { path: 'catalogue', element: <Catalogue /> },
     ],
   },
+  { path: '*', element: <NotFound /> },
 ])

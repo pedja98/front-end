@@ -7,6 +7,10 @@
   "phoneFormatError": "Phone is not in correct format",
   "fillAllFields": "Please fill in all fields",
   "entityUpdateError": "Error occures while updating",
+  "pageNotFound": "PAGE NOT FOUND",
+  "backToPreviousPage": "Back to previous page",
+  "create": "Create",
+  "search": "Search",
   "navbarLinks": {
     "home": "Home",
     "companies": "Companies",
@@ -16,6 +20,7 @@
     "offers": "Offers",
     "contracts": "Contracts",
     "shops": "Shops",
+    "userManagment": "User managment",
     "editProfile": "Edit Profile",
     "catalogue": "Catalogue",
     "logout": "Logout"

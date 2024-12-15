@@ -4,5 +4,8 @@
   "email": "Email",
   "phone": "Telefon",
   "language": "Jezik",
+  "username": "Korisničko ime",
+  "password": "Lozinka",
+  "confirm": "Potvrdi lozinku",
   "userUpdated": "Korisnički podaci su uspešno ažurirani"
 }

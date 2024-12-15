@@ -9,5 +9,6 @@ export enum NavbarOptionsEnum {
   Shops = 'shops',
   EditProfile = 'editProfile',
   Catalogue = 'catalogue',
+  UserManagment = 'userManagment',
   Logout = 'logout',
 }

@@ -4,5 +4,8 @@
   "email": "Email",
   "phone": "Phone",
   "language": "Language",
+  "username": "Username",
+  "password": "Password",
+  "confirm": "Confirm password",
   "userUpdated": "User data has been successfully updated"
 }
