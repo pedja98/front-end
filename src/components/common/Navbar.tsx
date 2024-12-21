@@ -7,7 +7,7 @@ import { NavbarLinkStyled } from '../../styles/navbar'
 import NavbarFadeMenu from './NavbarFadeMenu'
 import { useAppSelector } from '../../app/hooks'
 import { getRoutePrefixFromCodeString } from '../../helpers/common'
-import { UserTypes } from '../../types/user'
+import { UserType } from '../../types/user'
 
 const Navbar = () => {
   const { t } = useTranslation()
@@ -18,8 +18,7 @@ const Navbar = () => {
 
   const auth = useAppSelector((state) => state.auth)
 
-  const navbarFadeMenueOptions =
-    auth.type === UserTypes.ADMIN ? NavbarFadeMenueAdminOptions : NavbarFadeMenueUserOptions
+  const navbarFadeMenueOptions = auth.type === UserType.ADMIN ? NavbarFadeMenueAdminOptions : NavbarFadeMenueUserOptions
 
   return (
     <Grid container style={{ backgroundColor: 'black', width: '100%' }}>

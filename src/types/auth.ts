@@ -1,5 +1,5 @@
 import { Language } from './common'
-import { UserTypes } from './user'
+import { UserType } from './user'
 
 export interface AuthRequest {
   username: string
@@ -8,13 +8,13 @@ export interface AuthRequest {
 
 export interface AuthResponse {
   username: string | undefined | null
-  type: UserTypes | undefined | null
+  type: UserType | undefined | null
   language: Language
 }
 
 export interface AuthState {
   username: string | undefined | null
-  type: UserTypes | undefined | null
+  type: UserType | undefined | null
   language: Language
 }
 

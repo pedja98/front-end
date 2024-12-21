@@ -7,5 +7,8 @@
   "username": "Username",
   "password": "Password",
   "confirm": "Confirm password",
-  "userUpdated": "User data has been successfully updated"
+  "userUpdated": "User data has been successfully updated",
+  "createUserLabel": "Create user",
+  "userType": "User type",
+  "userCreated": "New user is created"
 }

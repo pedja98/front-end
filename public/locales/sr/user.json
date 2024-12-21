@@ -7,5 +7,8 @@
   "username": "Korisničko ime",
   "password": "Lozinka",
   "confirm": "Potvrdi lozinku",
-  "userUpdated": "Korisnički podaci su uspešno ažurirani"
+  "userUpdated": "Korisnički podaci su uspešno ažurirani",
+  "createUserLabel": "Kreiraj korisnika",
+  "userType": "Tip korisnika",
+  "userCreated": "Kreiran je novi korisnik"
 }

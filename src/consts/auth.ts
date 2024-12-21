@@ -1,5 +1,5 @@
 import { AuthState } from '../types/auth'
-import { Languages } from './common'
+import { Languages } from './user'
 
 export const InitialState: AuthState = {
   username: undefined,

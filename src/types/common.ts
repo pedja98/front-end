@@ -1,11 +1,11 @@
 import { ReactNode } from 'react'
-import { UserTypes } from './user'
+import { UserType } from './user'
 
 export type Language = 'SR' | 'EN'
 
 export interface UpdateAttributePayload {
   attribute: string
-  value?: number | string | UserTypes | Language | Date
+  value?: number | string | UserType | Language | Date
 }
 
 export interface TabPanelProps {

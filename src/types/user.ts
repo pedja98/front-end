@@ -1,9 +1,11 @@
 import { Language } from './common'
 
-export enum UserTypes {
+export enum UserType {
   ADMIN = 'ADMIN',
   SALESMAN = 'SALESMAN',
-  MANAGER = 'MANAGER',
+  L1_MANAGER = 'L1_MANAGER',
+  L2_MANAGER = 'L2_MANAGER',
+  L3_MANAGER = 'L3_MANAGER',
 }
 
 export interface FetchUserResponse {
@@ -12,7 +14,7 @@ export interface FetchUserResponse {
   email?: string
   username?: string
   phone?: string
-  type?: UserTypes
+  type?: UserType
   language?: Language
   shopId?: number
   shopName?: string
@@ -31,7 +33,7 @@ export interface UserState {
   email?: string
   username?: string
   phone?: string
-  type?: UserTypes
+  type?: UserType
   language?: Language
   shopId?: number
   shopName?: string
@@ -42,4 +44,27 @@ export interface UserState {
   modifiedByUsername?: string
   dateCreated?: Date
   dateModified?: Date
+}
+export interface CreateUserDto {
+  firstName?: string
+  lastName?: string
+  email?: string
+  username?: string
+  password: string
+  phone?: string
+  type?: UserType
+  language?: Language
+}
+
+export interface UserDataFormProps {
+  firstName: string
+  lastName: string
+  username: string
+  password: string
+  confirm: string
+  email: string
+  phone: string
+  userType: string
+  type: string
+  language: string
 }

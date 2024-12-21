@@ -3,7 +3,7 @@ import { useGetUserByUsernameQuery, useUpdateUserMutation } from '../../app/apis
 import Spinner from '../common/Spinner'
 import { getCurrentUser } from '../../helpers/common'
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
-import { EmailPattern, Languages, PhonePattern } from '../../consts/common'
+import { EmailPattern, PhonePattern } from '../../consts/common'
 import { Language } from '../../types/common'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent } from 'react'
@@ -14,6 +14,7 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationTypeEnum } from '../../types/notification'
 import { useNavigate } from 'react-router-dom'
 import { updateAuthAttribute } from '../../features/auth.slice'
+import { Languages } from '../../consts/user'
 
 const EditUser = () => {
   const { isLoading: getUserByUsernameLoading } = useGetUserByUsernameQuery(String(getCurrentUser().username))

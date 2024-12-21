@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { FetchUserResponse, UserState } from '../../types/user'
+import { CreateUserDto, FetchUserResponse, UserState } from '../../types/user'
 import { getCurrentUser } from '../../helpers/common'
 import { ChangePasswordRequest } from '../../types/auth'
 
@@ -34,7 +34,15 @@ export const crmApi = createApi({
         body: credentials,
       }),
     }),
+    createUser: builder.mutation<{ message: string }, CreateUserDto>({
+      query: (credentials) => ({
+        url: '/users',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
   }),
 })
 
-export const { useGetUserByUsernameQuery, useUpdateUserMutation, useChangePasswordMutation } = crmApi
+export const { useGetUserByUsernameQuery, useUpdateUserMutation, useChangePasswordMutation, useCreateUserMutation } =
+  crmApi
