@@ -1,17 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import Cookies from 'js-cookie'
 import { AuthResponse } from '../types/auth'
-import { gwApi } from '../app/apis/gw.api'
 import { InitialState as AuthInitialState } from '../consts/auth'
 import { UpdateAttributePayload } from '../types/common'
+import { gwApi } from '../app/apis/gw.api'
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: AuthInitialState,
   reducers: {
-    setAuthDataFromLocalStorage: (state) => {
-      const auth = localStorage.getItem('currentUser')
-        ? JSON.parse(String(localStorage.getItem('currentUser')))
-        : undefined
+    setAuthDataFromCookies: (state) => {
+      const auth = Cookies.get('currentUser') ? JSON.parse(String(Cookies.get('currentUser'))) : undefined
       if (auth) {
         state.username = auth.username
         state.type = auth.type
@@ -20,12 +19,10 @@ const authSlice = createSlice({
     },
     updateAuthAttribute: (state, { payload }: PayloadAction<UpdateAttributePayload>) => {
       const { attribute, value } = payload
-      const auth = localStorage.getItem('currentUser')
-        ? JSON.parse(String(localStorage.getItem('currentUser')))
-        : undefined
+      const auth = Cookies.get('currentUser') ? JSON.parse(String(Cookies.get('currentUser'))) : undefined
 
       const newAuth = { ...auth, [attribute]: value }
-      localStorage.setItem('currentUser', JSON.stringify(newAuth))
+      Cookies.set('currentUser', JSON.stringify(newAuth), { expires: 0.5, sameSite: 'None', secure: true })
 
       return {
         ...state,
@@ -39,7 +36,7 @@ const authSlice = createSlice({
         state.username = payload.username
         state.type = payload.type
         state.language = payload.language
-        localStorage.setItem('currentUser', JSON.stringify(state))
+        Cookies.set('currentUser', JSON.stringify(state), { expires: 0.5, sameSite: 'None', secure: true })
       })
       .addMatcher(gwApi.endpoints.logout.matchFulfilled, (state) => {
         Object.assign(state, {
@@ -47,11 +44,11 @@ const authSlice = createSlice({
           type: AuthInitialState.type,
           language: AuthInitialState.language,
         })
-        localStorage.removeItem('currentUser')
+        Cookies.remove('currentUser')
       })
   },
 })
 
-export const { setAuthDataFromLocalStorage, updateAuthAttribute } = authSlice.actions
+export const { setAuthDataFromCookies, updateAuthAttribute } = authSlice.actions
 
 export default authSlice.reducer

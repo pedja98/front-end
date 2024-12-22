@@ -7,7 +7,7 @@ import {
   Root,
   StyledCenterBackgroundContainer,
 } from '../styles/common'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { AuthRequest } from '../types/auth'
 import { useLoginMutation } from '../app/apis/gw.api'
 import { useAppDispatch } from '../app/hooks'
@@ -26,6 +26,14 @@ const Login = () => {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const loginButtonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (loginButtonRef.current) {
+      loginButtonRef.current.focus()
+    }
+  }, [])
 
   const handleChange =
     (field: keyof typeof loginRequest) =>
@@ -91,7 +99,7 @@ const Login = () => {
           />
         </FormCartContextStyled>
         <FormCartActionStyled>
-          <FormButtonStyled sx={{ m: 1 }} onClick={handleLogin}>
+          <FormButtonStyled sx={{ m: 1 }} onClick={handleLogin} ref={loginButtonRef}>
             {t('login:loginButtonText')}
           </FormButtonStyled>
         </FormCartActionStyled>

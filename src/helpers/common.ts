@@ -1,4 +1,6 @@
+import { InitialState as AuthInitialState } from '../consts/auth'
 import { AuthState } from '../types/auth'
+import Cookies from 'js-cookie'
 
 export const getRoutePrefixFromCodeString = (prefixText: string): string => {
   return prefixText
@@ -8,5 +10,6 @@ export const getRoutePrefixFromCodeString = (prefixText: string): string => {
 }
 
 export const getCurrentUser = (): AuthState => {
-  return JSON.parse(String(localStorage.getItem('currentUser'))) as AuthState
+  const cookie = Cookies.get('currentUser')
+  return cookie ? (JSON.parse(cookie) as AuthState) : AuthInitialState
 }

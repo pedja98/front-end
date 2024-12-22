@@ -2,17 +2,11 @@ import { FC } from 'react'
 import { Navigate } from 'react-router-dom'
 import { getCurrentUser } from '../helpers/common'
 
-interface LoginProtectedRouteProps {
+const LoginProtectedRoute: FC<{
   element: JSX.Element
-}
-
-const LoginProtectedRoute: FC<LoginProtectedRouteProps> = ({ element }) => {
-  const currentUser = getCurrentUser()
-  return !currentUser || !currentUser.username || !Object.values(currentUser).length ? (
-    element
-  ) : (
-    <Navigate to='/index' />
-  )
+}> = ({ element }) => {
+  const username = getCurrentUser().username
+  return !username ? element : <Navigate to='/index' />
 }
 
 export default LoginProtectedRoute
