@@ -11,6 +11,9 @@
   "backToPreviousPage": "Back to previous page",
   "create": "Create",
   "search": "Search",
+  "close": "Close",
+  "searchDialogTitle": "Search",
+  "noSearchContent": "No search content",
   "navbarLinks": {
     "home": "Home",
     "companies": "Companies",

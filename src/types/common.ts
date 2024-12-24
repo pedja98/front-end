@@ -14,6 +14,11 @@ export interface TabPanelProps {
   value: number
 }
 
+export interface SearchDialogProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
 export interface BasicTabProps {
   tabs: Record<string, ReactNode>
 }

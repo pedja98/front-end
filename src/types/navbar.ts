@@ -1,4 +1,4 @@
-export enum NavbarOptionsEnum {
+export enum ModulesOptions {
   Home = 'home',
   Companies = 'companies',
   Contacts = 'contacts',

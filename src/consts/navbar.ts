@@ -1,21 +1,21 @@
-import { NavbarOptionsEnum } from '../types/navbar'
+import { ModulesOptions } from '../types/navbar'
 
 export const NavbarLinks = [
-  NavbarOptionsEnum.Home,
-  NavbarOptionsEnum.Companies,
-  NavbarOptionsEnum.Contacts,
-  NavbarOptionsEnum.CustomerSessions,
-  NavbarOptionsEnum.Opportunities,
-  NavbarOptionsEnum.Offers,
-  NavbarOptionsEnum.Contracts,
-  NavbarOptionsEnum.Shops,
+  ModulesOptions.Home,
+  ModulesOptions.Companies,
+  ModulesOptions.Contacts,
+  ModulesOptions.CustomerSessions,
+  ModulesOptions.Opportunities,
+  ModulesOptions.Offers,
+  ModulesOptions.Contracts,
+  ModulesOptions.Shops,
 ]
 
-export const NavbarFadeMenueUserOptions = [NavbarOptionsEnum.EditProfile, NavbarOptionsEnum.Logout]
+export const NavbarFadeMenueUserOptions = [ModulesOptions.EditProfile, ModulesOptions.Logout]
 
 export const NavbarFadeMenueAdminOptions = [
-  NavbarOptionsEnum.EditProfile,
-  NavbarOptionsEnum.Catalogue,
-  NavbarOptionsEnum.UserManagment,
-  NavbarOptionsEnum.Logout,
+  ModulesOptions.EditProfile,
+  ModulesOptions.Catalogue,
+  ModulesOptions.UserManagment,
+  ModulesOptions.Logout,
 ]

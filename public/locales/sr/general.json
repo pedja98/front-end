@@ -11,6 +11,9 @@
   "backToPreviousPage": "Vrati me na predhodnu stranicu",
   "create": "Napravi",
   "search": "Pretraži",
+  "close": "Zatvori",
+  "searchDialogTitle": "Pretraži",
+  "noSearchContent": "Ne postoji pretraga",
   "navbarLinks": {
     "home": "Početna",
     "companies": "Kompanije",
