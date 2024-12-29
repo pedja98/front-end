@@ -74,5 +74,24 @@ export interface SearchUserDataFormProps {
   username?: string
   email?: string
   phone?: string
-  type: string[]
+  type?: string[]
+}
+
+export interface User {
+  firstName: string
+  lastName: string
+  email: string
+  username: string
+  phone: string
+  type: UserType
+  language: Language
+  shopId: number
+  shopName: string
+  salesmen: string
+  createdById: number
+  createdByUsername: string
+  modifiedById: number
+  modifiedByUsername: string
+  dateCreated: string
+  dateModified: string
 }

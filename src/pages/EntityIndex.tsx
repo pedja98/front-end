@@ -3,11 +3,14 @@ import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import SearchDialog from '../components/common/SearchDialog'
+import { useAppDispatch } from '../app/hooks'
+import { cleanSearch } from '../features/search.slice'
 
 const EntityIndex = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
+  const dispatch = useAppDispatch()
 
   const [isDialogOpen, setDialogOpen] = useState(false)
 
@@ -20,6 +23,7 @@ const EntityIndex = () => {
   }
 
   const handleCloseDialog = () => {
+    dispatch(cleanSearch())
     setDialogOpen(false)
   }
 

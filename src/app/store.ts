@@ -1,5 +1,6 @@
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import notificationsReducer from '../features/notifications.slice'
+import searchReducer from '../features/search.slice'
 import authReducer from '../features/auth.slice'
 import userReducer from '../features/user.slice'
 import { gwApi } from './apis/gw.api'
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
   [gwApi.reducerPath]: gwApi.reducer,
   [crmApi.reducerPath]: crmApi.reducer,
   notifications: notificationsReducer,
+  search: searchReducer,
   auth: authReducer,
   user: userReducer,
 })

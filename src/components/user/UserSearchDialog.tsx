@@ -10,28 +10,19 @@ import {
   ListItemText,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 import { UserTypes } from '../../consts/user'
 import { SearchUserDataFormProps, UserType } from '../../types/user'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { updateSearchAttribute } from '../../features/search.slice'
 
 const UserSearchDialog = () => {
-  const [userSearchData, setUserSearchData] = useState<SearchUserDataFormProps>({
-    firstName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    phone: '',
-    type: [],
-  })
-
   const { t } = useTranslation()
+  const dispatch = useAppDispatch()
+  const userSearchData = useAppSelector((state) => state.search) as SearchUserDataFormProps
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string[]>) => {
-    const { name, value } = event.target
-    setUserSearchData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
+    dispatch(updateSearchAttribute({ attribute: event.target.name, value: event.target.value }))
   }
 
   return (
@@ -43,7 +34,7 @@ const UserSearchDialog = () => {
             name='firstName'
             label={t('user:firstName')}
             variant='standard'
-            value={userSearchData.firstName}
+            value={userSearchData.firstName || ''}
             sx={{ width: '100%' }}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               handleChange(event)
@@ -57,7 +48,7 @@ const UserSearchDialog = () => {
             name='lastName'
             label={t('user:lastName')}
             variant='standard'
-            value={userSearchData.lastName}
+            value={userSearchData.lastName || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               handleChange(event)
             }}
@@ -70,7 +61,7 @@ const UserSearchDialog = () => {
             name='username'
             label={t('user:username')}
             variant='standard'
-            value={userSearchData.username}
+            value={userSearchData.username || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               handleChange(event)
             }}
@@ -83,7 +74,7 @@ const UserSearchDialog = () => {
             name='email'
             label={t('user:email')}
             variant='standard'
-            value={userSearchData.email}
+            value={userSearchData.email || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               handleChange(event)
             }}
@@ -96,7 +87,7 @@ const UserSearchDialog = () => {
             name='phone'
             label={t('user:phone')}
             variant='standard'
-            value={userSearchData.phone}
+            value={userSearchData.phone || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               handleChange(event)
             }}
@@ -104,7 +95,7 @@ const UserSearchDialog = () => {
         </Grid>
         <Grid item sx={{ width: '100%' }}>
           <FormControl sx={{ width: '100%' }} variant='standard'>
-            <InputLabel id='user-type-select-label' sx={{ pl: 2.2 }}>
+            <InputLabel id='user-type-select-label' sx={{ pl: 2 }}>
               {t('user:type')}
             </InputLabel>
             <Select
@@ -113,15 +104,17 @@ const UserSearchDialog = () => {
               variant='standard'
               name='type'
               multiple
-              value={userSearchData.type}
+              value={userSearchData.type || []}
               onChange={(event: SelectChangeEvent<string[]>) => {
                 handleChange(event)
               }}
-              renderValue={(selected) => selected.map((type) => UserTypes[type as UserType]).join(', ')}
+              renderValue={(selected) =>
+                selected && selected.length > 0 ? selected.map((type) => UserTypes[type as UserType]).join(', ') : ''
+              }
             >
               {Object.keys(UserTypes).map((type) => (
                 <MenuItem key={type} value={type}>
-                  <Checkbox checked={userSearchData.type.includes(type)} />
+                  <Checkbox checked={userSearchData.type?.includes(type) || false} />
                   <ListItemText primary={UserTypes[type as UserType]} />
                 </MenuItem>
               ))}

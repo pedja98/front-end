@@ -20,3 +20,18 @@ export const getCurrentUser = (): AuthState => {
   const cookie = Cookies.get('currentUser')
   return cookie ? (JSON.parse(cookie) as AuthState) : AuthInitialState
 }
+
+export const createQueryParamsForSearch = (searchData: Record<string, unknown>): string => {
+  const searchKeys = Object.keys(searchData)
+  if (!searchKeys.length) {
+    return ''
+  }
+  let queryParams = '?'
+  searchKeys.forEach((key, index) => {
+    queryParams += key + '=' + String(searchData[key])
+    if (index !== searchKeys.length - 1) {
+      queryParams += '&'
+    }
+  })
+  return queryParams
+}
