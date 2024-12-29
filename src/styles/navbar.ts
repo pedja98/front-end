@@ -27,6 +27,7 @@ export const NavbarUserOptionsButtonStyled = styled(Button)(() => ({
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'black',
+  width: '90%',
   '&:hover': {
     backgroundColor: '#525252',
     cursor: 'pointer',

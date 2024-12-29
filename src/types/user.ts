@@ -56,7 +56,7 @@ export interface CreateUserDto {
   language?: Language
 }
 
-export interface UserDataFormProps {
+export interface CreateUserDataFormProps {
   firstName: string
   lastName: string
   username: string
@@ -64,7 +64,15 @@ export interface UserDataFormProps {
   confirm: string
   email: string
   phone: string
-  userType: string
   type: string
   language: string
+}
+
+export interface SearchUserDataFormProps {
+  firstName?: string
+  lastName?: string
+  username?: string
+  email?: string
+  phone?: string
+  type: string[]
 }

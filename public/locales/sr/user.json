@@ -9,6 +9,6 @@
   "confirm": "Potvrdi lozinku",
   "userUpdated": "Korisnički podaci su uspešno ažurirani",
   "createUserLabel": "Kreiraj korisnika",
-  "userType": "Tip korisnika",
+  "type": "Tip korisnika",
   "userCreated": "Kreiran je novi korisnik"
 }

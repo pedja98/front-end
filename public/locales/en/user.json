@@ -9,6 +9,6 @@
   "confirm": "Confirm password",
   "userUpdated": "User data has been successfully updated",
   "createUserLabel": "Create user",
-  "userType": "User type",
+  "type": "User type",
   "userCreated": "New user is created"
 }

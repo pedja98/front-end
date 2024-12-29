@@ -79,7 +79,7 @@ const NavbarFadeMenu: FC<Props> = (props): JSX.Element => {
         aria-haspopup='true'
         aria-expanded={open ? 'true' : undefined}
         onMouseEnter={handleMouseEnter}
-        style={{ width: '90%' }}
+        style={{ textTransform: 'none' }}
         endIcon={<KeyboardArrowDownIcon />}
       >
         {props.mainComponentText}

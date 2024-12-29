@@ -20,12 +20,12 @@ import { NotificationTypeEnum } from '../../types/notification'
 import { useNavigate } from 'react-router-dom'
 import { Root } from '../../styles/common'
 import { Languages, UserTypes } from '../../consts/user'
-import { CreateUserDto, UserDataFormProps, UserType } from '../../types/user'
+import { CreateUserDto, CreateUserDataFormProps, UserType } from '../../types/user'
 import { useCreateUserMutation } from '../../app/apis/crm.api'
 import Spinner from '../common/Spinner'
 
 const CreateUser = () => {
-  const [currentUserData, setCurrentUserData] = useState<UserDataFormProps>({
+  const [currentUserData, setCurrentUserData] = useState<CreateUserDataFormProps>({
     firstName: '',
     lastName: '',
     username: '',
@@ -34,7 +34,6 @@ const CreateUser = () => {
     email: '',
     phone: '',
     type: '',
-    userType: '',
     language: '',
   })
 
@@ -241,14 +240,14 @@ const CreateUser = () => {
         <Grid item sx={{ width: '100%' }}>
           <FormControl sx={{ width: '100%' }} variant='standard'>
             <InputLabel id='user-type-select-label' sx={{ pl: 9.3 }}>
-              {t('user:userType')}
+              {t('user:type')}
             </InputLabel>
             <Select
               labelId='user-type-select-label'
               id='user-type'
-              name='userType'
-              value={currentUserData.userType}
-              label={t('user:userType')}
+              name='type'
+              value={currentUserData.type}
+              label={t('user:type')}
               variant='standard'
               sx={{ width: '100%' }}
               onChange={(event: SelectChangeEvent<string>) => {
