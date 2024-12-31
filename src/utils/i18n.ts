@@ -4,6 +4,7 @@ import HttpBackend from 'i18next-http-backend'
 import { store } from '../app/store'
 import { Languages } from '../consts/user'
 
+// Initialize i18n
 i18n
   .use(HttpBackend)
   .use(initReactI18next)
@@ -20,13 +21,13 @@ i18n
       escapeValue: false,
     },
   })
-  .then(() => {
-    store.subscribe(() => {
-      const newLanguage = store.getState().auth.language.toLowerCase()
-      if (newLanguage !== i18n.language) {
-        i18n.changeLanguage(newLanguage)
-      }
-    })
-  })
+
+// Subscribe to Redux store changes separately
+store.subscribe(() => {
+  const newLanguage = store.getState().auth.language.toLowerCase()
+  if (newLanguage !== i18n.language) {
+    i18n.changeLanguage(newLanguage)
+  }
+})
 
 export default i18n

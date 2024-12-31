@@ -13,6 +13,7 @@
   "search": "Search",
   "close": "Close",
   "searchDialogTitle": "Search",
+  "none": "None",
   "noSearchContent": "No search content",
   "navbarLinks": {
     "home": "Home",
@@ -27,5 +28,16 @@
     "editProfile": "Edit Profile",
     "catalogue": "Catalogue",
     "logout": "Logout"
+  },
+  "sortByLabel": "Sort by",
+  "sortOrderLabel": "Sort order",
+  "sortOrderValueLabels": {
+    "asc": "Ascending",
+    "desc": "Descending"
+  },
+  "sortByLabels": {
+    "userame": "Userame",
+    "email": "Email",
+    "dateCreated": "Date created"
   }
 }

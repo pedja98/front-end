@@ -12,6 +12,7 @@
   "create": "Napravi",
   "search": "Pretraži",
   "close": "Zatvori",
+  "none": "Nijedan",
   "searchDialogTitle": "Pretraži",
   "noSearchContent": "Ne postoji pretraga",
   "navbarLinks": {
@@ -27,5 +28,16 @@
     "editProfile": "Izmeni profil",
     "catalogue": "Katalog",
     "logout": "Izloguj se"
+  },
+  "sortByLabel": "Sortiraj po",
+  "sortOrderLabel": "Sortirati",
+  "sortOrderValueLabels": {
+    "asc": "Rastuće",
+    "desc": "Opadajuće"
+  },
+  "sortByLabels": {
+    "userame": "Korisničko ime",
+    "email": "Email",
+    "dateCreated": "Datum kreiranja"
   }
 }

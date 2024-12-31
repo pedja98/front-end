@@ -75,6 +75,8 @@ export interface SearchUserDataFormProps {
   email?: string
   phone?: string
   type?: string[]
+  sortBy?: string
+  sortOrder?: string
 }
 
 export interface User {
