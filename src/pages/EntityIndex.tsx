@@ -19,11 +19,11 @@ const EntityIndex = () => {
   }
 
   const handleOpenDialog = () => {
+    dispatch(cleanSearch())
     setDialogOpen(true)
   }
 
   const handleCloseDialog = () => {
-    dispatch(cleanSearch())
     setDialogOpen(false)
   }
 

@@ -17,6 +17,7 @@ import NotFound from '../pages/NotFound'
 import UserManagment from '../pages/UserManagment'
 import CreateUser from '../components/user/CreateUser'
 import EntityIndex from '../pages/EntityIndex'
+import ListUsers from '../components/user/ListUsers'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<Login />} /> },
@@ -37,6 +38,7 @@ export default createBrowserRouter([
         children: [
           { index: true, element: <EntityIndex /> },
           { path: 'create', element: <CreateUser /> },
+          { path: 'list', element: <ListUsers /> },
         ],
       },
       { path: 'contracts', element: <Contracts /> },
