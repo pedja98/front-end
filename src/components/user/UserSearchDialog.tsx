@@ -143,7 +143,7 @@ const UserSearchDialog = () => {
               <MenuItem value={undefined}>{t('general:none')}</MenuItem>
               {Object.keys(UserSortedByFields).map((key) => (
                 <MenuItem key={key} value={UserSortedByFields[key as keyof typeof UserSortedByFields]}>
-                  {t(`general:sortByLabels.${UserSortedByFields[key as keyof typeof UserSortedByFields]}`)}
+                  {t(`user:sortByLabels.${UserSortedByFields[key as keyof typeof UserSortedByFields]}`)}
                 </MenuItem>
               ))}
             </Select>

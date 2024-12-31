@@ -10,5 +10,10 @@
   "userUpdated": "User data has been successfully updated",
   "createUserLabel": "Create user",
   "type": "User type",
-  "userCreated": "New user is created"
+  "userCreated": "New user is created",
+  "sortByLabels": {
+    "userame": "Userame",
+    "email": "Email",
+    "dateCreated": "Date created"
+  }
 }

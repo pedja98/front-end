@@ -34,10 +34,5 @@
   "sortOrderValueLabels": {
     "asc": "Rastuće",
     "desc": "Opadajuće"
-  },
-  "sortByLabels": {
-    "userame": "Korisničko ime",
-    "email": "Email",
-    "dateCreated": "Datum kreiranja"
   }
 }

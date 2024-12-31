@@ -10,5 +10,10 @@
   "userUpdated": "Korisnički podaci su uspešno ažurirani",
   "createUserLabel": "Kreiraj korisnika",
   "type": "Tip korisnika",
-  "userCreated": "Kreiran je novi korisnik"
+  "userCreated": "Kreiran je novi korisnik",
+  "sortByLabels": {
+    "userame": "Korisničko ime",
+    "email": "Email",
+    "dateCreated": "Datum kreiranja"
+  }
 }
