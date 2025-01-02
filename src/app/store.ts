@@ -4,7 +4,6 @@ import storage from 'redux-persist/lib/storage'
 import notificationsReducer from '../features/notifications.slice'
 import searchReducer from '../features/search.slice'
 import authReducer from '../features/auth.slice'
-import userReducer from '../features/user.slice'
 import { gwApi } from './apis/gw.api'
 import { crmApi } from './apis/crm.api'
 
@@ -20,7 +19,6 @@ const rootReducer = combineReducers({
   notifications: notificationsReducer,
   search: searchReducer,
   auth: authReducer,
-  user: userReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

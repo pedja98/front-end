@@ -1,7 +1,5 @@
 import { Language } from '../types/common'
-import { UserState, UserType } from '../types/user'
-
-export const InitialState: UserState = {}
+import { UserType } from '../types/user'
 
 export const UserTypes: Record<UserType, UserType> = {
   ADMIN: UserType.ADMIN,

@@ -1,42 +1,53 @@
 import Grid from '@mui/material/Grid'
 import { useGetUserQuery, useUpdateUserMutation } from '../../app/apis/crm.api'
 import Spinner from '../common/Spinner'
-import { getCurrentUser, isViewSelect } from '../../helpers/common'
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
 import { EmailPattern, PhonePattern } from '../../consts/common'
 import { useTranslation } from 'react-i18next'
-import { ChangeEvent } from 'react'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { updateUserAttribute } from '../../features/user.slice'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { useAppDispatch } from '../../app/hooks'
 import { ApiException } from '../../types/exception'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationTypeEnum } from '../../types/notification'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { updateAuthAttribute } from '../../features/auth.slice'
-import { User, UserState } from '../../types/user'
+import { User } from '../../types/user'
 import { transformUserDataForEditView } from '../../transformers/user'
 import { ViewLabel } from '../../types/common'
+import { getCurrentUser, isViewSelect } from '../../helpers/common'
 
 const EditUser = () => {
-  const { isLoading: getUserLoading } = useGetUserQuery(String(getCurrentUser().username))
-  const [updateUser, { isLoading: updateUserLoading }] = useUpdateUserMutation()
-
-  const currentUserData = useAppSelector((state) => state.user)
-  const currentLanguage = useAppSelector((state) => state.auth.language)
-
-  const { t } = useTranslation()
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
   const location = useLocation()
+  const params = useParams()
 
   const isEditProfile = location.pathname.includes('edit-profile')
 
+  const username = String(isEditProfile ? getCurrentUser().username : params.username)
+
+  const { data: fetchedUser, isLoading: getUserLoading } = useGetUserQuery(username)
+  const [updateUser, { isLoading: updateUserLoading }] = useUpdateUserMutation()
+
+  const [userData, setUserData] = useState<User | null>(null)
+  const { t } = useTranslation()
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (fetchedUser) {
+      setUserData(fetchedUser)
+    }
+  }, [fetchedUser])
+
   const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
-    dispatch(updateUserAttribute({ attribute: event.target.name, value: event.target.value }))
+    if (!userData) return
+    const { name, value } = event.target
+    setUserData((prev) => (prev ? { ...prev, [name]: value } : null))
   }
 
   const handleSaveChanges = async () => {
-    if (!EmailPattern.test(String(currentUserData.email))) {
+    if (!userData) return
+
+    if (!EmailPattern.test(String(userData.email))) {
       dispatch(
         setNotification({
           text: t('general:emailFormatError'),
@@ -46,7 +57,7 @@ const EditUser = () => {
       return
     }
 
-    if (!PhonePattern.test(String(currentUserData.phone))) {
+    if (!PhonePattern.test(String(userData.phone))) {
       dispatch(
         setNotification({
           text: t('general:phoneFormatError'),
@@ -57,16 +68,16 @@ const EditUser = () => {
     }
 
     try {
-      const userData = {
-        firstName: currentUserData.firstName,
-        lastName: currentUserData.lastName,
-        email: currentUserData.email,
-        phone: currentUserData.phone,
-        type: currentUserData.type,
-        language: currentUserData.language,
+      const updatedData = {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        phone: userData.phone,
+        type: userData.type,
+        language: userData.language,
       }
 
-      if (Object.values(userData).some((userDataValue) => !String(userDataValue).trim())) {
+      if (Object.values(updatedData).some((value) => !String(value).trim())) {
         dispatch(
           setNotification({
             text: t('general:fillAllFields'),
@@ -79,14 +90,14 @@ const EditUser = () => {
       const messageCode = `user:${
         (
           await updateUser({
-            username: String(currentUserData.username),
-            user: userData,
+            username: String(userData.username),
+            user: updatedData,
           }).unwrap()
         ).message
       }`
 
-      if (currentLanguage !== currentUserData.language) {
-        dispatch(updateAuthAttribute({ attribute: 'language', value: currentUserData.language }))
+      if (userData.language !== fetchedUser?.language) {
+        dispatch(updateAuthAttribute({ attribute: 'language', value: userData.language }))
       }
 
       dispatch(
@@ -99,7 +110,7 @@ const EditUser = () => {
       navigate('/index')
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `user:${errorResponse.data}` || 'general:unknowError'
+      const errorCode = `user:${errorResponse.data}` || 'general:unknownError'
       dispatch(
         setNotification({
           text: t(errorCode),
@@ -109,7 +120,7 @@ const EditUser = () => {
     }
   }
 
-  if (getUserLoading || updateUserLoading) {
+  if (getUserLoading || updateUserLoading || !userData) {
     return <Spinner />
   }
 
@@ -122,7 +133,7 @@ const EditUser = () => {
     { label: t('user:language'), key: 'language' },
   ]
 
-  const userViewData = transformUserDataForEditView(currentUserData as unknown as User)
+  const userViewData = transformUserDataForEditView(userData)
 
   return (
     <Grid container sx={{ width: '100%' }} direction='column' spacing={2}>
@@ -135,12 +146,14 @@ const EditUser = () => {
               return (
                 <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                   <FormControl sx={{ width: '100%' }} variant='standard'>
-                    <InputLabel id={label.key}>{label.label}</InputLabel>
+                    <InputLabel id={label.key} sx={{ pl: 9.3 }}>
+                      {label.label}
+                    </InputLabel>
                     <Select
                       labelId={label.key}
                       id={label.key}
                       name={label.key}
-                      value={String(currentUserData[label.key as keyof UserState])}
+                      value={String(userData[label.key as keyof User])}
                       variant='standard'
                       sx={{ width: '100%' }}
                       onChange={(event: SelectChangeEvent<string>) => {
@@ -149,7 +162,7 @@ const EditUser = () => {
                     >
                       {cellData.options.map((option) => (
                         <MenuItem key={option} value={option}>
-                          {t(`${label.key}.${option.toLocaleLowerCase()}`)}
+                          {t(`${label.key}.${option.toLowerCase()}`)}
                         </MenuItem>
                       ))}
                     </Select>
@@ -165,7 +178,7 @@ const EditUser = () => {
                   name={label.key}
                   label={label.label}
                   variant='standard'
-                  value={currentUserData[label.key as keyof UserState]}
+                  value={userData[label.key as keyof User]}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
                   }}

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { CreateUserDto, FetchUserResponse, User, UserState } from '../../types/user'
+import { CreateUserDto, User } from '../../types/user'
 import { getCurrentUser } from '../../helpers/common'
 import { ChangePasswordRequest } from '../../types/auth'
 
@@ -16,16 +16,19 @@ export const crmApi = createApi({
       return headers
     },
   }),
+  tagTypes: ['User'],
   endpoints: (builder) => ({
-    getUser: builder.query<FetchUserResponse, string>({
+    getUser: builder.query<User, string>({
       query: (username) => `/users/${username}`,
+      providesTags: (result, error, username) => [{ type: 'User', id: username }],
     }),
-    updateUser: builder.mutation<{ message: string }, { username: string; user: Partial<UserState> }>({
+    updateUser: builder.mutation<{ message: string }, { username: string; user: Partial<User> }>({
       query: ({ username, user }) => ({
         url: `/users/${username}`,
         method: 'PUT',
         body: user,
       }),
+      invalidatesTags: (result, error, { username }) => [{ type: 'User', id: username }],
     }),
     changePassword: builder.mutation<{ message: string }, ChangePasswordRequest>({
       query: (credentials) => ({
@@ -41,7 +44,7 @@ export const crmApi = createApi({
         body: credentials,
       }),
     }),
-    getUsers: builder.query<User[], string>({ query: (queryParams) => `/users${queryParams}` }),
+    getUsers: builder.query<User[], string>({ query: (queryParams) => `/users${queryParams}`, providesTags: ['User'] }),
   }),
 })
 
