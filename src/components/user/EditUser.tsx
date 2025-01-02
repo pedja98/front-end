@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid'
 import { useGetUserQuery, useUpdateUserMutation } from '../../app/apis/crm.api'
 import Spinner from '../common/Spinner'
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
-import { EmailPattern, PhonePattern } from '../../consts/common'
+import { EmailPattern, GridFieldTypes, PhonePattern } from '../../consts/common'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useAppDispatch } from '../../app/hooks'
@@ -142,7 +142,7 @@ const EditUser = () => {
           .filter((label) => !label.skip)
           .map((label) => {
             const cellData = userViewData[label.key]
-            if (cellData instanceof Object && cellData?.options) {
+            if (cellData.type === GridFieldTypes.SELECT && cellData?.options) {
               return (
                 <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                   <FormControl sx={{ width: '100%' }} variant='standard'>
@@ -169,22 +169,24 @@ const EditUser = () => {
                   </FormControl>
                 </Grid>
               )
+            } else if (cellData.type === GridFieldTypes.STRING) {
+              return (
+                <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
+                  <TextField
+                    sx={{ width: '100%' }}
+                    id={label.key}
+                    name={label.key}
+                    label={label.label}
+                    variant='standard'
+                    value={userData[label.key as keyof User]}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                      handleChange(event)
+                    }}
+                  />
+                </Grid>
+              )
             }
-            return (
-              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-                <TextField
-                  sx={{ width: '100%' }}
-                  id={label.key}
-                  name={label.key}
-                  label={label.label}
-                  variant='standard'
-                  value={userData[label.key as keyof User]}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    handleChange(event)
-                  }}
-                />
-              </Grid>
-            )
+            return <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}></Grid>
           })}
         <Button sx={{ width: '100%', mt: 3 }} onClick={handleSaveChanges}>
           {t('general:saveButtonText')}

@@ -25,15 +25,15 @@ export interface BasicTabProps {
   tabs: Record<string, ReactNode>
 }
 
-export interface GridField {
-  text?: string
+export interface GridFieldAttributes {
+  value?: string
   type: GridFieldType
   link?: string
   options?: string[]
 }
 
 export interface ViewElement {
-  [key: string]: string | number | undefined | null | GridField
+  [key: string]: GridFieldAttributes
 }
 
 export interface TableColumn {

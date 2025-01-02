@@ -8,7 +8,7 @@ import { useGetUserQuery } from '../../app/apis/crm.api'
 import { transformUserDataForView } from '../../transformers/user'
 import { User } from '../../types/user'
 import { useTranslation } from 'react-i18next'
-import { EmptyValue } from '../../consts/common'
+import { EmptyValue, GridFieldTypes } from '../../consts/common'
 import { LinkStyled } from '../../styles/common'
 
 const DetailViewUser = () => {
@@ -74,21 +74,37 @@ const DetailViewUser = () => {
                     <Typography variant='subtitle1'>{label.label}</Typography>
                   </Grid>
                   <Grid item xs>
-                    {!(cellData instanceof Object) ? (
-                      <TextField
-                        fullWidth
-                        value={cellData}
-                        variant='outlined'
-                        disabled
-                        InputProps={{
-                          readOnly: true,
-                        }}
-                      />
-                    ) : (
-                      <>
-                        <LinkStyled to={String(cellData.link)}>{cellData.text}</LinkStyled>
-                      </>
-                    )}
+                    <Grid item xs>
+                      {(() => {
+                        if (cellData.type === GridFieldTypes.STRING) {
+                          return (
+                            <TextField
+                              fullWidth
+                              value={cellData.value}
+                              variant='outlined'
+                              disabled
+                              InputProps={{
+                                readOnly: true,
+                              }}
+                            />
+                          )
+                        } else if (cellData.type === GridFieldTypes.LINK && cellData.value) {
+                          return <LinkStyled to={String(cellData.link)}>{cellData.value}</LinkStyled>
+                        } else {
+                          return (
+                            <TextField
+                              fullWidth
+                              value={EmptyValue}
+                              variant='outlined'
+                              disabled
+                              InputProps={{
+                                readOnly: true,
+                              }}
+                            />
+                          )
+                        }
+                      })()}
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>

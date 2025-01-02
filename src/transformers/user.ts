@@ -5,42 +5,36 @@ import { ViewElement } from '../types/common'
 import { User, UserType } from '../types/user'
 
 export const transformUserDataForView = (user: User, skipUsernameAsLink?: boolean): ViewElement => ({
-  username: skipUsernameAsLink
-    ? user.username || null
-    : user.username
-      ? { text: user.username, link: `/index/user-managment/user/${user.username}`, type: GridFieldTypes.LINK }
-      : null,
-  firstName: user.firstName || null,
-  lastName: user.lastName || null,
-  email: user.email || null,
-  phone: user.phone || null,
-  type: user.type || null,
-  shopName: user.shopName
-    ? { text: user.shopName, link: `/index/shop/${user.shopId}`, type: GridFieldTypes.LINK }
-    : null,
-  createdByUsername: user.createdByUsername
-    ? {
-        text: user.createdByUsername,
-        link: `/index/user-managment/user/${user.createdByUsername}`,
-        type: GridFieldTypes.LINK,
-      }
-    : null,
-  modifiedByUsername: user.modifiedByUsername
-    ? {
-        text: user.modifiedByUsername,
-        link: `/index/user-managment/user/${user.modifiedByUsername}`,
-        type: GridFieldTypes.LINK,
-      }
-    : null,
-  dateCreated: dateFormater(user.dateCreated) || null,
-  dateModified: dateFormater(user.dateModified) || null,
+  username: {
+    value: user.username,
+    link: `/index/user-managment/user/${user.username}`,
+    type: skipUsernameAsLink ? GridFieldTypes.STRING : GridFieldTypes.LINK,
+  },
+  firstName: { value: user.firstName, type: GridFieldTypes.STRING },
+  lastName: { value: user.lastName, type: GridFieldTypes.STRING },
+  email: { value: user.email, type: GridFieldTypes.STRING },
+  phone: { value: user.phone, type: GridFieldTypes.STRING },
+  type: { value: user.type, type: GridFieldTypes.STRING },
+  shopName: { value: user.shopName, link: `/index/shop/${user.shopId}`, type: GridFieldTypes.LINK },
+  createdByUsername: {
+    value: user.createdByUsername,
+    link: `/index/user-managment/user/${user.createdByUsername}`,
+    type: GridFieldTypes.LINK,
+  },
+  modifiedByUsername: {
+    value: user.modifiedByUsername,
+    link: `/index/user-managment/user/${user.modifiedByUsername}`,
+    type: GridFieldTypes.LINK,
+  },
+  dateCreated: { value: dateFormater(user.dateCreated), type: GridFieldTypes.STRING },
+  dateModified: { value: dateFormater(user.dateModified), type: GridFieldTypes.STRING },
 })
 
 export const transformUserDataForEditView = (user: User): ViewElement => ({
-  firstName: user.firstName,
-  lastName: user.lastName,
-  email: user.email,
-  phone: user.phone,
+  firstName: { value: user.firstName, type: GridFieldTypes.STRING },
+  lastName: { value: user.lastName, type: GridFieldTypes.STRING },
+  email: { value: user.email, type: GridFieldTypes.STRING },
+  phone: { value: user.phone, type: GridFieldTypes.STRING },
   type: {
     options: Object.keys(UserType),
     type: GridFieldTypes.SELECT,

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { EmptyValue } from '../../consts/common'
+import { EmptyValue, GridFieldTypes } from '../../consts/common'
 import { TableProps } from '../../types/common'
 
 const UniformTable: FC<TableProps> = ({ columns, rows }) => {
@@ -20,14 +20,15 @@ const UniformTable: FC<TableProps> = ({ columns, rows }) => {
             <TableRow key={rowIndex}>
               {columns.map((col) => {
                 const cellData = row[col.key]
-                if (cellData instanceof Object) {
+                if (cellData.type === GridFieldTypes.LINK) {
                   return (
                     <TableCell key={col.key}>
-                      {cellData?.text ? <Link to={String(cellData.link)}>{cellData.text}</Link> : EmptyValue}
+                      {cellData?.value ? <Link to={String(cellData.link)}>{cellData.value}</Link> : EmptyValue}
                     </TableCell>
                   )
+                } else if (cellData.type === GridFieldTypes.STRING) {
+                  return <TableCell key={col.key}> {cellData.value || EmptyValue} </TableCell>
                 }
-                return <TableCell key={col.key}> {cellData || EmptyValue} </TableCell>
               })}
             </TableRow>
           ))}
