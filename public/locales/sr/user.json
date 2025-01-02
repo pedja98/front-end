@@ -12,7 +12,7 @@
   "type": "Tip korisnika",
   "userCreated": "Kreiran je novi korisnik",
   "sortByLabels": {
-    "userame": "Korisničko ime",
+    "username": "Korisničko ime",
     "email": "Email",
     "dateCreated": "Datum kreiranja"
   }

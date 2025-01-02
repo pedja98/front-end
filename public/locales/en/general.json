@@ -15,6 +15,10 @@
   "searchDialogTitle": "Search",
   "none": "None",
   "noSearchContent": "No search content",
+  "createdBy": "Created by",
+  "modifiedBy": "Modified by",
+  "dateCreated": "Date created",
+  "dateModified": "Date modified",
   "navbarLinks": {
     "home": "Home",
     "companies": "Companies",

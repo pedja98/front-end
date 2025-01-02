@@ -22,3 +22,23 @@ export interface SearchDialogProps {
 export interface BasicTabProps {
   tabs: Record<string, ReactNode>
 }
+
+export interface TableLink {
+  value: string
+  link: string
+}
+
+export interface TableRowElement {
+  [key: string]: string | number | undefined | null | TableLink
+}
+
+export interface TableColumn {
+  label: string
+  key: string
+}
+
+export interface TableProps {
+  columns: TableColumn[]
+  rows: TableRowElement[]
+  emptyValue?: string
+}

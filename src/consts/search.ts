@@ -1,7 +1,7 @@
 export const InitialState: Record<string, unknown> = {}
 
 export const UserSortedByFields = {
-  Username: 'userame',
+  Username: 'username',
   Email: 'email',
   DateCreated: 'dateCreated',
 }

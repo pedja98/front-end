@@ -12,7 +12,7 @@
   "type": "User type",
   "userCreated": "New user is created",
   "sortByLabels": {
-    "userame": "Userame",
+    "username": "Username",
     "email": "Email",
     "dateCreated": "Date created"
   }

@@ -39,6 +39,7 @@ export default createBrowserRouter([
           { index: true, element: <EntityIndex /> },
           { path: 'create', element: <CreateUser /> },
           { path: 'list', element: <ListUsers /> },
+          { path: 'user/:username', element: <EntityIndex /> },
         ],
       },
       { path: 'contracts', element: <Contracts /> },

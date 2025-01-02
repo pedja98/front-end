@@ -15,6 +15,10 @@
   "none": "Nijedan",
   "searchDialogTitle": "Pretraži",
   "noSearchContent": "Ne postoji pretraga",
+  "createdBy": "Kreirao",
+  "modifiedBy": "Izmenio",
+  "dateCreated": "Datum kreiranja",
+  "dateModified": "Datum izmene",
   "navbarLinks": {
     "home": "Početna",
     "companies": "Kompanije",
