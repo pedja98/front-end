@@ -15,5 +15,7 @@
     "username": "Username",
     "email": "Email",
     "dateCreated": "Date created"
-  }
+  },
+  "changePasswordLabel": "Change password",
+  "editUserData": "Edit user data"
 }

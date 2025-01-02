@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid'
-import { useGetUserByUsernameQuery, useUpdateUserMutation } from '../../app/apis/crm.api'
+import { useGetUserQuery, useUpdateUserMutation } from '../../app/apis/crm.api'
 import Spinner from '../common/Spinner'
 import { getCurrentUser } from '../../helpers/common'
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
@@ -17,7 +17,7 @@ import { updateAuthAttribute } from '../../features/auth.slice'
 import { Languages } from '../../consts/user'
 
 const EditUser = () => {
-  const { isLoading: getUserByUsernameLoading } = useGetUserByUsernameQuery(String(getCurrentUser().username))
+  const { isLoading: getUserLoading } = useGetUserQuery(String(getCurrentUser().username))
   const [updateUser, { isLoading: updateUserLoading }] = useUpdateUserMutation()
 
   const currentUserData = useAppSelector((state) => state.user)
@@ -105,7 +105,7 @@ const EditUser = () => {
     }
   }
 
-  if (getUserByUsernameLoading || updateUserLoading) {
+  if (getUserLoading || updateUserLoading) {
     return <Spinner />
   }
 

@@ -17,7 +17,7 @@ export const crmApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getUserByUsername: builder.query<FetchUserResponse, string>({
+    getUser: builder.query<FetchUserResponse, string>({
       query: (username) => `/users/${username}`,
     }),
     updateUser: builder.mutation<{ message: string }, { username: string; user: Partial<UserState> }>({
@@ -46,7 +46,7 @@ export const crmApi = createApi({
 })
 
 export const {
-  useGetUserByUsernameQuery,
+  useGetUserQuery,
   useUpdateUserMutation,
   useChangePasswordMutation,
   useCreateUserMutation,

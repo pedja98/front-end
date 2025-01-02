@@ -45,6 +45,7 @@ export interface UserState {
   dateCreated?: Date
   dateModified?: Date
 }
+
 export interface CreateUserDto {
   firstName?: string
   lastName?: string

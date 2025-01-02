@@ -28,7 +28,7 @@ export interface TableLink {
   link: string
 }
 
-export interface TableRowElement {
+export interface ViewElement {
   [key: string]: string | number | undefined | null | TableLink
 }
 
@@ -39,6 +39,6 @@ export interface TableColumn {
 
 export interface TableProps {
   columns: TableColumn[]
-  rows: TableRowElement[]
+  rows: ViewElement[]
   emptyValue?: string
 }

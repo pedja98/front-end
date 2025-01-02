@@ -15,5 +15,7 @@
     "username": "Korisničko ime",
     "email": "Email",
     "dateCreated": "Datum kreiranja"
-  }
+  },
+  "changePasswordLabel": "Izmeni lozinku",
+  "editUserData": "Uredite korisničke podatke"
 }

@@ -7,15 +7,16 @@ import { createQueryParamsForSearch } from '../../helpers/common'
 import { NotificationTypeEnum } from '../../types/notification'
 import Spinner from '../common/Spinner'
 import UniformTable from '../common/UniformTable'
-import { transformUserDataForUniformTable } from '../../transformers/user'
+import { transformUserDataForView } from '../../transformers/user'
 import { Pagination, Grid } from '@mui/material'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
-const ListUsers = () => {
+const ListViewUsers = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
   const { isLoading, data: users, isError, error } = useGetUsersQuery(queryParams)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const [currentPage, setCurrentPage] = useState(1)
   const rowsPerPage = 20
@@ -36,7 +37,7 @@ const ListUsers = () => {
   }
 
   const paginatedUsers = users.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
-  const transformedUsers = transformUserDataForUniformTable(paginatedUsers)
+  const transformedUsers = paginatedUsers.map((user) => transformUserDataForView(user))
 
   const columns = [
     { label: t('user:username'), key: 'username' },
@@ -70,4 +71,4 @@ const ListUsers = () => {
   )
 }
 
-export default ListUsers
+export default ListViewUsers

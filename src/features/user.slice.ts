@@ -18,7 +18,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      crmApi.endpoints.getUserByUsername.matchFulfilled,
+      crmApi.endpoints.getUser.matchFulfilled,
       (state, { payload }: PayloadAction<FetchUserResponse>) => {
         return { ...state, ...payload }
       },
