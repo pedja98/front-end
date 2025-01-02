@@ -23,7 +23,7 @@ const UniformTable: FC<TableProps> = ({ columns, rows }) => {
                 if (cellData instanceof Object) {
                   return (
                     <TableCell key={col.key}>
-                      {cellData?.value ? <Link to={String(cellData.link)}>{cellData.value}</Link> : EmptyValue}
+                      {cellData?.text ? <Link to={String(cellData.link)}>{cellData.text}</Link> : EmptyValue}
                     </TableCell>
                   )
                 }

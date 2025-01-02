@@ -3,6 +3,8 @@ import { UserType } from './user'
 
 export type Language = 'SR' | 'EN'
 
+export type GridFieldType = 'string' | 'select' | 'link' | 'password' | 'multiselect'
+
 export interface UpdateAttributePayload {
   attribute: string
   value?: number | string | UserType | Language | Date
@@ -23,14 +25,15 @@ export interface BasicTabProps {
   tabs: Record<string, ReactNode>
 }
 
-export interface ViewLink {
-  value?: string
+export interface GridField {
+  text?: string
+  type: GridFieldType
   link?: string
   options?: string[]
 }
 
 export interface ViewElement {
-  [key: string]: string | number | undefined | null | ViewLink
+  [key: string]: string | number | undefined | null | GridField
 }
 
 export interface TableColumn {

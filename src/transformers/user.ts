@@ -1,3 +1,4 @@
+import { GridFieldTypes } from '../consts/common'
 import { Languages } from '../consts/user'
 import { dateFormater } from '../helpers/common'
 import { ViewElement } from '../types/common'
@@ -7,19 +8,29 @@ export const transformUserDataForView = (user: User, skipUsernameAsLink?: boolea
   username: skipUsernameAsLink
     ? user.username || null
     : user.username
-      ? { value: user.username, link: `/index/user-managment/user/${user.username}` }
+      ? { text: user.username, link: `/index/user-managment/user/${user.username}`, type: GridFieldTypes.LINK }
       : null,
   firstName: user.firstName || null,
   lastName: user.lastName || null,
   email: user.email || null,
   phone: user.phone || null,
   type: user.type || null,
-  shopName: user.shopName ? { value: user.shopName, link: `/index/shop/${user.shopId}` } : null,
+  shopName: user.shopName
+    ? { text: user.shopName, link: `/index/shop/${user.shopId}`, type: GridFieldTypes.LINK }
+    : null,
   createdByUsername: user.createdByUsername
-    ? { value: user.createdByUsername, link: `/index/user-managment/user/${user.createdByUsername}` }
+    ? {
+        text: user.createdByUsername,
+        link: `/index/user-managment/user/${user.createdByUsername}`,
+        type: GridFieldTypes.LINK,
+      }
     : null,
   modifiedByUsername: user.modifiedByUsername
-    ? { value: user.modifiedByUsername, link: `/index/user-managment/user/${user.modifiedByUsername}` }
+    ? {
+        text: user.modifiedByUsername,
+        link: `/index/user-managment/user/${user.modifiedByUsername}`,
+        type: GridFieldTypes.LINK,
+      }
     : null,
   dateCreated: dateFormater(user.dateCreated) || null,
   dateModified: dateFormater(user.dateModified) || null,
@@ -32,8 +43,10 @@ export const transformUserDataForEditView = (user: User): ViewElement => ({
   phone: user.phone,
   type: {
     options: Object.keys(UserType),
+    type: GridFieldTypes.SELECT,
   },
   language: {
     options: Object.keys(Languages),
+    type: GridFieldTypes.SELECT,
   },
 })

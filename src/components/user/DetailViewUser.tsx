@@ -86,7 +86,7 @@ const DetailViewUser = () => {
                       />
                     ) : (
                       <>
-                        <LinkStyled to={String(cellData.link)}>{cellData.value}</LinkStyled>
+                        <LinkStyled to={String(cellData.link)}>{cellData.text}</LinkStyled>
                       </>
                     )}
                   </Grid>
