@@ -23,13 +23,18 @@ export interface BasicTabProps {
   tabs: Record<string, ReactNode>
 }
 
-export interface TableLink {
+export interface ViewLink {
   value: string
   link: string
 }
 
+export interface ViewSelect {
+  currentValue: string
+  options: string[]
+}
+
 export interface ViewElement {
-  [key: string]: string | number | undefined | null | TableLink
+  [key: string]: string | number | undefined | null | ViewLink | ViewSelect
 }
 
 export interface TableColumn {
@@ -41,4 +46,10 @@ export interface TableProps {
   columns: TableColumn[]
   rows: ViewElement[]
   emptyValue?: string
+}
+
+export interface ViewLabel {
+  label: string
+  key: string
+  skip?: boolean
 }

@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { Link } from 'react-router-dom'
 import { EmptyValue } from '../../consts/common'
 import { TableProps } from '../../types/common'
+import { isViewLink } from '../../helpers/common'
 
 const UniformTable: FC<TableProps> = ({ columns, rows }) => {
   return (
@@ -20,14 +21,17 @@ const UniformTable: FC<TableProps> = ({ columns, rows }) => {
             <TableRow key={rowIndex}>
               {columns.map((col) => {
                 const cellData = row[col.key]
-                if (!(cellData instanceof Object)) {
+                if (isViewLink(cellData)) {
+                  return (
+                    <TableCell key={col.key}>
+                      {cellData?.value ? <Link to={cellData.link}>{cellData.value}</Link> : EmptyValue}
+                    </TableCell>
+                  )
+                } else if (!(cellData instanceof Object)) {
                   return <TableCell key={col.key}> {cellData || EmptyValue} </TableCell>
+                } else {
+                  return <></>
                 }
-                return (
-                  <TableCell key={col.key}>
-                    {cellData?.value ? <Link to={cellData.link}>{cellData.value}</Link> : EmptyValue}
-                  </TableCell>
-                )
               })}
             </TableRow>
           ))}

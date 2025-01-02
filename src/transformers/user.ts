@@ -1,6 +1,7 @@
+import { Languages } from '../consts/user'
 import { dateFormater } from '../helpers/common'
 import { ViewElement } from '../types/common'
-import { User } from '../types/user'
+import { User, UserType } from '../types/user'
 
 export const transformUserDataForView = (user: User, skipUsernameAsLink?: boolean): ViewElement => ({
   username: skipUsernameAsLink
@@ -22,4 +23,19 @@ export const transformUserDataForView = (user: User, skipUsernameAsLink?: boolea
     : null,
   dateCreated: dateFormater(user.dateCreated) || null,
   dateModified: dateFormater(user.dateModified) || null,
+})
+
+export const transformUserDataForEditView = (user: User): ViewElement => ({
+  firstName: user.firstName,
+  lastName: user.lastName,
+  email: user.email,
+  phone: user.phone,
+  type: {
+    currentValue: user.type,
+    options: Object.keys(UserType),
+  },
+  language: {
+    currentValue: user.language,
+    options: Object.keys(Languages),
+  },
 })

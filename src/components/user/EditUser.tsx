@@ -1,10 +1,9 @@
 import Grid from '@mui/material/Grid'
 import { useGetUserQuery, useUpdateUserMutation } from '../../app/apis/crm.api'
 import Spinner from '../common/Spinner'
-import { getCurrentUser } from '../../helpers/common'
+import { getCurrentUser, isViewSelect } from '../../helpers/common'
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
 import { EmailPattern, PhonePattern } from '../../consts/common'
-import { Language } from '../../types/common'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent } from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -12,9 +11,11 @@ import { updateUserAttribute } from '../../features/user.slice'
 import { ApiException } from '../../types/exception'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationTypeEnum } from '../../types/notification'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { updateAuthAttribute } from '../../features/auth.slice'
-import { Languages } from '../../consts/user'
+import { User, UserState } from '../../types/user'
+import { transformUserDataForEditView } from '../../transformers/user'
+import { ViewLabel } from '../../types/common'
 
 const EditUser = () => {
   const { isLoading: getUserLoading } = useGetUserQuery(String(getCurrentUser().username))
@@ -26,6 +27,9 @@ const EditUser = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
+
+  const isEditProfile = location.pathname.includes('edit-profile')
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
     dispatch(updateUserAttribute({ attribute: event.target.name, value: event.target.value }))
@@ -109,85 +113,67 @@ const EditUser = () => {
     return <Spinner />
   }
 
+  const labels: ViewLabel[] = [
+    { label: t('user:firstName'), key: 'firstName' },
+    { label: t('user:lastName'), key: 'lastName' },
+    { label: t('user:email'), key: 'email' },
+    { label: t('user:phone'), key: 'phone' },
+    { label: t('user:type'), key: 'type', skip: isEditProfile },
+    { label: t('user:language'), key: 'language' },
+  ]
+
+  const userViewData = transformUserDataForEditView(currentUserData as unknown as User)
+
   return (
     <Grid container sx={{ width: '100%' }} direction='column' spacing={2}>
       <Grid item sx={{ width: '100%' }}>
-        <TextField
-          id='first-name'
-          name='firstName'
-          label={t('user:firstName')}
-          variant='standard'
-          value={currentUserData?.firstName}
-          sx={{ width: '100%' }}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            handleChange(event)
-          }}
-        />
-      </Grid>
-      <Grid item sx={{ width: '100%' }}>
-        <TextField
-          sx={{ width: '100%' }}
-          id='last-name'
-          name='lastName'
-          label={t('user:lastName')}
-          variant='standard'
-          value={currentUserData?.lastName}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            handleChange(event)
-          }}
-        />
-      </Grid>
-      <Grid item sx={{ width: '100%' }}>
-        <TextField
-          sx={{ width: '100%' }}
-          id='email'
-          name='email'
-          label={t('user:email')}
-          variant='standard'
-          value={currentUserData?.email}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            handleChange(event)
-          }}
-        />
-      </Grid>
-      <Grid item sx={{ width: '100%' }}>
-        <TextField
-          sx={{ width: '100%' }}
-          id='phone'
-          name='phone'
-          label={t('user:phone')}
-          variant='standard'
-          value={currentUserData?.phone}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            handleChange(event)
-          }}
-        />
-      </Grid>
-      <Grid item sx={{ width: '100%' }}>
-        <FormControl sx={{ width: '100%' }} variant='standard'>
-          <InputLabel id='language-select-label'>{t('user:language')}</InputLabel>
-          <Select
-            labelId='language-select-label'
-            id='language'
-            name='language'
-            value={currentUserData?.language}
-            label='Language'
-            variant='standard'
-            sx={{ width: '100%' }}
-            onChange={(event: SelectChangeEvent<string>) => {
-              handleChange(event)
-            }}
-          >
-            {Object.keys(Languages).map((lang) => (
-              <MenuItem key={lang} value={lang}>
-                {Languages[lang as Language]}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid item sx={{ width: '100%' }}>
-        <Button sx={{ width: '100%' }} onClick={handleSaveChanges}>
+        {labels
+          .filter((label) => !label.skip)
+          .map((label) => {
+            const cellData = userViewData[label.key]
+            if (isViewSelect(cellData)) {
+              return (
+                <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
+                  <FormControl sx={{ width: '100%' }} variant='standard'>
+                    <InputLabel id={label.key}>{label.label}</InputLabel>
+                    <Select
+                      labelId={label.key}
+                      id={label.key}
+                      name={label.key}
+                      value={String(currentUserData[label.key as keyof UserState])}
+                      variant='standard'
+                      sx={{ width: '100%' }}
+                      onChange={(event: SelectChangeEvent<string>) => {
+                        handleChange(event)
+                      }}
+                    >
+                      {cellData.options.map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {t(`${label.key}.${option.toLocaleLowerCase()}`)}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              )
+            }
+            return (
+              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
+                <TextField
+                  sx={{ width: '100%' }}
+                  id={label.key}
+                  name={label.key}
+                  label={label.label}
+                  variant='standard'
+                  value={currentUserData[label.key as keyof UserState]}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    handleChange(event)
+                  }}
+                />
+              </Grid>
+            )
+          })}
+        <Button sx={{ width: '100%', mt: 3 }} onClick={handleSaveChanges}>
           {t('general:saveButtonText')}
         </Button>
       </Grid>

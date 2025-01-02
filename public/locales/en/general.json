@@ -39,5 +39,16 @@
   "sortOrderValueLabels": {
     "asc": "Ascending",
     "desc": "Descending"
+  },
+  "language": {
+    "en": "English",
+    "sr": "Serbian"
+  },
+  "type": {
+    "admin": "Admin",
+    "salesman": "Salesman",
+    "l1_manager": "L1 Manager",
+    "l2_manager": "L2 Manager",
+    "l3_manager": "L3 Manager"
   }
 }

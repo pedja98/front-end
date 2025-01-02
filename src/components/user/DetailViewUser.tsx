@@ -10,6 +10,7 @@ import { User } from '../../types/user'
 import { useTranslation } from 'react-i18next'
 import { EmptyValue } from '../../consts/common'
 import { LinkStyled } from '../../styles/common'
+import { isViewLink } from '../../helpers/common'
 
 const DetailViewUser = () => {
   const username = String(useParams().username)
@@ -74,7 +75,7 @@ const DetailViewUser = () => {
                     <Typography variant='subtitle1'>{label.label}</Typography>
                   </Grid>
                   <Grid item xs>
-                    {!(cellData instanceof Object) ? (
+                    {!isViewLink(cellData) ? (
                       <TextField
                         fullWidth
                         value={cellData}
