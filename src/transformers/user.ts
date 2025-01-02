@@ -31,11 +31,9 @@ export const transformUserDataForEditView = (user: User): ViewElement => ({
   email: user.email,
   phone: user.phone,
   type: {
-    currentValue: user.type,
     options: Object.keys(UserType),
   },
   language: {
-    currentValue: user.language,
     options: Object.keys(Languages),
   },
 })

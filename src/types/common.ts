@@ -24,17 +24,13 @@ export interface BasicTabProps {
 }
 
 export interface ViewLink {
-  value: string
-  link: string
-}
-
-export interface ViewSelect {
-  currentValue: string
-  options: string[]
+  value?: string
+  link?: string
+  options?: string[]
 }
 
 export interface ViewElement {
-  [key: string]: string | number | undefined | null | ViewLink | ViewSelect
+  [key: string]: string | number | undefined | null | ViewLink
 }
 
 export interface TableColumn {

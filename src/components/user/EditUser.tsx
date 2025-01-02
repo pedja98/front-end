@@ -14,7 +14,7 @@ import { updateAuthAttribute } from '../../features/auth.slice'
 import { User } from '../../types/user'
 import { transformUserDataForEditView } from '../../transformers/user'
 import { ViewLabel } from '../../types/common'
-import { getCurrentUser, isViewSelect } from '../../helpers/common'
+import { getCurrentUser } from '../../helpers/common'
 
 const EditUser = () => {
   const location = useLocation()
@@ -142,7 +142,7 @@ const EditUser = () => {
           .filter((label) => !label.skip)
           .map((label) => {
             const cellData = userViewData[label.key]
-            if (isViewSelect(cellData)) {
+            if (cellData instanceof Object && cellData?.options) {
               return (
                 <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                   <FormControl sx={{ width: '100%' }} variant='standard'>
@@ -160,7 +160,7 @@ const EditUser = () => {
                         handleChange(event)
                       }}
                     >
-                      {cellData.options.map((option) => (
+                      {cellData?.options.map((option) => (
                         <MenuItem key={option} value={option}>
                           {t(`${label.key}.${option.toLowerCase()}`)}
                         </MenuItem>

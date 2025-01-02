@@ -1,7 +1,6 @@
 import { InitialState as AuthInitialState } from '../consts/auth'
 import { AuthState } from '../types/auth'
 import Cookies from 'js-cookie'
-import { ViewLink, ViewSelect } from '../types/common'
 
 export const getRoutePrefixFromCodeString = (prefixText: string): string => {
   return prefixText
@@ -46,24 +45,4 @@ export const dateFormater = (dateString: string): string => {
   const minutes = date.getUTCMinutes().toString().padStart(2, '0')
 
   return `${day}/${month}/${year} ${hours}:${minutes}`
-}
-
-export const isViewLink = (obj: unknown): obj is ViewLink =>
-  typeof obj === 'object' &&
-  obj !== null &&
-  'value' in obj &&
-  'link' in obj &&
-  typeof (obj as Record<string, unknown>).value === 'string' &&
-  typeof (obj as Record<string, unknown>).link === 'string'
-
-export function isViewSelect(obj: unknown): obj is ViewSelect {
-  if (typeof obj === 'object' && obj !== null) {
-    const viewSelect = obj as Record<string, unknown>
-    return (
-      typeof viewSelect.currentValue === 'string' &&
-      Array.isArray(viewSelect.options) &&
-      viewSelect.options.every((option) => typeof option === 'string')
-    )
-  }
-  return false
 }
