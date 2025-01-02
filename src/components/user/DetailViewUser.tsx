@@ -9,6 +9,7 @@ import { transformUserDataForView } from '../../transformers/user'
 import { User } from '../../types/user'
 import { useTranslation } from 'react-i18next'
 import { EmptyValue } from '../../consts/common'
+import { LinkStyled } from '../../styles/common'
 
 const DetailViewUser = () => {
   const username = String(useParams().username)
@@ -35,44 +36,61 @@ const DetailViewUser = () => {
   const userViewData = transformUserDataForView(user as unknown as User, true)
 
   const labels = [
-    { label: t('user:username'), key: 'username' },
-    { label: t('user:firstName'), key: 'firstName' },
-    { label: t('user:lastName'), key: 'lastName' },
-    { label: t('user:email'), key: 'email' },
-    { label: t('user:phone'), key: 'phone' },
-    { label: t('user:type'), key: 'type' },
-    { label: t('shop:shopLabel'), key: 'shopName' },
-    { label: t('general:createdBy'), key: 'createdByUsername' },
-    { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-    { label: t('general:dateCreated'), key: 'dateCreated' },
-    { label: t('general:dateModified'), key: 'dateModified' },
+    { label: t('user:username') + ':', key: 'username' },
+    { label: t('user:firstName') + ':', key: 'firstName' },
+    { label: t('user:lastName') + ':', key: 'lastName' },
+    { label: t('user:email') + ':', key: 'email' },
+    { label: t('user:phone') + ':', key: 'phone' },
+    { label: t('user:type') + ':', key: 'type' },
+    { label: t('shop:shopLabel') + ':', key: 'shopName' },
+    { label: t('general:createdBy') + ':', key: 'createdByUsername' },
+    { label: t('general:modifiedBy') + ':', key: 'modifiedByUsername' },
+    { label: t('general:dateCreated') + ':', key: 'dateCreated' },
+    { label: t('general:dateModified') + ':', key: 'dateModified' },
   ]
+
+  const handleEditRedirect = () => {
+    navigate(`/index/user-managment/user/edit/${username}`)
+  }
 
   return (
     <Grid sx={{ width: '100%', mt: 1, mb: 1 }}>
       <Grid sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Grid sx={{ width: '80%' }}>
-          <Button sx={{ ml: 0.5, width: '100px' }}>{t('general:edit')}</Button>
+          <Button onClick={handleEditRedirect} sx={{ ml: 0.5, width: '100px' }}>
+            {t('general:edit')}
+          </Button>
         </Grid>
       </Grid>
       <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
         <Grid container spacing={2} sx={{ width: '80%' }}>
           {labels.map((label) => {
             const cellData = userViewData[label.key] || EmptyValue
+
             return (
               <Grid item xs={12} sm={6} key={label.key}>
-                <Typography variant='subtitle2' sx={{ minWidth: 150, mr: 2 }}>
-                  {label.label}
-                </Typography>
-                <TextField
-                  fullWidth
-                  value={cellData}
-                  variant='outlined'
-                  disabled
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                />
+                <Grid container alignItems='center' sx={{ height: '50px' }}>
+                  <Grid item sx={{ minWidth: 120 }}>
+                    <Typography variant='subtitle1'>{label.label}</Typography>
+                  </Grid>
+                  <Grid item xs>
+                    {!(cellData instanceof Object) ? (
+                      <TextField
+                        fullWidth
+                        value={cellData}
+                        variant='outlined'
+                        disabled
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      />
+                    ) : (
+                      <>
+                        <LinkStyled to={cellData.link}>{cellData.value}</LinkStyled>
+                      </>
+                    )}
+                  </Grid>
+                </Grid>
               </Grid>
             )
           })}

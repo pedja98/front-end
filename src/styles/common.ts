@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles'
 import { TernaryColor, PrimaryThemeColor, WhiteTeamColor } from '../consts/common'
 import { Button, CardActions, CardContent, CircularProgress, TextField } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 export const StyledBackgroundContainer = styled('div')(() => ({
   backgroundColor: PrimaryThemeColor,
@@ -155,3 +156,9 @@ export const CenteredCircularProgress = styled(CircularProgress)({
   height: '80px !important',
   color: 'black !important',
 })
+
+export const LinkStyled = styled(Link)(() => ({
+  color: 'black',
+  textDecoration: 'none',
+  fontSize: '1rem !important',
+}))

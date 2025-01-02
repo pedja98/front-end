@@ -19,6 +19,7 @@ import CreateUser from '../components/user/CreateUser'
 import EntityIndex from '../pages/EntityIndex'
 import ListViewUsers from '../components/user/ListViewUsers'
 import DetailViewUser from '../components/user/DetailViewUser'
+import EditViewUser from '../components/user/EditViewUser'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<Login />} /> },
@@ -41,6 +42,7 @@ export default createBrowserRouter([
           { path: 'create', element: <CreateUser /> },
           { path: 'list', element: <ListViewUsers /> },
           { path: 'user/:username', element: <DetailViewUser /> },
+          { path: 'user/edit/:username', element: <EditViewUser /> },
         ],
       },
       { path: 'contracts', element: <Contracts /> },
