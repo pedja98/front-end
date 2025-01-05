@@ -8,7 +8,7 @@
   "password": "Lozinka",
   "confirm": "Potvrdi lozinku",
   "userUpdated": "Korisnički podaci su uspešno ažurirani",
-  "createUserLabel": "Kreiraj korisnika",
+  "createUserLabel": "KREIRAJ KORISNIKA",
   "type": "Tip korisnika",
   "userCreated": "Kreiran je novi korisnik",
   "sortByLabels": {

@@ -26,7 +26,7 @@ const Navbar = () => {
         {isLargeScreen ? (
           NavbarLinks.map((navbarLink) => (
             <NavbarLinkStyled key={navbarLink} to={`/index/${getRoutePrefixFromCodeString(navbarLink)}`}>
-              {t(`general:navbarLinks.${navbarLink}`)}
+              {t(`general:pageNamesAndActions.${navbarLink}`)}
             </NavbarLinkStyled>
           ))
         ) : (

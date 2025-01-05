@@ -102,7 +102,7 @@ const NavbarFadeMenu: FC<Props> = (props): JSX.Element => {
               handleClick(option)
             }}
           >
-            {t(`general:navbarLinks.${option}`)}
+            {t(`general:pageNamesAndActions.${option}`)}
           </NavbarUserOptionsMenuItemStyled>
         ))}
       </Menu>

@@ -18,7 +18,6 @@ import { ApiException } from '../../types/exception'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationTypeEnum } from '../../types/notification'
 import { useNavigate } from 'react-router-dom'
-import { Root } from '../../styles/common'
 import { CreateUserDto, CreateUserDataFormProps, UserType } from '../../types/user'
 import { useCreateUserMutation } from '../../app/apis/crm.api'
 import Spinner from '../common/Spinner'
@@ -149,10 +148,10 @@ const CreateUser = () => {
   const createUserGridData = getCreateUserGridData()
 
   return (
-    <Grid container sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Root>
+    <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
+      <Grid item sx={{ width: '80%', mb: 2 }}>
         <Typography variant='h4'>{t('user:createUserLabel')}</Typography>
-      </Root>
+      </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = createUserGridData[label.key]

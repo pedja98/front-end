@@ -8,7 +8,7 @@ import { NotificationTypeEnum } from '../../types/notification'
 import Spinner from '../common/Spinner'
 import UniformTable from '../common/UniformTable'
 import { transformUserIntoViewGridData } from '../../transformers/user'
-import { Pagination, Grid } from '@mui/material'
+import { Pagination, Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 const ListViewUsers = () => {
@@ -58,15 +58,20 @@ const ListViewUsers = () => {
   }
 
   return (
-    <Grid sx={{ pt: 5 }}>
-      <UniformTable columns={columns} rows={listViewUserGridData} />
-      <Pagination
-        count={Math.ceil(users.length / rowsPerPage)}
-        page={currentPage}
-        onChange={handlePageChange}
-        color='primary'
-        sx={{ display: 'flex', justifyContent: 'center' }}
-      />
+    <Grid sx={{ mt: 2 }}>
+      <Grid item>
+        <Typography variant='h4'>{t(`pageNamesAndActions.userManagment`).toLocaleUpperCase()}</Typography>
+      </Grid>
+      <Grid sx={{ mt: 2 }}>
+        <UniformTable columns={columns} rows={listViewUserGridData} />
+        <Pagination
+          count={Math.ceil(users.length / rowsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          color='primary'
+          sx={{ display: 'flex', justifyContent: 'center' }}
+        />
+      </Grid>
     </Grid>
   )
 }
