@@ -4,7 +4,7 @@ import { dateFormater } from '../helpers/common'
 import { ViewElement } from '../types/common'
 import { User, UserType } from '../types/user'
 
-export const transformUserDataForView = (user: User, skipUsernameAsLink?: boolean): ViewElement => ({
+export const transformUserIntoViewGridData = (user: User, skipUsernameAsLink?: boolean): ViewElement => ({
   username: {
     value: user.username,
     link: `/index/user-managment/user/${user.username}`,
@@ -30,7 +30,7 @@ export const transformUserDataForView = (user: User, skipUsernameAsLink?: boolea
   dateModified: { value: dateFormater(user.dateModified), type: GridFieldTypes.STRING },
 })
 
-export const transformUserDataForEditView = (user: User): ViewElement => ({
+export const transformUserIntoEditViewGridData = (user: User): ViewElement => ({
   firstName: { value: user.firstName, type: GridFieldTypes.STRING },
   lastName: { value: user.lastName, type: GridFieldTypes.STRING },
   email: { value: user.email, type: GridFieldTypes.STRING },
@@ -41,6 +41,20 @@ export const transformUserDataForEditView = (user: User): ViewElement => ({
   },
   language: {
     options: Object.keys(Languages),
+    type: GridFieldTypes.SELECT,
+  },
+})
+
+export const getCreateUserGridData = (): ViewElement => ({
+  firstName: { type: GridFieldTypes.STRING },
+  lastName: { type: GridFieldTypes.STRING },
+  username: { type: GridFieldTypes.STRING },
+  email: { type: GridFieldTypes.STRING },
+  password: { type: GridFieldTypes.PASSWORD },
+  confirm: { type: GridFieldTypes.PASSWORD },
+  phone: { type: GridFieldTypes.STRING },
+  type: {
+    options: Object.keys(UserType),
     type: GridFieldTypes.SELECT,
   },
 })

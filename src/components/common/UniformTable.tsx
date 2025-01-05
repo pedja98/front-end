@@ -19,15 +19,19 @@ const UniformTable: FC<TableProps> = ({ columns, rows }) => {
           {rows.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
               {columns.map((col) => {
-                const cellData = row[col.key]
-                if (cellData.type === GridFieldTypes.LINK) {
+                const gridFieldData = row[col.key]
+                if (gridFieldData.type === GridFieldTypes.LINK) {
                   return (
                     <TableCell key={col.key}>
-                      {cellData?.value ? <Link to={String(cellData.link)}>{cellData.value}</Link> : EmptyValue}
+                      {gridFieldData?.value ? (
+                        <Link to={String(gridFieldData.link)}>{gridFieldData.value}</Link>
+                      ) : (
+                        EmptyValue
+                      )}
                     </TableCell>
                   )
-                } else if (cellData.type === GridFieldTypes.STRING) {
-                  return <TableCell key={col.key}> {cellData.value || EmptyValue} </TableCell>
+                } else if (gridFieldData.type === GridFieldTypes.STRING) {
+                  return <TableCell key={col.key}> {gridFieldData.value || EmptyValue} </TableCell>
                 }
               })}
             </TableRow>

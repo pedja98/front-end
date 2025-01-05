@@ -7,7 +7,7 @@ import { createQueryParamsForSearch } from '../../helpers/common'
 import { NotificationTypeEnum } from '../../types/notification'
 import Spinner from '../common/Spinner'
 import UniformTable from '../common/UniformTable'
-import { transformUserDataForView } from '../../transformers/user'
+import { transformUserIntoViewGridData } from '../../transformers/user'
 import { Pagination, Grid } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
@@ -37,7 +37,7 @@ const ListViewUsers = () => {
   }
 
   const paginatedUsers = users.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
-  const transformedUsers = paginatedUsers.map((user) => transformUserDataForView(user))
+  const listViewUserGridData = paginatedUsers.map((user) => transformUserIntoViewGridData(user))
 
   const columns = [
     { label: t('user:username'), key: 'username' },
@@ -59,7 +59,7 @@ const ListViewUsers = () => {
 
   return (
     <Grid sx={{ pt: 5 }}>
-      <UniformTable columns={columns} rows={transformedUsers} />
+      <UniformTable columns={columns} rows={listViewUserGridData} />
       <Pagination
         count={Math.ceil(users.length / rowsPerPage)}
         page={currentPage}

@@ -12,7 +12,7 @@ import { NotificationTypeEnum } from '../../types/notification'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { updateAuthAttribute } from '../../features/auth.slice'
 import { User } from '../../types/user'
-import { transformUserDataForEditView } from '../../transformers/user'
+import { transformUserIntoEditViewGridData } from '../../transformers/user'
 import { ViewLabel } from '../../types/common'
 import { getCurrentUser } from '../../helpers/common'
 
@@ -133,7 +133,7 @@ const EditUser = () => {
     { label: t('user:language'), key: 'language' },
   ]
 
-  const userViewData = transformUserDataForEditView(userData)
+  const editViewUserGridData = transformUserIntoEditViewGridData(userData)
 
   return (
     <Grid container sx={{ width: '100%' }} direction='column' spacing={2}>
@@ -141,8 +141,8 @@ const EditUser = () => {
         {labels
           .filter((label) => !label.skip)
           .map((label) => {
-            const cellData = userViewData[label.key]
-            if (cellData.type === GridFieldTypes.SELECT && cellData?.options) {
+            const gridFieldData = editViewUserGridData[label.key]
+            if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
               return (
                 <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                   <FormControl sx={{ width: '100%' }} variant='standard'>
@@ -160,7 +160,7 @@ const EditUser = () => {
                         handleChange(event)
                       }}
                     >
-                      {cellData?.options.map((option) => (
+                      {gridFieldData?.options.map((option) => (
                         <MenuItem key={option} value={option}>
                           {t(`${label.key}.${option.toLowerCase()}`)}
                         </MenuItem>
@@ -169,7 +169,7 @@ const EditUser = () => {
                   </FormControl>
                 </Grid>
               )
-            } else if (cellData.type === GridFieldTypes.STRING) {
+            } else if (gridFieldData.type === GridFieldTypes.STRING) {
               return (
                 <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                   <TextField

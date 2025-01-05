@@ -5,7 +5,7 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationTypeEnum } from '../../types/notification'
 import { useAppDispatch } from '../../app/hooks'
 import { useGetUserQuery } from '../../app/apis/crm.api'
-import { transformUserDataForView } from '../../transformers/user'
+import { transformUserIntoViewGridData } from '../../transformers/user'
 import { User } from '../../types/user'
 import { useTranslation } from 'react-i18next'
 import { EmptyValue, GridFieldTypes } from '../../consts/common'
@@ -33,7 +33,7 @@ const DetailViewUser = () => {
     return null
   }
 
-  const userViewData = transformUserDataForView(user as unknown as User, true)
+  const detailViewUserGridData = transformUserIntoViewGridData(user as unknown as User, true)
 
   const labels = [
     { label: t('user:username') + ':', key: 'username' },
@@ -65,7 +65,7 @@ const DetailViewUser = () => {
       <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
         <Grid container spacing={2} sx={{ width: '80%' }}>
           {labels.map((label) => {
-            const cellData = userViewData[label.key] || EmptyValue
+            const gridFieldData = detailViewUserGridData[label.key] || EmptyValue
 
             return (
               <Grid item xs={12} sm={6} key={label.key}>
@@ -76,11 +76,11 @@ const DetailViewUser = () => {
                   <Grid item xs>
                     <Grid item xs>
                       {(() => {
-                        if (cellData.type === GridFieldTypes.STRING) {
+                        if (gridFieldData.type === GridFieldTypes.STRING) {
                           return (
                             <TextField
                               fullWidth
-                              value={cellData.value}
+                              value={gridFieldData.value}
                               variant='outlined'
                               disabled
                               InputProps={{
@@ -88,8 +88,8 @@ const DetailViewUser = () => {
                               }}
                             />
                           )
-                        } else if (cellData.type === GridFieldTypes.LINK && cellData.value) {
-                          return <LinkStyled to={String(cellData.link)}>{cellData.value}</LinkStyled>
+                        } else if (gridFieldData.type === GridFieldTypes.LINK && gridFieldData.value) {
+                          return <LinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</LinkStyled>
                         } else {
                           return (
                             <TextField

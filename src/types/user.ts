@@ -8,25 +8,6 @@ export enum UserType {
   L3_MANAGER = 'L3_MANAGER',
 }
 
-export interface FetchUserResponse {
-  firstName?: string
-  lastName?: string
-  email?: string
-  username?: string
-  phone?: string
-  type?: UserType
-  language?: Language
-  shopId?: number
-  shopName?: string
-  salesmen?: string
-  createdById?: number
-  createdByUsername?: string
-  modifiedById?: number
-  modifiedByUsername?: string
-  dateCreated?: Date
-  dateModified?: Date
-}
-
 export interface CreateUserDto {
   firstName?: string
   lastName?: string
@@ -47,7 +28,6 @@ export interface CreateUserDataFormProps {
   email: string
   phone: string
   type: string
-  language: string
 }
 
 export interface SearchUserDataFormProps {

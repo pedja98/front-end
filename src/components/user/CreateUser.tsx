@@ -9,8 +9,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { EmailPattern, PasswordPattern, PhonePattern } from '../../consts/common'
-import { Language } from '../../types/common'
+import { EmailPattern, GridFieldTypes, PasswordPattern, PhonePattern } from '../../consts/common'
+import { ViewLabel } from '../../types/common'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent, useState } from 'react'
 import { useAppDispatch } from '../../app/hooks'
@@ -19,10 +19,10 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationTypeEnum } from '../../types/notification'
 import { useNavigate } from 'react-router-dom'
 import { Root } from '../../styles/common'
-import { Languages, UserTypes } from '../../consts/user'
 import { CreateUserDto, CreateUserDataFormProps, UserType } from '../../types/user'
 import { useCreateUserMutation } from '../../app/apis/crm.api'
 import Spinner from '../common/Spinner'
+import { getCreateUserGridData } from '../../transformers/user'
 
 const CreateUser = () => {
   const [currentUserData, setCurrentUserData] = useState<CreateUserDataFormProps>({
@@ -34,7 +34,6 @@ const CreateUser = () => {
     email: '',
     phone: '',
     type: '',
-    language: '',
   })
 
   const { t } = useTranslation()
@@ -111,7 +110,6 @@ const CreateUser = () => {
         email: currentUserData.email,
         phone: currentUserData.phone,
         type: currentUserData.type as UserType,
-        language: currentUserData.language as Language,
       }
 
       const messageCode = `user:${(await createUser(userData).unwrap()).message}`
@@ -121,7 +119,7 @@ const CreateUser = () => {
           type: NotificationTypeEnum.Success,
         }),
       )
-      navigate('/index')
+      navigate(`/index/user-managment/user/${userData.username}`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `user:${errorResponse.data}` || 'general:unknowError'
@@ -138,155 +136,89 @@ const CreateUser = () => {
     return <Spinner />
   }
 
+  const labels: ViewLabel[] = [
+    { label: t('user:firstName'), key: 'firstName' },
+    { label: t('user:lastName'), key: 'lastName' },
+    { label: t('user:username'), key: 'username' },
+    { label: t('user:password'), key: 'password' },
+    { label: t('user:confirm'), key: 'confirm' },
+    { label: t('user:email'), key: 'email' },
+    { label: t('user:phone'), key: 'phone' },
+    { label: t('user:type'), key: 'type' },
+  ]
+  const createUserGridData = getCreateUserGridData()
+
   return (
     <Grid container sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Root>
         <Typography variant='h4'>{t('user:createUserLabel')}</Typography>
       </Root>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
-        <Grid item sx={{ width: '100%' }}>
-          <TextField
-            id='first-name'
-            name='firstName'
-            label={t('user:firstName')}
-            variant='standard'
-            value={currentUserData.firstName}
-            sx={{ width: '100%' }}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              handleChange(event)
-            }}
-          />
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <TextField
-            sx={{ width: '100%' }}
-            id='last-name'
-            name='lastName'
-            label={t('user:lastName')}
-            variant='standard'
-            value={currentUserData.lastName}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              handleChange(event)
-            }}
-          />
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <TextField
-            sx={{ width: '100%' }}
-            id='username'
-            name='username'
-            label={t('user:username')}
-            variant='standard'
-            value={currentUserData.username}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              handleChange(event)
-            }}
-          />
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <TextField
-            sx={{ width: '100%' }}
-            id='password'
-            name='password'
-            type='password'
-            label={t('user:password')}
-            variant='standard'
-            value={currentUserData.password}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              handleChange(event)
-            }}
-          />
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <TextField
-            sx={{ width: '100%' }}
-            id='confirm'
-            name='confirm'
-            type='password'
-            label={t('user:confirm')}
-            variant='standard'
-            value={currentUserData.confirm}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              handleChange(event)
-            }}
-          />
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <TextField
-            sx={{ width: '100%' }}
-            id='email'
-            name='email'
-            label={t('user:email')}
-            variant='standard'
-            value={currentUserData.email}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              handleChange(event)
-            }}
-          />
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <TextField
-            sx={{ width: '100%' }}
-            id='phone'
-            name='phone'
-            label={t('user:phone')}
-            variant='standard'
-            value={currentUserData.phone}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              handleChange(event)
-            }}
-          />
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <FormControl sx={{ width: '100%' }} variant='standard'>
-            <InputLabel id='user-type-select-label' sx={{ pl: 9.3 }}>
-              {t('user:type')}
-            </InputLabel>
-            <Select
-              labelId='user-type-select-label'
-              id='user-type'
-              name='type'
-              value={currentUserData.type}
-              label={t('user:type')}
-              variant='standard'
-              sx={{ width: '100%' }}
-              onChange={(event: SelectChangeEvent<string>) => {
-                handleChange(event)
-              }}
-            >
-              {Object.keys(UserTypes).map((type) => (
-                <MenuItem key={type} value={type}>
-                  {UserTypes[type as UserType]}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <FormControl sx={{ width: '100%' }} variant='standard'>
-            <InputLabel id='language-select-label' sx={{ pl: 9.3 }}>
-              {t('user:language')}
-            </InputLabel>
-            <Select
-              labelId='language-select-label'
-              id='language'
-              name='language'
-              value={currentUserData.language}
-              label={t('user:language')}
-              variant='standard'
-              sx={{ width: '100%' }}
-              onChange={(event: SelectChangeEvent<string>) => {
-                handleChange(event)
-              }}
-            >
-              {Object.keys(Languages).map((lang) => (
-                <MenuItem key={lang} value={lang}>
-                  {Languages[lang as Language]}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
+        {labels.map((label) => {
+          const gridFieldData = createUserGridData[label.key]
+          if (gridFieldData.type === GridFieldTypes.STRING) {
+            return (
+              <Grid item sx={{ width: '100%' }} key={label.key}>
+                <TextField
+                  id={label.key}
+                  name={label.key}
+                  label={label.label}
+                  variant='standard'
+                  value={currentUserData[label.key as keyof CreateUserDataFormProps]}
+                  sx={{ width: '100%' }}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    handleChange(event)
+                  }}
+                />
+              </Grid>
+            )
+          } else if (gridFieldData.type === GridFieldTypes.PASSWORD) {
+            return (
+              <Grid item sx={{ width: '100%' }} key={label.key}>
+                <TextField
+                  id={label.key}
+                  name={label.key}
+                  label={label.label}
+                  type='password'
+                  variant='standard'
+                  value={currentUserData[label.key as keyof CreateUserDataFormProps]}
+                  sx={{ width: '100%' }}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    handleChange(event)
+                  }}
+                />
+              </Grid>
+            )
+          } else if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
+            return (
+              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
+                <FormControl sx={{ width: '100%' }} variant='standard'>
+                  <InputLabel id={label.key} sx={{ pl: 9.3 }}>
+                    {label.label}
+                  </InputLabel>
+                  <Select
+                    labelId={label.key}
+                    id={label.key}
+                    name={label.key}
+                    value={String(currentUserData[label.key as keyof CreateUserDataFormProps])}
+                    variant='standard'
+                    sx={{ width: '100%' }}
+                    onChange={(event: SelectChangeEvent<string>) => {
+                      handleChange(event)
+                    }}
+                  >
+                    {gridFieldData?.options.map((option) => (
+                      <MenuItem key={option} value={option}>
+                        {t(`${label.key}.${option.toLowerCase()}`)}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            )
+          }
+          return <Grid key={label.key}></Grid>
+        })}
         <Grid item sx={{ width: '100%' }}>
           <Button sx={{ width: '100%' }} onClick={handleSave}>
             {t('general:saveButtonText')}
