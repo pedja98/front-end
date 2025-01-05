@@ -1,7 +1,12 @@
 import Grid from '@mui/material/Grid'
+import { Outlet } from 'react-router-dom'
 
 const Offers = () => {
-  return <Grid>Offers</Grid>
+  return (
+    <Grid>
+      <Outlet />
+    </Grid>
+  )
 }
 
 export default Offers

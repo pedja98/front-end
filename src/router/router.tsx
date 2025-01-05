@@ -20,6 +20,7 @@ import EntityIndex from '../pages/EntityIndex'
 import ListViewUsers from '../components/user/ListViewUsers'
 import DetailViewUser from '../components/user/DetailViewUser'
 import EditViewUser from '../components/user/EditViewUser'
+import CreateShop from '../components/shop/CreateShop'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<Login />} /> },
@@ -29,11 +30,15 @@ export default createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'home', element: <Navigate to='/index' /> },
-      { path: 'companies', element: <Companies /> },
-      { path: 'contacts', element: <Contacts /> },
-      { path: 'customer-sessions', element: <CustomerSessions /> },
-      { path: 'opportunities', element: <Opportunities /> },
-      { path: 'offers', element: <Offers /> },
+      { path: 'companies', element: <Companies />, children: [{ index: true, element: <EntityIndex /> }] },
+      { path: 'contacts', element: <Contacts />, children: [{ index: true, element: <EntityIndex /> }] },
+      {
+        path: 'customer-sessions',
+        element: <CustomerSessions />,
+        children: [{ index: true, element: <EntityIndex /> }],
+      },
+      { path: 'opportunities', element: <Opportunities />, children: [{ index: true, element: <EntityIndex /> }] },
+      { path: 'offers', element: <Offers />, children: [{ index: true, element: <EntityIndex /> }] },
       {
         path: 'user-managment',
         element: <UserManagment />,
@@ -45,8 +50,19 @@ export default createBrowserRouter([
           { path: 'user/edit/:username', element: <EditViewUser /> },
         ],
       },
-      { path: 'contracts', element: <Contracts /> },
-      { path: 'shops', element: <Shops /> },
+      {
+        path: 'contracts',
+        element: <Contracts />,
+        children: [{ index: true, element: <EntityIndex /> }],
+      },
+      {
+        path: 'shops',
+        element: <Shops />,
+        children: [
+          { index: true, element: <EntityIndex /> },
+          { path: 'create', element: <CreateShop /> },
+        ],
+      },
       { path: 'edit-profile', element: <EditProfile /> },
       { path: 'catalogue', element: <Catalogue /> },
     ],
