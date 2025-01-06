@@ -45,8 +45,12 @@ export const crmApi = createApi({
       }),
     }),
     getUsers: builder.query<User[], string>({ query: (queryParams) => `/users${queryParams}`, providesTags: ['User'] }),
-    deleteUsers: builder.mutation<User[], string>({
-      query: (username) => `/users/${username}`,
+    deleteUsers: builder.mutation<{ message: string }, string>({
+      query: (username) => ({
+        url: `/users/${username}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, username) => [{ type: 'User', id: username }],
     }),
   }),
 })
