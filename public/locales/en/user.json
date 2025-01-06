@@ -1,4 +1,5 @@
 {
+  "userDeletionText": "user",
   "firstName": "First name",
   "lastName": "Last name",
   "email": "Email",
@@ -9,6 +10,7 @@
   "confirm": "Confirm password",
   "userUpdated": "User data has been successfully updated",
   "createUserLabel": "CREATE USER",
+  "userDeleted": "User {{username}} has been successfully deleted",
   "type": "User type",
   "userCreated": "New user is created",
   "sortByLabels": {

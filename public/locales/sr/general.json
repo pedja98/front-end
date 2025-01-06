@@ -20,6 +20,7 @@
   "dateCreated": "Datum kreiranja",
   "dateModified": "Datum izmene",
   "edit": "Izmeni",
+  "delete": "Obriši",
   "pageNamesAndActions": {
     "home": "Početna",
     "companies": "Kompanije",
@@ -50,5 +51,11 @@
     "l1_manager": "L1 Menadžer",
     "l2_manager": "L2 Menadžer",
     "l3_manager": "L3 Menadžer"
-  }
+  },
+  "dialogConfirmationButtonLabels": {
+    "yes": "Da",
+    "no": "NE"
+  },
+  "confirmDeletionTitle": "Potvrdite brisanje",
+  "deleteConfirmationMessage": "Da li ste sigurni da želite da obrišete {{additionalText}}"
 }

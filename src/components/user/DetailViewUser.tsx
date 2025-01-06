@@ -4,21 +4,25 @@ import Spinner from '../common/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationTypeEnum } from '../../types/notification'
 import { useAppDispatch } from '../../app/hooks'
-import { useGetUserQuery } from '../../app/apis/crm.api'
+import { useDeleteUsersMutation, useGetUserQuery } from '../../app/apis/crm.api'
 import { transformUserIntoViewGridData } from '../../transformers/user'
-import { User } from '../../types/user'
 import { useTranslation } from 'react-i18next'
 import { EmptyValue, GridFieldTypes } from '../../consts/common'
 import { LinkStyled } from '../../styles/common'
+import { useState } from 'react'
+import DeleteEntityDialog from '../common/DeleteEntityDialog'
 
 const DetailViewUser = () => {
   const username = String(useParams().username)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { isLoading, data: user, isError, error } = useGetUserQuery(username)
+  const { isLoading: isGetUserLoading, data: user, isError, error } = useGetUserQuery(username)
+  const [deleteUser, { isLoading: isDeleteUserLoading }] = useDeleteUsersMutation()
 
-  if (isLoading) {
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+
+  if (isGetUserLoading || isDeleteUserLoading) {
     return <Spinner />
   }
 
@@ -33,7 +37,37 @@ const DetailViewUser = () => {
     return null
   }
 
-  const detailViewUserGridData = transformUserIntoViewGridData(user as unknown as User, true)
+  const detailViewUserGridData = transformUserIntoViewGridData(user, true)
+
+  const handleDeleteClick = () => {
+    setIsDeleteDialogOpen(true)
+  }
+
+  const handleConfirmDelete = async () => {
+    try {
+      await deleteUser(username).unwrap()
+      dispatch(
+        setNotification({
+          text: t('user:userDeleted', { username }),
+          type: NotificationTypeEnum.Success,
+        }),
+      )
+      navigate('/index/user-managment')
+    } catch (error) {
+      dispatch(
+        setNotification({
+          text: JSON.stringify(error),
+          type: NotificationTypeEnum.Error,
+        }),
+      )
+    } finally {
+      setIsDeleteDialogOpen(false)
+    }
+  }
+
+  const handleCancelDelete = () => {
+    setIsDeleteDialogOpen(false)
+  }
 
   const labels = [
     { label: t('user:username') + ':', key: 'username' },
@@ -54,65 +88,76 @@ const DetailViewUser = () => {
   }
 
   return (
-    <Grid sx={{ width: '100%', mt: 1, mb: 1 }}>
-      <Grid sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-        <Grid sx={{ width: '80%' }}>
-          <Button onClick={handleEditRedirect} sx={{ ml: 0.5, width: '100px' }}>
-            {t('general:edit')}
-          </Button>
+    <>
+      <Grid sx={{ width: '100%', mt: 1, mb: 1 }}>
+        <Grid sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <Grid sx={{ width: '80%' }}>
+            <Button onClick={handleEditRedirect} sx={{ ml: 0.5, width: '100px' }}>
+              {t('general:edit')}
+            </Button>
+            <Button sx={{ ml: 0.5, width: '100px' }} onClick={handleDeleteClick}>
+              {t('general:delete')}
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
-        <Grid container spacing={2} sx={{ width: '80%' }}>
-          {labels.map((label) => {
-            const gridFieldData = detailViewUserGridData[label.key] || EmptyValue
+        <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
+          <Grid container spacing={2} sx={{ width: '80%' }}>
+            {labels.map((label) => {
+              const gridFieldData = detailViewUserGridData[label.key] || EmptyValue
 
-            return (
-              <Grid item xs={12} sm={6} key={label.key}>
-                <Grid container alignItems='center' sx={{ height: '50px' }}>
-                  <Grid item sx={{ minWidth: 120 }}>
-                    <Typography variant='subtitle1'>{label.label}</Typography>
-                  </Grid>
-                  <Grid item xs>
+              return (
+                <Grid item xs={12} sm={6} key={label.key}>
+                  <Grid container alignItems='center' sx={{ height: '50px' }}>
+                    <Grid item sx={{ minWidth: 120 }}>
+                      <Typography variant='subtitle1'>{label.label}</Typography>
+                    </Grid>
                     <Grid item xs>
-                      {(() => {
-                        if (gridFieldData.type === GridFieldTypes.STRING) {
-                          return (
-                            <TextField
-                              fullWidth
-                              value={gridFieldData.value}
-                              variant='outlined'
-                              disabled
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                            />
-                          )
-                        } else if (gridFieldData.type === GridFieldTypes.LINK && gridFieldData.value) {
-                          return <LinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</LinkStyled>
-                        } else {
-                          return (
-                            <TextField
-                              fullWidth
-                              value={EmptyValue}
-                              variant='outlined'
-                              disabled
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                            />
-                          )
-                        }
-                      })()}
+                      <Grid item xs>
+                        {(() => {
+                          if (gridFieldData.type === GridFieldTypes.STRING) {
+                            return (
+                              <TextField
+                                fullWidth
+                                value={gridFieldData.value}
+                                variant='outlined'
+                                disabled
+                                InputProps={{
+                                  readOnly: true,
+                                }}
+                              />
+                            )
+                          } else if (gridFieldData.type === GridFieldTypes.LINK && gridFieldData.value) {
+                            return <LinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</LinkStyled>
+                          } else {
+                            return (
+                              <TextField
+                                fullWidth
+                                value={EmptyValue}
+                                variant='outlined'
+                                disabled
+                                InputProps={{
+                                  readOnly: true,
+                                }}
+                              />
+                            )
+                          }
+                        })()}
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            )
-          })}
+              )
+            })}
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+      <DeleteEntityDialog
+        open={isDeleteDialogOpen}
+        additionalText={t('user:userDeletionText') + ' ' + user.firstName + ' ' + user.lastName}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
+    </>
   )
 }
 

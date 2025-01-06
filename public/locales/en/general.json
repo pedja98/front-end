@@ -20,6 +20,7 @@
   "dateCreated": "Date created",
   "dateModified": "Date modified",
   "edit": "Edit",
+  "delete": "Delete",
   "pageNamesAndActions": {
     "home": "Home",
     "companies": "Companies",
@@ -50,5 +51,11 @@
     "l1_manager": "L1 Manager",
     "l2_manager": "L2 Manager",
     "l3_manager": "L3 Manager"
-  }
+  },
+  "dialogConfirmationButtonLabels": {
+    "yes": "Yes",
+    "no": "No"
+  },
+  "confirmDeletionTitle": "Confirm deletion",
+  "deleteConfirmationMessage": "Are you sure that you want to delete {{additionalText}}"
 }

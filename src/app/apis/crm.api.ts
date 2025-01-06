@@ -45,6 +45,9 @@ export const crmApi = createApi({
       }),
     }),
     getUsers: builder.query<User[], string>({ query: (queryParams) => `/users${queryParams}`, providesTags: ['User'] }),
+    deleteUsers: builder.mutation<User[], string>({
+      query: (username) => `/users/${username}`,
+    }),
   }),
 })
 
@@ -54,4 +57,5 @@ export const {
   useChangePasswordMutation,
   useCreateUserMutation,
   useGetUsersQuery,
+  useDeleteUsersMutation,
 } = crmApi

@@ -1,4 +1,5 @@
 {
+  "userDeletionText": "korisnika",
   "firstName": "Ime",
   "lastName": "Prezime",
   "email": "Email",
@@ -9,6 +10,7 @@
   "confirm": "Potvrdi lozinku",
   "userUpdated": "Korisnički podaci su uspešno ažurirani",
   "createUserLabel": "KREIRAJ KORISNIKA",
+  "userDeleted": "Korisnik {{username}} je uspešno obrisan",
   "type": "Tip korisnika",
   "userCreated": "Kreiran je novi korisnik",
   "sortByLabels": {
