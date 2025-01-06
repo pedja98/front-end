@@ -9,6 +9,7 @@ export enum ModulesOptions {
   Shops = 'shops',
   EditProfile = 'editProfile',
   Catalogue = 'catalogue',
+  Regions = 'regions',
   UserManagment = 'userManagment',
   Logout = 'logout',
 }
