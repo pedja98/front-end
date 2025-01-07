@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { EmptyValue, GridFieldTypes } from '../../consts/common'
 import { LinkStyled } from '../../styles/common'
 import { useState } from 'react'
-import DeleteEntityDialog from '../common/DeleteEntityDialog'
+import Confirm from '../common/Confirm'
 
 const DetailViewUser = () => {
   const username = String(useParams().username)
@@ -151,9 +151,10 @@ const DetailViewUser = () => {
           </Grid>
         </Grid>
       </Grid>
-      <DeleteEntityDialog
+      <Confirm
         open={isDeleteDialogOpen}
-        additionalText={t('user:userDeletionText') + ' ' + user.firstName + ' ' + user.lastName}
+        confirmationText={t('user:userDeletionText', { firstName: user.firstName, lastName: user.lastName })}
+        confirmationTitle={t('general:confirmDeletionTitle')}
         onConfirm={handleConfirmDelete}
         onCancel={handleCancelDelete}
       />

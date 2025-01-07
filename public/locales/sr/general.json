@@ -57,6 +57,5 @@
     "yes": "Da",
     "no": "NE"
   },
-  "confirmDeletionTitle": "Potvrdite brisanje",
-  "deleteConfirmationMessage": "Da li ste sigurni da želite da obrišete {{additionalText}}"
+  "confirmDeletionTitle": "Potvrdite brisanje"
 }

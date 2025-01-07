@@ -1,5 +1,5 @@
 {
-  "userDeletionText": "korisnika",
+  "userDeletionText": "Da li ste sigurni da želite da obrišete korisnika/cu {{firstName}} {{lastName}}",
   "firstName": "Ime",
   "lastName": "Prezime",
   "email": "Email",

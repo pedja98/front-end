@@ -57,6 +57,5 @@
     "yes": "Yes",
     "no": "No"
   },
-  "confirmDeletionTitle": "Confirm deletion",
-  "deleteConfirmationMessage": "Are you sure that you want to delete {{additionalText}}"
+  "confirmDeletionTitle": "Confirm deletion"
 }
