@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'
 import notificationsReducer from '../features/notifications.slice'
 import searchReducer from '../features/search.slice'
 import authReducer from '../features/auth.slice'
+import confirmReducer from '../features/confirm.slice'
 import { gwApi } from './apis/gw.api'
 import { crmApi } from './apis/crm.api'
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   notifications: notificationsReducer,
   search: searchReducer,
   auth: authReducer,
+  confirm: confirmReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -28,7 +30,9 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE', 'payload.onConfirm'],
+        ignoredActionPaths: ['payload.onConfirm', 'payload.onCancel', 'meta.baseQueryMeta'],
+        ignoredPaths: ['confirm.onConfirm', 'confirm.onCancel', 'api.meta.baseQueryMeta'],
       },
     })
       .concat(gwApi.middleware)

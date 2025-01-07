@@ -1,3 +1,3 @@
-import { Notification } from '../types/notification'
+import { NotificationState } from '../types/notification'
 
-export const InitialState: Notification[] = []
+export const InitialState: NotificationState = []

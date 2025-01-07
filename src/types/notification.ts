@@ -4,6 +4,8 @@ export interface Notification {
   type: NotificationTypeEnum
 }
 
+export type NotificationState = Notification[]
+
 export enum NotificationTypeEnum {
   Default = 'default',
   Error = 'error',

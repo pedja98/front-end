@@ -12,6 +12,7 @@ import { SnackbarProvider } from 'notistack'
 import Notification from './components/common/Notification'
 import { PersistGate } from 'redux-persist/integration/react'
 import Spinner from './components/common/Spinner'
+import Confirm from './components/common/Confirm'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
@@ -26,6 +27,7 @@ root.render(
           <SnackbarProvider maxSnack={5} autoHideDuration={8000}>
             <Notification />
           </SnackbarProvider>
+          <Confirm />
         </PersistGate>
       </Provider>
     </ThemeProvider>

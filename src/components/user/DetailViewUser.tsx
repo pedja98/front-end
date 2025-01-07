@@ -9,18 +9,16 @@ import { transformUserIntoViewGridData } from '../../transformers/user'
 import { useTranslation } from 'react-i18next'
 import { EmptyValue, GridFieldTypes } from '../../consts/common'
 import { LinkStyled } from '../../styles/common'
-import { useState } from 'react'
-import Confirm from '../common/Confirm'
+import { showConfirm } from '../../features/confirm.slice'
 
 const DetailViewUser = () => {
   const username = String(useParams().username)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { t } = useTranslation()
+
   const { isLoading: isGetUserLoading, data: user, isError, error } = useGetUserQuery(username)
   const [deleteUser, { isLoading: isDeleteUserLoading }] = useDeleteUsersMutation()
-
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
   if (isGetUserLoading || isDeleteUserLoading) {
     return <Spinner />
@@ -40,7 +38,15 @@ const DetailViewUser = () => {
   const detailViewUserGridData = transformUserIntoViewGridData(user, true)
 
   const handleDeleteClick = () => {
-    setIsDeleteDialogOpen(true)
+    dispatch(
+      showConfirm({
+        confirmationText: t('user:userDeletionText', { firstName: user.firstName, lastName: user.lastName }),
+        confirmationTitle: t('general:confirmDeletionTitle'),
+        onConfirm: handleConfirmDelete,
+        confirmButtonLabel: t('dialogConfirmationButtonLabels.yes'),
+        denyButtonLabel: t('dialogConfirmationButtonLabels.no'),
+      }),
+    )
   }
 
   const handleConfirmDelete = async () => {
@@ -60,13 +66,7 @@ const DetailViewUser = () => {
           type: NotificationTypeEnum.Error,
         }),
       )
-    } finally {
-      setIsDeleteDialogOpen(false)
     }
-  }
-
-  const handleCancelDelete = () => {
-    setIsDeleteDialogOpen(false)
   }
 
   const labels = [
@@ -151,13 +151,6 @@ const DetailViewUser = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Confirm
-        open={isDeleteDialogOpen}
-        confirmationText={t('user:userDeletionText', { firstName: user.firstName, lastName: user.lastName })}
-        confirmationTitle={t('general:confirmDeletionTitle')}
-        onConfirm={handleConfirmDelete}
-        onCancel={handleCancelDelete}
-      />
     </>
   )
 }
