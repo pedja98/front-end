@@ -5,6 +5,7 @@ import notificationsReducer from '../features/notifications.slice'
 import searchReducer from '../features/search.slice'
 import authReducer from '../features/auth.slice'
 import confirmReducer from '../features/confirm.slice'
+import commonReducer from '../features/common.slice'
 import { gwApi } from './apis/gw.api'
 import { crmApi } from './apis/crm.api'
 
@@ -17,6 +18,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   [gwApi.reducerPath]: gwApi.reducer,
   [crmApi.reducerPath]: crmApi.reducer,
+  common: commonReducer,
   notifications: notificationsReducer,
   search: searchReducer,
   auth: authReducer,

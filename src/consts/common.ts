@@ -1,3 +1,5 @@
+import { CommonState } from '../types/common'
+
 export const PrimaryThemeColor = '#6e6e6e'
 
 export const SecondaryThemeColor = '#454444'
@@ -23,3 +25,5 @@ export const GridFieldTypes = {
   PASSWORD: 'password',
   MULTISELECT: 'multiselect',
 } as const
+
+export const InitialState: CommonState = {}

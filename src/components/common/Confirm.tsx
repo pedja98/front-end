@@ -1,38 +1,34 @@
 import { FC } from 'react'
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from '@mui/material'
-import { useSelector, useDispatch } from 'react-redux'
-import { hideConfirm, selectConfirm } from '../../features/confirm.slice'
+import { useAppSelector } from '../../app/hooks'
 
 const Confirm: FC = () => {
-  const dispatch = useDispatch()
-  const confirmState = useSelector(selectConfirm)
+  const confirm = useAppSelector((state) => state.confirm)
 
   const handleConfirm = () => {
-    if (confirmState.onConfirm) {
-      confirmState.onConfirm()
+    if (confirm.onConfirm) {
+      confirm.onConfirm()
     }
-    dispatch(hideConfirm())
   }
 
   const handleCancel = () => {
-    if (confirmState.onCancel) {
-      confirmState.onCancel()
+    if (confirm.onCancel) {
+      confirm.onCancel()
     }
-    dispatch(hideConfirm())
   }
 
   return (
-    <Dialog open={!!confirmState.open} onClose={handleCancel} aria-labelledby='confirmation-title'>
-      <DialogTitle id='confirmation-title'>{confirmState.confirmationTitle}</DialogTitle>
+    <Dialog open={!!confirm.open} onClose={handleCancel} aria-labelledby='confirmation-title'>
+      <DialogTitle id='confirmation-title'>{confirm.confirmationTitle}</DialogTitle>
       <DialogContent>
-        <Typography>{confirmState.confirmationText}</Typography>
+        <Typography>{confirm.confirmationText}</Typography>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleConfirm} color='primary'>
-          {confirmState.confirmButtonLabel}
+          {confirm.confirmButtonLabel}
         </Button>
         <Button onClick={handleCancel} color='error'>
-          {confirmState.denyButtonLabel}
+          {confirm.denyButtonLabel}
         </Button>
       </DialogActions>
     </Dialog>

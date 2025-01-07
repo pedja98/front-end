@@ -52,3 +52,7 @@ export interface ViewLabel {
   key: string
   skip?: boolean
 }
+
+export interface CommonState {
+  entityIsDeleted?: boolean
+}

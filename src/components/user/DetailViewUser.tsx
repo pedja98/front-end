@@ -3,13 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../common/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationTypeEnum } from '../../types/notification'
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useDeleteUsersMutation, useGetUserQuery } from '../../app/apis/crm.api'
 import { transformUserIntoViewGridData } from '../../transformers/user'
 import { useTranslation } from 'react-i18next'
 import { EmptyValue, GridFieldTypes } from '../../consts/common'
 import { LinkStyled } from '../../styles/common'
-import { showConfirm } from '../../features/confirm.slice'
+import { hideConfirm, showConfirm } from '../../features/confirm.slice'
+import { confirmEntityIsDeleted } from '../../features/common.slice'
 
 const DetailViewUser = () => {
   const username = String(useParams().username)
@@ -17,7 +18,13 @@ const DetailViewUser = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const { isLoading: isGetUserLoading, data: user, isError, error } = useGetUserQuery(username)
+  const entityIsDeleted = !!useAppSelector((state) => state.common.entityIsDeleted)
+  const {
+    isLoading: isGetUserLoading,
+    data: user,
+    isError,
+    error,
+  } = useGetUserQuery(username, { skip: !!entityIsDeleted })
   const [deleteUser, { isLoading: isDeleteUserLoading }] = useDeleteUsersMutation()
 
   if (isGetUserLoading || isDeleteUserLoading) {
@@ -43,6 +50,7 @@ const DetailViewUser = () => {
         confirmationText: t('user:userDeletionText', { firstName: user.firstName, lastName: user.lastName }),
         confirmationTitle: t('general:confirmDeletionTitle'),
         onConfirm: handleConfirmDelete,
+        onCancel: handleConfirmClose,
         confirmButtonLabel: t('dialogConfirmationButtonLabels.yes'),
         denyButtonLabel: t('dialogConfirmationButtonLabels.no'),
       }),
@@ -51,6 +59,7 @@ const DetailViewUser = () => {
 
   const handleConfirmDelete = async () => {
     try {
+      dispatch(confirmEntityIsDeleted())
       await deleteUser(username).unwrap()
       dispatch(
         setNotification({
@@ -66,7 +75,13 @@ const DetailViewUser = () => {
           type: NotificationTypeEnum.Error,
         }),
       )
+    } finally {
+      dispatch(hideConfirm())
     }
+  }
+
+  const handleConfirmClose = () => {
+    dispatch(hideConfirm())
   }
 
   const labels = [

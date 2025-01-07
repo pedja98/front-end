@@ -1,11 +1,12 @@
 import { Button, Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SearchDialog from '../components/common/SearchDialog'
 import { useAppDispatch } from '../app/hooks'
 import { cleanSearch } from '../features/search.slice'
 import { getCamelCaseFromKebabString } from '../helpers/common'
+import { cleanCommonState } from '../features/common.slice'
 
 const EntityIndex = () => {
   const { t } = useTranslation()
@@ -16,6 +17,10 @@ const EntityIndex = () => {
   const [isDialogOpen, setDialogOpen] = useState(false)
 
   const entityName = String(location.pathname.split('/').pop())
+
+  useEffect(() => {
+    dispatch(cleanCommonState())
+  }, [])
 
   const handleNavigateToCreatePage = () => {
     navigate(`${location.pathname}/create`)

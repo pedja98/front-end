@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { InitialState as ConfirmInitialState } from '../consts/confirm'
-import { RootState } from '../app/store'
 import { ConfirmState } from '../types/confirm'
 
 const confirmSlice = createSlice({
@@ -15,8 +14,6 @@ const confirmSlice = createSlice({
     },
   },
 })
-
-export const selectConfirm = (state: RootState) => state.confirm
 
 export const { showConfirm, hideConfirm } = confirmSlice.actions
 export default confirmSlice.reducer
