@@ -9,7 +9,7 @@ import { useLogoutMutation } from '../../app/apis/gw.api'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom'
 import { setNotification } from '../../features/notifications.slice'
-import { NotificationTypeEnum } from '../../types/notification'
+import { NotificationType } from '../../types/notification'
 import { ApiException } from '../../types/exception'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { getRoutePrefixFromCodeString } from '../../helpers/common'
@@ -44,7 +44,7 @@ const NavbarFadeMenu: FC<Props> = (props): JSX.Element => {
         dispatch(
           setNotification({
             text: t(messageCode),
-            type: NotificationTypeEnum.Info,
+            type: NotificationType.Info,
           }),
         )
         navigate('/')
@@ -54,7 +54,7 @@ const NavbarFadeMenu: FC<Props> = (props): JSX.Element => {
         dispatch(
           setNotification({
             text: t(errorCode),
-            type: NotificationTypeEnum.Error,
+            type: NotificationType.Error,
           }),
         )
       }

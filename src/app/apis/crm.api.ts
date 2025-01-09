@@ -52,6 +52,13 @@ export const crmApi = createApi({
       }),
       invalidatesTags: (result, error, username) => [{ type: 'User', id: username }],
     }),
+    createRegion: builder.mutation<{ message: string }, { name: string }>({
+      query: (credentials) => ({
+        url: '/regions',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
   }),
 })
 
@@ -62,4 +69,5 @@ export const {
   useCreateUserMutation,
   useGetUsersQuery,
   useDeleteUsersMutation,
+  useCreateRegionMutation,
 } = crmApi

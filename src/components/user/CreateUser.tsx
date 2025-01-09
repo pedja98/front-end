@@ -16,7 +16,7 @@ import { ChangeEvent, useState } from 'react'
 import { useAppDispatch } from '../../app/hooks'
 import { ApiException } from '../../types/exception'
 import { setNotification } from '../../features/notifications.slice'
-import { NotificationTypeEnum } from '../../types/notification'
+import { NotificationType } from '../../types/notification'
 import { useNavigate } from 'react-router-dom'
 import { CreateUserDto, CreateUserDataFormProps, UserType } from '../../types/user'
 import { useCreateUserMutation } from '../../app/apis/crm.api'
@@ -24,7 +24,7 @@ import Spinner from '../common/Spinner'
 import { getCreateUserGridData } from '../../transformers/user'
 
 const CreateUser = () => {
-  const [currentUserData, setCurrentUserData] = useState<CreateUserDataFormProps>({
+  const [createUserData, setCreateUserData] = useState<CreateUserDataFormProps>({
     firstName: '',
     lastName: '',
     username: '',
@@ -43,58 +43,58 @@ const CreateUser = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
     const { name, value } = event.target
-    setCurrentUserData((prevData) => ({
+    setCreateUserData((prevData) => ({
       ...prevData,
       [name]: value,
     }))
   }
 
   const handleSave = async () => {
-    if (!EmailPattern.test(String(currentUserData.email))) {
+    if (!EmailPattern.test(String(createUserData.email))) {
       dispatch(
         setNotification({
           text: t('general:emailFormatError'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
     }
 
-    if (!PhonePattern.test(String(currentUserData.phone))) {
+    if (!PhonePattern.test(String(createUserData.phone))) {
       dispatch(
         setNotification({
           text: t('general:phoneFormatError'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
     }
 
-    if (currentUserData.password !== currentUserData.confirm) {
+    if (createUserData.password !== createUserData.confirm) {
       dispatch(
         setNotification({
           text: t('changePassword:passwordMismatch'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
     }
 
-    if (!PasswordPattern.test(currentUserData.password)) {
+    if (!PasswordPattern.test(createUserData.password)) {
       dispatch(
         setNotification({
           text: t('changePassword:invalidPasswordFormat'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
     }
 
-    if (Object.values(currentUserData).some((currentUserDataValue) => !String(currentUserDataValue).trim())) {
+    if (Object.values(createUserData).some((currentUserDataValue) => !String(currentUserDataValue).trim())) {
       dispatch(
         setNotification({
           text: t('general:fillAllFields'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
@@ -102,20 +102,20 @@ const CreateUser = () => {
 
     try {
       const userData: CreateUserDto = {
-        firstName: currentUserData.firstName,
-        lastName: currentUserData.lastName,
-        password: currentUserData.password,
-        username: currentUserData.username,
-        email: currentUserData.email,
-        phone: currentUserData.phone,
-        type: currentUserData.type as UserType,
+        firstName: createUserData.firstName,
+        lastName: createUserData.lastName,
+        password: createUserData.password,
+        username: createUserData.username,
+        email: createUserData.email,
+        phone: createUserData.phone,
+        type: createUserData.type as UserType,
       }
 
       const messageCode = `user:${(await createUser(userData).unwrap()).message}`
       dispatch(
         setNotification({
           text: t(messageCode),
-          type: NotificationTypeEnum.Success,
+          type: NotificationType.Success,
         }),
       )
       navigate(`/index/user-managment/user/${userData.username}`)
@@ -125,7 +125,7 @@ const CreateUser = () => {
       dispatch(
         setNotification({
           text: t(errorCode),
-          type: NotificationTypeEnum.Error,
+          type: NotificationType.Error,
         }),
       )
     }
@@ -163,7 +163,7 @@ const CreateUser = () => {
                   name={label.key}
                   label={label.label}
                   variant='standard'
-                  value={currentUserData[label.key as keyof CreateUserDataFormProps]}
+                  value={createUserData[label.key as keyof CreateUserDataFormProps]}
                   sx={{ width: '100%' }}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
@@ -180,7 +180,7 @@ const CreateUser = () => {
                   label={label.label}
                   type='password'
                   variant='standard'
-                  value={currentUserData[label.key as keyof CreateUserDataFormProps]}
+                  value={createUserData[label.key as keyof CreateUserDataFormProps]}
                   sx={{ width: '100%' }}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
@@ -199,7 +199,7 @@ const CreateUser = () => {
                     labelId={label.key}
                     id={label.key}
                     name={label.key}
-                    value={String(currentUserData[label.key as keyof CreateUserDataFormProps])}
+                    value={String(createUserData[label.key as keyof CreateUserDataFormProps])}
                     variant='standard'
                     sx={{ width: '100%' }}
                     onChange={(event: SelectChangeEvent<string>) => {

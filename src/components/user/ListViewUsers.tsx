@@ -4,7 +4,7 @@ import { useGetUsersQuery } from '../../app/apis/crm.api'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { setNotification } from '../../features/notifications.slice'
 import { createQueryParamsForSearch } from '../../helpers/common'
-import { NotificationTypeEnum } from '../../types/notification'
+import { NotificationType } from '../../types/notification'
 import Spinner from '../common/Spinner'
 import UniformTable from '../common/UniformTable'
 import { transformUserIntoViewGridData } from '../../transformers/user'
@@ -29,7 +29,7 @@ const ListViewUsers = () => {
     dispatch(
       setNotification({
         text: JSON.stringify(error),
-        type: NotificationTypeEnum.Error,
+        type: NotificationType.Error,
       }),
     )
     navigate('/index/user-managment')

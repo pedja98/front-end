@@ -2,7 +2,7 @@ import { Button, Grid, TextField, Typography } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../common/Spinner'
 import { setNotification } from '../../features/notifications.slice'
-import { NotificationTypeEnum } from '../../types/notification'
+import { NotificationType } from '../../types/notification'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useDeleteUsersMutation, useGetUserQuery } from '../../app/apis/crm.api'
 import { transformUserIntoViewGridData } from '../../transformers/user'
@@ -35,7 +35,7 @@ const DetailViewUser = () => {
     dispatch(
       setNotification({
         text: JSON.stringify(error),
-        type: NotificationTypeEnum.Error,
+        type: NotificationType.Error,
       }),
     )
     navigate('/index/user-managment')
@@ -64,7 +64,7 @@ const DetailViewUser = () => {
       dispatch(
         setNotification({
           text: t('user:userDeleted', { username }),
-          type: NotificationTypeEnum.Success,
+          type: NotificationType.Success,
         }),
       )
       navigate('/index/user-managment')
@@ -72,7 +72,7 @@ const DetailViewUser = () => {
       dispatch(
         setNotification({
           text: JSON.stringify(error),
-          type: NotificationTypeEnum.Error,
+          type: NotificationType.Error,
         }),
       )
     } finally {

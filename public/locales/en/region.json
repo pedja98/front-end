@@ -1,0 +1,6 @@
+{
+  "name": "Region name",
+  "regionAlreadyExists": "Region with this name already exists",
+  "regionCreated": "New region is created",
+  "createRegionLabel": "CREATE REGION"
+}

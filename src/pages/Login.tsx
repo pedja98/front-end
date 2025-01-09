@@ -12,7 +12,7 @@ import { AuthRequest } from '../types/auth'
 import { useLoginMutation } from '../app/apis/gw.api'
 import { useAppDispatch } from '../app/hooks'
 import { setNotification } from '../features/notifications.slice'
-import { NotificationTypeEnum } from '../types/notification'
+import { NotificationType } from '../types/notification'
 import { ApiException } from '../types/exception'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -47,7 +47,7 @@ const Login = () => {
         dispatch(
           setNotification({
             text: t('general:fillAllFields'),
-            type: NotificationTypeEnum.Error,
+            type: NotificationType.Error,
           }),
         )
         return
@@ -60,7 +60,7 @@ const Login = () => {
       dispatch(
         setNotification({
           text: t(errorCode),
-          type: NotificationTypeEnum.Error,
+          type: NotificationType.Error,
         }),
       )
     }

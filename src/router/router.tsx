@@ -22,6 +22,7 @@ import DetailViewUser from '../components/user/DetailViewUser'
 import EditViewUser from '../components/user/EditViewUser'
 import CreateShop from '../components/shop/CreateShop'
 import Regions from '../pages/Regions'
+import CreateRegion from '../components/region/CreateRegion'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<Login />} /> },
@@ -32,7 +33,14 @@ export default createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'home', element: <Navigate to='/index' /> },
       { path: 'companies', element: <Companies />, children: [{ index: true, element: <EntityIndex /> }] },
-      { path: 'regions', element: <Regions />, children: [{ index: true, element: <EntityIndex /> }] },
+      {
+        path: 'regions',
+        element: <Regions />,
+        children: [
+          { index: true, element: <EntityIndex /> },
+          { path: 'create', element: <CreateRegion /> },
+        ],
+      },
       { path: 'contacts', element: <Contacts />, children: [{ index: true, element: <EntityIndex /> }] },
       {
         path: 'customer-sessions',

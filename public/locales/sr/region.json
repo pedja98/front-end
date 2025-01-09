@@ -1,0 +1,6 @@
+{
+  "name": "Ime regiona",
+  "regionAlreadyExists": "Region pod ovim imenom već postoji",
+  "regionCreated": "Novi region je napravljen",
+  "createRegionLabel": "KREIRAJ REGION"
+}

@@ -4,7 +4,6 @@ import HttpBackend from 'i18next-http-backend'
 import { store } from '../app/store'
 import { Languages } from '../consts/user'
 
-// Initialize i18n
 i18n
   .use(HttpBackend)
   .use(initReactI18next)
@@ -15,14 +14,13 @@ i18n
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
-    ns: ['general', 'user', 'login', 'changePassword', 'shop'],
+    ns: ['general', 'user', 'login', 'changePassword', 'shop', 'region'],
     defaultNS: 'general',
     interpolation: {
       escapeValue: false,
     },
   })
 
-// Subscribe to Redux store changes separately
 store.subscribe(() => {
   const newLanguage = store.getState().auth.language.toLowerCase()
   if (newLanguage !== i18n.language) {

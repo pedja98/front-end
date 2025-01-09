@@ -8,7 +8,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { useAppDispatch } from '../../app/hooks'
 import { ApiException } from '../../types/exception'
 import { setNotification } from '../../features/notifications.slice'
-import { NotificationTypeEnum } from '../../types/notification'
+import { NotificationType } from '../../types/notification'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { updateAuthAttribute } from '../../features/auth.slice'
 import { User } from '../../types/user'
@@ -51,7 +51,7 @@ const EditUser = () => {
       dispatch(
         setNotification({
           text: t('general:emailFormatError'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
@@ -61,7 +61,7 @@ const EditUser = () => {
       dispatch(
         setNotification({
           text: t('general:phoneFormatError'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
@@ -81,7 +81,7 @@ const EditUser = () => {
         dispatch(
           setNotification({
             text: t('general:fillAllFields'),
-            type: NotificationTypeEnum.Warning,
+            type: NotificationType.Warning,
           }),
         )
         return
@@ -103,7 +103,7 @@ const EditUser = () => {
       dispatch(
         setNotification({
           text: t(messageCode),
-          type: NotificationTypeEnum.Success,
+          type: NotificationType.Success,
         }),
       )
 
@@ -114,7 +114,7 @@ const EditUser = () => {
       dispatch(
         setNotification({
           text: t(errorCode),
-          type: NotificationTypeEnum.Error,
+          type: NotificationType.Error,
         }),
       )
     }

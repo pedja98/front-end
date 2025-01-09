@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ChangePasswordFormProps } from '../../types/auth'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { NotificationTypeEnum } from '../../types/notification'
+import { NotificationType } from '../../types/notification'
 import { setNotification } from '../../features/notifications.slice'
 import { useChangePasswordMutation } from '../../app/apis/crm.api'
 import Spinner from '../common/Spinner'
@@ -37,7 +37,7 @@ const ChangePassword = () => {
       dispatch(
         setNotification({
           text: t('general:fillAllFields'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
@@ -47,7 +47,7 @@ const ChangePassword = () => {
       dispatch(
         setNotification({
           text: t('changePassword:passwordNotChanged'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
@@ -57,7 +57,7 @@ const ChangePassword = () => {
       dispatch(
         setNotification({
           text: t('changePassword:invalidPasswordFormat'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
@@ -67,7 +67,7 @@ const ChangePassword = () => {
       dispatch(
         setNotification({
           text: t('changePassword:passwordMismatch'),
-          type: NotificationTypeEnum.Warning,
+          type: NotificationType.Warning,
         }),
       )
       return
@@ -87,7 +87,7 @@ const ChangePassword = () => {
       dispatch(
         setNotification({
           text: t(messageCode),
-          type: NotificationTypeEnum.Success,
+          type: NotificationType.Success,
         }),
       )
 
@@ -98,7 +98,7 @@ const ChangePassword = () => {
       dispatch(
         setNotification({
           text: t(errorCode),
-          type: NotificationTypeEnum.Error,
+          type: NotificationType.Error,
         }),
       )
     }
