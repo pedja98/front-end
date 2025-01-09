@@ -6,8 +6,8 @@ import searchReducer from '../features/search.slice'
 import authReducer from '../features/auth.slice'
 import confirmReducer from '../features/confirm.slice'
 import commonReducer from '../features/common.slice'
-import { gwApi } from './apis/gw.api'
-import { crmApi } from './apis/crm.api'
+import { gwApi } from './apis/core/gw.api'
+import { crmApi } from './apis/core/crm.api'
 
 const persistConfig = {
   key: 'root',

@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import { AuthResponse } from '../types/auth'
 import { InitialState as AuthInitialState } from '../consts/auth'
 import { UpdateAttributePayload } from '../types/common'
-import { gwApi } from '../app/apis/gw.api'
+import { gwApi } from '../app/apis/core/gw.api'
 
 const authSlice = createSlice({
   name: 'auth',

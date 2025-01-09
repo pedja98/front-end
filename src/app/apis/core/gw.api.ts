@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { AuthRequest, AuthResponse } from '../../types/auth'
-import { getCurrentUser } from '../../helpers/common'
+import { AuthRequest, AuthResponse } from '../../../types/auth'
+import { getCurrentUser } from '../../../helpers/common'
 
 export const gwApi = createApi({
   reducerPath: 'gwApi',

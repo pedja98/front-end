@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useGetUsersQuery } from '../../app/apis/crm.api'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { setNotification } from '../../features/notifications.slice'
 import { createQueryParamsForSearch } from '../../helpers/common'
@@ -10,6 +9,7 @@ import UniformTable from '../common/UniformTable'
 import { transformUserIntoViewGridData } from '../../transformers/user'
 import { Pagination, Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import { useGetUsersQuery } from '../../app/apis/user.api'
 
 const ListViewUsers = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))

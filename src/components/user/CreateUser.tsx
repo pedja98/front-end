@@ -19,7 +19,7 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { useNavigate } from 'react-router-dom'
 import { CreateUserDto, CreateUserDataFormProps, UserType } from '../../types/user'
-import { useCreateUserMutation } from '../../app/apis/crm.api'
+import { useCreateUserMutation } from '../../app/apis/user.api'
 import Spinner from '../common/Spinner'
 import { getCreateUserGridData } from '../../transformers/user'
 
