@@ -2,16 +2,17 @@ import { User } from '../../types/user'
 import { ChangePasswordRequest } from '../../types/auth'
 import { CreateUserDto } from '../../types/user'
 import { crmApi } from './core/crm.api'
+import { CrmApiTags } from '../../consts/common'
 
 export const userApi = crmApi.injectEndpoints({
   endpoints: (builder) => ({
     getUser: builder.query<User, string>({
       query: (username) => `/users/${username}`,
-      providesTags: (result, error, username) => [{ type: 'User', id: username }],
+      providesTags: (result, error, username) => [{ type: CrmApiTags.USER, id: username }],
     }),
     getUsers: builder.query<User[], string>({
       query: (queryParams) => `/users${queryParams}`,
-      providesTags: ['User'],
+      providesTags: [CrmApiTags.USER],
     }),
     updateUser: builder.mutation<{ message: string }, { username: string; user: Partial<User> }>({
       query: ({ username, user }) => ({
@@ -19,14 +20,14 @@ export const userApi = crmApi.injectEndpoints({
         method: 'PUT',
         body: user,
       }),
-      invalidatesTags: (result, error, { username }) => [{ type: 'User', id: username }],
+      invalidatesTags: (result, error, { username }) => [{ type: CrmApiTags.USER, id: username }],
     }),
     deleteUsers: builder.mutation<{ message: string }, string>({
       query: (username) => ({
         url: `/users/${username}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, username) => [{ type: 'User', id: username }],
+      invalidatesTags: (result, error, username) => [{ type: CrmApiTags.USER, id: username }],
     }),
     createUser: builder.mutation<{ message: string }, CreateUserDto>({
       query: (credentials) => ({

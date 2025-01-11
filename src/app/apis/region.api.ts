@@ -1,3 +1,5 @@
+import { CrmApiTags } from '../../consts/common'
+import { Region } from '../../types/region'
 import { crmApi } from './core/crm.api'
 
 export const regionApi = crmApi.injectEndpoints({
@@ -9,8 +11,12 @@ export const regionApi = crmApi.injectEndpoints({
         body: credentials,
       }),
     }),
+    getRegion: builder.query<Region[], string>({
+      query: (queryParams) => `/regions${queryParams}`,
+      providesTags: [CrmApiTags.REGION],
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useCreateRegionMutation } = regionApi
+export const { useCreateRegionMutation, useGetRegionQuery } = regionApi

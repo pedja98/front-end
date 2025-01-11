@@ -6,6 +6,11 @@ export const UserSortedByFields = {
   DateCreated: 'dateCreated',
 }
 
+export const RegionSortedByFields = {
+  Name: 'name',
+  DateCreated: 'dateCreated',
+}
+
 export const SortedOrderValues = {
   Asc: 'asc',
   Desc: 'desc',

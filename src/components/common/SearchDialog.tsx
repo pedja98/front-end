@@ -7,6 +7,7 @@ import { ModulesOptions } from '../../types/navbar'
 import UserSearchDialog from '../user/UserSearchDialog'
 import { ReactNode } from 'react'
 import { Root } from '../../styles/common'
+import RegionSearchDialog from '../region/RegionSearchDialog'
 
 const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
   const { t } = useTranslation()
@@ -20,6 +21,9 @@ const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
   switch (currentModule) {
     case ModulesOptions.UserManagment:
       dialogContent = <UserSearchDialog />
+      break
+    case ModulesOptions.Regions:
+      dialogContent = <RegionSearchDialog />
       break
     default:
       dialogContent = <div>{t('general:noSearchContent')}</div>

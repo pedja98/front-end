@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { getCurrentUser } from '../../../helpers/common'
+import { CrmApiTags } from '../../../consts/common'
 
 export const crmApi = createApi({
   reducerPath: 'crmApi',
@@ -14,6 +15,6 @@ export const crmApi = createApi({
       return headers
     },
   }),
-  tagTypes: ['User', 'Region'],
+  tagTypes: [CrmApiTags.USER, CrmApiTags.USER],
   endpoints: () => ({}),
 })

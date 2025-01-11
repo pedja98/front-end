@@ -27,3 +27,8 @@ export const GridFieldTypes = {
 } as const
 
 export const InitialState: CommonState = {}
+
+export const CrmApiTags = {
+  USER: 'User',
+  REGION: 'Region',
+}
