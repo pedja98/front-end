@@ -12,7 +12,7 @@ import { LinkStyled } from '../../styles/common'
 import { hideConfirm, showConfirm } from '../../features/confirm.slice'
 import { confirmEntityIsDeleted } from '../../features/common.slice'
 
-const DetailViewUser = () => {
+const UserDetailView = () => {
   const username = String(useParams().username)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -170,4 +170,4 @@ const DetailViewUser = () => {
   )
 }
 
-export default DetailViewUser
+export default UserDetailView

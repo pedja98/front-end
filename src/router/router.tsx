@@ -17,12 +17,13 @@ import NotFound from '../pages/NotFound'
 import UserManagment from '../pages/UserManagment'
 import CreateUser from '../components/user/CreateUser'
 import EntityIndex from '../pages/EntityIndex'
-import ListViewUsers from '../components/user/ListViewUsers'
-import DetailViewUser from '../components/user/DetailViewUser'
-import EditViewUser from '../components/user/EditViewUser'
+import UsersListView from '../components/user/UsersListView'
+import UserDetailView from '../components/user/UserDetailView'
+import UserEditView from '../components/user/UserEditView'
 import CreateShop from '../components/shop/CreateShop'
 import Regions from '../pages/Regions'
 import CreateRegion from '../components/region/CreateRegion'
+import RegionListView from '../components/region/RegionListView'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<Login />} /> },
@@ -39,6 +40,7 @@ export default createBrowserRouter([
         children: [
           { index: true, element: <EntityIndex /> },
           { path: 'create', element: <CreateRegion /> },
+          { path: 'list', element: <RegionListView /> },
         ],
       },
       { path: 'contacts', element: <Contacts />, children: [{ index: true, element: <EntityIndex /> }] },
@@ -55,9 +57,9 @@ export default createBrowserRouter([
         children: [
           { index: true, element: <EntityIndex /> },
           { path: 'create', element: <CreateUser /> },
-          { path: 'list', element: <ListViewUsers /> },
-          { path: 'user/:username', element: <DetailViewUser /> },
-          { path: 'user/edit/:username', element: <EditViewUser /> },
+          { path: 'list', element: <UsersListView /> },
+          { path: 'user/:username', element: <UserDetailView /> },
+          { path: 'user/edit/:username', element: <UserEditView /> },
         ],
       },
       {

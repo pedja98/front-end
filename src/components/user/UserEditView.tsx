@@ -3,7 +3,7 @@ import EditUser from './EditUser'
 import ChangePassword from './ChangePassword'
 import BasicTabs from '../common/BasicTabs'
 
-const EditViewUser = () => {
+const UserEditView = () => {
   const { t } = useTranslation()
 
   const editProfileTabData = {
@@ -14,4 +14,4 @@ const EditViewUser = () => {
   return <BasicTabs tabs={editProfileTabData} />
 }
 
-export default EditViewUser
+export default UserEditView

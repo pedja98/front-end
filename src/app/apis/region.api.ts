@@ -12,8 +12,12 @@ export const regionApi = crmApi.injectEndpoints({
       }),
     }),
     getRegion: builder.query<Region[], string>({
-      query: (queryParams) => `/regions${queryParams}`,
+      query: (id) => `/regions${id}`,
       providesTags: [CrmApiTags.REGION],
+    }),
+    getRegions: builder.query<Region[], string>({
+      query: (queryParams) => `/regions${queryParams}`,
+      providesTags: [CrmApiTags.USER],
     }),
   }),
   overrideExisting: false,

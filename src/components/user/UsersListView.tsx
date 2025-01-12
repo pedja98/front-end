@@ -11,7 +11,7 @@ import { Pagination, Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useGetUsersQuery } from '../../app/apis/user.api'
 
-const ListViewUsers = () => {
+const UsersListView = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
   const { isLoading, data: users, isError, error } = useGetUsersQuery(queryParams)
   const dispatch = useAppDispatch()
@@ -76,4 +76,4 @@ const ListViewUsers = () => {
   )
 }
 
-export default ListViewUsers
+export default UsersListView
