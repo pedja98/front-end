@@ -14,15 +14,15 @@ import EditProfile from '../pages/EditProfile'
 import Catalogue from '../pages/Catalogue'
 import Contacts from '../pages/Contacts'
 import NotFound from '../pages/NotFound'
-import UserManagment from '../pages/UserManagment'
-import CreateUser from '../components/user/CreateUser'
+import UserManagment from '../components/user/UserManagment'
+import UserCreateView from '../components/user/UserCreateView'
 import EntityIndex from '../pages/EntityIndex'
 import UsersListView from '../components/user/UsersListView'
 import UserDetailView from '../components/user/UserDetailView'
 import UserEditView from '../components/user/UserEditView'
 import CreateShop from '../components/shop/CreateShop'
 import Regions from '../pages/Regions'
-import CreateRegion from '../components/region/CreateRegion'
+import RegionCreateView from '../components/region/RegionCreateView'
 import RegionListView from '../components/region/RegionListView'
 import RegionDetailView from '../components/region/RegionDetailView'
 import RegionEditView from '../components/region/RegionEditView'
@@ -41,7 +41,7 @@ export default createBrowserRouter([
         element: <Regions />,
         children: [
           { index: true, element: <EntityIndex /> },
-          { path: 'create', element: <CreateRegion /> },
+          { path: 'create', element: <RegionCreateView /> },
           { path: 'list', element: <RegionListView /> },
           { path: ':id', element: <RegionDetailView /> },
           { path: ':id/edit', element: <RegionEditView /> },
@@ -60,7 +60,7 @@ export default createBrowserRouter([
         element: <UserManagment />,
         children: [
           { index: true, element: <EntityIndex /> },
-          { path: 'create', element: <CreateUser /> },
+          { path: 'create', element: <UserCreateView /> },
           { path: 'list', element: <UsersListView /> },
           { path: 'user/:username', element: <UserDetailView /> },
           { path: 'user/:username/edit', element: <UserEditView /> },

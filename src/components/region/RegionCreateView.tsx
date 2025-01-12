@@ -9,7 +9,7 @@ import { NotificationType } from '../../types/notification'
 import { ApiException } from '../../types/exception'
 import { useAppDispatch } from '../../app/hooks'
 
-const CreateRegion = () => {
+const RegionCreateView = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -81,4 +81,4 @@ const CreateRegion = () => {
   )
 }
 
-export default CreateRegion
+export default RegionCreateView
