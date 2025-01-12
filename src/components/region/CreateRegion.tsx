@@ -37,7 +37,7 @@ const CreateRegion = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate('/index')
+      navigate('/index/regions')
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `region:${errorResponse.data}` || 'general:unknowError'

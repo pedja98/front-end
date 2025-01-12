@@ -1,5 +1,5 @@
 {
-  "userDeletionText": "Are you sure that you want to delete user {{firstName}} {{lastName}}",
+  "userDeletionText": "Are you sure that you want to delete user {{firstName}} {{lastName}}?",
   "firstName": "First name",
   "lastName": "Last name",
   "email": "Email",

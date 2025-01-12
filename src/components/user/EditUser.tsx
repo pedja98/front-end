@@ -24,8 +24,14 @@ const EditUser = () => {
 
   const username = String(isEditProfile ? getCurrentUser().username : params.username)
 
-  const { data: fetchedUser, isLoading: getUserLoading } = useGetUserQuery(username)
-  const [updateUser, { isLoading: updateUserLoading }] = useUpdateUserMutation()
+  const {
+    data: fetchedUser,
+    isLoading: getUserIsLoading,
+    isError: getUserIsError,
+    error: getUserError,
+  } = useGetUserQuery(username)
+  const [updateUser, { isLoading: updateUserIsLoading, isError: updateUserIsError, error: updateUserError }] =
+    useUpdateUserMutation()
 
   const [userData, setUserData] = useState<User | null>(null)
   const { t } = useTranslation()
@@ -42,6 +48,17 @@ const EditUser = () => {
     if (!userData) return
     const { name, value } = event.target
     setUserData((prev) => (prev ? { ...prev, [name]: value } : null))
+  }
+
+  if (getUserIsError || !fetchedUser || updateUserIsError) {
+    dispatch(
+      setNotification({
+        text: JSON.stringify(getUserError || updateUserError),
+        type: NotificationType.Error,
+      }),
+    )
+    isEditProfile ? navigate('/index') : navigate(`/index/user-managment/`)
+    return null
   }
 
   const handleSaveChanges = async () => {
@@ -120,7 +137,7 @@ const EditUser = () => {
     }
   }
 
-  if (getUserLoading || updateUserLoading || !userData) {
+  if (getUserIsLoading || updateUserIsLoading || !userData) {
     return <Spinner />
   }
 

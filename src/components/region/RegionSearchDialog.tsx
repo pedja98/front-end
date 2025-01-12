@@ -21,7 +21,7 @@ const RegionSearchDialog = () => {
         <Grid item sx={{ width: '100%' }}>
           <TextField
             id='name'
-            name='Name'
+            name='name'
             label={t('region:name')}
             variant='standard'
             value={regionSearchData.name || ''}

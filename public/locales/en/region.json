@@ -6,5 +6,7 @@
   "sortByLabels": {
     "name": "Region name",
     "dateCreated": "Date created"
-  }
+  },
+  "regionDeletionText": "Are you sure that you want to delete region {{name}}?",
+  "regionDeleted": "Region {{name}} has been successfully deleted"
 }

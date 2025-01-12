@@ -5,6 +5,8 @@
   "createRegionLabel": "KREIRAJ REGION",
   "sortByLabels": {
     "name": "Ime regiona",
-    "dateCreated": "Date created"
-  }
+    "dateCreated": "Datum kreiranja"
+  },
+  "regionDeletionText": "Da li ste sigurni da želite da obrišete region {{name}}?",
+  "regionDeleted": "Region {{name}} je uspešno obrisan"
 }

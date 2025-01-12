@@ -32,3 +32,5 @@ export const CrmApiTags = {
   USER: 'User',
   REGION: 'Region',
 }
+
+export const TabelRowPerPage = 20

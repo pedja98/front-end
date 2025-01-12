@@ -1,54 +1,52 @@
-import { Button, Grid, TextField, Typography } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { useTranslation } from 'react-i18next'
+import { useDeleteRegionMutation, useGetRegionQuery } from '../../app/apis/region.api'
 import Spinner from '../common/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { useDeleteUsersMutation, useGetUserQuery } from '../../app/apis/user.api'
-import { transformUserIntoViewGridData } from '../../transformers/user'
-import { useTranslation } from 'react-i18next'
-import { EmptyValue, GridFieldTypes } from '../../consts/common'
-import { LinkStyled } from '../../styles/common'
+import { transformRegionIntoViewGridData } from '../../transformers/region'
 import { hideConfirm, showConfirm } from '../../features/confirm.slice'
 import { confirmEntityIsDeleted } from '../../features/common.slice'
+import { Button, Grid, TextField, Typography } from '@mui/material'
+import { EmptyValue, GridFieldTypes } from '../../consts/common'
+import { LinkStyled } from '../../styles/common'
 
-const UserDetailView = () => {
-  const username = String(useParams().username)
+const RegionDetailView = () => {
+  const regionId = String(useParams().id)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { t } = useTranslation()
 
   const entityIsDeleted = !!useAppSelector((state) => state.common.entityIsDeleted)
   const {
-    isLoading: isGetUserLoading,
-    data: user,
+    isLoading: isGetRegionLoading,
+    data: region,
     isError,
     error,
-  } = useGetUserQuery(username, { skip: !!entityIsDeleted })
+  } = useGetRegionQuery(regionId, { skip: !!entityIsDeleted })
 
-  const [deleteUser, { isLoading: isDeleteUserLoading }] = useDeleteUsersMutation()
+  const [deleteRegion, { isLoading: isDeleteRegionLoading }] = useDeleteRegionMutation()
 
-  if (isGetUserLoading || isDeleteUserLoading) {
+  if (isGetRegionLoading || isDeleteRegionLoading) {
     return <Spinner />
   }
 
-  if (isError || !user) {
+  if (isError || !region) {
     dispatch(
       setNotification({
         text: JSON.stringify(error),
         type: NotificationType.Error,
       }),
     )
-    navigate('/index/user-managment')
+    navigate('/index/regions')
     return null
   }
-
-  const detailViewUserGridData = transformUserIntoViewGridData(user, true)
 
   const handleDeleteClick = () => {
     dispatch(
       showConfirm({
-        confirmationText: t('user:userDeletionText', { firstName: user.firstName, lastName: user.lastName }),
+        confirmationText: t('region:regionDeletionText', { name: region.name }),
         confirmationTitle: t('general:confirmDeletionTitle'),
         onConfirm: handleConfirmDelete,
         onCancel: handleConfirmClose,
@@ -58,17 +56,21 @@ const UserDetailView = () => {
     )
   }
 
+  const handleConfirmClose = () => {
+    dispatch(hideConfirm())
+  }
+
   const handleConfirmDelete = async () => {
     try {
       dispatch(confirmEntityIsDeleted())
-      await deleteUser(username).unwrap()
+      await deleteRegion(regionId).unwrap()
       dispatch(
         setNotification({
-          text: t('user:userDeleted', { username }),
+          text: t('region:regionDeleted', { name: region.name }),
           type: NotificationType.Success,
         }),
       )
-      navigate('/index/user-managment')
+      navigate('/index/regions')
     } catch (error) {
       dispatch(
         setNotification({
@@ -81,27 +83,19 @@ const UserDetailView = () => {
     }
   }
 
-  const handleConfirmClose = () => {
-    dispatch(hideConfirm())
+  const detailViewRegionGridData = transformRegionIntoViewGridData(region, true)
+
+  const handleEditRedirect = () => {
+    navigate(`/index/regions/${regionId}/edit`)
   }
 
   const labels = [
-    { label: t('user:username') + ':', key: 'username' },
-    { label: t('user:firstName') + ':', key: 'firstName' },
-    { label: t('user:lastName') + ':', key: 'lastName' },
-    { label: t('user:email') + ':', key: 'email' },
-    { label: t('user:phone') + ':', key: 'phone' },
-    { label: t('user:type') + ':', key: 'type' },
-    { label: t('shop:shopLabel') + ':', key: 'shopName' },
-    { label: t('general:createdBy') + ':', key: 'createdByUsername' },
-    { label: t('general:modifiedBy') + ':', key: 'modifiedByUsername' },
-    { label: t('general:dateCreated') + ':', key: 'dateCreated' },
-    { label: t('general:dateModified') + ':', key: 'dateModified' },
+    { label: t('region:name'), key: 'name' },
+    { label: t('general:createdBy'), key: 'createdByUsername' },
+    { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
+    { label: t('general:dateCreated'), key: 'dateCreated' },
+    { label: t('general:dateModified'), key: 'dateModified' },
   ]
-
-  const handleEditRedirect = () => {
-    navigate(`/index/user-managment/user/${username}/edit`)
-  }
 
   return (
     <>
@@ -119,7 +113,7 @@ const UserDetailView = () => {
         <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
           <Grid container spacing={2} sx={{ width: '80%' }}>
             {labels.map((label) => {
-              const gridFieldData = detailViewUserGridData[label.key] || EmptyValue
+              const gridFieldData = detailViewRegionGridData[label.key] || EmptyValue
 
               return (
                 <Grid item xs={12} sm={6} key={label.key}>
@@ -171,4 +165,4 @@ const UserDetailView = () => {
   )
 }
 
-export default UserDetailView
+export default RegionDetailView

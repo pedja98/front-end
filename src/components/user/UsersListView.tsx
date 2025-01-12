@@ -10,6 +10,7 @@ import { transformUserIntoViewGridData } from '../../transformers/user'
 import { Pagination, Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useGetUsersQuery } from '../../app/apis/user.api'
+import { TabelRowPerPage } from '../../consts/common'
 
 const UsersListView = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -19,7 +20,6 @@ const UsersListView = () => {
   const { t } = useTranslation()
 
   const [currentPage, setCurrentPage] = useState(1)
-  const rowsPerPage = 20
 
   if (isLoading) {
     return <Spinner />
@@ -36,7 +36,7 @@ const UsersListView = () => {
     return null
   }
 
-  const paginatedUsers = users.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
+  const paginatedUsers = users.slice((currentPage - 1) * TabelRowPerPage, currentPage * TabelRowPerPage)
   const listViewUserGridData = paginatedUsers.map((user) => transformUserIntoViewGridData(user))
 
   const columns = [
@@ -65,7 +65,7 @@ const UsersListView = () => {
       <Grid sx={{ mt: 2 }}>
         <UniformTable columns={columns} rows={listViewUserGridData} />
         <Pagination
-          count={Math.ceil(users.length / rowsPerPage)}
+          count={Math.ceil(users.length / TabelRowPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color='primary'

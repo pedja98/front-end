@@ -24,6 +24,8 @@ import CreateShop from '../components/shop/CreateShop'
 import Regions from '../pages/Regions'
 import CreateRegion from '../components/region/CreateRegion'
 import RegionListView from '../components/region/RegionListView'
+import RegionDetailView from '../components/region/RegionDetailView'
+import RegionEditView from '../components/region/RegionEditView'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<Login />} /> },
@@ -41,6 +43,8 @@ export default createBrowserRouter([
           { index: true, element: <EntityIndex /> },
           { path: 'create', element: <CreateRegion /> },
           { path: 'list', element: <RegionListView /> },
+          { path: ':id', element: <RegionDetailView /> },
+          { path: ':id/edit', element: <RegionEditView /> },
         ],
       },
       { path: 'contacts', element: <Contacts />, children: [{ index: true, element: <EntityIndex /> }] },
@@ -59,7 +63,7 @@ export default createBrowserRouter([
           { path: 'create', element: <CreateUser /> },
           { path: 'list', element: <UsersListView /> },
           { path: 'user/:username', element: <UserDetailView /> },
-          { path: 'user/edit/:username', element: <UserEditView /> },
+          { path: 'user/:username/edit', element: <UserEditView /> },
         ],
       },
       {
