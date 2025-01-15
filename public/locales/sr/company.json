@@ -1,0 +1,13 @@
+{
+  "name": "Ime kompanije",
+  "hqAddress": "Adresa sedišta",
+  "industry": "Industrija",
+  "contactPhone": "Kontakt telefon",
+  "numberOfEmployees": "Broj zaposlenih",
+  "tin": "Pib",
+  "bankName": "Ime banke",
+  "bankAccountNumber": "Bankovni rračun",
+  "comment": "Komentar",
+  "createCompanyLabel": "KREIRAJ KOMPANIJU",
+  "companyCreated": "New company is successfully created"
+}

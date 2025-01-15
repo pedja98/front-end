@@ -20,6 +20,7 @@ export const EmptyValue = '/'
 
 export const GridFieldTypes = {
   STRING: 'string',
+  NUMBER: 'number',
   SELECT: 'select',
   LINK: 'link',
   PASSWORD: 'password',
@@ -31,6 +32,7 @@ export const InitialState: CommonState = {}
 export const CrmApiTags = {
   USER: 'User',
   REGION: 'Region',
+  COMPANY: 'Company',
 }
 
 export const TabelRowPerPage = 20

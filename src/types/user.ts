@@ -5,29 +5,6 @@ export enum UserType {
   SALESMAN = 'SALESMAN',
   L1_MANAGER = 'L1_MANAGER',
   L2_MANAGER = 'L2_MANAGER',
-  L3_MANAGER = 'L3_MANAGER',
-}
-
-export interface CreateUserDto {
-  firstName?: string
-  lastName?: string
-  email?: string
-  username?: string
-  password: string
-  phone?: string
-  type?: UserType
-  language?: Language
-}
-
-export interface CreateUserDataFormProps {
-  firstName: string
-  lastName: string
-  username: string
-  password: string
-  confirm: string
-  email: string
-  phone: string
-  type: string
 }
 
 export interface SearchUserDataFormProps {
@@ -45,9 +22,11 @@ export interface User {
   firstName: string
   lastName: string
   email: string
+  password: string
   username: string
   phone: string
-  type: UserType
+  confirm: string
+  type: UserType | ''
   language: Language
   shopId: number
   shopName: string

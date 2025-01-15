@@ -1,6 +1,5 @@
 import { User } from '../../types/user'
 import { ChangePasswordRequest } from '../../types/auth'
-import { CreateUserDto } from '../../types/user'
 import { crmApi } from './core/crm.api'
 import { CrmApiTags } from '../../consts/common'
 
@@ -29,7 +28,7 @@ export const userApi = crmApi.injectEndpoints({
       }),
       invalidatesTags: (result, error, username) => [{ type: CrmApiTags.USER, id: username }],
     }),
-    createUser: builder.mutation<{ message: string }, CreateUserDto>({
+    createUser: builder.mutation<{ message: string }, Partial<User>>({
       query: (credentials) => ({
         url: '/users',
         method: 'POST',

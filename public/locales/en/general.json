@@ -6,6 +6,7 @@
   "emailFormatError": "Email is not in correct format",
   "phoneFormatError": "Phone is not in correct format",
   "fillAllFields": "Please fill in all fields",
+  "invalidFieldValueFormat": "The value provided for the {{fieldName}} field is invalid.",
   "entityUpdateError": "Error occures while updating",
   "pageNotFound": "PAGE NOT FOUND",
   "backToPreviousPage": "Back to previous page",
@@ -50,8 +51,7 @@
     "admin": "Admin",
     "salesman": "Salesman",
     "l1_manager": "L1 Manager",
-    "l2_manager": "L2 Manager",
-    "l3_manager": "L3 Manager"
+    "l2_manager": "L2 Manager"
   },
   "dialogConfirmationButtonLabels": {
     "yes": "Yes",

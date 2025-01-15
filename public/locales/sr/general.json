@@ -6,6 +6,7 @@
   "phoneFormatError": "Telefon nije u odgovarajućem formatu",
   "moreOptions": "Još",
   "fillAllFields": "Molimo Vas da popunite sva polja",
+  "invalidFieldValueFormat": "Vrednost prosledjena za polje {{fieldName}} je nevalidno.",
   "entityUpdateError": "Nastala je greška pri ažuriranju podataka",
   "pageNotFound": "STRANICA NIJE PRONADJENA",
   "backToPreviousPage": "Vrati me na predhodnu stranicu",
@@ -50,8 +51,7 @@
     "admin": "Admin",
     "salesman": "Prodavac",
     "l1_manager": "L1 Menadžer",
-    "l2_manager": "L2 Menadžer",
-    "l3_manager": "L3 Menadžer"
+    "l2_manager": "L2 Menadžer"
   },
   "dialogConfirmationButtonLabels": {
     "yes": "Da",

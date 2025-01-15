@@ -6,7 +6,6 @@ export const UserTypes: Record<UserType, UserType> = {
   SALESMAN: UserType.SALESMAN,
   L1_MANAGER: UserType.L1_MANAGER,
   L2_MANAGER: UserType.L2_MANAGER,
-  L3_MANAGER: UserType.L2_MANAGER,
 }
 
 export const Languages: Record<Language, Language> = {

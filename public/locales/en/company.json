@@ -1,0 +1,13 @@
+{
+  "name": "Company name",
+  "hqAddress": "HQ Address",
+  "industry": "Industry",
+  "contactPhone": "Contact phone",
+  "numberOfEmployees": "Number of employees",
+  "tin": "Tin",
+  "bankName": "Bank name",
+  "bankAccountNumber": "Bank account number",
+  "comment": "Comment",
+  "createCompanyLabel": "CREATE COMPANY",
+  "companyCreated": "Nova kompanija je uspešno napravljena"
+}

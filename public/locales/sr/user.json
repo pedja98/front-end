@@ -12,7 +12,7 @@
   "createUserLabel": "KREIRAJ KORISNIKA",
   "userDeleted": "Korisnik {{username}} je uspešno obrisan",
   "type": "Tip korisnika",
-  "userCreated": "Kreiran je novi korisnik",
+  "userCreated": "Novi korisnike je uspešno napravljen",
   "sortByLabels": {
     "username": "Korisničko ime",
     "email": "Email",

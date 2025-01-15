@@ -18,13 +18,13 @@ import { ApiException } from '../../types/exception'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { useNavigate } from 'react-router-dom'
-import { CreateUserDto, CreateUserDataFormProps, UserType } from '../../types/user'
+import { User, UserType } from '../../types/user'
 import { useCreateUserMutation } from '../../app/apis/user.api'
 import { getCreateUserGridData } from '../../transformers/user'
 import Spinner from '../common/Spinner'
 
 const UserCreateView = () => {
-  const [createUserData, setCreateUserData] = useState<CreateUserDataFormProps>({
+  const [createUserData, setCreateUserData] = useState<Partial<User>>({
     firstName: '',
     lastName: '',
     username: '',
@@ -80,7 +80,7 @@ const UserCreateView = () => {
       return
     }
 
-    if (!PasswordPattern.test(createUserData.password)) {
+    if (!PasswordPattern.test(String(createUserData.password))) {
       dispatch(
         setNotification({
           text: t('changePassword:invalidPasswordFormat'),
@@ -101,7 +101,7 @@ const UserCreateView = () => {
     }
 
     try {
-      const userData: CreateUserDto = {
+      const userData: Partial<User> = {
         firstName: createUserData.firstName,
         lastName: createUserData.lastName,
         password: createUserData.password,
@@ -163,7 +163,7 @@ const UserCreateView = () => {
                   name={label.key}
                   label={label.label}
                   variant='standard'
-                  value={createUserData[label.key as keyof CreateUserDataFormProps]}
+                  value={createUserData[label.key as keyof User]}
                   sx={{ width: '100%' }}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
@@ -180,7 +180,7 @@ const UserCreateView = () => {
                   label={label.label}
                   type='password'
                   variant='standard'
-                  value={createUserData[label.key as keyof CreateUserDataFormProps]}
+                  value={createUserData[label.key as keyof User]}
                   sx={{ width: '100%' }}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
@@ -199,7 +199,7 @@ const UserCreateView = () => {
                     labelId={label.key}
                     id={label.key}
                     name={label.key}
-                    value={String(createUserData[label.key as keyof CreateUserDataFormProps])}
+                    value={String(createUserData[label.key as keyof User])}
                     variant='standard'
                     sx={{ width: '100%' }}
                     onChange={(event: SelectChangeEvent<string>) => {

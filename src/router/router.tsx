@@ -26,6 +26,7 @@ import RegionCreateView from '../components/region/RegionCreateView'
 import RegionListView from '../components/region/RegionListView'
 import RegionDetailView from '../components/region/RegionDetailView'
 import RegionEditView from '../components/region/RegionEditView'
+import CompanyCreateView from '../components/company/CompanyCreateView'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<Login />} /> },
@@ -35,7 +36,14 @@ export default createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'home', element: <Navigate to='/index' /> },
-      { path: 'companies', element: <Companies />, children: [{ index: true, element: <EntityIndex /> }] },
+      {
+        path: 'companies',
+        element: <Companies />,
+        children: [
+          { index: true, element: <EntityIndex /> },
+          { path: 'create', element: <CompanyCreateView /> },
+        ],
+      },
       {
         path: 'regions',
         element: <Regions />,

@@ -1,7 +1,7 @@
 {
   "name": "Region name",
   "regionAlreadyExists": "Region with this name already exists",
-  "regionCreated": "New region is created",
+  "regionCreated": "New region is successfully created",
   "createRegionLabel": "CREATE REGION",
   "sortByLabels": {
     "name": "Region name",

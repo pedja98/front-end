@@ -1,9 +1,10 @@
 import { ReactNode } from 'react'
 import { UserType } from './user'
+import { GridFieldTypes } from '../consts/common'
 
 export type Language = 'SR' | 'EN'
 
-export type GridFieldType = 'string' | 'select' | 'link' | 'password' | 'multiselect'
+export type GridFieldType = (typeof GridFieldTypes)[keyof typeof GridFieldTypes]
 
 export interface UpdateAttributePayload {
   attribute: string
