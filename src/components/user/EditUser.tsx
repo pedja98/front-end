@@ -57,7 +57,7 @@ const EditUser = () => {
         type: NotificationType.Error,
       }),
     )
-    isEditProfile ? navigate('/index') : navigate(`/index/user-managment/`)
+    isEditProfile ? navigate('/index') : navigate(`/index/user-management/`)
     return null
   }
 
@@ -124,7 +124,7 @@ const EditUser = () => {
         }),
       )
 
-      isEditProfile ? navigate('/index') : navigate(`/index/user-managment/user/${userData.username}`)
+      isEditProfile ? navigate('/index') : navigate(`/index/user-management/user/${userData.username}`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `user:${errorResponse.data}` || 'general:unknownError'

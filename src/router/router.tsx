@@ -14,7 +14,7 @@ import EditProfile from '../pages/EditProfile'
 import Catalogue from '../pages/Catalogue'
 import Contacts from '../pages/Contacts'
 import NotFound from '../pages/NotFound'
-import UserManagment from '../components/user/UserManagment'
+import UserManagement from '../components/user/UserManagement'
 import UserCreateView from '../components/user/UserCreateView'
 import EntityIndex from '../pages/EntityIndex'
 import UsersListView from '../components/user/UsersListView'
@@ -64,8 +64,8 @@ export default createBrowserRouter([
       { path: 'opportunities', element: <Opportunities />, children: [{ index: true, element: <EntityIndex /> }] },
       { path: 'offers', element: <Offers />, children: [{ index: true, element: <EntityIndex /> }] },
       {
-        path: 'user-managment',
-        element: <UserManagment />,
+        path: 'user-management',
+        element: <UserManagement />,
         children: [
           { index: true, element: <EntityIndex /> },
           { path: 'create', element: <UserCreateView /> },

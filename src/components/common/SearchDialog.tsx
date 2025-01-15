@@ -19,7 +19,7 @@ const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
   let dialogContent: ReactNode
 
   switch (currentModule) {
-    case ModulesOptions.UserManagment:
+    case ModulesOptions.UserManagement:
       dialogContent = <UserSearchDialog />
       break
     case ModulesOptions.Regions:

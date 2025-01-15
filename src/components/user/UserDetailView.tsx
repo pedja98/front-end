@@ -39,7 +39,7 @@ const UserDetailView = () => {
         type: NotificationType.Error,
       }),
     )
-    navigate('/index/user-managment')
+    navigate('/index/user-management')
     return null
   }
 
@@ -68,7 +68,7 @@ const UserDetailView = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate('/index/user-managment')
+      navigate('/index/user-management')
     } catch (error) {
       dispatch(
         setNotification({
@@ -100,7 +100,7 @@ const UserDetailView = () => {
   ]
 
   const handleEditRedirect = () => {
-    navigate(`/index/user-managment/user/${username}/edit`)
+    navigate(`/index/user-management/user/${username}/edit`)
   }
 
   return (

@@ -11,12 +11,12 @@ export const transformRegionIntoViewGridData = (region: Region, skipNameAsLink?:
   },
   createdByUsername: {
     value: region.createdByUsername,
-    link: `/index/user-managment/user/${region.createdByUsername}`,
+    link: `/index/user-management/user/${region.createdByUsername}`,
     type: GridFieldTypes.LINK,
   },
   modifiedByUsername: {
     value: region.modifiedByUsername,
-    link: `/index/user-managment/user/${region.modifiedByUsername}`,
+    link: `/index/user-management/user/${region.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
   dateCreated: { value: dateFormater(region.dateCreated), type: GridFieldTypes.STRING },

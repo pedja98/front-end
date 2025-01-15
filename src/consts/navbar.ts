@@ -17,6 +17,6 @@ export const NavbarFadeMenueAdminOptions = [
   ModulesOptions.EditProfile,
   ModulesOptions.Regions,
   ModulesOptions.Catalogue,
-  ModulesOptions.UserManagment,
+  ModulesOptions.UserManagement,
   ModulesOptions.Logout,
 ]

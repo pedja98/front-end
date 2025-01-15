@@ -7,7 +7,7 @@ import { User, UserType } from '../types/user'
 export const transformUserIntoViewGridData = (user: User, skipUsernameAsLink?: boolean): ViewElement => ({
   username: {
     value: user.username,
-    link: `/index/user-managment/user/${user.username}`,
+    link: `/index/user-management/user/${user.username}`,
     type: skipUsernameAsLink ? GridFieldTypes.STRING : GridFieldTypes.LINK,
   },
   firstName: { value: user.firstName, type: GridFieldTypes.STRING },
@@ -18,12 +18,12 @@ export const transformUserIntoViewGridData = (user: User, skipUsernameAsLink?: b
   shopName: { value: user.shopName, link: `/index/shop/${user.shopId}`, type: GridFieldTypes.LINK },
   createdByUsername: {
     value: user.createdByUsername,
-    link: `/index/user-managment/user/${user.createdByUsername}`,
+    link: `/index/user-management/user/${user.createdByUsername}`,
     type: GridFieldTypes.LINK,
   },
   modifiedByUsername: {
     value: user.modifiedByUsername,
-    link: `/index/user-managment/user/${user.modifiedByUsername}`,
+    link: `/index/user-management/user/${user.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
   dateCreated: { value: dateFormater(user.dateCreated), type: GridFieldTypes.STRING },

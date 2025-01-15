@@ -118,7 +118,7 @@ const UserCreateView = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate(`/index/user-managment/user/${userData.username}`)
+      navigate(`/index/user-management/user/${userData.username}`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `user:${errorResponse.data}` || 'general:unknowError'
