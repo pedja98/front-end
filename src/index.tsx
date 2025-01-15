@@ -9,10 +9,10 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import crmTheme from './theme/crmTheme'
 import './utils/i18n'
 import { SnackbarProvider } from 'notistack'
-import Notification from './components/common/Notification'
+import Notification from './components/Notification'
 import { PersistGate } from 'redux-persist/integration/react'
-import Spinner from './components/common/Spinner'
-import Confirm from './components/common/Confirm'
+import Spinner from './components/Spinner'
+import Confirm from './components/Confirm'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

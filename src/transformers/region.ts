@@ -1,9 +1,9 @@
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
-import { ViewElement } from '../types/common'
+import { PageElement } from '../types/common'
 import { Region } from '../types/region'
 
-export const transformRegionIntoViewGridData = (region: Region, skipNameAsLink?: boolean): ViewElement => ({
+export const transformRegionIntoPageGridData = (region: Region, skipNameAsLink?: boolean): PageElement => ({
   name: {
     value: region.name,
     link: `/index/regions/${region.id}`,

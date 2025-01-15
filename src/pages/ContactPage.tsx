@@ -1,14 +1,11 @@
 import Grid from '@mui/material/Grid'
 import { Outlet } from 'react-router-dom'
-import Navbar from '../components/Navbar'
 
-const Layout = () => {
+const ContactPage = () => {
   return (
     <Grid>
-      <Navbar />
       <Outlet />
     </Grid>
   )
 }
-
-export default Layout
+export default ContactPage

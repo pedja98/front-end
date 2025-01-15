@@ -33,7 +33,7 @@ export interface GridFieldAttributes {
   options?: string[]
 }
 
-export interface ViewElement {
+export interface PageElement {
   [key: string]: GridFieldAttributes
 }
 
@@ -44,11 +44,11 @@ export interface TableColumn {
 
 export interface TableProps {
   columns: TableColumn[]
-  rows: ViewElement[]
+  rows: PageElement[]
   emptyValue?: string
 }
 
-export interface ViewLabel {
+export interface PageLabel {
   label: string
   key: string
   skip?: boolean

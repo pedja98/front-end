@@ -1,7 +1,7 @@
 import { GridFieldTypes } from '../consts/common'
-import { ViewElement } from '../types/common'
+import { PageElement } from '../types/common'
 
-export const getCreateCompanyGridData = (): ViewElement => ({
+export const getCreateCompanyGridData = (): PageElement => ({
   name: { type: GridFieldTypes.STRING },
   hqAddress: { type: GridFieldTypes.STRING },
   industry: { type: GridFieldTypes.STRING },

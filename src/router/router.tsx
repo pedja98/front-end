@@ -1,95 +1,99 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
-import Login from '../pages/Login'
-import Home from '../pages/Home'
+import LoginPage from '../pages/LoginPage'
+import HomePage from '../pages/HomePage'
 import IndexProtectedRoute from '../routes/IndexProtectedRoute'
 import Layout from '../layouts/layout'
 import LoginProtectedRoute from '../routes/LoginProtectedRoute'
-import Companies from '../pages/Companies'
-import CustomerSessions from '../pages/CustomerSessions'
-import Opportunities from '../pages/Opportunities'
-import Offers from '../pages/Offers'
-import Contracts from '../pages/Contracts'
-import Shops from '../pages/Shops'
-import EditProfile from '../pages/EditProfile'
-import Catalogue from '../pages/Catalogue'
-import Contacts from '../pages/Contacts'
-import NotFound from '../pages/NotFound'
-import UserManagement from '../components/user/UserManagement'
-import UserCreateView from '../components/user/UserCreateView'
-import EntityIndex from '../pages/EntityIndex'
-import UsersListView from '../components/user/UsersListView'
-import UserDetailView from '../components/user/UserDetailView'
-import UserEditView from '../components/user/UserEditView'
-import CreateShop from '../components/shop/CreateShop'
-import Regions from '../pages/Regions'
-import RegionCreateView from '../components/region/RegionCreateView'
-import RegionListView from '../components/region/RegionListView'
-import RegionDetailView from '../components/region/RegionDetailView'
-import RegionEditView from '../components/region/RegionEditView'
-import CompanyCreateView from '../components/company/CompanyCreateView'
+import CompanyPage from '../pages/company/CompanyPage'
+import CustomerSessionPage from '../pages/CustomerSessionPage'
+import OpportunityPage from '../pages/OpportunityPage'
+import OfferPage from '../pages/OfferPage'
+import ContractPage from '../pages/ContractPage'
+import ShopPage from '../pages/shop/ShopPage'
+import EditProfile from '../pages/user/EditProfile'
+import CataloguePage from '../pages/CataloguePage'
+import ContactPage from '../pages/ContactPage'
+import NotFoundPage from '../pages/NotFoundPage'
+import UserManagementPage from '../pages/user/UserManagementPage'
+import UserCreatePage from '../pages/user/UserCreatePage'
+import EntityIndexPage from '../pages/EntityIndexPage'
+import UsersListPage from '../pages/user/UsersListPage'
+import UserDetailPage from '../pages/user/UserDetailPage'
+import UserEditPage from '../pages/user/UserEditPage'
+import ShopCreatePage from '../pages/shop/ShopCreatePage'
+import RegionPage from '../pages/region/RegionPage'
+import RegionCreatePage from '../pages/region/RegionCreatePage'
+import RegionListPage from '../pages/region/RegionListPage'
+import RegionDetailPage from '../pages/region/RegionDetailPage'
+import RegionEditPage from '../pages/region/RegionEditPage'
+import CompanyCreatePage from '../pages/company/CompanyCreatePage'
 
 export default createBrowserRouter([
-  { path: '/', element: <LoginProtectedRoute element={<Login />} /> },
+  { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
   {
     path: '/index',
     element: <IndexProtectedRoute element={<Layout />} />,
     children: [
-      { index: true, element: <Home /> },
+      { index: true, element: <HomePage /> },
       { path: 'home', element: <Navigate to='/index' /> },
       {
         path: 'companies',
-        element: <Companies />,
+        element: <CompanyPage />,
         children: [
-          { index: true, element: <EntityIndex /> },
-          { path: 'create', element: <CompanyCreateView /> },
+          { index: true, element: <EntityIndexPage /> },
+          { path: 'create', element: <CompanyCreatePage /> },
         ],
       },
       {
         path: 'regions',
-        element: <Regions />,
+        element: <RegionPage />,
         children: [
-          { index: true, element: <EntityIndex /> },
-          { path: 'create', element: <RegionCreateView /> },
-          { path: 'list', element: <RegionListView /> },
-          { path: ':id', element: <RegionDetailView /> },
-          { path: ':id/edit', element: <RegionEditView /> },
+          { index: true, element: <EntityIndexPage /> },
+          { path: 'create', element: <RegionCreatePage /> },
+          { path: 'list', element: <RegionListPage /> },
+          { path: ':id', element: <RegionDetailPage /> },
+          { path: ':id/edit', element: <RegionEditPage /> },
         ],
       },
-      { path: 'contacts', element: <Contacts />, children: [{ index: true, element: <EntityIndex /> }] },
+      { path: 'contacts', element: <ContactPage />, children: [{ index: true, element: <EntityIndexPage /> }] },
       {
         path: 'customer-sessions',
-        element: <CustomerSessions />,
-        children: [{ index: true, element: <EntityIndex /> }],
+        element: <CustomerSessionPage />,
+        children: [{ index: true, element: <EntityIndexPage /> }],
       },
-      { path: 'opportunities', element: <Opportunities />, children: [{ index: true, element: <EntityIndex /> }] },
-      { path: 'offers', element: <Offers />, children: [{ index: true, element: <EntityIndex /> }] },
+      {
+        path: 'opportunities',
+        element: <OpportunityPage />,
+        children: [{ index: true, element: <EntityIndexPage /> }],
+      },
+      { path: 'offers', element: <OfferPage />, children: [{ index: true, element: <EntityIndexPage /> }] },
       {
         path: 'user-management',
-        element: <UserManagement />,
+        element: <UserManagementPage />,
         children: [
-          { index: true, element: <EntityIndex /> },
-          { path: 'create', element: <UserCreateView /> },
-          { path: 'list', element: <UsersListView /> },
-          { path: 'user/:username', element: <UserDetailView /> },
-          { path: 'user/:username/edit', element: <UserEditView /> },
+          { index: true, element: <EntityIndexPage /> },
+          { path: 'create', element: <UserCreatePage /> },
+          { path: 'list', element: <UsersListPage /> },
+          { path: 'user/:username', element: <UserDetailPage /> },
+          { path: 'user/:username/edit', element: <UserEditPage /> },
         ],
       },
       {
         path: 'contracts',
-        element: <Contracts />,
-        children: [{ index: true, element: <EntityIndex /> }],
+        element: <ContractPage />,
+        children: [{ index: true, element: <EntityIndexPage /> }],
       },
       {
         path: 'shops',
-        element: <Shops />,
+        element: <ShopPage />,
         children: [
-          { index: true, element: <EntityIndex /> },
-          { path: 'create', element: <CreateShop /> },
+          { index: true, element: <EntityIndexPage /> },
+          { path: 'create', element: <ShopCreatePage /> },
         ],
       },
       { path: 'edit-profile', element: <EditProfile /> },
-      { path: 'catalogue', element: <Catalogue /> },
+      { path: 'catalogue', element: <CataloguePage /> },
     ],
   },
-  { path: '*', element: <NotFound /> },
+  { path: '*', element: <NotFoundPage /> },
 ])

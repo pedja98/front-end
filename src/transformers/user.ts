@@ -1,10 +1,10 @@
 import { GridFieldTypes } from '../consts/common'
 import { Languages } from '../consts/user'
 import { dateFormater } from '../helpers/common'
-import { ViewElement } from '../types/common'
+import { PageElement } from '../types/common'
 import { User, UserType } from '../types/user'
 
-export const transformUserIntoViewGridData = (user: User, skipUsernameAsLink?: boolean): ViewElement => ({
+export const transformUserIntoPageGridData = (user: User, skipUsernameAsLink?: boolean): PageElement => ({
   username: {
     value: user.username,
     link: `/index/user-management/user/${user.username}`,
@@ -30,7 +30,7 @@ export const transformUserIntoViewGridData = (user: User, skipUsernameAsLink?: b
   dateModified: { value: dateFormater(user.dateModified), type: GridFieldTypes.STRING },
 })
 
-export const transformUserIntoEditViewGridData = (user: User): ViewElement => ({
+export const transformUserIntoEditPageGridData = (user: User): PageElement => ({
   firstName: { value: user.firstName, type: GridFieldTypes.STRING },
   lastName: { value: user.lastName, type: GridFieldTypes.STRING },
   email: { value: user.email, type: GridFieldTypes.STRING },
@@ -45,7 +45,7 @@ export const transformUserIntoEditViewGridData = (user: User): ViewElement => ({
   },
 })
 
-export const getCreateUserGridData = (): ViewElement => ({
+export const getCreateUserGridData = (): PageElement => ({
   firstName: { type: GridFieldTypes.STRING },
   lastName: { type: GridFieldTypes.STRING },
   username: { type: GridFieldTypes.STRING },
