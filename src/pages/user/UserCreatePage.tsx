@@ -93,7 +93,7 @@ const UserCreatePage = () => {
     if (Object.values(createUserData).some((currentUserDataValue) => !String(currentUserDataValue).trim())) {
       dispatch(
         setNotification({
-          text: t('general:fillAllFields'),
+          text: t('general:fillAllRequiredFields'),
           type: NotificationType.Warning,
         }),
       )
@@ -165,6 +165,7 @@ const UserCreatePage = () => {
                   variant='standard'
                   value={createUserData[label.key as keyof User]}
                   sx={{ width: '100%' }}
+                  required={!!gridFieldData.required}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
                   }}
@@ -180,6 +181,7 @@ const UserCreatePage = () => {
                   label={label.label}
                   type='password'
                   variant='standard'
+                  required={!!gridFieldData.required}
                   value={createUserData[label.key as keyof User]}
                   sx={{ width: '100%' }}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -199,6 +201,7 @@ const UserCreatePage = () => {
                     labelId={label.key}
                     id={label.key}
                     name={label.key}
+                    required={!!gridFieldData.required}
                     value={String(createUserData[label.key as keyof User])}
                     variant='standard'
                     sx={{ width: '100%' }}

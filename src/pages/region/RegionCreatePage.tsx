@@ -63,6 +63,7 @@ const RegionCreatePage = () => {
         <Grid item sx={{ width: '100%' }}>
           <TextField
             id='name'
+            required
             name='name'
             label={t('region:name')}
             variant='standard'

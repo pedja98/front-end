@@ -41,10 +41,16 @@ const CompanyCreatePage = () => {
   }
 
   const handleSave = async () => {
-    if (Object.values(companyData).some((value) => !String(value).trim())) {
+    if (
+      Object.keys(companyData).some(
+        (key) =>
+          createCompanyGridData[key as keyof Company]?.required &&
+          !String(companyData[key as keyof Company] || '').trim(),
+      )
+    ) {
       dispatch(
         setNotification({
-          text: t('fillAllFields'),
+          text: t('fillAllRequiredFields'),
           type: NotificationType.Warning,
         }),
       )
@@ -127,6 +133,7 @@ const CompanyCreatePage = () => {
                   name={label.key}
                   label={label.label}
                   variant='standard'
+                  required={!!gridFieldData.required}
                   value={String(companyData[label.key as keyof Company] || '')}
                   sx={{ width: '100%' }}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {

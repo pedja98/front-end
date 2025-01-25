@@ -10,7 +10,6 @@ import OpportunityPage from '../pages/OpportunityPage'
 import OfferPage from '../pages/OfferPage'
 import ContractPage from '../pages/ContractPage'
 import ShopPage from '../pages/shop/ShopPage'
-import EditProfile from '../pages/user/EditProfile'
 import CataloguePage from '../pages/CataloguePage'
 import ContactPage from '../pages/ContactPage'
 import NotFoundPage from '../pages/NotFoundPage'
@@ -91,7 +90,7 @@ export default createBrowserRouter([
           { path: 'create', element: <ShopCreatePage /> },
         ],
       },
-      { path: 'edit-profile', element: <EditProfile /> },
+      { path: 'edit-profile', element: <UserEditPage /> },
       { path: 'catalogue', element: <CataloguePage /> },
     ],
   },

@@ -46,7 +46,7 @@ const LoginPage = () => {
       if (!loginRequest.username || !loginRequest.password) {
         dispatch(
           setNotification({
-            text: t('general:fillAllFields'),
+            text: t('general:fillAllRequiredFields'),
             type: NotificationType.Error,
           }),
         )

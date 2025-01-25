@@ -36,7 +36,7 @@ const ChangePassword = () => {
     if (Object.values(changePasswordFormProps).some((userDataValue) => !String(userDataValue).trim())) {
       dispatch(
         setNotification({
-          text: t('general:fillAllFields'),
+          text: t('general:fillAllRequiredFields'),
           type: NotificationType.Warning,
         }),
       )

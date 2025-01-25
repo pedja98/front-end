@@ -5,7 +5,7 @@
   "saveButtonText": "Save",
   "emailFormatError": "Email is not in correct format",
   "phoneFormatError": "Phone is not in correct format",
-  "fillAllFields": "Please fill in all fields",
+  "fillAllRequiredFields": "Please fill in all required fields",
   "invalidFieldValueFormat": "The value provided for the {{fieldName}} field is invalid.",
   "entityUpdateError": "Error occures while updating",
   "pageNotFound": "PAGE NOT FOUND",

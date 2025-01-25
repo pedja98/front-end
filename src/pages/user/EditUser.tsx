@@ -50,7 +50,7 @@ const EditUser = () => {
     setUserData((prev) => (prev ? { ...prev, [name]: value } : null))
   }
 
-  if (getUserIsError || !fetchedUser || updateUserIsError) {
+  if (getUserIsError || updateUserIsError) {
     dispatch(
       setNotification({
         text: JSON.stringify(getUserError || updateUserError),
@@ -163,7 +163,7 @@ const EditUser = () => {
               return (
                 <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                   <FormControl sx={{ width: '100%' }} variant='standard'>
-                    <InputLabel id={label.key} sx={{ pl: 9.3 }}>
+                    <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
                       {label.label}
                     </InputLabel>
                     <Select
@@ -195,6 +195,7 @@ const EditUser = () => {
                     name={label.key}
                     label={label.label}
                     variant='standard'
+                    required={gridFieldData.required}
                     value={userData[label.key as keyof User]}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => {
                       handleChange(event)

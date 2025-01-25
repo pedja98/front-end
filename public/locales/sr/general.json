@@ -5,7 +5,7 @@
   "emailFormatError": "Email nije u odgovarajućem formatu",
   "phoneFormatError": "Telefon nije u odgovarajućem formatu",
   "moreOptions": "Još",
-  "fillAllFields": "Molimo Vas da popunite sva polja",
+  "fillAllRequiredFields": "Molimo Vas da popunite sva obavezna polja",
   "invalidFieldValueFormat": "Vrednost prosledjena za polje {{fieldName}} je nevalidno.",
   "entityUpdateError": "Nastala je greška pri ažuriranju podataka",
   "pageNotFound": "STRANICA NIJE PRONADJENA",

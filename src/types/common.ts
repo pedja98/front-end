@@ -31,6 +31,7 @@ export interface GridFieldAttributes {
   type: GridFieldType
   link?: string
   options?: string[]
+  required?: boolean
 }
 
 export interface PageElement {

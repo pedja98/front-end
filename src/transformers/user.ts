@@ -31,30 +31,33 @@ export const transformUserIntoPageGridData = (user: User, skipUsernameAsLink?: b
 })
 
 export const transformUserIntoEditPageGridData = (user: User): PageElement => ({
-  firstName: { value: user.firstName, type: GridFieldTypes.STRING },
-  lastName: { value: user.lastName, type: GridFieldTypes.STRING },
-  email: { value: user.email, type: GridFieldTypes.STRING },
-  phone: { value: user.phone, type: GridFieldTypes.STRING },
+  firstName: { value: user.firstName, type: GridFieldTypes.STRING, required: true },
+  lastName: { value: user.lastName, type: GridFieldTypes.STRING, required: true },
+  email: { value: user.email, type: GridFieldTypes.STRING, required: true },
+  phone: { value: user.phone, type: GridFieldTypes.STRING, required: true },
   type: {
     options: Object.keys(UserType),
     type: GridFieldTypes.SELECT,
+    required: true,
   },
   language: {
     options: Object.keys(Languages),
     type: GridFieldTypes.SELECT,
+    required: true,
   },
 })
 
 export const getCreateUserGridData = (): PageElement => ({
-  firstName: { type: GridFieldTypes.STRING },
-  lastName: { type: GridFieldTypes.STRING },
-  username: { type: GridFieldTypes.STRING },
-  email: { type: GridFieldTypes.STRING },
-  password: { type: GridFieldTypes.PASSWORD },
-  confirm: { type: GridFieldTypes.PASSWORD },
-  phone: { type: GridFieldTypes.STRING },
+  firstName: { type: GridFieldTypes.STRING, required: true },
+  lastName: { type: GridFieldTypes.STRING, required: true },
+  username: { type: GridFieldTypes.STRING, required: true },
+  email: { type: GridFieldTypes.STRING, required: true },
+  password: { type: GridFieldTypes.PASSWORD, required: true },
+  confirm: { type: GridFieldTypes.PASSWORD, required: true },
+  phone: { type: GridFieldTypes.STRING, required: true },
   type: {
     options: Object.keys(UserType),
     type: GridFieldTypes.SELECT,
+    required: true,
   },
 })

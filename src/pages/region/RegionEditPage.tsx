@@ -88,6 +88,7 @@ const RegionEditPage = () => {
             id='name'
             name='name'
             label={t('region:name')}
+            required
             variant='standard'
             value={regionData.name}
             sx={{ width: '100%' }}
