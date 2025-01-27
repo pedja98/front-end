@@ -9,5 +9,11 @@
   "bankAccountNumber": "Bankovni rračun",
   "comment": "Komentar",
   "createCompanyLabel": "KREIRAJ KOMPANIJU",
-  "companyCreated": "New company is successfully created"
+  "companyCreated": "Nova kompanija je uspešno napravljena",
+  "sortByLabels": {
+    "name": "Ime kompanije",
+    "hqAddress": "Adresa sedišta",
+    "tin": "Pib",
+    "dateCreated": "Date created"
+  }
 }

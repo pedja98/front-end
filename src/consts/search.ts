@@ -11,6 +11,13 @@ export const RegionSortedByFields = {
   DateCreated: 'dateCreated',
 }
 
+export const CompanySortedByFields = {
+  Name: 'name',
+  Hq: 'hqAddress',
+  Tin: 'tin',
+  DateCreated: 'dateCreated',
+}
+
 export const SortedOrderValues = {
   Asc: 'asc',
   Desc: 'desc',

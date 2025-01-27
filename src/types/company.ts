@@ -16,3 +16,12 @@ export interface Company {
   dateCreated?: string
   dateModified?: string
 }
+
+export interface SearchCompanyDataFormProps {
+  name?: string
+  hqAddress?: string
+  tin?: number
+  sortBy?: string
+  sortOrder?: string
+  contactPhone?: string
+}

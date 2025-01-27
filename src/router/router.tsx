@@ -26,6 +26,7 @@ import RegionListPage from '../pages/region/RegionListPage'
 import RegionDetailPage from '../pages/region/RegionDetailPage'
 import RegionEditPage from '../pages/region/RegionEditPage'
 import CompanyCreatePage from '../pages/company/CompanyCreatePage'
+import CompanyListPage from '../pages/company/CompanyListPage'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -41,6 +42,7 @@ export default createBrowserRouter([
         children: [
           { index: true, element: <EntityIndexPage /> },
           { path: 'create', element: <CompanyCreatePage /> },
+          { path: 'list', element: <CompanyListPage /> },
         ],
       },
       {

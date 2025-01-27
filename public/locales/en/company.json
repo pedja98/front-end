@@ -9,5 +9,11 @@
   "bankAccountNumber": "Bank account number",
   "comment": "Comment",
   "createCompanyLabel": "CREATE COMPANY",
-  "companyCreated": "Nova kompanija je uspešno napravljena"
+  "companyCreated": "New company is successfully created",
+  "sortByLabels": {
+    "name": "Company name",
+    "hqAddress": "HQ Address",
+    "tin": "Tin",
+    "dateCreated": "Date created"
+  }
 }

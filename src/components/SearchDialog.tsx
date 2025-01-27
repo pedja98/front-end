@@ -8,6 +8,7 @@ import UserSearchDialog from './searchDialogs/UserSearchDialog'
 import { ReactNode } from 'react'
 import { Root } from '../styles/common'
 import RegionSearchDialog from './searchDialogs/RegionSearchDialog'
+import CompanySearchDialog from './searchDialogs/CompanySearchDialog'
 
 const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
   const { t } = useTranslation()
@@ -24,6 +25,9 @@ const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
       break
     case ModulesOptions.Regions:
       dialogContent = <RegionSearchDialog />
+      break
+    case ModulesOptions.Companies:
+      dialogContent = <CompanySearchDialog />
       break
     default:
       dialogContent = <div>{t('general:noSearchContent')}</div>
