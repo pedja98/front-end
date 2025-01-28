@@ -16,7 +16,7 @@ import NotFoundPage from '../pages/NotFoundPage'
 import UserManagementPage from '../pages/user/UserManagementPage'
 import UserCreatePage from '../pages/user/UserCreatePage'
 import EntityIndexPage from '../pages/EntityIndexPage'
-import UsersListPage from '../pages/user/UsersListPage'
+import UserListPage from '../pages/user/UserListPage'
 import UserDetailPage from '../pages/user/UserDetailPage'
 import UserEditPage from '../pages/user/UserEditPage'
 import ShopCreatePage from '../pages/shop/ShopCreatePage'
@@ -27,6 +27,7 @@ import RegionDetailPage from '../pages/region/RegionDetailPage'
 import RegionEditPage from '../pages/region/RegionEditPage'
 import CompanyCreatePage from '../pages/company/CompanyCreatePage'
 import CompanyListPage from '../pages/company/CompanyListPage'
+import CompanyDetailPage from '../pages/company/CompanyDetailPage'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -43,6 +44,7 @@ export default createBrowserRouter([
           { index: true, element: <EntityIndexPage /> },
           { path: 'create', element: <CompanyCreatePage /> },
           { path: 'list', element: <CompanyListPage /> },
+          { path: ':id', element: <CompanyDetailPage /> },
         ],
       },
       {
@@ -74,7 +76,7 @@ export default createBrowserRouter([
         children: [
           { index: true, element: <EntityIndexPage /> },
           { path: 'create', element: <UserCreatePage /> },
-          { path: 'list', element: <UsersListPage /> },
+          { path: 'list', element: <UserListPage /> },
           { path: 'user/:username', element: <UserDetailPage /> },
           { path: 'user/:username/edit', element: <UserEditPage /> },
         ],

@@ -27,7 +27,7 @@ export interface BasicTabProps {
 }
 
 export interface GridFieldAttributes {
-  value?: string
+  value?: string | number
   type: GridFieldType
   link?: string
   options?: string[]

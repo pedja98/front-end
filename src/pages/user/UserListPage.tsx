@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { useGetUsersQuery } from '../../app/apis/user.api'
 import { TabelRowPerPage } from '../../consts/common'
 
-const UsersListPage = () => {
+const UserListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
   const { isLoading, data: users, isError, error } = useGetUsersQuery(queryParams)
   const dispatch = useAppDispatch()
@@ -76,4 +76,4 @@ const UsersListPage = () => {
   )
 }
 
-export default UsersListPage
+export default UserListPage
