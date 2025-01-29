@@ -12,7 +12,7 @@ export const getCreateCompanyGridData = (): PageElement => ({
   tin: { type: GridFieldTypes.NUMBER, required: true },
   bankName: { type: GridFieldTypes.STRING, required: false },
   bankAccountNumber: { type: GridFieldTypes.STRING, required: false },
-  comment: { type: GridFieldTypes.STRING, required: false },
+  comment: { type: GridFieldTypes.AREA, required: false },
 })
 
 export const transformCompanyIntoEditPageGridData = (company: Company, skipNameAsLink?: boolean): PageElement => ({
@@ -24,6 +24,9 @@ export const transformCompanyIntoEditPageGridData = (company: Company, skipNameA
   hqAddress: { type: GridFieldTypes.STRING, value: company.hqAddress },
   contactPhone: { type: GridFieldTypes.STRING, value: company.contactPhone },
   tin: { type: GridFieldTypes.STRING, value: company.tin },
+  bankName: { type: GridFieldTypes.STRING, value: company.bankName },
+  bankAccountNumber: { type: GridFieldTypes.STRING, value: company.bankAccountNumber },
+  comment: { type: GridFieldTypes.AREA, value: company.comment },
   createdByUsername: {
     value: company.createdByUsername,
     link: `/index/user-management/user/${company.createdByUsername}`,

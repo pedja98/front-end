@@ -25,6 +25,7 @@ export const GridFieldTypes = {
   LINK: 'link',
   PASSWORD: 'password',
   MULTISELECT: 'multiselect',
+  AREA: 'area',
 } as const
 
 export const InitialState: CommonState = {}

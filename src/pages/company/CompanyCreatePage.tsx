@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid'
-import { Button, SelectChangeEvent, TextField, Typography } from '@mui/material'
+import { Button, TextField, Typography } from '@mui/material'
 import { ChangeEvent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../app/hooks'
@@ -12,6 +12,7 @@ import { Company } from '../../types/company'
 import { useCreateCompanyMutation } from '../../app/apis/company.api'
 import { GridFieldTypes } from '../../consts/common'
 import { getCreateCompanyGridData } from '../../transformers/company'
+import { GridFieldType } from '../../types/common'
 
 const CompanyCreatePage = () => {
   const [companyData, setCompanyData] = useState<Partial<Company>>({
@@ -32,7 +33,7 @@ const CompanyCreatePage = () => {
 
   const [createCompany, { isLoading }] = useCreateCompanyMutation()
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target
     setCompanyData((prevData) => ({
       ...prevData,
@@ -125,7 +126,12 @@ const CompanyCreatePage = () => {
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = createCompanyGridData[label.key]
-          if (gridFieldData.type === GridFieldTypes.STRING || gridFieldData.type === GridFieldTypes.NUMBER) {
+          if (
+            ([GridFieldTypes.STRING, GridFieldTypes.NUMBER, GridFieldTypes.AREA] as GridFieldType[]).includes(
+              gridFieldData.type,
+            )
+          ) {
+            const isArea = gridFieldData.type === GridFieldTypes.AREA
             return (
               <Grid item sx={{ width: '100%' }} key={label.key}>
                 <TextField
@@ -136,6 +142,8 @@ const CompanyCreatePage = () => {
                   required={!!gridFieldData.required}
                   value={String(companyData[label.key as keyof Company] || '')}
                   sx={{ width: '100%' }}
+                  minRows={isArea ? 4 : 0}
+                  multiline={isArea}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
                   }}
