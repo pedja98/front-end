@@ -9,22 +9,22 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../app/hooks'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { ApiException } from '../../types/exception'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
 import { SaveCompanyDto } from '../../types/company'
-import { useCreateCompanyMutation } from '../../app/apis/company.api'
+import { useUpdateCompanyMutation, useGetCompanyQuery } from '../../app/apis/company.api'
 import { GridFieldTypes } from '../../consts/common'
 import { getSaveCompanyGridData } from '../../transformers/company'
 import { GridFieldType } from '../../types/common'
 import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
 
-const CompanyCreatePage = () => {
+const CompanyEditPage = () => {
   const [companyData, setCompanyData] = useState<Partial<SaveCompanyDto>>({
     name: '',
     hqAddress: '',
@@ -42,13 +42,42 @@ const CompanyCreatePage = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const params = useParams()
+  const companyId = Number(params.id)
+
   const {
     data: assignedToUserData,
     isLoading: isLoadingGetAssignedToUserData,
     isError: isErrorGetAssignedToUserData,
     error: errorGetAssignedToUserData,
   } = useGetAssignedToUserDataQuery()
-  const [createCompany, { isLoading: isLoadingCreateCompany }] = useCreateCompanyMutation()
+
+  const {
+    data: getCompanyData,
+    isLoading: isLoadingGetCompany,
+    isError: isErrorGetCompany,
+    error: errorGetCompany,
+  } = useGetCompanyQuery(companyId)
+
+  useEffect(() => {
+    if (getCompanyData) {
+      setCompanyData({
+        name: getCompanyData.name,
+        hqAddress: getCompanyData.hqAddress,
+        industry: getCompanyData.industry,
+        contactPhone: getCompanyData.contactPhone,
+        numberOfEmployees: getCompanyData.numberOfEmployees,
+        tin: getCompanyData.tin,
+        bankName: getCompanyData.bankName,
+        bankAccountNumber: getCompanyData.bankAccountNumber,
+        comment: getCompanyData.comment,
+        assignedTo: getCompanyData.assignedToId,
+        temporaryAssignedTo: getCompanyData.temporaryAssignedToId || undefined,
+      })
+    }
+  }, [getCompanyData])
+
+  const [updateCompany, { isLoading: isLoadingUpdateCompany }] = useUpdateCompanyMutation()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
     const { name, value } = event.target
@@ -110,7 +139,7 @@ const CompanyCreatePage = () => {
     }
 
     try {
-      const response = await createCompany(companyData).unwrap()
+      const response = await updateCompany({ id: companyId, company: companyData }).unwrap()
       const messageCode = `company:${response.message}`
       dispatch(
         setNotification({
@@ -118,7 +147,7 @@ const CompanyCreatePage = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate(`/index/companies`)
+      navigate(`/index/companies/${companyId}`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `company:${errorResponse.data}` || 'general:unknownError'
@@ -131,17 +160,24 @@ const CompanyCreatePage = () => {
     }
   }
 
-  if (isLoadingCreateCompany || isLoadingGetAssignedToUserData) {
+  if (isLoadingUpdateCompany || isLoadingGetAssignedToUserData || isLoadingGetCompany) {
     return <Spinner />
   }
 
-  if (isErrorGetAssignedToUserData || !assignedToUserData) {
+  if (
+    isErrorGetAssignedToUserData ||
+    !assignedToUserData ||
+    !assignedToUserData ||
+    !getCompanyData ||
+    isErrorGetCompany
+  ) {
     dispatch(
       setNotification({
-        text: JSON.stringify(errorGetAssignedToUserData),
+        text: JSON.stringify(errorGetAssignedToUserData || errorGetCompany),
         type: NotificationType.Error,
       }),
     )
+    navigate(`/index/companies/${companyId}`)
     return null
   }
 
@@ -169,7 +205,7 @@ const CompanyCreatePage = () => {
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
       <Grid item sx={{ width: '80%', mb: 2 }}>
-        <Typography variant='h4'>{t('company:createCompanyLabel')}</Typography>
+        <Typography variant='h4'>{t('company:editCompanyLabel')}</Typography>
       </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
@@ -239,4 +275,4 @@ const CompanyCreatePage = () => {
   )
 }
 
-export default CompanyCreatePage
+export default CompanyEditPage

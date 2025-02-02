@@ -44,6 +44,8 @@ const CompanyListPage = () => {
     { label: t('company:hqAddress'), key: 'hqAddress' },
     { label: t('company:contactPhone'), key: 'contactPhone' },
     { label: t('company:tin'), key: 'tin' },
+    { label: t('company:assignedTo'), key: 'assignedTo' },
+    { label: t('company:temporaryAssignedTo'), key: 'temporaryAssignedTo' },
     { label: t('general:createdBy'), key: 'createdByUsername' },
     { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
     { label: t('general:dateCreated'), key: 'dateCreated' },

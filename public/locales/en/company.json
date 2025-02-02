@@ -9,10 +9,11 @@
   "bankAccountNumber": "Bank account number",
   "comment": "Comment",
   "createCompanyLabel": "CREATE COMPANY",
+  "editCompanyLabel": "EDIT COMPANY",
   "companyCreated": "New company is successfully created",
-  "assignedTo": "Assigned to person",
+  "assignedTo": "Assigned to",
   "assignedToSameAsTemporary": "Assigned To and TemporaryAssigned To cannot be the same",
-  "temporaryAssignedTo": "Temporary assigned to person",
+  "temporaryAssignedTo": "Temp. assigned to",
   "tinAlreadyTaken": "This TIN is already in use by other company.",
   "sortByLabels": {
     "name": "Company name",

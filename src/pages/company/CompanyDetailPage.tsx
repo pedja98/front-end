@@ -45,6 +45,8 @@ const CompanyDetailPage = () => {
     { label: t('company:tin') + ':', key: 'tin' },
     { label: t('company:bankName') + ':', key: 'bankName' },
     { label: t('company:bankAccountNumber') + ':', key: 'bankAccountNumber' },
+    { label: t('company:assignedTo') + ':  ', key: 'assignedTo' },
+    { label: t('company:temporaryAssignedTo') + ':', key: 'temporaryAssignedTo' },
     { label: t('general:createdBy') + ':', key: 'createdByUsername' },
     { label: t('general:modifiedBy') + ':', key: 'modifiedByUsername' },
     { label: t('general:dateCreated') + ':', key: 'dateCreated' },

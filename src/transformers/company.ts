@@ -3,7 +3,7 @@ import { dateFormater } from '../helpers/common'
 import { PageElement } from '../types/common'
 import { Company } from '../types/company'
 
-export const getCreateCompanyGridData = (
+export const getSaveCompanyGridData = (
   assignedToIds: (number | undefined)[],
   assignedToUsernames: (string | undefined)[],
 ): PageElement => ({
@@ -23,7 +23,7 @@ export const getCreateCompanyGridData = (
   },
   temporaryAssignedTo: {
     type: GridFieldTypes.SELECT,
-    required: true,
+    required: false,
     options: assignedToUsernames,
     optionsValues: assignedToIds,
   },
@@ -42,6 +42,16 @@ export const transformCompanyIntoEditPageGridData = (company: Company, skipNameA
   bankName: { type: GridFieldTypes.STRING, value: company.bankName },
   bankAccountNumber: { type: GridFieldTypes.STRING, value: company.bankAccountNumber },
   comment: { type: GridFieldTypes.AREA, value: company.comment },
+  assignedTo: {
+    value: company.assignedToUsername,
+    link: `/index/user-management/user/${company.assignedToId}`,
+    type: GridFieldTypes.LINK,
+  },
+  temporaryAssignedTo: {
+    value: company.temporaryAssignedToUsername,
+    link: `/index/user-management/user/${company.temporaryAssignedToId}`,
+    type: GridFieldTypes.LINK,
+  },
   createdByUsername: {
     value: company.createdByUsername,
     link: `/index/user-management/user/${company.createdByUsername}`,

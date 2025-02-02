@@ -32,8 +32,8 @@ export interface SaveCompanyDto {
   bankName?: string
   bankAccountNumber?: string
   comment?: string
-  assignedTo?: string
-  temporaryAssignedTo?: string
+  assignedTo?: number
+  temporaryAssignedTo?: number
 }
 
 export interface SearchCompanyDataFormProps {

@@ -9,9 +9,10 @@
   "bankAccountNumber": "Bankovni rračun",
   "comment": "Komentar",
   "createCompanyLabel": "KREIRAJ KOMPANIJU",
+  "editCompanyLabel": "IZMENI KOMPANIJU",
   "companyCreated": "Nova kompanija je uspešno napravljena",
   "assignedTo": "Dodeljena osoba",
-  "temporaryAssignedTo": "Privremeno dodeljena osoba",
+  "temporaryAssignedTo": "Priv. dodeljena osoba",
   "assignedToSameAsTemporary": "Dodeljena i privremeno dodeljena osoba ne mogu biti iste",
   "tinAlreadyTaken": "Ovaj PIB je već u upotrebi od strane druge kompanije",
   "sortByLabels": {
