@@ -9,6 +9,10 @@ export interface Company {
   bankName?: string
   bankAccountNumber?: string
   comment?: string
+  assignedToId?: number
+  assignedToUsername?: string
+  temporaryAssignedToId?: number
+  temporaryAssignedToUsername?: string
   createdById?: number
   createdByUsername?: string
   modifiedById?: number

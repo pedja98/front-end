@@ -19,5 +19,15 @@
     "dateCreated": "Datum kreiranja"
   },
   "changePasswordLabel": "Izmeni lozinku",
-  "editUserData": "Uredite korisničke podatke"
+  "editUserData": "Uredite korisničke podatke",
+  "userTypes": {
+    "admin": "Admin",
+    "salesman": "Prodavac",
+    "l1_manager": "L1 Menadžer",
+    "l2_manager": "L2 Menadžer"
+  },
+  "userLanguages": {
+    "en": "Engleski",
+    "sr": "Srpski"
+  }
 }

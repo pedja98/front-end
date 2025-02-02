@@ -1,8 +1,7 @@
 import { GridFieldTypes } from '../consts/common'
-import { Languages } from '../consts/user'
 import { dateFormater } from '../helpers/common'
 import { PageElement } from '../types/common'
-import { User, UserType } from '../types/user'
+import { User } from '../types/user'
 
 export const transformUserIntoPageGridData = (user: User, skipUsernameAsLink?: boolean): PageElement => ({
   username: {
@@ -30,24 +29,32 @@ export const transformUserIntoPageGridData = (user: User, skipUsernameAsLink?: b
   dateModified: { value: dateFormater(user.dateModified), type: GridFieldTypes.STRING },
 })
 
-export const transformUserIntoEditPageGridData = (user: User): PageElement => ({
+export const transformUserIntoEditPageGridData = (
+  user: User,
+  userTypeOptions: string[],
+  userTypeOptionValues: string[],
+  languageOptions: string[],
+  languageOptionValues: string[],
+): PageElement => ({
   firstName: { value: user.firstName, type: GridFieldTypes.STRING, required: true },
   lastName: { value: user.lastName, type: GridFieldTypes.STRING, required: true },
   email: { value: user.email, type: GridFieldTypes.STRING, required: true },
   phone: { value: user.phone, type: GridFieldTypes.STRING, required: true },
   type: {
-    options: Object.keys(UserType),
+    options: userTypeOptions,
     type: GridFieldTypes.SELECT,
+    optionsValues: userTypeOptionValues,
     required: true,
   },
   language: {
-    options: Object.keys(Languages),
+    options: languageOptions,
     type: GridFieldTypes.SELECT,
+    optionsValues: languageOptionValues,
     required: true,
   },
 })
 
-export const getCreateUserGridData = (): PageElement => ({
+export const getCreateUserGridData = (userTypeOptions: string[], userTypeOptionValues: string[]): PageElement => ({
   firstName: { type: GridFieldTypes.STRING, required: true },
   lastName: { type: GridFieldTypes.STRING, required: true },
   username: { type: GridFieldTypes.STRING, required: true },
@@ -56,8 +63,9 @@ export const getCreateUserGridData = (): PageElement => ({
   confirm: { type: GridFieldTypes.PASSWORD, required: true },
   phone: { type: GridFieldTypes.STRING, required: true },
   type: {
-    options: Object.keys(UserType),
+    options: userTypeOptions,
     type: GridFieldTypes.SELECT,
     required: true,
+    optionsValues: userTypeOptionValues,
   },
 })

@@ -43,16 +43,6 @@
     "asc": "Rastuće",
     "desc": "Opadajuće"
   },
-  "language": {
-    "en": "Engleski",
-    "sr": "Srpski"
-  },
-  "type": {
-    "admin": "Admin",
-    "salesman": "Prodavac",
-    "l1_manager": "L1 Menadžer",
-    "l2_manager": "L2 Menadžer"
-  },
   "dialogConfirmationButtonLabels": {
     "yes": "Da",
     "no": "NE"

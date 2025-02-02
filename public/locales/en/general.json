@@ -43,16 +43,6 @@
     "asc": "Ascending",
     "desc": "Descending"
   },
-  "language": {
-    "en": "English",
-    "sr": "Serbian"
-  },
-  "type": {
-    "admin": "Admin",
-    "salesman": "Salesman",
-    "l1_manager": "L1 Manager",
-    "l2_manager": "L2 Manager"
-  },
   "dialogConfirmationButtonLabels": {
     "yes": "Yes",
     "no": "No"

@@ -11,10 +11,11 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { updateAuthAttribute } from '../../features/auth.slice'
-import { User } from '../../types/user'
+import { User, UserType } from '../../types/user'
 import { transformUserIntoEditPageGridData } from '../../transformers/user'
 import { PageLabel } from '../../types/common'
 import { getCurrentUser } from '../../helpers/common'
+import { Languages } from '../../consts/user'
 
 const EditUser = () => {
   const location = useLocation()
@@ -150,7 +151,16 @@ const EditUser = () => {
     { label: t('user:language'), key: 'language' },
   ]
 
-  const editPageUserGridData = transformUserIntoEditPageGridData(userData)
+  const userTypeOptions = Object.keys(UserType).map((type) => t(`user:userTypes.${type.toLowerCase()}`))
+  const languageOptions = Object.keys(Languages).map((language) => t(`user:userLanguages.${language.toLowerCase()}`))
+
+  const editPageUserGridData = transformUserIntoEditPageGridData(
+    userData,
+    userTypeOptions,
+    Object.values(UserType),
+    languageOptions,
+    Object.values(Languages),
+  )
 
   return (
     <Grid container sx={{ width: '100%' }} direction='column' spacing={2}>
@@ -177,9 +187,9 @@ const EditUser = () => {
                         handleChange(event)
                       }}
                     >
-                      {gridFieldData?.options.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {t(`${label.key}.${option.toLowerCase()}`)}
+                      {gridFieldData?.options.map((option, index) => (
+                        <MenuItem key={option} value={gridFieldData?.optionsValues?.[index] ?? ''}>
+                          {option}
                         </MenuItem>
                       ))}
                     </Select>

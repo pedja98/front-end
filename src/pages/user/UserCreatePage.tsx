@@ -145,7 +145,10 @@ const UserCreatePage = () => {
     { label: t('user:phone'), key: 'phone' },
     { label: t('user:type'), key: 'type' },
   ]
-  const createUserGridData = getCreateUserGridData()
+
+  const userTypeOptions = Object.keys(UserType).map((type) => t(`user:userTypes.${type.toLowerCase()}`))
+
+  const createUserGridData = getCreateUserGridData(userTypeOptions, Object.values(UserType))
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
@@ -194,14 +197,13 @@ const UserCreatePage = () => {
             return (
               <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                 <FormControl sx={{ width: '100%' }} variant='standard'>
-                  <InputLabel id={label.key} sx={{ pl: 9.3 }}>
+                  <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
                     {label.label}
                   </InputLabel>
                   <Select
                     labelId={label.key}
                     id={label.key}
                     name={label.key}
-                    required={!!gridFieldData.required}
                     value={String(createUserData[label.key as keyof User])}
                     variant='standard'
                     sx={{ width: '100%' }}
@@ -209,9 +211,9 @@ const UserCreatePage = () => {
                       handleChange(event)
                     }}
                   >
-                    {gridFieldData?.options.map((option) => (
-                      <MenuItem key={option} value={option}>
-                        {t(`${label.key}.${option.toLowerCase()}`)}
+                    {gridFieldData?.options.map((option, index) => (
+                      <MenuItem key={option} value={gridFieldData?.optionsValues?.[index] ?? ''}>
+                        {option}
                       </MenuItem>
                     ))}
                   </Select>

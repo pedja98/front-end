@@ -19,5 +19,15 @@
     "dateCreated": "Date created"
   },
   "changePasswordLabel": "Change password",
-  "editUserData": "Edit user data"
+  "editUserData": "Edit user data",
+  "userTypes": {
+    "admin": "Admin",
+    "salesman": "Salesman",
+    "l1_manager": "L1 Manager",
+    "l2_manager": "L2 Manager"
+  },
+  "userLanguages": {
+    "en": "English",
+    "sr": "Serbian"
+  }
 }
