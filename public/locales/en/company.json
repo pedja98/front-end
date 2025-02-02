@@ -10,6 +10,10 @@
   "comment": "Comment",
   "createCompanyLabel": "CREATE COMPANY",
   "companyCreated": "New company is successfully created",
+  "assignedTo": "Assigned to person",
+  "assignedToSameAsTemporary": "Assigned To and TemporaryAssigned To cannot be the same",
+  "temporaryAssignedTo": "Temporary assigned to person",
+  "tinAlreadyTaken": "This TIN is already in use by other company.",
   "sortByLabels": {
     "name": "Company name",
     "hqAddress": "HQ Address",

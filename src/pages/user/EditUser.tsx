@@ -188,7 +188,7 @@ const EditUser = () => {
                       }}
                     >
                       {gridFieldData?.options.map((option, index) => (
-                        <MenuItem key={option} value={gridFieldData?.optionsValues?.[index] ?? ''}>
+                        <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? ''}>
                           {option}
                         </MenuItem>
                       ))}

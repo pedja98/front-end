@@ -1,5 +1,14 @@
 import Grid from '@mui/material/Grid'
-import { Button, TextField, Typography } from '@mui/material'
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography,
+} from '@mui/material'
 import { ChangeEvent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../app/hooks'
@@ -8,14 +17,15 @@ import { NotificationType } from '../../types/notification'
 import { ApiException } from '../../types/exception'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
-import { Company } from '../../types/company'
+import { SaveCompanyDto } from '../../types/company'
 import { useCreateCompanyMutation } from '../../app/apis/company.api'
 import { GridFieldTypes } from '../../consts/common'
 import { getCreateCompanyGridData } from '../../transformers/company'
 import { GridFieldType } from '../../types/common'
+import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
 
 const CompanyCreatePage = () => {
-  const [companyData, setCompanyData] = useState<Partial<Company>>({
+  const [companyData, setCompanyData] = useState<Partial<SaveCompanyDto>>({
     name: '',
     hqAddress: '',
     industry: '',
@@ -25,15 +35,22 @@ const CompanyCreatePage = () => {
     bankName: '',
     bankAccountNumber: '',
     comment: '',
+    assignedTo: undefined,
+    temporaryAssignedTo: undefined,
   })
 
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const {
+    data: assignedToUserData,
+    isLoading: isLoadingGetAssignedToUserData,
+    isError: isErrorGetAssignedToUserData,
+    error: errorGetAssignedToUserData,
+  } = useGetAssignedToUserDataQuery()
+  const [createCompany, { isLoading: isLoadingCreateCompany }] = useCreateCompanyMutation()
 
-  const [createCompany, { isLoading }] = useCreateCompanyMutation()
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
     const { name, value } = event.target
     setCompanyData((prevData) => ({
       ...prevData,
@@ -45,13 +62,23 @@ const CompanyCreatePage = () => {
     if (
       Object.keys(companyData).some(
         (key) =>
-          createCompanyGridData[key as keyof Company]?.required &&
-          !String(companyData[key as keyof Company] || '').trim(),
+          createCompanyGridData[key as keyof SaveCompanyDto]?.required &&
+          !String(companyData[key as keyof SaveCompanyDto] || '').trim(),
       )
     ) {
       dispatch(
         setNotification({
           text: t('fillAllRequiredFields'),
+          type: NotificationType.Warning,
+        }),
+      )
+      return
+    }
+
+    if (companyData.assignedTo === companyData.temporaryAssignedTo) {
+      dispatch(
+        setNotification({
+          text: t('company:assignedToSameAsTemporary'),
           type: NotificationType.Warning,
         }),
       )
@@ -68,7 +95,11 @@ const CompanyCreatePage = () => {
       return
     }
 
-    if (isNaN(Number(companyData.numberOfEmployees))) {
+    if (
+      companyData.numberOfEmployees !== null &&
+      companyData.numberOfEmployees !== undefined &&
+      isNaN(Number(companyData.numberOfEmployees))
+    ) {
       dispatch(
         setNotification({
           text: t('invalidFieldValueFormat', { fieldName: t('company:numberOfEmployees') }),
@@ -100,8 +131,21 @@ const CompanyCreatePage = () => {
     }
   }
 
-  if (isLoading) {
+  if (isLoadingCreateCompany || isLoadingGetAssignedToUserData) {
     return <Spinner />
+  }
+
+  if (isErrorGetAssignedToUserData || !assignedToUserData) {
+    dispatch(
+      setNotification({
+        text: JSON.stringify(errorGetAssignedToUserData),
+        type: NotificationType.Error,
+      }),
+    )
+  }
+
+  if (!assignedToUserData) {
+    return null
   }
 
   const labels = [
@@ -109,17 +153,24 @@ const CompanyCreatePage = () => {
     { label: t('company:hqAddress'), key: 'hqAddress' },
     { label: t('company:industry'), key: 'industry' },
     { label: t('company:contactPhone'), key: 'contactPhone' },
-    { label: t('company:numberOfEmployees'), key: 'numberOfEmployees' },
     { label: t('company:tin'), key: 'tin' },
+    { label: t('company:numberOfEmployees'), key: 'numberOfEmployees' },
     { label: t('company:bankName'), key: 'bankName' },
     { label: t('company:bankAccountNumber'), key: 'bankAccountNumber' },
+    { label: t('company:assignedTo'), key: 'assignedTo' },
+    { label: t('company:temporaryAssignedTo'), key: 'temporaryAssignedTo' },
     { label: t('company:comment'), key: 'comment' },
   ]
 
-  const createCompanyGridData = getCreateCompanyGridData()
+  const assignedToUserDataWithEmptyValue = [{ id: undefined, username: t('none') }, ...assignedToUserData]
+
+  const createCompanyGridData = getCreateCompanyGridData(
+    assignedToUserDataWithEmptyValue?.map((user) => user.id),
+    assignedToUserDataWithEmptyValue?.map((user) => user.username),
+  )
 
   return (
-    <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
+    <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
       <Grid item sx={{ width: '80%', mb: 2 }}>
         <Typography variant='h4'>{t('company:createCompanyLabel')}</Typography>
       </Grid>
@@ -140,7 +191,7 @@ const CompanyCreatePage = () => {
                   label={label.label}
                   variant='standard'
                   required={!!gridFieldData.required}
-                  value={String(companyData[label.key as keyof Company] || '')}
+                  value={String(companyData[label.key as keyof SaveCompanyDto] || '')}
                   sx={{ width: '100%' }}
                   minRows={isArea ? 4 : 0}
                   multiline={isArea}
@@ -148,6 +199,34 @@ const CompanyCreatePage = () => {
                     handleChange(event)
                   }}
                 />
+              </Grid>
+            )
+          }
+          if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
+            return (
+              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
+                <FormControl sx={{ width: '100%' }} variant='standard'>
+                  <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
+                    {label.label}
+                  </InputLabel>
+                  <Select
+                    labelId={label.key}
+                    id={label.key}
+                    name={label.key}
+                    value={String(companyData[label.key as keyof SaveCompanyDto])}
+                    variant='standard'
+                    sx={{ width: '100%' }}
+                    onChange={(event: SelectChangeEvent<string>) => {
+                      handleChange(event)
+                    }}
+                  >
+                    {gridFieldData?.options.map((option, index) => (
+                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? undefined}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </Grid>
             )
           }

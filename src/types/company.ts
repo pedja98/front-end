@@ -21,6 +21,21 @@ export interface Company {
   dateModified?: string
 }
 
+export interface SaveCompanyDto {
+  id?: number
+  name?: string
+  hqAddress?: string
+  industry?: string
+  contactPhone?: string
+  numberOfEmployees?: number
+  tin?: number
+  bankName?: string
+  bankAccountNumber?: string
+  comment?: string
+  assignedTo?: string
+  temporaryAssignedTo?: string
+}
+
 export interface SearchCompanyDataFormProps {
   name?: string
   hqAddress?: string

@@ -10,6 +10,10 @@
   "comment": "Komentar",
   "createCompanyLabel": "KREIRAJ KOMPANIJU",
   "companyCreated": "Nova kompanija je uspešno napravljena",
+  "assignedTo": "Dodeljena osoba",
+  "temporaryAssignedTo": "Privremeno dodeljena osoba",
+  "assignedToSameAsTemporary": "Dodeljena i privremeno dodeljena osoba ne mogu biti iste",
+  "tinAlreadyTaken": "Ovaj PIB je već u upotrebi od strane druge kompanije",
   "sortByLabels": {
     "name": "Ime kompanije",
     "hqAddress": "Adresa sedišta",

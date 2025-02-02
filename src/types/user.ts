@@ -38,3 +38,8 @@ export interface User {
   dateCreated: string
   dateModified: string
 }
+
+export interface AssignedToUserData {
+  id: number
+  username: string
+}

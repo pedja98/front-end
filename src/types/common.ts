@@ -30,8 +30,8 @@ export interface GridFieldAttributes {
   value?: string | number
   type: GridFieldType
   link?: string
-  options?: string[]
-  optionsValues?: string[]
+  options?: (string | number | undefined)[]
+  optionsValues?: (string | number | undefined)[]
   required?: boolean
 }
 

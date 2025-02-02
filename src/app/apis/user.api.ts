@@ -1,4 +1,4 @@
-import { User } from '../../types/user'
+import { AssignedToUserData, User } from '../../types/user'
 import { ChangePasswordRequest } from '../../types/auth'
 import { crmApi } from './core/crm.api'
 import { CrmApiTags } from '../../consts/common'
@@ -11,6 +11,10 @@ export const userApi = crmApi.injectEndpoints({
     }),
     getUsers: builder.query<User[], string>({
       query: (queryParams) => `/users${queryParams}`,
+      providesTags: [CrmApiTags.USER],
+    }),
+    getAssignedToUserData: builder.query<AssignedToUserData[], void>({
+      query: () => `/users/assign-to`,
       providesTags: [CrmApiTags.USER],
     }),
     updateUser: builder.mutation<{ message: string }, { username: string; user: Partial<User> }>({
@@ -53,4 +57,5 @@ export const {
   useDeleteUsersMutation,
   useCreateUserMutation,
   useChangePasswordMutation,
+  useGetAssignedToUserDataQuery,
 } = userApi
