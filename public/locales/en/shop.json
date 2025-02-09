@@ -1,3 +1,11 @@
 {
-  "shopLabel": "Shop"
+  "shopLabel": "Shop",
+  "createShopLabel": "Create shop",
+  "name": "Shop name",
+  "address": "Address",
+  "shopLeader": "Shop leader",
+  "region": "Region",
+  "shopDeleted": "Shop has been successfully deleted",
+  "shopNotFound": "No shop was found according to the specified criteria",
+  "shopCreated": "Shop has been successfully created"
 }

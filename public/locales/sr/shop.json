@@ -1,3 +1,11 @@
 {
-  "shopLabel": "Prodavnica"
+  "shopLabel": "Prodavnica",
+  "createShopLabel": "Kreiraj prodavnicu",
+  "name": "Ime prodavnice",
+  "address": "Adresa",
+  "shopLeaders": "Vođa pordavnice",
+  "regions": "Region",
+  "shopDeleted": "Prodavnica je uspešno obrisana",
+  "shopNotFound": "Nije pronađena prodavnica po zadatim kriterijumima",
+  "shopCreated": "Prodavnica je uspešno kreirana"
 }
