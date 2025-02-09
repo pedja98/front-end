@@ -7,7 +7,7 @@ import { NotificationType } from '../../types/notification'
 import { setNotification } from '../../features/notifications.slice'
 import { useChangePasswordMutation } from '../../app/apis/user.api'
 import Spinner from '../../components/Spinner'
-import { ApiException } from '../../types/exception'
+import { ApiException } from '../../types/common'
 import { PasswordPattern } from '../../consts/common'
 import { useNavigate } from 'react-router-dom'
 

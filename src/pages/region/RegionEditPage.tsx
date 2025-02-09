@@ -7,7 +7,7 @@ import { Button, Grid, TextField, Typography } from '@mui/material'
 import { ChangeEvent, useState, useEffect } from 'react'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { ApiException } from '../../types/exception'
+import { ApiException } from '../../types/common'
 
 const RegionEditPage = () => {
   const regionId = String(useParams().id)

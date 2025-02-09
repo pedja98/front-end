@@ -13,7 +13,7 @@ import { useLoginMutation } from '../app/apis/core/gw.api'
 import { useAppDispatch } from '../app/hooks'
 import { setNotification } from '../features/notifications.slice'
 import { NotificationType } from '../types/notification'
-import { ApiException } from '../types/exception'
+import { ApiException } from '../types/common'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 

@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../app/hooks'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { ApiException } from '../../types/exception'
+import { ApiException } from '../../types/common'
 import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
 import { SaveCompanyDto } from '../../types/company'
@@ -23,6 +23,7 @@ import { GridFieldTypes } from '../../consts/common'
 import { getSaveCompanyGridData } from '../../transformers/company'
 import { GridFieldType } from '../../types/common'
 import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
+import { UserType } from '../../types/user'
 
 const CompanyEditPage = () => {
   const [companyData, setCompanyData] = useState<Partial<SaveCompanyDto>>({
@@ -50,7 +51,7 @@ const CompanyEditPage = () => {
     isLoading: isLoadingGetAssignedToUserData,
     isError: isErrorGetAssignedToUserData,
     error: errorGetAssignedToUserData,
-  } = useGetAssignedToUserDataQuery()
+  } = useGetAssignedToUserDataQuery(UserType.SALESMAN)
 
   const {
     data: getCompanyData,

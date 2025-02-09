@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { useNavigate } from 'react-router-dom'
 import { setNotification } from '../features/notifications.slice'
 import { NotificationType } from '../types/notification'
-import { ApiException } from '../types/exception'
+import { ApiException } from '../types/common'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { getRoutePrefixFromCodeString } from '../helpers/common'
 

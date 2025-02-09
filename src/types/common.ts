@@ -59,3 +59,8 @@ export interface PageLabel {
 export interface CommonState {
   entityIsDeleted?: boolean
 }
+export interface ApiException {
+  status: number
+  message: string
+  error: string
+}

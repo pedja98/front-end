@@ -6,7 +6,7 @@ import Spinner from '../../components/Spinner'
 import { useCreateRegionMutation } from '../../app/apis/region.api'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { ApiException } from '../../types/exception'
+import { ApiException } from '../../types/common'
 import { useAppDispatch } from '../../app/hooks'
 
 const RegionCreatePage = () => {
