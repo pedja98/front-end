@@ -18,6 +18,12 @@ export const CompanySortedByFields = {
   DateCreated: 'dateCreated',
 }
 
+export const ShopSortedByFields = {
+  Name: 'name',
+  Address: 'address',
+  DateCreated: 'dateCreated',
+}
+
 export const SortedOrderValues = {
   Asc: 'asc',
   Desc: 'desc',

@@ -12,7 +12,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent } from 'react'
 import { UserTypes } from '../../consts/user'
-import { SearchUserDataFormProps, UserType } from '../../types/user'
+import { UserSearchFormProps, UserType } from '../../types/user'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { updateSearchAttribute } from '../../features/search.slice'
 import { SortedOrderValues, UserSortedByFields } from '../../consts/search'
@@ -20,7 +20,7 @@ import { SortedOrderValues, UserSortedByFields } from '../../consts/search'
 const UserSearchDialog = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const userSearchData = useAppSelector((state) => state.search) as SearchUserDataFormProps
+  const userSearchData = useAppSelector((state) => state.search) as UserSearchFormProps
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string[]> | SelectChangeEvent<string>,

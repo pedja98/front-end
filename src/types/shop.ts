@@ -20,3 +20,11 @@ export interface SaveShop {
   shopLeader?: number
   region?: number
 }
+
+export interface ShopSearchFormProps {
+  name?: string
+  region?: string[]
+  shopLeader?: string[]
+  sortBy?: string
+  sortOrder?: string
+}

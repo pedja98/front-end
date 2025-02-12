@@ -7,7 +7,7 @@ export enum UserType {
   L2_MANAGER = 'L2_MANAGER',
 }
 
-export interface SearchUserDataFormProps {
+export interface UserSearchFormProps {
   firstName?: string
   lastName?: string
   username?: string

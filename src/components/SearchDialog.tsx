@@ -1,14 +1,12 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from '@mui/material'
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Grid } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { SearchDialogProps } from '../types/common'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { getCamelCaseFromKebabString } from '../helpers/common'
 import { ModulesOptions } from '../types/navbar'
-import UserSearchDialog from './searchDialogs/UserSearchDialog'
 import { ReactNode } from 'react'
 import { Root } from '../styles/common'
-import RegionSearchDialog from './searchDialogs/RegionSearchDialog'
-import CompanySearchDialog from './searchDialogs/CompanySearchDialog'
+import { getCurrentSearchDialog } from '../transformers/search'
 
 const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
   const { t } = useTranslation()
@@ -17,22 +15,7 @@ const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
 
   const currentModule = getCamelCaseFromKebabString(location.pathname.split('/')[2]) as ModulesOptions
 
-  let dialogContent: ReactNode
-
-  switch (currentModule) {
-    case ModulesOptions.UserManagement:
-      dialogContent = <UserSearchDialog />
-      break
-    case ModulesOptions.Regions:
-      dialogContent = <RegionSearchDialog />
-      break
-    case ModulesOptions.Companies:
-      dialogContent = <CompanySearchDialog />
-      break
-    default:
-      dialogContent = <div>{t('general:noSearchContent')}</div>
-      break
-  }
+  const dialogContent: ReactNode = getCurrentSearchDialog(currentModule) || <Grid>{t('noSearchContent')}</Grid>
 
   const handleSearch = () => {
     navigate(`${location.pathname}/list`)
