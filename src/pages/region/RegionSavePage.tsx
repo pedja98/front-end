@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Grid, Typography, TextField, Button } from '@mui/material'
@@ -35,13 +35,13 @@ const RegionSavePage = () => {
     }
   }, [region])
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setRegionData((prevData) => ({
       ...prevData,
       [name]: value,
     }))
-  }
+  }, [])
 
   const handleSave = async () => {
     try {

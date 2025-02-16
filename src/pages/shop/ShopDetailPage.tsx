@@ -12,12 +12,12 @@ import { GridFieldType } from '../../types/common'
 import { LinkStyled } from '../../styles/common'
 
 const ShopDetailPage = () => {
-  const shopId = Number(useParams().id)
+  const shopId = useParams().id
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const { isLoading: isGetCompanyLoading, data: shop, isError, error } = useGetShopQuery(shopId)
+  const { isLoading: isGetCompanyLoading, data: shop, isError, error } = useGetShopQuery(shopId as string)
 
   if (isGetCompanyLoading) {
     return <Spinner />

@@ -19,7 +19,7 @@ import EntityIndexPage from '../pages/EntityIndexPage'
 import UserListPage from '../pages/user/UserListPage'
 import UserDetailPage from '../pages/user/UserDetailPage'
 import UserEditPage from '../pages/user/UserEditPage'
-import ShopCreatePage from '../pages/shop/ShopCreatePage'
+import ShopSavePage from '../pages/shop/ShopSavePage'
 import RegionPage from '../pages/region/RegionPage'
 import RegionSavePage from '../pages/region/RegionSavePage'
 import RegionListPage from '../pages/region/RegionListPage'
@@ -93,7 +93,8 @@ export default createBrowserRouter([
         element: <ShopPage />,
         children: [
           { index: true, element: <EntityIndexPage /> },
-          { path: 'create', element: <ShopCreatePage /> },
+          { path: 'create', element: <ShopSavePage /> },
+          { path: ':id/edit', element: <ShopSavePage /> },
           { path: 'list', element: <ShopListPage /> },
           { path: ':id', element: <ShopDetailPage /> },
         ],

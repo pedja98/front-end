@@ -109,11 +109,7 @@ const CompanySavePage = () => {
       return
     }
 
-    if (
-      companyData.numberOfEmployees !== null &&
-      companyData.numberOfEmployees !== undefined &&
-      isNaN(Number(companyData.numberOfEmployees))
-    ) {
+    if (!companyData.numberOfEmployees && isNaN(Number(companyData.numberOfEmployees))) {
       dispatch(
         setNotification({
           text: t('invalidFieldValueFormat', { fieldName: t('company:numberOfEmployees') }),

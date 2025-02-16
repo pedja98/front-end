@@ -11,7 +11,7 @@ export const shopApi = crmApi.injectEndpoints({
         body: shopData,
       }),
     }),
-    updateShop: builder.mutation<{ message: string }, { id: number; shop: Partial<Shop> }>({
+    updateShop: builder.mutation<{ message: string }, { id: string; shop: Partial<Shop> }>({
       query: ({ id, shop }) => ({
         url: `/shops/${id}`,
         method: 'PUT',
@@ -19,7 +19,7 @@ export const shopApi = crmApi.injectEndpoints({
       }),
       invalidatesTags: (result, error, { id }) => [{ type: CrmApiTags.SHOP, id }],
     }),
-    getShop: builder.query<Shop, number>({
+    getShop: builder.query<Shop, string>({
       query: (id) => `/shops/${id}`,
       providesTags: (result, error, id) => [{ type: CrmApiTags.SHOP, id }],
     }),

@@ -14,28 +14,43 @@ import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
 import { UserType } from '../../types/user'
 import Spinner from '../../components/Spinner'
 import { useAppDispatch } from '../../app/hooks'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { SaveShop } from '../../types/shop'
 import { getSaveShopGridData } from '../../transformers/shop'
 import { GridFieldTypes } from '../../consts/common'
 import { ApiException } from '../../types/common'
-import { useCreateShopMutation } from '../../app/apis/shop.api'
+import { useCreateShopMutation, useGetShopQuery, useUpdateShopMutation } from '../../app/apis/shop.api'
+import { SaveShopFormInitialState } from '../../consts/shops'
 
-const ShopCreatePage = () => {
-  const [shopData, setShopData] = useState<SaveShop>({
-    name: '',
-    address: '',
-    shopLeader: undefined,
-    region: undefined,
-  })
+const ShopSavePage = () => {
+  const [shopData, setShopData] = useState<SaveShop>(SaveShopFormInitialState)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { t } = useTranslation()
+
+  const shopId = useParams().id
+
+  const {
+    data: getShopData,
+    isLoading: isLoadingGetShop,
+    isError: isErrorGetShop,
+    error: errorGetShop,
+  } = useGetShopQuery(shopId as string, { skip: !shopId })
+
+  useEffect(() => {
+    if (getShopData) {
+      setShopData({
+        ...getShopData,
+        region: getShopData.regionId,
+        shopLeader: getShopData.shopLeaderId,
+      })
+    }
+  }, [getShopData])
 
   const { data: regions } = useGetRegionsQuery('', {
     selectFromResult: ({ data }) => ({
@@ -43,8 +58,9 @@ const ShopCreatePage = () => {
     }),
   })
 
-  const [createShop, { isLoading: isLoadingCreateShop, isError: isErrorCreateShop, error: errorCreateShop }] =
-    useCreateShopMutation()
+  const [createShop, { isLoading: isLoadingCreateShop }] = useCreateShopMutation()
+
+  const [updateShop, { isLoading: isLoadingUpdateShop }] = useUpdateShopMutation()
 
   const {
     data: shopLeaders,
@@ -53,14 +69,14 @@ const ShopCreatePage = () => {
     error: errorShopLeaders,
   } = useGetAssignedToUserDataQuery(UserType.L1_MANAGER)
 
-  if (isLoadingShopLeaders || isLoadingCreateShop) {
+  if (isLoadingShopLeaders || isLoadingCreateShop || isLoadingGetShop || isLoadingUpdateShop) {
     return <Spinner />
   }
 
-  if (isErrorShopLeaders || !shopLeaders || isErrorCreateShop) {
+  if (isErrorShopLeaders || !shopLeaders || isErrorGetShop) {
     dispatch(
       setNotification({
-        text: JSON.stringify(errorShopLeaders || errorCreateShop),
+        text: JSON.stringify(errorShopLeaders || errorGetShop),
         type: NotificationType.Error,
       }),
     )
@@ -68,11 +84,14 @@ const ShopCreatePage = () => {
     return null
   }
 
+  const shopLeadersWithEmptyValue = [{ id: undefined, username: t('none') }, ...shopLeaders]
+  const regionsWithEmptyValue = [{ id: undefined, name: t('none') }, ...regions]
+
   const createShopGridData = getSaveShopGridData(
-    shopLeaders?.map((shopLeader) => shopLeader.id),
-    shopLeaders?.map((shopLeader) => shopLeader.username),
-    regions?.map((region) => region.id),
-    regions?.map((region) => region.name),
+    shopLeadersWithEmptyValue?.map((shopLeader) => shopLeader.id),
+    shopLeadersWithEmptyValue?.map((shopLeader) => shopLeader.username),
+    regionsWithEmptyValue?.map((region) => region.id),
+    regionsWithEmptyValue?.map((region) => region.name),
   )
 
   const labels = [
@@ -82,13 +101,13 @@ const ShopCreatePage = () => {
     { label: t('shop:region'), key: 'region' },
   ]
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
     const { name, value } = event.target
     setShopData((prevData) => ({
       ...prevData,
       [name]: value,
     }))
-  }
+  }, [])
 
   const handleSave = async () => {
     if (
@@ -107,7 +126,9 @@ const ShopCreatePage = () => {
     }
 
     try {
-      const response = await createShop(shopData).unwrap()
+      const response = shopId
+        ? await updateShop({ id: shopId as string, shop: shopData }).unwrap()
+        : await createShop(shopData).unwrap()
       const messageCode = `shop:${response.message}`
       dispatch(
         setNotification({
@@ -115,7 +136,7 @@ const ShopCreatePage = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate('/index/shops')
+      navigate(shopId ? `/index/shopss/${shopId}` : `/index/companies`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `shop:${errorResponse.data}` || 'general:unknownError'
@@ -194,4 +215,4 @@ const ShopCreatePage = () => {
   )
 }
 
-export default ShopCreatePage
+export default ShopSavePage
