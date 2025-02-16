@@ -157,7 +157,7 @@ const ShopSearchDialog = () => {
               <MenuItem value={undefined}>{t('general:none')}</MenuItem>
               {Object.keys(ShopSortedByFields).map((key) => (
                 <MenuItem key={key} value={ShopSortedByFields[key as keyof typeof ShopSortedByFields]}>
-                  {t(`user:sortByLabels.${ShopSortedByFields[key as keyof typeof ShopSortedByFields]}`)}
+                  {t(`shop:sortByLabels.${ShopSortedByFields[key as keyof typeof ShopSortedByFields]}`)}
                 </MenuItem>
               ))}
             </Select>

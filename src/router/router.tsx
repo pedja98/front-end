@@ -29,6 +29,8 @@ import CompanyCreatePage from '../pages/company/CompanyCreatePage'
 import CompanyListPage from '../pages/company/CompanyListPage'
 import CompanyDetailPage from '../pages/company/CompanyDetailPage'
 import CompanyEditPage from '../pages/company/CompanyEditPage'
+import ShopListPage from '../pages/shop/ShopListPage'
+import ShopDetailPage from '../pages/shop/ShopDetailPage'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -94,6 +96,8 @@ export default createBrowserRouter([
         children: [
           { index: true, element: <EntityIndexPage /> },
           { path: 'create', element: <ShopCreatePage /> },
+          { path: 'list', element: <ShopListPage /> },
+          { path: ':id', element: <ShopDetailPage /> },
         ],
       },
       { path: 'edit-profile', element: <UserEditPage /> },

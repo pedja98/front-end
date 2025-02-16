@@ -7,5 +7,10 @@
   "region": "Region",
   "shopDeleted": "Shop has been successfully deleted",
   "shopNotFound": "No shop was found according to the specified criteria",
-  "shopCreated": "Shop has been successfully created"
+  "shopCreated": "Shop has been successfully created",
+  "sortByLabels": {
+    "name": "Shop name",
+    "address": "Address",
+    "dateCreated": "Date created"
+  }
 }
