@@ -6,6 +6,7 @@
   "shopLeaders": "Vođa pordavnice",
   "regions": "Region",
   "shopDeleted": "Prodavnica je uspešno obrisana",
+  "shopUpdated": "Prodavnica je uspešno ažurirana",
   "shopNotFound": "Nije pronađena prodavnica po zadatim kriterijumima",
   "shopCreated": "Prodavnica je uspešno kreirana"
 }

@@ -154,6 +154,7 @@ const CompanySavePage = () => {
         type: NotificationType.Error,
       }),
     )
+    navigate(companyId ? `/index/companies/${companyId}` : `/index/companies`)
     return null
   }
 

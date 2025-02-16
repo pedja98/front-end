@@ -6,6 +6,7 @@
   "shopLeader": "Shop leader",
   "region": "Region",
   "shopDeleted": "Shop has been successfully deleted",
+  "shopUpdated": "Shop has been successfully updated",
   "shopNotFound": "No shop was found according to the specified criteria",
   "shopCreated": "Shop has been successfully created",
   "sortByLabels": {

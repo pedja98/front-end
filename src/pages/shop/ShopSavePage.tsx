@@ -62,6 +62,14 @@ const ShopSavePage = () => {
 
   const [updateShop, { isLoading: isLoadingUpdateShop }] = useUpdateShopMutation()
 
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+    const { name, value } = event.target
+    setShopData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }, [])
+
   const {
     data: shopLeaders,
     isLoading: isLoadingShopLeaders,
@@ -80,7 +88,7 @@ const ShopSavePage = () => {
         type: NotificationType.Error,
       }),
     )
-    navigate('/index/shops')
+    navigate(shopId ? `/index/shops/${shopId}` : `/index/shops`)
     return null
   }
 
@@ -100,14 +108,6 @@ const ShopSavePage = () => {
     { label: t('shop:shopLeader'), key: 'shopLeader' },
     { label: t('shop:region'), key: 'region' },
   ]
-
-  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
-    const { name, value } = event.target
-    setShopData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
-  }, [])
 
   const handleSave = async () => {
     if (
@@ -136,7 +136,7 @@ const ShopSavePage = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate(shopId ? `/index/shopss/${shopId}` : `/index/companies`)
+      navigate(shopId ? `/index/shops/${shopId}` : `/index/companies`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `shop:${errorResponse.data}` || 'general:unknownError'
