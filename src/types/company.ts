@@ -13,9 +13,7 @@ export interface Company {
   assignedToUsername?: string
   temporaryAssignedToId?: number
   temporaryAssignedToUsername?: string
-  createdById?: number
   createdByUsername?: string
-  modifiedById?: number
   modifiedByUsername?: string
   dateCreated?: string
   dateModified?: string

@@ -31,9 +31,7 @@ export interface User {
   shopId: number
   shopName: string
   salesmen: string
-  createdById: number
   createdByUsername: string
-  modifiedById: number
   modifiedByUsername: string
   dateCreated: string
   dateModified: string

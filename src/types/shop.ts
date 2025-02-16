@@ -6,9 +6,7 @@ export interface Shop {
   shopLeaderUsername?: string
   regionId?: number
   regionName?: string
-  createdById?: number
   createdByUsername?: string
-  modifiedById?: number
   modifiedByUsername?: string
   dateCreated?: string
   dateModified?: string
