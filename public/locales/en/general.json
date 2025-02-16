@@ -2,7 +2,7 @@
   "unknowError": "Unknown Error",
   "logoutSuccessfully": "You have logged out successfully",
   "moreOptions": "More",
-  "saveButtonText": "Save",
+  "saveButtonLabel": "Save",
   "emailFormatError": "Email is not in correct format",
   "phoneFormatError": "Phone is not in correct format",
   "fillAllRequiredFields": "Please fill in all required fields",

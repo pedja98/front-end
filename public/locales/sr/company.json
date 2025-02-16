@@ -8,6 +8,7 @@
   "bankName": "Ime banke",
   "bankAccountNumber": "Bankovni rračun",
   "comment": "Komentar",
+  "companyUpdated": "Kompanijski podaci su uspešno ažurirani",
   "createCompanyLabel": "KREIRAJ KOMPANIJU",
   "editCompanyLabel": "IZMENI KOMPANIJU",
   "companyCreated": "Nova kompanija je uspešno napravljena",

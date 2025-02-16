@@ -232,7 +232,7 @@ const UserCreatePage = () => {
         })}
         <Grid item sx={{ width: '100%' }}>
           <Button sx={{ width: '100%' }} onClick={handleSave}>
-            {t('general:saveButtonText')}
+            {t('general:saveButtonLabel')}
           </Button>
         </Grid>
       </Grid>

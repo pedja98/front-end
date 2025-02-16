@@ -144,7 +144,7 @@ const ChangePassword = () => {
       </Grid>
       <Grid item sx={{ width: '100%' }}>
         <Button sx={{ width: '100%' }} onClick={handleChangePassword}>
-          {t('general:saveButtonText')}
+          {t('general:saveButtonLabel')}
         </Button>
       </Grid>
     </Grid>

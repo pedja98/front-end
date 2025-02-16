@@ -8,6 +8,7 @@
   "bankName": "Bank name",
   "bankAccountNumber": "Bank account number",
   "comment": "Comment",
+  "companyUpdated": "Company data has been successfully updated",
   "createCompanyLabel": "CREATE COMPANY",
   "editCompanyLabel": "EDIT COMPANY",
   "companyCreated": "New company is successfully created",

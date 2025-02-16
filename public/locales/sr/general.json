@@ -1,7 +1,7 @@
 {
   "unknowError": "Nepoznata greška",
   "logoutSuccessfully": "Uspešno ste se izlogovali",
-  "saveButtonText": "Sačuvaj",
+  "saveButtonLabel": "Sačuvaj",
   "emailFormatError": "Email nije u odgovarajućem formatu",
   "phoneFormatError": "Telefon nije u odgovarajućem formatu",
   "moreOptions": "Još",

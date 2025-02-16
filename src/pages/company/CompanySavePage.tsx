@@ -9,23 +9,23 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../app/hooks'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { ApiException } from '../../types/common'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
 import { SaveCompanyDto } from '../../types/company'
-import { useCreateCompanyMutation } from '../../app/apis/company.api'
+import { useCreateCompanyMutation, useGetCompanyQuery, useUpdateCompanyMutation } from '../../app/apis/company.api'
 import { GridFieldTypes } from '../../consts/common'
 import { getSaveCompanyGridData } from '../../transformers/company'
 import { GridFieldType } from '../../types/common'
 import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
 import { UserType } from '../../types/user'
 
-const CompanyCreatePage = () => {
+const CompanySavePage = () => {
   const [companyData, setCompanyData] = useState<Partial<SaveCompanyDto>>({
     name: '',
     hqAddress: '',
@@ -43,13 +43,40 @@ const CompanyCreatePage = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
   const {
     data: assignedToUserData,
     isLoading: isLoadingGetAssignedToUserData,
     isError: isErrorGetAssignedToUserData,
     error: errorGetAssignedToUserData,
   } = useGetAssignedToUserDataQuery(UserType.SALESMAN)
+
+  const params = useParams()
+  const companyId = params.id ? Number(params.id) : undefined
+
+  const {
+    data: getCompanyData,
+    isLoading: isLoadingGetCompany,
+    isError: isErrorGetCompany,
+    error: errorGetCompany,
+  } = useGetCompanyQuery(companyId as number, { skip: !companyId })
+
+  const [
+    updateCompany,
+    { isLoading: isLoadingUpdateCompany, isError: isErrorUpdateCompany, error: errorUpdateCompany },
+  ] = useUpdateCompanyMutation()
+
   const [createCompany, { isLoading: isLoadingCreateCompany }] = useCreateCompanyMutation()
+
+  useEffect(() => {
+    if (getCompanyData) {
+      setCompanyData({
+        ...getCompanyData,
+        assignedTo: getCompanyData.assignedToId,
+        temporaryAssignedTo: getCompanyData.temporaryAssignedToId,
+      })
+    }
+  }, [getCompanyData])
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
     const { name, value } = event.target
@@ -111,7 +138,9 @@ const CompanyCreatePage = () => {
     }
 
     try {
-      const response = await createCompany(companyData).unwrap()
+      const response = companyId
+        ? await updateCompany({ id: Number(companyId), company: companyData }).unwrap()
+        : await createCompany(companyData).unwrap()
       const messageCode = `company:${response.message}`
       dispatch(
         setNotification({
@@ -119,7 +148,7 @@ const CompanyCreatePage = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate(`/index/companies`)
+      navigate(companyId ? `/index/companies/${companyId}` : `/index/companies`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `company:${errorResponse.data}` || 'general:unknownError'
@@ -132,14 +161,14 @@ const CompanyCreatePage = () => {
     }
   }
 
-  if (isLoadingCreateCompany || isLoadingGetAssignedToUserData) {
+  if (isLoadingCreateCompany || isLoadingGetAssignedToUserData || isLoadingGetCompany || isLoadingUpdateCompany) {
     return <Spinner />
   }
 
-  if (isErrorGetAssignedToUserData || !assignedToUserData) {
+  if (isErrorGetAssignedToUserData || !assignedToUserData || isErrorGetCompany || isErrorUpdateCompany) {
     dispatch(
       setNotification({
-        text: JSON.stringify(errorGetAssignedToUserData),
+        text: JSON.stringify(errorGetAssignedToUserData || errorGetCompany || errorUpdateCompany),
         type: NotificationType.Error,
       }),
     )
@@ -232,7 +261,7 @@ const CompanyCreatePage = () => {
         })}
         <Grid item sx={{ width: '100%' }}>
           <Button sx={{ width: '100%' }} onClick={handleSave}>
-            {t('general:saveButtonText')}
+            {t('general:saveButtonLabel')}
           </Button>
         </Grid>
       </Grid>
@@ -240,4 +269,4 @@ const CompanyCreatePage = () => {
   )
 }
 
-export default CompanyCreatePage
+export default CompanySavePage

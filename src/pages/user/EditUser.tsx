@@ -216,7 +216,7 @@ const EditUser = () => {
             return <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}></Grid>
           })}
         <Button sx={{ width: '100%', mt: 3 }} onClick={handleSaveChanges}>
-          {t('general:saveButtonText')}
+          {t('general:saveButtonLabel')}
         </Button>
       </Grid>
     </Grid>
