@@ -2,6 +2,7 @@
   "name": "Ime regiona",
   "regionAlreadyExists": "Region pod ovim imenom već postoji",
   "regionCreated": "Novi region je uspešno napravljen",
+  "regionUpdated": "Region je uspešno izmenjen",
   "createRegionLabel": "KREIRAJ REGION",
   "sortByLabels": {
     "name": "Ime regiona",

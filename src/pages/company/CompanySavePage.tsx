@@ -9,7 +9,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../app/hooks'
 import { setNotification } from '../../features/notifications.slice'
@@ -24,21 +24,10 @@ import { getSaveCompanyGridData } from '../../transformers/company'
 import { GridFieldType } from '../../types/common'
 import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
 import { UserType } from '../../types/user'
+import { SaveCompanyFormInitialState } from '../../consts/company'
 
 const CompanySavePage = () => {
-  const [companyData, setCompanyData] = useState<Partial<SaveCompanyDto>>({
-    name: '',
-    hqAddress: '',
-    industry: '',
-    contactPhone: '',
-    numberOfEmployees: undefined,
-    tin: undefined,
-    bankName: '',
-    bankAccountNumber: '',
-    comment: '',
-    assignedTo: undefined,
-    temporaryAssignedTo: undefined,
-  })
+  const [companyData, setCompanyData] = useState<Partial<SaveCompanyDto>>(SaveCompanyFormInitialState)
 
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
@@ -61,10 +50,7 @@ const CompanySavePage = () => {
     error: errorGetCompany,
   } = useGetCompanyQuery(companyId as number, { skip: !companyId })
 
-  const [
-    updateCompany,
-    { isLoading: isLoadingUpdateCompany, isError: isErrorUpdateCompany, error: errorUpdateCompany },
-  ] = useUpdateCompanyMutation()
+  const [updateCompany, { isLoading: isLoadingUpdateCompany }] = useUpdateCompanyMutation()
 
   const [createCompany, { isLoading: isLoadingCreateCompany }] = useCreateCompanyMutation()
 
@@ -78,13 +64,13 @@ const CompanySavePage = () => {
     }
   }, [getCompanyData])
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
     const { name, value } = event.target
     setCompanyData((prevData) => ({
       ...prevData,
       [name]: isNaN(Number(value)) || !value ? value : Number(value),
     }))
-  }
+  }, [])
 
   const handleSave = async () => {
     if (
@@ -165,10 +151,10 @@ const CompanySavePage = () => {
     return <Spinner />
   }
 
-  if (isErrorGetAssignedToUserData || !assignedToUserData || isErrorGetCompany || isErrorUpdateCompany) {
+  if (isErrorGetAssignedToUserData || !assignedToUserData || isErrorGetCompany) {
     dispatch(
       setNotification({
-        text: JSON.stringify(errorGetAssignedToUserData || errorGetCompany || errorUpdateCompany),
+        text: JSON.stringify(errorGetAssignedToUserData || errorGetCompany),
         type: NotificationType.Error,
       }),
     )

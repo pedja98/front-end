@@ -21,10 +21,9 @@ import UserDetailPage from '../pages/user/UserDetailPage'
 import UserEditPage from '../pages/user/UserEditPage'
 import ShopCreatePage from '../pages/shop/ShopCreatePage'
 import RegionPage from '../pages/region/RegionPage'
-import RegionCreatePage from '../pages/region/RegionCreatePage'
+import RegionSavePage from '../pages/region/RegionSavePage'
 import RegionListPage from '../pages/region/RegionListPage'
 import RegionDetailPage from '../pages/region/RegionDetailPage'
-import RegionEditPage from '../pages/region/RegionEditPage'
 import CompanySavePage from '../pages/company/CompanySavePage'
 import CompanyListPage from '../pages/company/CompanyListPage'
 import CompanyDetailPage from '../pages/company/CompanyDetailPage'
@@ -55,10 +54,10 @@ export default createBrowserRouter([
         element: <RegionPage />,
         children: [
           { index: true, element: <EntityIndexPage /> },
-          { path: 'create', element: <RegionCreatePage /> },
+          { path: 'create', element: <RegionSavePage /> },
           { path: 'list', element: <RegionListPage /> },
           { path: ':id', element: <RegionDetailPage /> },
-          { path: ':id/edit', element: <RegionEditPage /> },
+          { path: ':id/edit', element: <RegionSavePage /> },
         ],
       },
       { path: 'contacts', element: <ContactPage />, children: [{ index: true, element: <EntityIndexPage /> }] },
