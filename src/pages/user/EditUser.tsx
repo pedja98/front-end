@@ -155,7 +155,6 @@ const EditUser = () => {
   const languageOptions = Object.keys(Languages).map((language) => t(`user:userLanguages.${language.toLowerCase()}`))
 
   const editPageUserGridData = transformUserIntoEditPageGridData(
-    userData,
     userTypeOptions,
     Object.values(UserType),
     languageOptions,

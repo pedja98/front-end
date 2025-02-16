@@ -20,8 +20,9 @@ import { NotificationType } from '../../types/notification'
 import { useNavigate } from 'react-router-dom'
 import { User, UserType } from '../../types/user'
 import { useCreateUserMutation } from '../../app/apis/user.api'
-import { getCreateUserGridData } from '../../transformers/user'
+import { transformUserIntoEditPageGridData } from '../../transformers/user'
 import Spinner from '../../components/Spinner'
+import { Languages } from '../../consts/user'
 
 const UserCreatePage = () => {
   const [createUserData, setCreateUserData] = useState<Partial<User>>({
@@ -147,8 +148,14 @@ const UserCreatePage = () => {
   ]
 
   const userTypeOptions = Object.keys(UserType).map((type) => t(`user:userTypes.${type.toLowerCase()}`))
+  const languageOptions = Object.keys(Languages).map((language) => t(`user:userLanguages.${language.toLowerCase()}`))
 
-  const createUserGridData = getCreateUserGridData(userTypeOptions, Object.values(UserType))
+  const createUserGridData = transformUserIntoEditPageGridData(
+    userTypeOptions,
+    Object.values(UserType),
+    languageOptions,
+    Object.values(Languages),
+  )
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
