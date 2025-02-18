@@ -22,19 +22,10 @@ import { User, UserType } from '../../types/user'
 import { useCreateUserMutation } from '../../app/apis/user.api'
 import { transformUserIntoEditPageGridData } from '../../transformers/user'
 import Spinner from '../../components/Spinner'
-import { Languages } from '../../consts/user'
+import { Languages, SaveUserFormInitialState } from '../../consts/user'
 
 const UserCreatePage = () => {
-  const [createUserData, setCreateUserData] = useState<Partial<User>>({
-    firstName: '',
-    lastName: '',
-    username: '',
-    password: '',
-    confirm: '',
-    email: '',
-    phone: '',
-    type: '',
-  })
+  const [createUserData, setCreateUserData] = useState<Partial<User>>(SaveUserFormInitialState)
 
   const { t } = useTranslation()
   const dispatch = useAppDispatch()

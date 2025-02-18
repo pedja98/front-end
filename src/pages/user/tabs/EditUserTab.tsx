@@ -1,23 +1,23 @@
 import Grid from '@mui/material/Grid'
-import { useGetUserQuery, useUpdateUserMutation } from '../../app/apis/user.api'
-import Spinner from '../../components/Spinner'
+import { useGetUserQuery, useUpdateUserMutation } from '../../../app/apis/user.api'
+import Spinner from '../../../components/Spinner'
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
-import { EmailPattern, GridFieldTypes, PhonePattern } from '../../consts/common'
+import { EmailPattern, GridFieldTypes, PhonePattern } from '../../../consts/common'
 import { useTranslation } from 'react-i18next'
-import { ChangeEvent, useEffect, useState } from 'react'
-import { useAppDispatch } from '../../app/hooks'
-import { ApiException } from '../../types/common'
-import { setNotification } from '../../features/notifications.slice'
-import { NotificationType } from '../../types/notification'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { useAppDispatch } from '../../../app/hooks'
+import { ApiException } from '../../../types/common'
+import { setNotification } from '../../../features/notifications.slice'
+import { NotificationType } from '../../../types/notification'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { updateAuthAttribute } from '../../features/auth.slice'
-import { User, UserType } from '../../types/user'
-import { transformUserIntoEditPageGridData } from '../../transformers/user'
-import { PageLabel } from '../../types/common'
-import { getCurrentUser } from '../../helpers/common'
-import { Languages } from '../../consts/user'
+import { updateAuthAttribute } from '../../../features/auth.slice'
+import { User, UserType } from '../../../types/user'
+import { transformUserIntoEditPageGridData } from '../../../transformers/user'
+import { PageLabel } from '../../../types/common'
+import { getCurrentUser } from '../../../helpers/common'
+import { Languages, SaveUserFormInitialState } from '../../../consts/user'
 
-const EditUser = () => {
+const EditUserTab = () => {
   const location = useLocation()
   const params = useParams()
 
@@ -34,7 +34,7 @@ const EditUser = () => {
   const [updateUser, { isLoading: updateUserIsLoading, isError: updateUserIsError, error: updateUserError }] =
     useUpdateUserMutation()
 
-  const [userData, setUserData] = useState<User | null>(null)
+  const [userData, setUserData] = useState<Partial<User>>(SaveUserFormInitialState)
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -45,11 +45,13 @@ const EditUser = () => {
     }
   }, [fetchedUser])
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
-    if (!userData) return
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
     const { name, value } = event.target
-    setUserData((prev) => (prev ? { ...prev, [name]: value } : null))
-  }
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }, [])
 
   if (getUserIsError || updateUserIsError) {
     dispatch(
@@ -223,4 +225,4 @@ const EditUser = () => {
   )
 }
 
-export default EditUser
+export default EditUserTab

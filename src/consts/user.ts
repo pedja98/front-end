@@ -1,5 +1,6 @@
+import { ChangePasswordFormProps } from '../types/auth'
 import { Language } from '../types/common'
-import { UserType } from '../types/user'
+import { User, UserType } from '../types/user'
 
 export const UserTypes: Record<UserType, UserType> = {
   ADMIN: UserType.ADMIN,
@@ -11,4 +12,21 @@ export const UserTypes: Record<UserType, UserType> = {
 export const Languages: Record<Language, Language> = {
   EN: 'EN',
   SR: 'SR',
+}
+
+export const SaveUserFormInitialState: Partial<User> = {
+  firstName: '',
+  lastName: '',
+  username: '',
+  password: '',
+  confirm: '',
+  email: '',
+  phone: '',
+  type: '',
+}
+
+export const ChangePasswordFormInitialState: ChangePasswordFormProps = {
+  currentPassword: '',
+  newPassword: '',
+  confirmNewPassword: '',
 }

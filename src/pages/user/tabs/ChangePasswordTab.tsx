@@ -1,27 +1,25 @@
 import { Button, Grid, TextField } from '@mui/material'
 import { ChangeEvent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ChangePasswordFormProps } from '../../types/auth'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { NotificationType } from '../../types/notification'
-import { setNotification } from '../../features/notifications.slice'
-import { useChangePasswordMutation } from '../../app/apis/user.api'
-import Spinner from '../../components/Spinner'
-import { ApiException } from '../../types/common'
-import { PasswordPattern } from '../../consts/common'
+import { ChangePasswordFormProps } from '../../../types/auth'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { NotificationType } from '../../../types/notification'
+import { setNotification } from '../../../features/notifications.slice'
+import { useChangePasswordMutation } from '../../../app/apis/user.api'
+import Spinner from '../../../components/Spinner'
+import { ApiException } from '../../../types/common'
+import { PasswordPattern } from '../../../consts/common'
 import { useNavigate } from 'react-router-dom'
+import { ChangePasswordFormInitialState } from '../../../consts/user'
 
-const ChangePassword = () => {
+const ChangePasswordTab = () => {
   const { t } = useTranslation()
   const currentUsername = String(useAppSelector((state) => state.auth.username))
   const [changePassword, { isLoading }] = useChangePasswordMutation()
   const navigate = useNavigate()
 
-  const [changePasswordFormProps, setChangePasswordFormProps] = useState<ChangePasswordFormProps>({
-    currentPassword: '',
-    newPassword: '',
-    confirmNewPassword: '',
-  })
+  const [changePasswordFormProps, setChangePasswordFormProps] =
+    useState<ChangePasswordFormProps>(ChangePasswordFormInitialState)
   const dispatch = useAppDispatch()
 
   if (isLoading) {
@@ -151,4 +149,4 @@ const ChangePassword = () => {
   )
 }
 
-export default ChangePassword
+export default ChangePasswordTab
