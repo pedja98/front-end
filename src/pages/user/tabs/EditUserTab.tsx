@@ -12,8 +12,8 @@ import { NotificationType } from '../../../types/notification'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { updateAuthAttribute } from '../../../features/auth.slice'
 import { User, UserType } from '../../../types/user'
-import { transformUserIntoEditPageGridData } from '../../../transformers/user'
-import { PageLabel } from '../../../types/common'
+import { getEditUserPagesLabels, transformUserIntoEditPageGridData } from '../../../transformers/user'
+import { GridLabel } from '../../../types/common'
 import { getCurrentUser } from '../../../helpers/common'
 import { Languages, SaveUserFormInitialState } from '../../../consts/user'
 
@@ -144,14 +144,7 @@ const EditUserTab = () => {
     return <Spinner />
   }
 
-  const labels: PageLabel[] = [
-    { label: t('user:firstName'), key: 'firstName' },
-    { label: t('user:lastName'), key: 'lastName' },
-    { label: t('user:email'), key: 'email' },
-    { label: t('user:phone'), key: 'phone' },
-    { label: t('user:type'), key: 'type', skip: isEditProfile },
-    { label: t('user:language'), key: 'language' },
-  ]
+  const labels: GridLabel[] = getEditUserPagesLabels(t, isEditProfile)
 
   const userTypeOptions = Object.keys(UserType).map((type) => t(`user:userTypes.${type.toLowerCase()}`))
   const languageOptions = Object.keys(Languages).map((language) => t(`user:userLanguages.${language.toLowerCase()}`))
@@ -166,57 +159,55 @@ const EditUserTab = () => {
   return (
     <Grid container sx={{ width: '100%' }} direction='column' spacing={2}>
       <Grid item sx={{ width: '100%' }}>
-        {labels
-          .filter((label) => !label.skip)
-          .map((label) => {
-            const gridFieldData = editPageUserGridData[label.key]
-            if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
-              return (
-                <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-                  <FormControl sx={{ width: '100%' }} variant='standard'>
-                    <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
-                      {label.label}
-                    </InputLabel>
-                    <Select
-                      labelId={label.key}
-                      id={label.key}
-                      name={label.key}
-                      value={String(userData[label.key as keyof User])}
-                      variant='standard'
-                      sx={{ width: '100%' }}
-                      onChange={(event: SelectChangeEvent<string>) => {
-                        handleChange(event)
-                      }}
-                    >
-                      {gridFieldData?.options.map((option, index) => (
-                        <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? ''}>
-                          {option}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-              )
-            } else if (gridFieldData.type === GridFieldTypes.STRING) {
-              return (
-                <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-                  <TextField
-                    sx={{ width: '100%' }}
+        {labels.map((label) => {
+          const gridFieldData = editPageUserGridData[label.key]
+          if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
+            return (
+              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
+                <FormControl sx={{ width: '100%' }} variant='standard'>
+                  <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
+                    {label.label}
+                  </InputLabel>
+                  <Select
+                    labelId={label.key}
                     id={label.key}
                     name={label.key}
-                    label={label.label}
+                    value={String(userData[label.key as keyof User])}
                     variant='standard'
-                    required={gridFieldData.required}
-                    value={userData[label.key as keyof User]}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    sx={{ width: '100%' }}
+                    onChange={(event: SelectChangeEvent<string>) => {
                       handleChange(event)
                     }}
-                  />
-                </Grid>
-              )
-            }
-            return <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}></Grid>
-          })}
+                  >
+                    {gridFieldData?.options.map((option, index) => (
+                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? ''}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            )
+          } else if (gridFieldData.type === GridFieldTypes.STRING) {
+            return (
+              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
+                <TextField
+                  sx={{ width: '100%' }}
+                  id={label.key}
+                  name={label.key}
+                  label={label.label}
+                  variant='standard'
+                  required={gridFieldData.required}
+                  value={userData[label.key as keyof User]}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    handleChange(event)
+                  }}
+                />
+              </Grid>
+            )
+          }
+          return <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}></Grid>
+        })}
         <Button sx={{ width: '100%', mt: 3 }} onClick={handleSaveChanges}>
           {t('general:saveButtonLabel')}
         </Button>

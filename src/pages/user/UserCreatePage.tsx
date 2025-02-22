@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material'
 import { EmailPattern, GridFieldTypes, PasswordPattern, PhonePattern } from '../../consts/common'
-import { PageLabel } from '../../types/common'
+import { GridLabel } from '../../types/common'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent, useState } from 'react'
 import { useAppDispatch } from '../../app/hooks'
@@ -20,7 +20,7 @@ import { NotificationType } from '../../types/notification'
 import { useNavigate } from 'react-router-dom'
 import { User, UserType } from '../../types/user'
 import { useCreateUserMutation } from '../../app/apis/user.api'
-import { transformUserIntoEditPageGridData } from '../../transformers/user'
+import { getCreateUserPagesLabels, transformUserIntoEditPageGridData } from '../../transformers/user'
 import Spinner from '../../components/Spinner'
 import { Languages, SaveUserFormInitialState } from '../../consts/user'
 
@@ -127,16 +127,7 @@ const UserCreatePage = () => {
     return <Spinner />
   }
 
-  const labels: PageLabel[] = [
-    { label: t('user:firstName'), key: 'firstName' },
-    { label: t('user:lastName'), key: 'lastName' },
-    { label: t('user:username'), key: 'username' },
-    { label: t('user:password'), key: 'password' },
-    { label: t('user:confirm'), key: 'confirm' },
-    { label: t('user:email'), key: 'email' },
-    { label: t('user:phone'), key: 'phone' },
-    { label: t('user:type'), key: 'type' },
-  ]
+  const labels: GridLabel[] = getCreateUserPagesLabels(t)
 
   const userTypeOptions = Object.keys(UserType).map((type) => t(`user:userTypes.${type.toLowerCase()}`))
   const languageOptions = Object.keys(Languages).map((language) => t(`user:userLanguages.${language.toLowerCase()}`))

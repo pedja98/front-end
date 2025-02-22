@@ -50,10 +50,9 @@ export interface TableProps {
   emptyValue?: string
 }
 
-export interface PageLabel {
+export interface GridLabel {
   label: string
   key: string
-  skip?: boolean
 }
 
 export interface CommonState {

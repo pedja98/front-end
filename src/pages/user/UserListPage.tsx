@@ -6,7 +6,7 @@ import { createQueryParamsForSearch } from '../../helpers/common'
 import { NotificationType } from '../../types/notification'
 import Spinner from '../../components/Spinner'
 import UniformTable from '../../components/UniformTable'
-import { transformUserIntoPageGridData } from '../../transformers/user'
+import { getUseDetailListPagesLabels, transformUserIntoPageGridData } from '../../transformers/user'
 import { Pagination, Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useGetUsersQuery } from '../../app/apis/user.api'
@@ -39,19 +39,7 @@ const UserListPage = () => {
   const paginatedUsers = users.slice((currentPage - 1) * TabelRowPerPage, currentPage * TabelRowPerPage)
   const listPageUserGridData = paginatedUsers.map((user) => transformUserIntoPageGridData(user))
 
-  const columns = [
-    { label: t('user:username'), key: 'username' },
-    { label: t('user:firstName'), key: 'firstName' },
-    { label: t('user:lastName'), key: 'lastName' },
-    { label: t('user:email'), key: 'email' },
-    { label: t('user:phone'), key: 'phone' },
-    { label: t('user:type'), key: 'type' },
-    { label: t('shop:shopLabel'), key: 'shopName' },
-    { label: t('general:createdBy'), key: 'createdByUsername' },
-    { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-    { label: t('general:dateCreated'), key: 'dateCreated' },
-    { label: t('general:dateModified'), key: 'dateModified' },
-  ]
+  const columns = getUseDetailListPagesLabels(t)
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page)

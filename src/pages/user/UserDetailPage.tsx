@@ -5,7 +5,7 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useDeleteUsersMutation, useGetUserQuery } from '../../app/apis/user.api'
-import { transformUserIntoPageGridData } from '../../transformers/user'
+import { getUseDetailListPagesLabels, transformUserIntoPageGridData } from '../../transformers/user'
 import { useTranslation } from 'react-i18next'
 import { EmptyValue, GridFieldTypes } from '../../consts/common'
 import { LinkStyled } from '../../styles/common'
@@ -85,19 +85,7 @@ const UserDetailPage = () => {
     dispatch(hideConfirm())
   }
 
-  const labels = [
-    { label: t('user:username') + ':', key: 'username' },
-    { label: t('user:firstName') + ':', key: 'firstName' },
-    { label: t('user:lastName') + ':', key: 'lastName' },
-    { label: t('user:email') + ':', key: 'email' },
-    { label: t('user:phone') + ':', key: 'phone' },
-    { label: t('user:type') + ':', key: 'type' },
-    { label: t('shop:shopLabel') + ':', key: 'shopName' },
-    { label: t('general:createdBy') + ':', key: 'createdByUsername' },
-    { label: t('general:modifiedBy') + ':', key: 'modifiedByUsername' },
-    { label: t('general:dateCreated') + ':', key: 'dateCreated' },
-    { label: t('general:dateModified') + ':', key: 'dateModified' },
-  ]
+  const labels = getUseDetailListPagesLabels(t)
 
   const handleEditRedirect = () => {
     navigate(`/index/user-management/user/${username}/edit`)

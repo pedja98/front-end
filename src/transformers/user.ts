@@ -1,6 +1,7 @@
+import { TFunction } from 'i18next'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
-import { PageElement } from '../types/common'
+import { PageElement, GridLabel } from '../types/common'
 import { User } from '../types/user'
 
 export const transformUserIntoPageGridData = (user: User, skipUsernameAsLink?: boolean): PageElement => ({
@@ -55,3 +56,43 @@ export const transformUserIntoEditPageGridData = (
     required: true,
   },
 })
+
+export const getUseDetailListPagesLabels = (t: TFunction): GridLabel[] => [
+  { label: t('user:username'), key: 'username' },
+  { label: t('user:firstName'), key: 'firstName' },
+  { label: t('user:lastName'), key: 'lastName' },
+  { label: t('user:email'), key: 'email' },
+  { label: t('user:phone'), key: 'phone' },
+  { label: t('user:type'), key: 'type' },
+  { label: t('shop:shopLabel'), key: 'shopName' },
+  { label: t('general:createdBy'), key: 'createdByUsername' },
+  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { label: t('general:dateCreated'), key: 'dateCreated' },
+  { label: t('general:dateModified'), key: 'dateModified' },
+]
+
+export const getCreateUserPagesLabels = (t: TFunction): GridLabel[] => [
+  { label: t('user:firstName'), key: 'firstName' },
+  { label: t('user:lastName'), key: 'lastName' },
+  { label: t('user:username'), key: 'username' },
+  { label: t('user:password'), key: 'password' },
+  { label: t('user:confirm'), key: 'confirm' },
+  { label: t('user:email'), key: 'email' },
+  { label: t('user:phone'), key: 'phone' },
+  { label: t('user:type'), key: 'type' },
+]
+
+export const getEditUserPagesLabels = (t: TFunction, removeType: boolean): GridLabel[] => {
+  const labels = [
+    { label: t('user:firstName'), key: 'firstName' },
+    { label: t('user:lastName'), key: 'lastName' },
+    { label: t('user:email'), key: 'email' },
+    { label: t('user:phone'), key: 'phone' },
+    { label: t('user:type'), key: 'type' },
+    { label: t('user:language'), key: 'language' },
+  ]
+  if (removeType) {
+    labels.splice(4, 1)
+  }
+  return labels
+}
