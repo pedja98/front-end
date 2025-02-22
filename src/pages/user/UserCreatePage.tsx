@@ -110,7 +110,7 @@ const UserCreatePage = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate(`/index/user-management/user/${userData.username}`)
+      navigate(`/index/users/${userData.username}`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `user:${errorResponse.data}` || 'general:unknowError'

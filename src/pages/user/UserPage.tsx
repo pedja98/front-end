@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 
-const UserManagementPage = () => {
+const UserPage = () => {
   return (
     <Grid>
       <Outlet />
@@ -9,4 +9,4 @@ const UserManagementPage = () => {
   )
 }
 
-export default UserManagementPage
+export default UserPage

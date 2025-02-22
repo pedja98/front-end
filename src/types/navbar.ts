@@ -10,6 +10,6 @@ export enum ModulesOptions {
   EditProfile = 'editProfile',
   Catalogue = 'catalogue',
   Regions = 'regions',
-  UserManagement = 'userManagement',
+  Users = 'users',
   Logout = 'logout',
 }

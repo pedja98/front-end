@@ -39,7 +39,7 @@ const UserDetailPage = () => {
         type: NotificationType.Error,
       }),
     )
-    navigate('/index/user-management')
+    navigate('/index/users')
     return null
   }
 
@@ -68,7 +68,7 @@ const UserDetailPage = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate('/index/user-management')
+      navigate('/index/users')
     } catch (error) {
       dispatch(
         setNotification({
@@ -88,7 +88,7 @@ const UserDetailPage = () => {
   const labels = getUseDetailListPagesLabels(t)
 
   const handleEditRedirect = () => {
-    navigate(`/index/user-management/user/${username}/edit`)
+    navigate(`/index/users/${username}/edit`)
   }
 
   return (

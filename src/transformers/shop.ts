@@ -31,7 +31,7 @@ export const transformShopIntoPageGridData = (shop: Shop, skipNameAsLink?: boole
   address: { value: shop.address, type: GridFieldTypes.STRING },
   createdByUsername: {
     value: shop.createdByUsername,
-    link: `/index/user-management/user/${shop.createdByUsername}`,
+    link: `/index/users/${shop.createdByUsername}`,
     type: GridFieldTypes.LINK,
   },
   region: {
@@ -41,12 +41,12 @@ export const transformShopIntoPageGridData = (shop: Shop, skipNameAsLink?: boole
   },
   shopLeader: {
     value: shop.shopLeaderUsername,
-    link: `/index/user-management/user/${shop.shopLeaderUsername}`,
+    link: `/index/users/${shop.shopLeaderUsername}`,
     type: GridFieldTypes.LINK,
   },
   modifiedByUsername: {
     value: shop.modifiedByUsername,
-    link: `/index/user-management/user/${shop.modifiedByUsername}`,
+    link: `/index/users/${shop.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
   dateCreated: { value: dateFormater(shop.dateCreated as string), type: GridFieldTypes.STRING },

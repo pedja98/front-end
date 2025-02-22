@@ -11,12 +11,12 @@ export const transformRegionIntoPageGridData = (region: Region, skipNameAsLink?:
   },
   createdByUsername: {
     value: region.createdByUsername,
-    link: `/index/user-management/user/${region.createdByUsername}`,
+    link: `/index/users/${region.createdByUsername}`,
     type: GridFieldTypes.LINK,
   },
   modifiedByUsername: {
     value: region.modifiedByUsername,
-    link: `/index/user-management/user/${region.modifiedByUsername}`,
+    link: `/index/users/${region.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
   dateCreated: { value: dateFormater(region.dateCreated), type: GridFieldTypes.STRING },

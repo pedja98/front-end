@@ -32,7 +32,7 @@ const UserListPage = () => {
         type: NotificationType.Error,
       }),
     )
-    navigate('/index/user-management')
+    navigate('/index/users')
     return null
   }
 
@@ -48,7 +48,7 @@ const UserListPage = () => {
   return (
     <Grid sx={{ mt: 2 }}>
       <Grid item>
-        <Typography variant='h4'>{t(`pageNamesAndActions.userManagement`).toLocaleUpperCase()}</Typography>
+        <Typography variant='h4'>{t(`pageNamesAndActions.users`).toLocaleUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
         <UniformTable columns={columns} rows={listPageUserGridData} />

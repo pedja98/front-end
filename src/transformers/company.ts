@@ -45,22 +45,22 @@ export const transformCompanyIntoEditPageGridData = (company: Company, skipNameA
   comment: { type: GridFieldTypes.AREA, value: company.comment },
   assignedTo: {
     value: company.assignedToUsername,
-    link: `/index/user-management/user/${company.assignedToId}`,
+    link: `/index/users/${company.assignedToUsername}`,
     type: GridFieldTypes.LINK,
   },
   temporaryAssignedTo: {
     value: company.temporaryAssignedToUsername,
-    link: `/index/user-management/user/${company.temporaryAssignedToId}`,
+    link: `/index/users/${company.temporaryAssignedToUsername}`,
     type: GridFieldTypes.LINK,
   },
   createdByUsername: {
     value: company.createdByUsername,
-    link: `/index/user-management/user/${company.createdByUsername}`,
+    link: `/index/users/${company.createdByUsername}`,
     type: GridFieldTypes.LINK,
   },
   modifiedByUsername: {
     value: company.modifiedByUsername,
-    link: `/index/user-management/user/${company.modifiedByUsername}`,
+    link: `/index/users/${company.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
   dateCreated: {

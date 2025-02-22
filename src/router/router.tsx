@@ -13,7 +13,7 @@ import ShopPage from '../pages/shop/ShopPage'
 import CataloguePage from '../pages/CataloguePage'
 import ContactPage from '../pages/ContactPage'
 import NotFoundPage from '../pages/NotFoundPage'
-import UserManagementPage from '../pages/user/UserManagementPage'
+import UserPage from '../pages/user/UserPage'
 import UserCreatePage from '../pages/user/UserCreatePage'
 import EntityIndexPage from '../pages/EntityIndexPage'
 import UserListPage from '../pages/user/UserListPage'
@@ -73,14 +73,14 @@ export default createBrowserRouter([
       },
       { path: 'offers', element: <OfferPage />, children: [{ index: true, element: <EntityIndexPage /> }] },
       {
-        path: 'user-management',
-        element: <UserManagementPage />,
+        path: 'users',
+        element: <UserPage />,
         children: [
           { index: true, element: <EntityIndexPage /> },
           { path: 'create', element: <UserCreatePage /> },
           { path: 'list', element: <UserListPage /> },
-          { path: 'user/:username', element: <UserDetailPage /> },
-          { path: 'user/:username/edit', element: <UserEditPage /> },
+          { path: ':username', element: <UserDetailPage /> },
+          { path: ':username/edit', element: <UserEditPage /> },
         ],
       },
       {

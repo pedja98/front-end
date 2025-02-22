@@ -7,7 +7,7 @@ import ShopSearchDialog from '../components/searchDialogs/ShopSearchDialog'
 
 export const getCurrentSearchDialog = (currentModule: ModulesOptions): ReactNode | undefined => {
   switch (currentModule) {
-    case ModulesOptions.UserManagement:
+    case ModulesOptions.Users:
       return <UserSearchDialog />
     case ModulesOptions.Regions:
       return <RegionSearchDialog />

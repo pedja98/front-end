@@ -7,7 +7,7 @@ import { User } from '../types/user'
 export const transformUserIntoPageGridData = (user: User, skipUsernameAsLink?: boolean): PageElement => ({
   username: {
     value: user.username,
-    link: `/index/user-management/user/${user.username}`,
+    link: `/index/users/${user.username}`,
     type: skipUsernameAsLink ? GridFieldTypes.STRING : GridFieldTypes.LINK,
   },
   firstName: { value: user.firstName, type: GridFieldTypes.STRING },
@@ -18,12 +18,12 @@ export const transformUserIntoPageGridData = (user: User, skipUsernameAsLink?: b
   shopName: { value: user.shopName, link: `/index/shop/${user.shopId}`, type: GridFieldTypes.LINK },
   createdByUsername: {
     value: user.createdByUsername,
-    link: `/index/user-management/user/${user.createdByUsername}`,
+    link: `/index/users/${user.createdByUsername}`,
     type: GridFieldTypes.LINK,
   },
   modifiedByUsername: {
     value: user.modifiedByUsername,
-    link: `/index/user-management/user/${user.modifiedByUsername}`,
+    link: `/index/users/${user.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
   dateCreated: { value: dateFormater(user.dateCreated), type: GridFieldTypes.STRING },
