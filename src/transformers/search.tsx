@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { ModulesOptions } from '../types/navbar'
+import { ModulesOptions } from '../types/common'
 import UserSearchDialog from '../components/searchDialogs/UserSearchDialog'
 import RegionSearchDialog from '../components/searchDialogs/RegionSearchDialog'
 import CompanySearchDialog from '../components/searchDialogs/CompanySearchDialog'

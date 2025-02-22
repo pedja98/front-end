@@ -1,4 +1,4 @@
-import { ModulesOptions } from '../types/navbar'
+import { ModulesOptions } from '../types/common'
 
 export const NavbarLinks = [
   ModulesOptions.Home,
