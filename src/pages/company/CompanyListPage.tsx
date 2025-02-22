@@ -10,7 +10,7 @@ import { Pagination, Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { TabelRowPerPage } from '../../consts/common'
 import { useGetCompaniesQuery } from '../../app/apis/company.api'
-import { transformCompanyIntoEditPageGridData } from '../../transformers/company'
+import { getCompanyListColumns, transformCompanyIntoEditPageGridData } from '../../transformers/company'
 
 const CompanyListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -39,18 +39,7 @@ const CompanyListPage = () => {
   const paginatedCompanies = companies.slice((currentPage - 1) * TabelRowPerPage, currentPage * TabelRowPerPage)
   const listPageCompaniesGridData = paginatedCompanies.map((company) => transformCompanyIntoEditPageGridData(company))
 
-  const columns = [
-    { label: t('company:name'), key: 'name' },
-    { label: t('company:hqAddress'), key: 'hqAddress' },
-    { label: t('company:contactPhone'), key: 'contactPhone' },
-    { label: t('company:tin'), key: 'tin' },
-    { label: t('company:assignedTo'), key: 'assignedTo' },
-    { label: t('company:temporaryAssignedTo'), key: 'temporaryAssignedTo' },
-    { label: t('general:createdBy'), key: 'createdByUsername' },
-    { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-    { label: t('general:dateCreated'), key: 'dateCreated' },
-    { label: t('general:dateModified'), key: 'dateModified' },
-  ]
+  const columns = getCompanyListColumns(t)
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page)

@@ -20,7 +20,7 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { SaveShop } from '../../types/shop'
-import { getSaveShopGridData } from '../../transformers/shop'
+import { getSaveShopGridData, getShopSaveLabels } from '../../transformers/shop'
 import { GridFieldTypes } from '../../consts/common'
 import { ApiException } from '../../types/common'
 import { useCreateShopMutation, useGetShopQuery, useUpdateShopMutation } from '../../app/apis/shop.api'
@@ -102,12 +102,7 @@ const ShopSavePage = () => {
     regionsWithEmptyValue?.map((region) => region.name),
   )
 
-  const labels = [
-    { label: t('shop:name'), key: 'name' },
-    { label: t('shop:address'), key: 'address' },
-    { label: t('shop:shopLeader'), key: 'shopLeader' },
-    { label: t('shop:region'), key: 'region' },
-  ]
+  const labels = getShopSaveLabels(t)
 
   const handleSave = async () => {
     if (

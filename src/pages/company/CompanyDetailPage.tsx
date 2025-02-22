@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { EmptyValue, GridFieldTypes } from '../../consts/common'
 import { LinkStyled } from '../../styles/common'
 import { useGetCompanyQuery } from '../../app/apis/company.api'
-import { transformCompanyIntoEditPageGridData } from '../../transformers/company'
+import { getCompanyDetailLabels, transformCompanyIntoEditPageGridData } from '../../transformers/company'
 import { GridFieldType } from '../../types/common'
 
 const CompanyDetailPage = () => {
@@ -36,23 +36,7 @@ const CompanyDetailPage = () => {
 
   const detailPageCompanyGridData = transformCompanyIntoEditPageGridData(company, true)
 
-  const labels = [
-    { label: t('company:name'), key: 'name' },
-    { label: t('company:hqAddress'), key: 'hqAddress' },
-    { label: t('company:industry'), key: 'industry' },
-    { label: t('company:contactPhone'), key: 'contactPhone' },
-    { label: t('company:numberOfEmployees'), key: 'numberOfEmployees' },
-    { label: t('company:tin'), key: 'tin' },
-    { label: t('company:bankName'), key: 'bankName' },
-    { label: t('company:bankAccountNumber'), key: 'bankAccountNumber' },
-    { label: t('company:assignedTo') + ':  ', key: 'assignedTo' },
-    { label: t('company:temporaryAssignedTo'), key: 'temporaryAssignedTo' },
-    { label: t('general:createdBy'), key: 'createdByUsername' },
-    { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-    { label: t('general:dateCreated'), key: 'dateCreated' },
-    { label: t('general:dateModified'), key: 'dateModified' },
-    { label: t('company:comment'), key: 'comment' },
-  ]
+  const labels = getCompanyDetailLabels(t)
 
   const handleEditRedirect = () => {
     navigate(`/index/companies/${companyId}/edit`)

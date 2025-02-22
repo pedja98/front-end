@@ -1,3 +1,5 @@
+import { GridLabel } from './../types/common'
+import { TFunction } from 'i18next'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 import { PageElement } from '../types/common'
@@ -50,3 +52,21 @@ export const transformShopIntoPageGridData = (shop: Shop, skipNameAsLink?: boole
   dateCreated: { value: dateFormater(shop.dateCreated as string), type: GridFieldTypes.STRING },
   dateModified: { value: dateFormater(shop.dateModified as string), type: GridFieldTypes.STRING },
 })
+
+export const getShopDetailListLabels = (t: TFunction): GridLabel[] => [
+  { label: t('shop:name'), key: 'name' },
+  { label: t('shop:address'), key: 'address' },
+  { label: t('shop:region'), key: 'region' },
+  { label: t('shop:shopLeader'), key: 'shopLeader' },
+  { label: t('general:createdBy'), key: 'createdByUsername' },
+  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { label: t('general:dateCreated'), key: 'dateCreated' },
+  { label: t('general:dateModified'), key: 'dateModified' },
+]
+
+export const getShopSaveLabels = (t: TFunction): GridLabel[] => [
+  { label: t('shop:name'), key: 'name' },
+  { label: t('shop:address'), key: 'address' },
+  { label: t('shop:shopLeader'), key: 'shopLeader' },
+  { label: t('shop:region'), key: 'region' },
+]

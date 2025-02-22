@@ -8,7 +8,7 @@ import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { TabelRowPerPage } from '../../consts/common'
-import { transformShopIntoPageGridData } from '../../transformers/shop'
+import { getShopDetailListLabels, transformShopIntoPageGridData } from '../../transformers/shop'
 import { Grid, Pagination, Typography } from '@mui/material'
 import UniformTable from '../../components/UniformTable'
 
@@ -43,16 +43,7 @@ const ShopListPage = () => {
     setCurrentPage(page)
   }
 
-  const columns = [
-    { label: t('shop:name'), key: 'name' },
-    { label: t('shop:address'), key: 'address' },
-    { label: t('shop:region'), key: 'region' },
-    { label: t('shop:shopLeader'), key: 'shopLeader' },
-    { label: t('general:createdBy'), key: 'createdByUsername' },
-    { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-    { label: t('general:dateCreated'), key: 'dateCreated' },
-    { label: t('general:dateModified'), key: 'dateModified' },
-  ]
+  const columns = getShopDetailListLabels(t)
 
   return (
     <Grid sx={{ mt: 2 }}>

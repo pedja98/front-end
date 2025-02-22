@@ -5,7 +5,7 @@ import { useGetShopQuery } from '../../app/apis/shop.api'
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { transformShopIntoPageGridData } from '../../transformers/shop'
+import { getShopDetailListLabels, transformShopIntoPageGridData } from '../../transformers/shop'
 import { Button, Grid, TextField, Typography } from '@mui/material'
 import { EmptyValue, GridFieldTypes } from '../../consts/common'
 import { GridFieldType } from '../../types/common'
@@ -36,16 +36,7 @@ const ShopDetailPage = () => {
 
   const detailPageShopGridData = transformShopIntoPageGridData(shop, true)
 
-  const labels = [
-    { label: t('shop:name'), key: 'name' },
-    { label: t('shop:address'), key: 'address' },
-    { label: t('shop:region'), key: 'region' },
-    { label: t('shop:shopLeader'), key: 'shopLeader' },
-    { label: t('general:createdBy'), key: 'createdByUsername' },
-    { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-    { label: t('general:dateCreated'), key: 'dateCreated' },
-    { label: t('general:dateModified'), key: 'dateModified' },
-  ]
+  const labels = getShopDetailListLabels(t)
 
   const handleEditRedirect = () => {
     navigate(`/index/shops/${shopId}/edit`)

@@ -1,6 +1,7 @@
+import { TFunction } from 'i18next'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
-import { PageElement } from '../types/common'
+import { GridLabel, PageElement } from '../types/common'
 import { Company } from '../types/company'
 
 export const getSaveCompanyGridData = (
@@ -71,3 +72,48 @@ export const transformCompanyIntoEditPageGridData = (company: Company, skipNameA
     type: GridFieldTypes.STRING,
   },
 })
+
+export const getCompanyDetailLabels = (t: TFunction): GridLabel[] => [
+  { label: t('company:name'), key: 'name' },
+  { label: t('company:hqAddress'), key: 'hqAddress' },
+  { label: t('company:industry'), key: 'industry' },
+  { label: t('company:contactPhone'), key: 'contactPhone' },
+  { label: t('company:numberOfEmployees'), key: 'numberOfEmployees' },
+  { label: t('company:tin'), key: 'tin' },
+  { label: t('company:bankName'), key: 'bankName' },
+  { label: t('company:bankAccountNumber'), key: 'bankAccountNumber' },
+  { label: t('company:assignedTo') + ':  ', key: 'assignedTo' },
+  { label: t('company:temporaryAssignedTo'), key: 'temporaryAssignedTo' },
+  { label: t('general:createdBy'), key: 'createdByUsername' },
+  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { label: t('general:dateCreated'), key: 'dateCreated' },
+  { label: t('general:dateModified'), key: 'dateModified' },
+  { label: t('company:comment'), key: 'comment' },
+]
+
+export const getCompanyListColumns = (t: TFunction): GridLabel[] => [
+  { label: t('company:name'), key: 'name' },
+  { label: t('company:hqAddress'), key: 'hqAddress' },
+  { label: t('company:contactPhone'), key: 'contactPhone' },
+  { label: t('company:tin'), key: 'tin' },
+  { label: t('company:assignedTo'), key: 'assignedTo' },
+  { label: t('company:temporaryAssignedTo'), key: 'temporaryAssignedTo' },
+  { label: t('general:createdBy'), key: 'createdByUsername' },
+  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { label: t('general:dateCreated'), key: 'dateCreated' },
+  { label: t('general:dateModified'), key: 'dateModified' },
+]
+
+export const getCompanySaveLabels = (t: TFunction): GridLabel[] => [
+  { label: t('company:name'), key: 'name' },
+  { label: t('company:hqAddress'), key: 'hqAddress' },
+  { label: t('company:industry'), key: 'industry' },
+  { label: t('company:contactPhone'), key: 'contactPhone' },
+  { label: t('company:tin'), key: 'tin' },
+  { label: t('company:numberOfEmployees'), key: 'numberOfEmployees' },
+  { label: t('company:bankName'), key: 'bankName' },
+  { label: t('company:bankAccountNumber'), key: 'bankAccountNumber' },
+  { label: t('company:assignedTo'), key: 'assignedTo' },
+  { label: t('company:temporaryAssignedTo'), key: 'temporaryAssignedTo' },
+  { label: t('company:comment'), key: 'comment' },
+]

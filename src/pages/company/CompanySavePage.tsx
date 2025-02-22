@@ -20,7 +20,7 @@ import Spinner from '../../components/Spinner'
 import { SaveCompanyDto } from '../../types/company'
 import { useCreateCompanyMutation, useGetCompanyQuery, useUpdateCompanyMutation } from '../../app/apis/company.api'
 import { GridFieldTypes } from '../../consts/common'
-import { getSaveCompanyGridData } from '../../transformers/company'
+import { getCompanySaveLabels, getSaveCompanyGridData } from '../../transformers/company'
 import { GridFieldType } from '../../types/common'
 import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
 import { UserType } from '../../types/user'
@@ -158,19 +158,7 @@ const CompanySavePage = () => {
     return null
   }
 
-  const labels = [
-    { label: t('company:name'), key: 'name' },
-    { label: t('company:hqAddress'), key: 'hqAddress' },
-    { label: t('company:industry'), key: 'industry' },
-    { label: t('company:contactPhone'), key: 'contactPhone' },
-    { label: t('company:tin'), key: 'tin' },
-    { label: t('company:numberOfEmployees'), key: 'numberOfEmployees' },
-    { label: t('company:bankName'), key: 'bankName' },
-    { label: t('company:bankAccountNumber'), key: 'bankAccountNumber' },
-    { label: t('company:assignedTo'), key: 'assignedTo' },
-    { label: t('company:temporaryAssignedTo'), key: 'temporaryAssignedTo' },
-    { label: t('company:comment'), key: 'comment' },
-  ]
+  const labels = getCompanySaveLabels(t)
 
   const assignedToUserDataWithEmptyValue = [{ id: undefined, username: t('none') }, ...assignedToUserData]
 
