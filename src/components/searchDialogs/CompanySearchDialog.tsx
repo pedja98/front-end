@@ -1,11 +1,12 @@
 import Grid from '@mui/material/Grid'
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
+import { SelectChangeEvent, TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent } from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { updateSearchAttribute } from '../../features/search.slice'
-import { CompanySortedByFields, SortedOrderValues } from '../../consts/search'
+import { CompanySortedByFields } from '../../consts/search'
 import { SearchCompanyDataFormProps } from '../../types/company'
+import SearchDialogSort from '../SearchDialogSort'
 
 const CompanySearchDialog = () => {
   const { t } = useTranslation()
@@ -74,56 +75,13 @@ const CompanySearchDialog = () => {
             }}
           />
         </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <FormControl sx={{ width: '100%' }} variant='standard'>
-            <InputLabel id='sort-by-select-label' sx={{ pl: 2 }}>
-              {t('general:sortByLabel')}
-            </InputLabel>
-            <Select
-              labelId='sort-by-select-label'
-              id='sort-by'
-              variant='standard'
-              name='sortBy'
-              value={companySearchData.sortBy || ''}
-              onChange={(event: SelectChangeEvent<string>) => {
-                handleChange(event)
-              }}
-              displayEmpty
-            >
-              <MenuItem value={undefined}>{t('general:none')}</MenuItem>
-              {Object.keys(CompanySortedByFields).map((key) => (
-                <MenuItem key={key} value={CompanySortedByFields[key as keyof typeof CompanySortedByFields]}>
-                  {t(`company:sortByLabels.${CompanySortedByFields[key as keyof typeof CompanySortedByFields]}`)}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <FormControl sx={{ width: '100%' }} variant='standard' disabled={!companySearchData.sortBy}>
-            <InputLabel id='sort-order-select-label' sx={{ pl: 2 }}>
-              {t('general:sortOrderLabel')}
-            </InputLabel>
-            <Select
-              labelId='sort-order-select-label'
-              id='sort-order'
-              variant='standard'
-              name='sortOrder'
-              value={companySearchData.sortOrder || ''}
-              onChange={(event: SelectChangeEvent<string>) => {
-                handleChange(event)
-              }}
-              displayEmpty
-            >
-              <MenuItem value={undefined}>{t('general:none')}</MenuItem>
-              {Object.keys(SortedOrderValues).map((key) => (
-                <MenuItem key={key} value={SortedOrderValues[key as keyof typeof SortedOrderValues]}>
-                  {t(`general:sortOrderValueLabels.${SortedOrderValues[key as keyof typeof SortedOrderValues]}`)}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
+        <SearchDialogSort
+          searchDialog='company'
+          sortByFields={CompanySortedByFields}
+          sortByValue={companySearchData.sortBy}
+          sortOrder={companySearchData.sortOrder}
+          handleChange={handleChange}
+        />
       </Grid>
     </Grid>
   )

@@ -21,7 +21,8 @@ import { NotificationType } from '../../types/notification'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ShopSearchFormProps } from '../../types/shop'
-import { ShopSortedByFields, SortedOrderValues } from '../../consts/search'
+import { ShopSortedByFields } from '../../consts/search'
+import SearchDialogSort from '../SearchDialogSort'
 
 const ShopSearchDialog = () => {
   const dispatch = useAppDispatch()
@@ -138,56 +139,13 @@ const ShopSearchDialog = () => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <FormControl sx={{ width: '100%' }} variant='standard'>
-            <InputLabel id='sort-by-select-label' sx={{ pl: 2 }}>
-              {t('general:sortByLabel')}
-            </InputLabel>
-            <Select
-              labelId='sort-by-select-label'
-              id='sort-by'
-              variant='standard'
-              name='sortBy'
-              value={shopSearchData.sortBy || ''}
-              onChange={(event: SelectChangeEvent<string>) => {
-                handleChange(event)
-              }}
-              displayEmpty
-            >
-              <MenuItem value={undefined}>{t('general:none')}</MenuItem>
-              {Object.keys(ShopSortedByFields).map((key) => (
-                <MenuItem key={key} value={ShopSortedByFields[key as keyof typeof ShopSortedByFields]}>
-                  {t(`shop:sortByLabels.${ShopSortedByFields[key as keyof typeof ShopSortedByFields]}`)}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <FormControl sx={{ width: '100%' }} variant='standard' disabled={!shopSearchData.sortBy}>
-            <InputLabel id='sort-order-select-label' sx={{ pl: 2 }}>
-              {t('general:sortOrderLabel')}
-            </InputLabel>
-            <Select
-              labelId='sort-order-select-label'
-              id='sort-order'
-              variant='standard'
-              name='sortOrder'
-              value={shopSearchData.sortOrder || ''}
-              onChange={(event: SelectChangeEvent<string>) => {
-                handleChange(event)
-              }}
-              displayEmpty
-            >
-              <MenuItem value={undefined}>{t('general:none')}</MenuItem>
-              {Object.keys(SortedOrderValues).map((key) => (
-                <MenuItem key={key} value={SortedOrderValues[key as keyof typeof SortedOrderValues]}>
-                  {t(`general:sortOrderValueLabels.${SortedOrderValues[key as keyof typeof SortedOrderValues]}`)}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
+        <SearchDialogSort
+          searchDialog='shop'
+          sortByFields={ShopSortedByFields}
+          sortByValue={shopSearchData.sortBy}
+          sortOrder={shopSearchData.sortOrder}
+          handleChange={handleChange}
+        />
       </Grid>
     </Grid>
   )

@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from '@mui/material'
 import { ReactNode } from 'react'
 import { UserType } from './user'
 import { GridFieldTypes } from '../consts/common'
@@ -62,4 +63,12 @@ export interface ApiException {
   status: number
   message: string
   error: string
+}
+
+export interface SearchDialogSortProps {
+  searchDialog: string
+  sortByFields: Record<string, string>
+  sortByValue?: string
+  sortOrder?: string
+  handleChange: (event: SelectChangeEvent<string>) => void
 }

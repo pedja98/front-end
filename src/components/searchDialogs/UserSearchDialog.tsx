@@ -15,7 +15,8 @@ import { UserTypes } from '../../consts/user'
 import { UserSearchFormProps, UserType } from '../../types/user'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { updateSearchAttribute } from '../../features/search.slice'
-import { SortedOrderValues, UserSortedByFields } from '../../consts/search'
+import { UserSortedByFields } from '../../consts/search'
+import SearchDialogSort from '../SearchDialogSort'
 
 const UserSearchDialog = () => {
   const { t } = useTranslation()
@@ -124,56 +125,13 @@ const UserSearchDialog = () => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <FormControl sx={{ width: '100%' }} variant='standard'>
-            <InputLabel id='sort-by-select-label' sx={{ pl: 2 }}>
-              {t('general:sortByLabel')}
-            </InputLabel>
-            <Select
-              labelId='sort-by-select-label'
-              id='sort-by'
-              variant='standard'
-              name='sortBy'
-              value={userSearchData.sortBy || ''}
-              onChange={(event: SelectChangeEvent<string>) => {
-                handleChange(event)
-              }}
-              displayEmpty
-            >
-              <MenuItem value={undefined}>{t('general:none')}</MenuItem>
-              {Object.keys(UserSortedByFields).map((key) => (
-                <MenuItem key={key} value={UserSortedByFields[key as keyof typeof UserSortedByFields]}>
-                  {t(`user:sortByLabels.${UserSortedByFields[key as keyof typeof UserSortedByFields]}`)}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item sx={{ width: '100%' }}>
-          <FormControl sx={{ width: '100%' }} variant='standard' disabled={!userSearchData.sortBy}>
-            <InputLabel id='sort-order-select-label' sx={{ pl: 2 }}>
-              {t('general:sortOrderLabel')}
-            </InputLabel>
-            <Select
-              labelId='sort-order-select-label'
-              id='sort-order'
-              variant='standard'
-              name='sortOrder'
-              value={userSearchData.sortOrder || ''}
-              onChange={(event: SelectChangeEvent<string>) => {
-                handleChange(event)
-              }}
-              displayEmpty
-            >
-              <MenuItem value={undefined}>{t('general:none')}</MenuItem>
-              {Object.keys(SortedOrderValues).map((key) => (
-                <MenuItem key={key} value={SortedOrderValues[key as keyof typeof SortedOrderValues]}>
-                  {t(`general:sortOrderValueLabels.${SortedOrderValues[key as keyof typeof SortedOrderValues]}`)}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
+        <SearchDialogSort
+          searchDialog='user'
+          sortByFields={UserSortedByFields}
+          sortByValue={userSearchData.sortBy}
+          sortOrder={userSearchData.sortOrder}
+          handleChange={handleChange}
+        />
       </Grid>
     </Grid>
   )
