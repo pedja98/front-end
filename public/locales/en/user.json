@@ -29,5 +29,13 @@
   "userLanguages": {
     "en": "English",
     "sr": "Serbian"
-  }
+  },
+  "currentPassword": "Current password",
+  "newPassword": "New password",
+  "confirmNewPassword": "Confirm new password",
+  "passwordNotChanged": "The new password must be different from the old one. Please try again.",
+  "invalidPasswordFormat": "Password is not in valid format.",
+  "passwordMismatch": "The new password and confirmation do not match. Please try again.",
+  "wrongPassword": "You entered the wrong current password. Please try again",
+  "passwordChanged": "Password is changed successfully"
 }

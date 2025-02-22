@@ -1,5 +1,5 @@
 import { Button, Grid, TextField } from '@mui/material'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ChangePasswordFormProps } from '../../../types/auth'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
@@ -8,9 +8,10 @@ import { setNotification } from '../../../features/notifications.slice'
 import { useChangePasswordMutation } from '../../../app/apis/user.api'
 import Spinner from '../../../components/Spinner'
 import { ApiException } from '../../../types/common'
-import { PasswordPattern } from '../../../consts/common'
+import { GridFieldTypes, PasswordPattern } from '../../../consts/common'
 import { useNavigate } from 'react-router-dom'
 import { ChangePasswordFormInitialState } from '../../../consts/user'
+import { getUserChangePasswordGridData, getUserChangePasswordLabels } from '../../../transformers/user'
 
 const ChangePasswordTab = () => {
   const { t } = useTranslation()
@@ -22,12 +23,16 @@ const ChangePasswordTab = () => {
     useState<ChangePasswordFormProps>(ChangePasswordFormInitialState)
   const dispatch = useAppDispatch()
 
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setChangePasswordFormProps((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }, [])
+
   if (isLoading) {
     return <Spinner />
-  }
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setChangePasswordFormProps({ ...changePasswordFormProps, [event.target.name]: event.target.value })
   }
 
   const handleChangePassword = async () => {
@@ -44,7 +49,7 @@ const ChangePasswordTab = () => {
     if (changePasswordFormProps.newPassword === changePasswordFormProps.currentPassword) {
       dispatch(
         setNotification({
-          text: t('changePassword:passwordNotChanged'),
+          text: t('user:passwordNotChanged'),
           type: NotificationType.Warning,
         }),
       )
@@ -54,7 +59,7 @@ const ChangePasswordTab = () => {
     if (!PasswordPattern.test(changePasswordFormProps.newPassword)) {
       dispatch(
         setNotification({
-          text: t('changePassword:invalidPasswordFormat'),
+          text: t('user:invalidPasswordFormat'),
           type: NotificationType.Warning,
         }),
       )
@@ -64,7 +69,7 @@ const ChangePasswordTab = () => {
     if (changePasswordFormProps.newPassword !== changePasswordFormProps.confirmNewPassword) {
       dispatch(
         setNotification({
-          text: t('changePassword:passwordMismatch'),
+          text: t('user:passwordMismatch'),
           type: NotificationType.Warning,
         }),
       )
@@ -72,7 +77,7 @@ const ChangePasswordTab = () => {
     }
 
     try {
-      const messageCode = `changePassword:${
+      const messageCode = `user:${
         (
           await changePassword({
             username: currentUsername,
@@ -92,7 +97,7 @@ const ChangePasswordTab = () => {
       navigate('/index')
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `changePassword:${errorResponse.data}` || 'general:unknowError'
+      const errorCode = `user:${errorResponse.data}` || 'general:unknowError'
       dispatch(
         setNotification({
           text: t(errorCode),
@@ -102,44 +107,29 @@ const ChangePasswordTab = () => {
     }
   }
 
+  const changePasswordGridData = getUserChangePasswordGridData()
+  const labels = getUserChangePasswordLabels(t)
+
   return (
     <Grid container sx={{ width: '100%' }} direction='column' spacing={2}>
-      <Grid item sx={{ width: '100%' }}>
-        <TextField
-          id='current-password'
-          name='currentPassword'
-          type='password'
-          label={t('changePassword:currentPassword')}
-          variant='standard'
-          value={changePasswordFormProps.currentPassword}
-          sx={{ width: '100%' }}
-          onChange={handleChange}
-        />
-      </Grid>
-      <Grid item sx={{ width: '100%' }}>
-        <TextField
-          sx={{ width: '100%' }}
-          id='new-password'
-          name='newPassword'
-          type='password'
-          label={t('changePassword:newPassword')}
-          variant='standard'
-          value={changePasswordFormProps.newPassword}
-          onChange={handleChange}
-        />
-      </Grid>
-      <Grid item sx={{ width: '100%' }}>
-        <TextField
-          sx={{ width: '100%' }}
-          id='confirm-new-password'
-          name='confirmNewPassword'
-          type='password'
-          label={t('changePassword:confirmNewPassword')}
-          variant='standard'
-          value={changePasswordFormProps.confirmNewPassword}
-          onChange={handleChange}
-        />
-      </Grid>
+      {labels.map((label) => {
+        const gridFieldData = changePasswordGridData[label.key]
+        return (
+          <Grid item sx={{ width: '100%' }} key={label.key}>
+            <TextField
+              id={label.key}
+              name={label.key}
+              label={label.label}
+              type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
+              variant='standard'
+              required={!!gridFieldData.required}
+              value={changePasswordFormProps[label.key as keyof ChangePasswordFormProps]}
+              sx={{ width: '100%' }}
+              onChange={handleChange}
+            />
+          </Grid>
+        )
+      })}
       <Grid item sx={{ width: '100%' }}>
         <Button sx={{ width: '100%' }} onClick={handleChangePassword}>
           {t('general:saveButtonLabel')}

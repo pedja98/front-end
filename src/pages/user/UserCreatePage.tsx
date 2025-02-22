@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material'
 import { EmailPattern, GridFieldTypes, PasswordPattern, PhonePattern } from '../../consts/common'
-import { GridLabel } from '../../types/common'
+import { GridFieldType, GridLabel } from '../../types/common'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent, useState } from 'react'
 import { useAppDispatch } from '../../app/hooks'
@@ -147,7 +147,7 @@ const UserCreatePage = () => {
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = createUserGridData[label.key]
-          if (gridFieldData.type === GridFieldTypes.STRING) {
+          if (([GridFieldTypes.STRING, GridFieldTypes.PASSWORD] as GridFieldType[]).includes(gridFieldData.type)) {
             return (
               <Grid item sx={{ width: '100%' }} key={label.key}>
                 <TextField
@@ -155,27 +155,10 @@ const UserCreatePage = () => {
                   name={label.key}
                   label={label.label}
                   variant='standard'
+                  type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
                   value={createUserData[label.key as keyof User]}
                   sx={{ width: '100%' }}
                   required={!!gridFieldData.required}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    handleChange(event)
-                  }}
-                />
-              </Grid>
-            )
-          } else if (gridFieldData.type === GridFieldTypes.PASSWORD) {
-            return (
-              <Grid item sx={{ width: '100%' }} key={label.key}>
-                <TextField
-                  id={label.key}
-                  name={label.key}
-                  label={label.label}
-                  type='password'
-                  variant='standard'
-                  required={!!gridFieldData.required}
-                  value={createUserData[label.key as keyof User]}
-                  sx={{ width: '100%' }}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
                   }}

@@ -96,3 +96,15 @@ export const getEditUserPagesLabels = (t: TFunction, removeType: boolean): GridL
   }
   return labels
 }
+
+export const getUserChangePasswordLabels = (t: TFunction): GridLabel[] => [
+  { label: t('user:currentPassword'), key: 'currentPassword' },
+  { label: t('user:newPassword'), key: 'newPassword' },
+  { label: t('user:confirmNewPassword'), key: 'confirmNewPassword' },
+]
+
+export const getUserChangePasswordGridData = (): PageElement => ({
+  currentPassword: { type: GridFieldTypes.PASSWORD, required: true },
+  newPassword: { type: GridFieldTypes.PASSWORD, required: true },
+  confirmNewPassword: { type: GridFieldTypes.PASSWORD, required: true },
+})
