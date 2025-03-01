@@ -4,7 +4,7 @@ import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useTranslation } from 'react-i18next'
 import { GridFieldType } from '../../types/common'
 import { useDeleteContactMutation, useGetContactQuery } from '../../app/apis/contact.api'
@@ -19,7 +19,14 @@ const ContactDetailPage = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const { isLoading: isGetContactLoading, data: contact, isError, error } = useGetContactQuery(contactId)
+  const entityIsDeleted = !!useAppSelector((state) => state.common.entityIsDeleted)
+
+  const {
+    isLoading: isGetContactLoading,
+    data: contact,
+    isError,
+    error,
+  } = useGetContactQuery(contactId, { skip: !!entityIsDeleted })
   const [deleteContact, { isLoading: isDeleteContactLoading }] = useDeleteContactMutation()
 
   if (isGetContactLoading || isDeleteContactLoading) {
