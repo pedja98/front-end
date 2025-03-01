@@ -17,9 +17,9 @@ const ShopDetailPage = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const { isLoading: isGetCompanyLoading, data: shop, isError, error } = useGetShopQuery(shopId as string)
+  const { isLoading: isGetShopLoading, data: shop, isError, error } = useGetShopQuery(shopId as string)
 
-  if (isGetCompanyLoading) {
+  if (isGetShopLoading) {
     return <Spinner />
   }
 

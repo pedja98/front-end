@@ -1,4 +1,5 @@
 {
+  "contactDeletionText": "Are you sure that you want to delete contact {{firstName}} {{lastName}}?",
   "fullName": "Full name",
   "firstName": "First name",
   "lastName": "Last name",
@@ -9,7 +10,7 @@
   "contactUpdated": "Contact data has been successfully updated",
   "createContactLabel": "CREATE COMPANY",
   "editContactLabel": "EDIT COMPANY",
-  "contactDeleted": "Contact data has been successfully deleted",
+  "contactDeleted": "Contact {{fullName}} has been successfully deleted",
   "contactCreated": "New contact is successfully created",
   "sortByLabels": {
     "firstName": "First name",

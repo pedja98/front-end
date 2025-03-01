@@ -12,7 +12,7 @@ export interface Contact {
   dateModified: string
 }
 
-export interface SaveContactDto {
+export interface SaveContact {
   firstName: string
   lastName: string
   email: string

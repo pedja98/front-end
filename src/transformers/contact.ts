@@ -50,37 +50,24 @@ export const transformContactIntoPageGridData = (contact: Contact, skipFullNameA
 })
 
 export const getSaveContactGridData = (
-  contact: Contact,
   documentTypeOptions: string[],
   documentTypeOptionValues: string[],
 ): PageElement => ({
   firstName: {
-    value: contact.firstName,
     type: GridFieldTypes.STRING,
+    required: true,
   },
   lastName: {
-    value: contact.firstName,
     type: GridFieldTypes.STRING,
+    required: true,
   },
-  email: { value: contact.email, type: GridFieldTypes.STRING },
-  phone: { value: contact.phone, type: GridFieldTypes.STRING },
+  email: { type: GridFieldTypes.STRING, required: true },
+  phone: { type: GridFieldTypes.STRING, required: true },
   documentType: {
-    value: contact.documentType,
+    required: true,
     type: GridFieldTypes.SELECT,
     options: documentTypeOptions,
     optionsValues: documentTypeOptionValues,
   },
-  documentId: { value: contact.documentId, type: GridFieldTypes.STRING },
-  createdByUsername: {
-    value: contact.createdByUsername,
-    link: `/index/users/${contact.createdByUsername}`,
-    type: GridFieldTypes.LINK,
-  },
-  modifiedByUsername: {
-    value: contact.modifiedByUsername,
-    link: `/index/users/${contact.modifiedByUsername}`,
-    type: GridFieldTypes.LINK,
-  },
-  dateCreated: { value: dateFormater(contact.dateCreated as string), type: GridFieldTypes.STRING },
-  dateModified: { value: dateFormater(contact.dateModified as string), type: GridFieldTypes.STRING },
+  documentId: { type: GridFieldTypes.STRING, required: true },
 })

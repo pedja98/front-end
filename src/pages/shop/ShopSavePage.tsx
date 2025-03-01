@@ -24,7 +24,7 @@ import { getSaveShopGridData, getShopSaveLabels } from '../../transformers/shop'
 import { GridFieldTypes } from '../../consts/common'
 import { ApiException } from '../../types/common'
 import { useCreateShopMutation, useGetShopQuery, useUpdateShopMutation } from '../../app/apis/shop.api'
-import { SaveShopFormInitialState } from '../../consts/shops'
+import { SaveShopFormInitialState } from '../../consts/shop'
 
 const ShopSavePage = () => {
   const [shopData, setShopData] = useState<SaveShop>(SaveShopFormInitialState)
@@ -131,7 +131,7 @@ const ShopSavePage = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate(shopId ? `/index/shops/${shopId}` : `/index/companies`)
+      navigate(shopId ? `/index/shops/${shopId}` : `/index/contacts`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `shop:${errorResponse.data}` || 'general:unknownError'
