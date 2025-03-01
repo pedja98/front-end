@@ -11,7 +11,7 @@ import OfferPage from '../pages/OfferPage'
 import ContractPage from '../pages/ContractPage'
 import ShopPage from '../pages/shop/ShopPage'
 import CataloguePage from '../pages/CataloguePage'
-import ContactPage from '../pages/ContactPage'
+import ContactPage from '../pages/contact/ContactPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import UserPage from '../pages/user/UserPage'
 import UserCreatePage from '../pages/user/UserCreatePage'
@@ -29,6 +29,9 @@ import CompanyListPage from '../pages/company/CompanyListPage'
 import CompanyDetailPage from '../pages/company/CompanyDetailPage'
 import ShopListPage from '../pages/shop/ShopListPage'
 import ShopDetailPage from '../pages/shop/ShopDetailPage'
+import ContactSavePage from '../pages/contact/ContactSavePage'
+import ContactListPage from '../pages/contact/ContactListPage'
+import ContactDetailPage from '../pages/contact/ContactDetailPage'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -60,7 +63,17 @@ export default createBrowserRouter([
           { path: ':id/edit', element: <RegionSavePage /> },
         ],
       },
-      { path: 'contacts', element: <ContactPage />, children: [{ index: true, element: <EntityIndexPage /> }] },
+      {
+        path: 'contacts',
+        element: <ContactPage />,
+        children: [
+          { index: true, element: <EntityIndexPage /> },
+          { path: 'create', element: <ContactSavePage /> },
+          { path: 'list', element: <ContactListPage /> },
+          { path: ':id', element: <ContactDetailPage /> },
+          { path: ':id/edit', element: <ContactSavePage /> },
+        ],
+      },
       {
         path: 'customer-sessions',
         element: <CustomerSessionPage />,

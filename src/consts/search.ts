@@ -24,6 +24,13 @@ export const ShopSortedByFields = {
   DateCreated: 'dateCreated',
 }
 
+export const ContactSortedByFields = {
+  firstName: 'firstName',
+  lastName: 'lastName',
+  documentId: 'documentId',
+  DateCreated: 'dateCreated',
+}
+
 export const SortedOrderValues = {
   Asc: 'asc',
   Desc: 'desc',

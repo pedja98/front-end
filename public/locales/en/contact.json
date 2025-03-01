@@ -1,0 +1,24 @@
+{
+  "fullName": "Full name",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "email": "Email",
+  "phone": "Phone",
+  "documentType": "Document type",
+  "documentId": "Document id",
+  "contactUpdated": "Contact data has been successfully updated",
+  "createContactLabel": "CREATE COMPANY",
+  "editContactLabel": "EDIT COMPANY",
+  "contactDeleted": "Contact data has been successfully deleted",
+  "contactCreated": "New contact is successfully created",
+  "sortByLabels": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "documentId": "Document id",
+    "dateCreated": "Date created"
+  },
+  "documentTypes": {
+    "identity_card": "Identity card",
+    "passport": "Passport"
+  }
+}

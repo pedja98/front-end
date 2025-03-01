@@ -1,0 +1,24 @@
+{
+  "fullName": "Puno ime",
+  "firstName": "Ime",
+  "lastName": "Prezime",
+  "email": "Email",
+  "phone": "Telefon",
+  "documentType": "Tip dokumenta",
+  "documentId": "Broj dokumenta",
+  "contactUpdated": "Kontakt je uspešno ažuriran",
+  "createContactLabel": "KREIRAJ KONTAKT",
+  "editContactLabel": "IZMENI KONTAKT",
+  "contactCreated": "Novi kontakt je uspešno napravljena",
+  "contactDeleted": "Kontakt je uspešno obrisan",
+  "sortByLabels": {
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "documentId": "Broj dokumenta",
+    "dateCreated": "Date created"
+  },
+  "documentTypes": {
+    "identity_card": "Lična karta",
+    "passport": "Pasoš"
+  }
+}
