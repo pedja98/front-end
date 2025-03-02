@@ -46,7 +46,7 @@ const LoginPage = () => {
       if (!loginRequest.username || !loginRequest.password) {
         dispatch(
           setNotification({
-            text: t('general:fillAllRequiredFields'),
+            text: t('fillAllRequiredFields'),
             type: NotificationType.Error,
           }),
         )
@@ -56,7 +56,7 @@ const LoginPage = () => {
       navigate('/index')
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `login:${errorResponse.data?.error}` || 'general:unknowError'
+      const errorCode = `${errorResponse.data?.error}` || 'unknowError'
       dispatch(
         setNotification({
           text: t(errorCode),
@@ -80,18 +80,18 @@ const LoginPage = () => {
       >
         <FormCartContextStyled>
           <Root>
-            <Typography variant='h5'>{t('login:welcome')}</Typography>
+            <Typography variant='h5'>{t('welcome')}</Typography>
           </Root>
           <FormTextFieldStyled
             id='username'
-            label={t('login:username')}
+            label={t('username')}
             value={loginRequest.username}
             onChange={handleChange('username')}
             sx={{ m: 1 }}
           />
           <FormTextFieldStyled
             id='password'
-            label={t('login:password')}
+            label={t('password')}
             type='password'
             value={loginRequest.password}
             onChange={handleChange('password')}
@@ -100,7 +100,7 @@ const LoginPage = () => {
         </FormCartContextStyled>
         <FormCartActionStyled>
           <FormButtonStyled sx={{ m: 1 }} onClick={handleLogin} ref={loginButtonRef}>
-            {t('login:loginButtonText')}
+            {t('loginButtonText')}
           </FormButtonStyled>
         </FormCartActionStyled>
       </Card>

@@ -75,10 +75,13 @@ const ContactSavePage = () => {
   }
 
   const contactDocumentTypesOptions = Object.keys(ContactDocumentTypes).map((type) =>
-    t(`contact:documentTypes.${type.toLowerCase()}`),
+    t(`contacts:documentTypes.${type.toLowerCase()}`),
   )
 
-  const createContactGridData = getSaveContactGridData(contactDocumentTypesOptions, Object.values(ContactDocumentTypes))
+  const createContactGridData = getSaveContactGridData(
+    [t('none'), ...contactDocumentTypesOptions],
+    [undefined, ...Object.values(ContactDocumentTypes)],
+  )
   const labels = getContactSaveLabels(t)
 
   const handleSave = async () => {
@@ -122,7 +125,7 @@ const ContactSavePage = () => {
       const response = contactId
         ? await updateContact({ id: contactId as string, contact: contactData }).unwrap()
         : await createContact(contactData).unwrap()
-      const messageCode = `contact:${response.message}`
+      const messageCode = `contacts:${response.message}`
       dispatch(
         setNotification({
           text: t(messageCode),
@@ -132,7 +135,7 @@ const ContactSavePage = () => {
       navigate(contactId ? `/index/contacts/${contactId}` : `/index/contacts`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `contact:${errorResponse.data}` || 'general:unknownError'
+      const errorCode = `contacts:${errorResponse.data}` || 'general:unknownError'
       dispatch(
         setNotification({
           text: t(errorCode),
@@ -187,7 +190,7 @@ const ContactSavePage = () => {
                     }}
                   >
                     {gridFieldData?.options.map((option, index) => (
-                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? ''}>
+                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? undefined}>
                         {option}
                       </MenuItem>
                     ))}

@@ -1,4 +1,10 @@
 {
+  "welcome": "DOBRODOŠLI",
+  "loginButtonText": "Prijavite se",
+  "userNotFound": "Korisnik nije pronađen",
+  "wrongPassword": "Pogrešna lozinka. Molimo Vas pokušajte ponovo",
+  "username": "Korisničko ime",
+  "password": "Lozinka",
   "unknowError": "Nepoznata greška",
   "logoutSuccessfully": "Uspešno ste se izlogovali",
   "saveButtonLabel": "Sačuvaj",

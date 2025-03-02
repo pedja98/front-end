@@ -51,7 +51,7 @@ export const transformContactIntoPageGridData = (contact: Contact, skipFullNameA
 
 export const getSaveContactGridData = (
   documentTypeOptions: string[],
-  documentTypeOptionValues: string[],
+  documentTypeOptionValues: (undefined | string)[],
 ): PageElement => ({
   firstName: {
     type: GridFieldTypes.STRING,
