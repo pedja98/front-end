@@ -58,13 +58,13 @@ export const transformUserIntoEditPageGridData = (
 })
 
 export const getUseDetailListPagesLabels = (t: TFunction): GridLabel[] => [
-  { label: t('user:username'), key: 'username' },
-  { label: t('user:firstName'), key: 'firstName' },
-  { label: t('user:lastName'), key: 'lastName' },
-  { label: t('user:email'), key: 'email' },
-  { label: t('user:phone'), key: 'phone' },
-  { label: t('user:type'), key: 'type' },
-  { label: t('shop:shopLabel'), key: 'shopName' },
+  { label: t('users:username'), key: 'username' },
+  { label: t('users:firstName'), key: 'firstName' },
+  { label: t('users:lastName'), key: 'lastName' },
+  { label: t('users:email'), key: 'email' },
+  { label: t('users:phone'), key: 'phone' },
+  { label: t('users:type'), key: 'type' },
+  { label: t('shops:shopLabel'), key: 'shopName' },
   { label: t('general:createdBy'), key: 'createdByUsername' },
   { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
   { label: t('general:dateCreated'), key: 'dateCreated' },
@@ -72,24 +72,24 @@ export const getUseDetailListPagesLabels = (t: TFunction): GridLabel[] => [
 ]
 
 export const getCreateUserPagesLabels = (t: TFunction): GridLabel[] => [
-  { label: t('user:firstName'), key: 'firstName' },
-  { label: t('user:lastName'), key: 'lastName' },
-  { label: t('user:username'), key: 'username' },
-  { label: t('user:password'), key: 'password' },
-  { label: t('user:confirm'), key: 'confirm' },
-  { label: t('user:email'), key: 'email' },
-  { label: t('user:phone'), key: 'phone' },
-  { label: t('user:type'), key: 'type' },
+  { label: t('users:firstName'), key: 'firstName' },
+  { label: t('users:lastName'), key: 'lastName' },
+  { label: t('users:username'), key: 'username' },
+  { label: t('users:password'), key: 'password' },
+  { label: t('users:confirm'), key: 'confirm' },
+  { label: t('users:email'), key: 'email' },
+  { label: t('users:phone'), key: 'phone' },
+  { label: t('users:type'), key: 'type' },
 ]
 
 export const getEditUserPagesLabels = (t: TFunction, removeType: boolean): GridLabel[] => {
   const labels = [
-    { label: t('user:firstName'), key: 'firstName' },
-    { label: t('user:lastName'), key: 'lastName' },
-    { label: t('user:email'), key: 'email' },
-    { label: t('user:phone'), key: 'phone' },
-    { label: t('user:type'), key: 'type' },
-    { label: t('user:language'), key: 'language' },
+    { label: t('users:firstName'), key: 'firstName' },
+    { label: t('users:lastName'), key: 'lastName' },
+    { label: t('users:email'), key: 'email' },
+    { label: t('users:phone'), key: 'phone' },
+    { label: t('users:type'), key: 'type' },
+    { label: t('users:language'), key: 'language' },
   ]
   if (removeType) {
     labels.splice(4, 1)
@@ -98,9 +98,9 @@ export const getEditUserPagesLabels = (t: TFunction, removeType: boolean): GridL
 }
 
 export const getUserChangePasswordLabels = (t: TFunction): GridLabel[] => [
-  { label: t('user:currentPassword'), key: 'currentPassword' },
-  { label: t('user:newPassword'), key: 'newPassword' },
-  { label: t('user:confirmNewPassword'), key: 'confirmNewPassword' },
+  { label: t('users:currentPassword'), key: 'currentPassword' },
+  { label: t('users:newPassword'), key: 'newPassword' },
+  { label: t('users:confirmNewPassword'), key: 'confirmNewPassword' },
 ]
 
 export const getUserChangePasswordGridData = (): PageElement => ({

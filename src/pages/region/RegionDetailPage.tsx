@@ -46,7 +46,7 @@ const RegionDetailPage = () => {
   const handleDeleteClick = () => {
     dispatch(
       showConfirm({
-        confirmationText: t('region:regionDeletionText', { name: region.name }),
+        confirmationText: t('regions:regionDeletionText', { name: region.name }),
         confirmationTitle: t('general:confirmDeletionTitle'),
         onConfirm: handleConfirmDelete,
         onCancel: handleConfirmClose,
@@ -66,7 +66,7 @@ const RegionDetailPage = () => {
       await deleteRegion(regionId).unwrap()
       dispatch(
         setNotification({
-          text: t('region:regionDeleted', { name: region.name }),
+          text: t('regions:regionDeleted', { name: region.name }),
           type: NotificationType.Success,
         }),
       )
@@ -90,7 +90,7 @@ const RegionDetailPage = () => {
   }
 
   const labels = [
-    { label: t('region:name'), key: 'name' },
+    { label: t('regions:name'), key: 'name' },
     { label: t('general:createdBy'), key: 'createdByUsername' },
     { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
     { label: t('general:dateCreated'), key: 'dateCreated' },

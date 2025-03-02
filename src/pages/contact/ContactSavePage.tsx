@@ -145,7 +145,7 @@ const ContactSavePage = () => {
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
       <Grid item sx={{ width: '80%', mb: 2 }}>
-        <Typography variant='h4'>{t('contact:createContactLabel')}</Typography>
+        <Typography variant='h4'>{t('contacts:createContactLabel')}</Typography>
       </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {

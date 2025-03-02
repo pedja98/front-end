@@ -23,6 +23,7 @@ import { useTranslation } from 'react-i18next'
 import { ShopSearchFormProps } from '../../types/shop'
 import { ShopSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
+import { ModulesOptions } from '../../types/common'
 
 const ShopSearchDialog = () => {
   const dispatch = useAppDispatch()
@@ -72,7 +73,7 @@ const ShopSearchDialog = () => {
           <TextField
             id='name'
             name='name'
-            label={t('shop:name')}
+            label={t('shops:name')}
             variant='standard'
             value={shopSearchData.name || ''}
             sx={{ width: '100%' }}
@@ -84,7 +85,7 @@ const ShopSearchDialog = () => {
         <Grid item sx={{ width: '100%' }}>
           <FormControl sx={{ width: '100%' }} variant='standard'>
             <InputLabel id='region-select-label' sx={{ pl: 2 }}>
-              {t('shop:region')}
+              {t('shops:region')}
             </InputLabel>
             <Select
               labelId='region-select-label'
@@ -112,7 +113,7 @@ const ShopSearchDialog = () => {
         <Grid item sx={{ width: '100%' }}>
           <FormControl sx={{ width: '100%' }} variant='standard'>
             <InputLabel id='shop-leader-select-label' sx={{ pl: 2 }}>
-              {t('shop:shopLeader')}
+              {t('shops:shopLeader')}
             </InputLabel>
             <Select
               labelId='shop-leader-select-label'
@@ -140,7 +141,7 @@ const ShopSearchDialog = () => {
           </FormControl>
         </Grid>
         <SearchDialogSort
-          searchDialog='shop'
+          moduleOption={ModulesOptions.Shops}
           sortByFields={ShopSortedByFields}
           sortByValue={shopSearchData.sortBy}
           sortOrder={shopSearchData.sortOrder}

@@ -66,7 +66,7 @@ export interface ApiException {
 }
 
 export interface SearchDialogSortProps {
-  searchDialog: string
+  moduleOption: ModulesOptions
   sortByFields: Record<string, string>
   sortByValue?: string
   sortOrder?: string

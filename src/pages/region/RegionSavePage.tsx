@@ -48,7 +48,7 @@ const RegionSavePage = () => {
       const response = regionId
         ? await updateRegion({ id: regionId, region: regionData }).unwrap()
         : await createRegion(regionData).unwrap()
-      const messageCode = `region:${response.message}`
+      const messageCode = `regions:${response.message}`
       dispatch(
         setNotification({
           text: t(messageCode),
@@ -58,7 +58,7 @@ const RegionSavePage = () => {
       navigate(regionId ? `/index/regions/${regionId}` : `/index/companies`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `region:${errorResponse.data}` || 'general:unknowError'
+      const errorCode = `regions:${errorResponse.data}` || 'general:unknowError'
       dispatch(
         setNotification({
           text: t(errorCode),
@@ -86,7 +86,7 @@ const RegionSavePage = () => {
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
       <Grid item sx={{ width: '80%', mb: 2 }}>
-        <Typography variant='h4'>{t('region:createRegionLabel')}</Typography>
+        <Typography variant='h4'>{t('regions:createRegionLabel')}</Typography>
       </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         <Grid item sx={{ width: '100%' }}>
@@ -94,7 +94,7 @@ const RegionSavePage = () => {
             id='name'
             required
             name='name'
-            label={t('region:name')}
+            label={t('regions:name')}
             variant='standard'
             value={regionData.name}
             sx={{ width: '100%' }}

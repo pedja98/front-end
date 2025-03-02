@@ -7,8 +7,8 @@ const UserEditPage = () => {
   const { t } = useTranslation()
 
   const editProfileTabData = {
-    [t('user:editUserData')]: <EditUserTab />,
-    [t('user:changePasswordLabel')]: <ChangePasswordTab />,
+    [t('users:editUserData')]: <EditUserTab />,
+    [t('users:changePasswordLabel')]: <ChangePasswordTab />,
   }
 
   return <BasicTabs tabs={editProfileTabData} />

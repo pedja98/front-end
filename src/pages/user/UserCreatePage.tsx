@@ -103,7 +103,7 @@ const UserCreatePage = () => {
         type: createUserData.type as UserType,
       }
 
-      const messageCode = `user:${(await createUser(userData).unwrap()).message}`
+      const messageCode = `users:${(await createUser(userData).unwrap()).message}`
       dispatch(
         setNotification({
           text: t(messageCode),
@@ -113,7 +113,7 @@ const UserCreatePage = () => {
       navigate(`/index/users/${userData.username}`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `user:${errorResponse.data}` || 'general:unknowError'
+      const errorCode = `users:${errorResponse.data}` || 'general:unknowError'
       dispatch(
         setNotification({
           text: t(errorCode),
@@ -129,8 +129,8 @@ const UserCreatePage = () => {
 
   const labels: GridLabel[] = getCreateUserPagesLabels(t)
 
-  const userTypeOptions = Object.keys(UserType).map((type) => t(`user:userTypes.${type.toLowerCase()}`))
-  const languageOptions = Object.keys(Languages).map((language) => t(`user:userLanguages.${language.toLowerCase()}`))
+  const userTypeOptions = Object.keys(UserType).map((type) => t(`users:userTypes.${type.toLowerCase()}`))
+  const languageOptions = Object.keys(Languages).map((language) => t(`users:userLanguages.${language.toLowerCase()}`))
 
   const createUserGridData = transformUserIntoEditPageGridData(
     userTypeOptions,
@@ -142,7 +142,7 @@ const UserCreatePage = () => {
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
       <Grid item sx={{ width: '80%', mb: 2 }}>
-        <Typography variant='h4'>{t('user:createUserLabel')}</Typography>
+        <Typography variant='h4'>{t('users:createUserLabel')}</Typography>
       </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {

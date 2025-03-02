@@ -92,7 +92,7 @@ const CompanySavePage = () => {
     if (companyData.assignedTo === companyData.temporaryAssignedTo) {
       dispatch(
         setNotification({
-          text: t('company:assignedToSameAsTemporary'),
+          text: t('companies:assignedToSameAsTemporary'),
           type: NotificationType.Warning,
         }),
       )
@@ -102,7 +102,7 @@ const CompanySavePage = () => {
     if (isNaN(Number(companyData.tin))) {
       dispatch(
         setNotification({
-          text: t('invalidFieldValueFormat', { fieldName: t('company:tin') }),
+          text: t('invalidFieldValueFormat', { fieldName: t('companies:tin') }),
           type: NotificationType.Warning,
         }),
       )
@@ -112,7 +112,7 @@ const CompanySavePage = () => {
     if (!companyData.numberOfEmployees && isNaN(Number(companyData.numberOfEmployees))) {
       dispatch(
         setNotification({
-          text: t('invalidFieldValueFormat', { fieldName: t('company:numberOfEmployees') }),
+          text: t('invalidFieldValueFormat', { fieldName: t('companies:numberOfEmployees') }),
           type: NotificationType.Warning,
         }),
       )
@@ -123,7 +123,7 @@ const CompanySavePage = () => {
       const response = companyId
         ? await updateCompany({ id: Number(companyId), company: companyData }).unwrap()
         : await createCompany(companyData).unwrap()
-      const messageCode = `company:${response.message}`
+      const messageCode = `companies:${response.message}`
       dispatch(
         setNotification({
           text: t(messageCode),
@@ -133,7 +133,7 @@ const CompanySavePage = () => {
       navigate(companyId ? `/index/companies/${companyId}` : `/index/companies`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `company:${errorResponse.data}` || 'general:unknownError'
+      const errorCode = `companies:${errorResponse.data}` || 'general:unknownError'
       dispatch(
         setNotification({
           text: t(errorCode),
@@ -170,7 +170,7 @@ const CompanySavePage = () => {
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
       <Grid item sx={{ width: '80%', mb: 2 }}>
-        <Typography variant='h4'>{t('company:createCompanyLabel')}</Typography>
+        <Typography variant='h4'>{t('companies:createCompanyLabel')}</Typography>
       </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {

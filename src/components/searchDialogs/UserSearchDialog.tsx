@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { updateSearchAttribute } from '../../features/search.slice'
 import { UserSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
+import { ModulesOptions } from '../../types/common'
 
 const UserSearchDialog = () => {
   const { t } = useTranslation()
@@ -36,7 +37,7 @@ const UserSearchDialog = () => {
           <TextField
             id='first-name'
             name='firstName'
-            label={t('user:firstName')}
+            label={t('users:firstName')}
             variant='standard'
             value={userSearchData.firstName || ''}
             sx={{ width: '100%' }}
@@ -50,7 +51,7 @@ const UserSearchDialog = () => {
             sx={{ width: '100%' }}
             id='last-name'
             name='lastName'
-            label={t('user:lastName')}
+            label={t('users:lastName')}
             variant='standard'
             value={userSearchData.lastName || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +64,7 @@ const UserSearchDialog = () => {
             sx={{ width: '100%' }}
             id='username'
             name='username'
-            label={t('user:username')}
+            label={t('users:username')}
             variant='standard'
             value={userSearchData.username || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +77,7 @@ const UserSearchDialog = () => {
             sx={{ width: '100%' }}
             id='email'
             name='email'
-            label={t('user:email')}
+            label={t('users:email')}
             variant='standard'
             value={userSearchData.email || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +90,7 @@ const UserSearchDialog = () => {
             sx={{ width: '100%' }}
             id='phone'
             name='phone'
-            label={t('user:phone')}
+            label={t('users:phone')}
             variant='standard'
             value={userSearchData.phone || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +101,7 @@ const UserSearchDialog = () => {
         <Grid item sx={{ width: '100%' }}>
           <FormControl sx={{ width: '100%' }} variant='standard'>
             <InputLabel id='user-type-select-label' sx={{ pl: 2 }}>
-              {t('user:type')}
+              {t('users:type')}
             </InputLabel>
             <Select
               labelId='user-type-select-label'
@@ -126,7 +127,7 @@ const UserSearchDialog = () => {
           </FormControl>
         </Grid>
         <SearchDialogSort
-          searchDialog='user'
+          moduleOption={ModulesOptions.Users}
           sortByFields={UserSortedByFields}
           sortByValue={userSearchData.sortBy}
           sortOrder={userSearchData.sortOrder}

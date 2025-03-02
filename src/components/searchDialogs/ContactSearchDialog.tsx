@@ -17,6 +17,7 @@ import { ContactSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
 import { ContactDocumentType, ContactSearchFormProps } from '../../types/contact'
 import { ContactDocumentTypes } from '../../consts/contact'
+import { ModulesOptions } from '../../types/common'
 
 const ContactSearchDialog = () => {
   const { t } = useTranslation()
@@ -36,7 +37,7 @@ const ContactSearchDialog = () => {
           <TextField
             id='first-name'
             name='firstName'
-            label={t('contact:firstName')}
+            label={t('contacts:firstName')}
             variant='standard'
             value={contactSearchData.firstName || ''}
             sx={{ width: '100%' }}
@@ -50,7 +51,7 @@ const ContactSearchDialog = () => {
             sx={{ width: '100%' }}
             id='last-name'
             name='lastName'
-            label={t('contact:lastName')}
+            label={t('contacts:lastName')}
             variant='standard'
             value={contactSearchData.lastName || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +64,7 @@ const ContactSearchDialog = () => {
             sx={{ width: '100%' }}
             id='email'
             name='email'
-            label={t('contact:email')}
+            label={t('contacts:email')}
             variant='standard'
             value={contactSearchData.email || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +77,7 @@ const ContactSearchDialog = () => {
             sx={{ width: '100%' }}
             id='phone'
             name='phone'
-            label={t('contact:phone')}
+            label={t('contacts:phone')}
             variant='standard'
             value={contactSearchData.phone || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +88,7 @@ const ContactSearchDialog = () => {
         <Grid item sx={{ width: '100%' }}>
           <FormControl sx={{ width: '100%' }} variant='standard'>
             <InputLabel id='document-type-select-label' sx={{ pl: 2 }}>
-              {t('contact:documentType')}
+              {t('contacts:documentType')}
             </InputLabel>
             <Select
               labelId='document-type-select-label'
@@ -119,7 +120,7 @@ const ContactSearchDialog = () => {
             sx={{ width: '100%' }}
             id='documentId'
             name='documentId'
-            label={t('contact:documentId')}
+            label={t('contacts:documentId')}
             variant='standard'
             value={contactSearchData.documentId || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -128,7 +129,7 @@ const ContactSearchDialog = () => {
           />
         </Grid>
         <SearchDialogSort
-          searchDialog='contact'
+          moduleOption={ModulesOptions.Contacts}
           sortByFields={ContactSortedByFields}
           sortByValue={contactSearchData.sortBy}
           sortOrder={contactSearchData.sortOrder}

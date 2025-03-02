@@ -6,7 +6,7 @@
   "numberOfEmployees": "Br. zap",
   "tin": "Pib",
   "bankName": "Ime banke",
-  "bankAccountNumber": "Bankovni rračun",
+  "bankAccountNumber": "Bankovni račun",
   "comment": "Komentar",
   "companyUpdated": "Kompanijski podaci su uspešno ažurirani",
   "createCompanyLabel": "KREIRAJ KOMPANIJU",

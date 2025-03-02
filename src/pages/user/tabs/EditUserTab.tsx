@@ -107,7 +107,7 @@ const EditUserTab = () => {
         return
       }
 
-      const messageCode = `user:${
+      const messageCode = `users:${
         (
           await updateUser({
             username: String(userData.username),
@@ -130,7 +130,7 @@ const EditUserTab = () => {
       isEditProfile ? navigate('/index') : navigate(`/index/users/${userData.username}`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `user:${errorResponse.data}` || 'general:unknownError'
+      const errorCode = `users:${errorResponse.data}` || 'general:unknownError'
       dispatch(
         setNotification({
           text: t(errorCode),
@@ -146,8 +146,8 @@ const EditUserTab = () => {
 
   const labels: GridLabel[] = getEditUserPagesLabels(t, isEditProfile)
 
-  const userTypeOptions = Object.keys(UserType).map((type) => t(`user:userTypes.${type.toLowerCase()}`))
-  const languageOptions = Object.keys(Languages).map((language) => t(`user:userLanguages.${language.toLowerCase()}`))
+  const userTypeOptions = Object.keys(UserType).map((type) => t(`users:userTypes.${type.toLowerCase()}`))
+  const languageOptions = Object.keys(Languages).map((language) => t(`users:userLanguages.${language.toLowerCase()}`))
 
   const editPageUserGridData = transformUserIntoEditPageGridData(
     userTypeOptions,

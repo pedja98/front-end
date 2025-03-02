@@ -4,7 +4,7 @@ import { SortedOrderValues } from '../consts/search'
 import { useTranslation } from 'react-i18next'
 
 const SearchDialogSort = (props: SearchDialogSortProps) => {
-  const { searchDialog, sortByFields, sortByValue, sortOrder, handleChange } = props
+  const { moduleOption, sortByFields, sortByValue, sortOrder, handleChange } = props
   const { t } = useTranslation()
   return (
     <>
@@ -27,7 +27,7 @@ const SearchDialogSort = (props: SearchDialogSortProps) => {
             <MenuItem value={undefined}>{t('general:none')}</MenuItem>
             {Object.keys(sortByFields).map((key) => (
               <MenuItem key={key} value={sortByFields[key as keyof typeof sortByFields]}>
-                {t(`${searchDialog}:sortByLabels.${sortByFields[key as keyof typeof sortByFields]}`)}
+                {t(`${moduleOption}:sortByLabels.${sortByFields[key as keyof typeof sortByFields]}`)}
               </MenuItem>
             ))}
           </Select>

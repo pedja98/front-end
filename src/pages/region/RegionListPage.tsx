@@ -45,7 +45,7 @@ const RegionListPage = () => {
   }
 
   const columns = [
-    { label: t('region:name'), key: 'name' },
+    { label: t('regions:name'), key: 'name' },
     { label: t('general:createdBy'), key: 'createdByUsername' },
     { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
     { label: t('general:dateCreated'), key: 'dateCreated' },

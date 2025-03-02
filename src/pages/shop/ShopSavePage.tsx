@@ -124,7 +124,7 @@ const ShopSavePage = () => {
       const response = shopId
         ? await updateShop({ id: shopId as string, shop: shopData }).unwrap()
         : await createShop(shopData).unwrap()
-      const messageCode = `shop:${response.message}`
+      const messageCode = `shops:${response.message}`
       dispatch(
         setNotification({
           text: t(messageCode),
@@ -134,7 +134,7 @@ const ShopSavePage = () => {
       navigate(shopId ? `/index/shops/${shopId}` : `/index/contacts`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `shop:${errorResponse.data}` || 'general:unknownError'
+      const errorCode = `shops:${errorResponse.data}` || 'general:unknownError'
       dispatch(
         setNotification({
           text: t(errorCode),
@@ -147,7 +147,7 @@ const ShopSavePage = () => {
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
       <Grid item sx={{ width: '80%', mb: 2 }}>
-        <Typography variant='h4'>{t('shop:createShopLabel')}</Typography>
+        <Typography variant='h4'>{t('shops:createShopLabel')}</Typography>
       </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {

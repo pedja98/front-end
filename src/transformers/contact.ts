@@ -5,11 +5,11 @@ import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 
 export const getContactDetailListLabels = (t: TFunction): GridLabel[] => [
-  { label: t('contact:fullName'), key: 'fullName' },
-  { label: t('contact:email'), key: 'email' },
-  { label: t('contact:phone'), key: 'phone' },
-  { label: t('contact:documentType'), key: 'documentType' },
-  { label: t('contact:documentId'), key: 'documentId' },
+  { label: t('contacts:fullName'), key: 'fullName' },
+  { label: t('contacts:email'), key: 'email' },
+  { label: t('contacts:phone'), key: 'phone' },
+  { label: t('contacts:documentType'), key: 'documentType' },
+  { label: t('contacts:documentId'), key: 'documentId' },
   { label: t('general:createdBy'), key: 'createdByUsername' },
   { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
   { label: t('general:dateCreated'), key: 'dateCreated' },
@@ -17,12 +17,12 @@ export const getContactDetailListLabels = (t: TFunction): GridLabel[] => [
 ]
 
 export const getContactSaveLabels = (t: TFunction): GridLabel[] => [
-  { label: t('contact:firstName'), key: 'firstName' },
-  { label: t('contact:lastName'), key: 'lastName' },
-  { label: t('contact:email'), key: 'email' },
-  { label: t('contact:phone'), key: 'phone' },
-  { label: t('contact:documentType'), key: 'documentType' },
-  { label: t('contact:documentId'), key: 'documentId' },
+  { label: t('contacts:firstName'), key: 'firstName' },
+  { label: t('contacts:lastName'), key: 'lastName' },
+  { label: t('contacts:email'), key: 'email' },
+  { label: t('contacts:phone'), key: 'phone' },
+  { label: t('contacts:documentType'), key: 'documentType' },
+  { label: t('contacts:documentId'), key: 'documentId' },
 ]
 
 export const transformContactIntoPageGridData = (contact: Contact, skipFullNameAsLink?: boolean): PageElement => ({

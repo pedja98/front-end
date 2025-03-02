@@ -54,10 +54,10 @@ export const transformShopIntoPageGridData = (shop: Shop, skipNameAsLink?: boole
 })
 
 export const getShopDetailListLabels = (t: TFunction): GridLabel[] => [
-  { label: t('shop:name'), key: 'name' },
-  { label: t('shop:address'), key: 'address' },
-  { label: t('shop:region'), key: 'region' },
-  { label: t('shop:shopLeader'), key: 'shopLeader' },
+  { label: t('shops:name'), key: 'name' },
+  { label: t('shops:address'), key: 'address' },
+  { label: t('shops:region'), key: 'region' },
+  { label: t('shops:shopLeader'), key: 'shopLeader' },
   { label: t('general:createdBy'), key: 'createdByUsername' },
   { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
   { label: t('general:dateCreated'), key: 'dateCreated' },
@@ -65,8 +65,8 @@ export const getShopDetailListLabels = (t: TFunction): GridLabel[] => [
 ]
 
 export const getShopSaveLabels = (t: TFunction): GridLabel[] => [
-  { label: t('shop:name'), key: 'name' },
-  { label: t('shop:address'), key: 'address' },
-  { label: t('shop:shopLeader'), key: 'shopLeader' },
-  { label: t('shop:region'), key: 'region' },
+  { label: t('shops:name'), key: 'name' },
+  { label: t('shops:address'), key: 'address' },
+  { label: t('shops:shopLeader'), key: 'shopLeader' },
+  { label: t('shops:region'), key: 'region' },
 ]

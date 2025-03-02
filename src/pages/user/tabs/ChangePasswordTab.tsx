@@ -49,7 +49,7 @@ const ChangePasswordTab = () => {
     if (changePasswordFormProps.newPassword === changePasswordFormProps.currentPassword) {
       dispatch(
         setNotification({
-          text: t('user:passwordNotChanged'),
+          text: t('users:passwordNotChanged'),
           type: NotificationType.Warning,
         }),
       )
@@ -59,7 +59,7 @@ const ChangePasswordTab = () => {
     if (!PasswordPattern.test(changePasswordFormProps.newPassword)) {
       dispatch(
         setNotification({
-          text: t('user:invalidPasswordFormat'),
+          text: t('users:invalidPasswordFormat'),
           type: NotificationType.Warning,
         }),
       )
@@ -69,7 +69,7 @@ const ChangePasswordTab = () => {
     if (changePasswordFormProps.newPassword !== changePasswordFormProps.confirmNewPassword) {
       dispatch(
         setNotification({
-          text: t('user:passwordMismatch'),
+          text: t('users:passwordMismatch'),
           type: NotificationType.Warning,
         }),
       )
@@ -77,7 +77,7 @@ const ChangePasswordTab = () => {
     }
 
     try {
-      const messageCode = `user:${
+      const messageCode = `users:${
         (
           await changePassword({
             username: currentUsername,
@@ -97,7 +97,7 @@ const ChangePasswordTab = () => {
       navigate('/index')
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `user:${errorResponse.data}` || 'general:unknowError'
+      const errorCode = `users:${errorResponse.data}` || 'general:unknowError'
       dispatch(
         setNotification({
           text: t(errorCode),

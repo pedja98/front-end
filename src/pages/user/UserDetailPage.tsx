@@ -48,7 +48,7 @@ const UserDetailPage = () => {
   const handleDeleteClick = () => {
     dispatch(
       showConfirm({
-        confirmationText: t('user:userDeletionText', { firstName: user.firstName, lastName: user.lastName }),
+        confirmationText: t('users:userDeletionText', { firstName: user.firstName, lastName: user.lastName }),
         confirmationTitle: t('general:confirmDeletionTitle'),
         onConfirm: handleConfirmDelete,
         onCancel: handleConfirmClose,
@@ -64,7 +64,7 @@ const UserDetailPage = () => {
       await deleteUser(username).unwrap()
       dispatch(
         setNotification({
-          text: t('user:userDeleted', { username }),
+          text: t('users:userDeleted', { username }),
           type: NotificationType.Success,
         }),
       )

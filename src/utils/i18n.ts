@@ -14,7 +14,7 @@ i18n
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
-    ns: ['general', 'user', 'login', 'shop', 'region', 'company', 'contact'],
+    ns: ['general', 'users', 'login', 'shops', 'regions', 'companies', 'contacts'],
     defaultNS: 'general',
     interpolation: {
       escapeValue: false,

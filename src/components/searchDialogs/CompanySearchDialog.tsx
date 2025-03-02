@@ -7,6 +7,7 @@ import { updateSearchAttribute } from '../../features/search.slice'
 import { CompanySortedByFields } from '../../consts/search'
 import { SearchCompanyDataFormProps } from '../../types/company'
 import SearchDialogSort from '../SearchDialogSort'
+import { ModulesOptions } from '../../types/common'
 
 const CompanySearchDialog = () => {
   const { t } = useTranslation()
@@ -26,7 +27,7 @@ const CompanySearchDialog = () => {
           <TextField
             id='name'
             name='name'
-            label={t('company:name')}
+            label={t('companies:name')}
             variant='standard'
             value={companySearchData.name || ''}
             sx={{ width: '100%' }}
@@ -40,7 +41,7 @@ const CompanySearchDialog = () => {
             sx={{ width: '100%' }}
             id='hqAddress'
             name='hqAddress'
-            label={t('company:hqAddress')}
+            label={t('companies:hqAddress')}
             variant='standard'
             value={companySearchData.hqAddress || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +54,7 @@ const CompanySearchDialog = () => {
             sx={{ width: '100%' }}
             id='tin'
             name='tin'
-            label={t('company:tin')}
+            label={t('companies:tin')}
             type='number'
             variant='standard'
             value={companySearchData.tin || ''}
@@ -67,7 +68,7 @@ const CompanySearchDialog = () => {
             sx={{ width: '100%' }}
             id='contact-phone'
             name='contactPhone'
-            label={t('company:contactPhone')}
+            label={t('companies:contactPhone')}
             variant='standard'
             value={companySearchData.contactPhone || ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +77,7 @@ const CompanySearchDialog = () => {
           />
         </Grid>
         <SearchDialogSort
-          searchDialog='company'
+          moduleOption={ModulesOptions.Companies}
           sortByFields={CompanySortedByFields}
           sortByValue={companySearchData.sortBy}
           sortOrder={companySearchData.sortOrder}

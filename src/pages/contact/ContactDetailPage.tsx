@@ -59,7 +59,7 @@ const ContactDetailPage = () => {
   const handleDeleteClick = () => {
     dispatch(
       showConfirm({
-        confirmationText: t('contact:contactDeletionText', {
+        confirmationText: t('contacts:contactDeletionText', {
           firstName: contact.firstName,
           lastName: contact.lastName,
         }),
@@ -78,7 +78,7 @@ const ContactDetailPage = () => {
       await deleteContact(contactId).unwrap()
       dispatch(
         setNotification({
-          text: t('contact:contactDeleted', { fullName: contact.firstName + ' ' + contact.lastName }),
+          text: t('contacts:contactDeleted', { fullName: contact.firstName + ' ' + contact.lastName }),
           type: NotificationType.Success,
         }),
       )
