@@ -25,7 +25,11 @@ export const getContactSaveLabels = (t: TFunction): GridLabel[] => [
   { label: t('contacts:documentId'), key: 'documentId' },
 ]
 
-export const transformContactIntoPageGridData = (contact: Contact, skipFullNameAsLink?: boolean): PageElement => ({
+export const transformContactIntoPageGridData = (
+  t: TFunction,
+  contact: Contact,
+  skipFullNameAsLink?: boolean,
+): PageElement => ({
   fullName: {
     value: contact.firstName + ' ' + contact.lastName,
     link: `/index/contacts/${contact.id}`,
@@ -33,7 +37,10 @@ export const transformContactIntoPageGridData = (contact: Contact, skipFullNameA
   },
   email: { value: contact.email, type: GridFieldTypes.STRING },
   phone: { value: contact.phone, type: GridFieldTypes.STRING },
-  documentType: { value: contact.documentType, type: GridFieldTypes.STRING },
+  documentType: {
+    value: t(`contacts:documentTypes.${contact.documentType.toLocaleLowerCase()}`),
+    type: GridFieldTypes.STRING,
+  },
   documentId: { value: contact.documentId, type: GridFieldTypes.STRING },
   createdByUsername: {
     value: contact.createdByUsername,

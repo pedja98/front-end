@@ -37,7 +37,7 @@ const ContactListPage = () => {
   }
 
   const paginatedContacts = contacts.slice((currentPage - 1) * TabelRowPerPage, currentPage * TabelRowPerPage)
-  const listPageContactGridData = paginatedContacts.map((contact) => transformContactIntoPageGridData(contact))
+  const listPageContactGridData = paginatedContacts.map((contact) => transformContactIntoPageGridData(t, contact))
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page)

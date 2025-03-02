@@ -37,7 +37,7 @@ const UserListPage = () => {
   }
 
   const paginatedUsers = users.slice((currentPage - 1) * TabelRowPerPage, currentPage * TabelRowPerPage)
-  const listPageUserGridData = paginatedUsers.map((user) => transformUserIntoPageGridData(user))
+  const listPageUserGridData = paginatedUsers.map((user) => transformUserIntoPageGridData(t, user))
 
   const columns = getUseDetailListPagesLabels(t)
 

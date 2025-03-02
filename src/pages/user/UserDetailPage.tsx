@@ -43,7 +43,7 @@ const UserDetailPage = () => {
     return null
   }
 
-  const detailPageUserGridData = transformUserIntoPageGridData(user, true)
+  const detailPageUserGridData = transformUserIntoPageGridData(t, user, true)
 
   const handleDeleteClick = () => {
     dispatch(

@@ -4,7 +4,7 @@ import { dateFormater } from '../helpers/common'
 import { PageElement, GridLabel } from '../types/common'
 import { User } from '../types/user'
 
-export const transformUserIntoPageGridData = (user: User, skipUsernameAsLink?: boolean): PageElement => ({
+export const transformUserIntoPageGridData = (t: TFunction, user: User, skipUsernameAsLink?: boolean): PageElement => ({
   username: {
     value: user.username,
     link: `/index/users/${user.username}`,
@@ -14,7 +14,7 @@ export const transformUserIntoPageGridData = (user: User, skipUsernameAsLink?: b
   lastName: { value: user.lastName, type: GridFieldTypes.STRING },
   email: { value: user.email, type: GridFieldTypes.STRING },
   phone: { value: user.phone, type: GridFieldTypes.STRING },
-  type: { value: user.type, type: GridFieldTypes.STRING },
+  type: { value: t(`users:userTypes.${user.type.toLocaleLowerCase()}`), type: GridFieldTypes.STRING },
   shopName: { value: user.shopName, link: `/index/shop/${user.shopId}`, type: GridFieldTypes.LINK },
   createdByUsername: {
     value: user.createdByUsername,

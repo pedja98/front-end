@@ -44,7 +44,7 @@ const ContactDetailPage = () => {
     return null
   }
 
-  const detailPageContactGridData = transformContactIntoPageGridData(contact, true)
+  const detailPageContactGridData = transformContactIntoPageGridData(t, contact, true)
 
   const labels = getContactDetailListLabels(t)
 
