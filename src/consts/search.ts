@@ -3,32 +3,36 @@ export const InitialState: Record<string, unknown> = {}
 export const UserSortedByFields = {
   Username: 'username',
   Email: 'email',
-  DateCreated: 'dateCreated',
+  dateCreated: 'dateCreated',
 }
 
 export const RegionSortedByFields = {
   Name: 'name',
-  DateCreated: 'dateCreated',
+  dateCreated: 'dateCreated',
 }
 
 export const CompanySortedByFields = {
   Name: 'name',
   Hq: 'hqAddress',
   Tin: 'tin',
-  DateCreated: 'dateCreated',
+  dateCreated: 'dateCreated',
 }
 
 export const ShopSortedByFields = {
   Name: 'name',
   Address: 'address',
-  DateCreated: 'dateCreated',
+  dateCreated: 'dateCreated',
 }
 
 export const ContactSortedByFields = {
   firstName: 'firstName',
   lastName: 'lastName',
   documentId: 'documentId',
-  DateCreated: 'dateCreated',
+  dateCreated: 'dateCreated',
+}
+
+export const CustomerSessionSortedByFields = {
+  dateCreated: 'dateCreated',
 }
 
 export const SortedOrderValues = {

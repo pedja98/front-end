@@ -1,4 +1,4 @@
-import { SaveCompanyDto } from '../types/company'
+import { CompanyStatus, SaveCompanyDto } from '../types/company'
 
 export const SaveCompanyFormInitialState: Partial<SaveCompanyDto> = {
   name: '',
@@ -12,4 +12,10 @@ export const SaveCompanyFormInitialState: Partial<SaveCompanyDto> = {
   comment: '',
   assignedTo: undefined,
   temporaryAssignedTo: undefined,
+}
+
+export const CompanyStatuses: Record<CompanyStatus, CompanyStatus> = {
+  ACTIVE: CompanyStatus.ACTIVE,
+  INACTIVE: CompanyStatus.INACTIVE,
+  POTENTIAL: CompanyStatus.POTENTIAL,
 }

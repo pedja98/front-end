@@ -8,6 +8,7 @@
   "bankName": "Ime banke",
   "bankAccountNumber": "Bankovni račun",
   "comment": "Komentar",
+  "status": "Status",
   "companyUpdated": "Kompanijski podaci su uspešno ažurirani",
   "createCompanyLabel": "KREIRAJ KOMPANIJU",
   "editCompanyLabel": "IZMENI KOMPANIJU",
@@ -21,5 +22,10 @@
     "hqAddress": "Adresa sedišta",
     "tin": "Pib",
     "dateCreated": "Date created"
+  },
+  "statuses": {
+    "active": "Aktivni",
+    "inactive": "Neaktivni",
+    "potential": "Potencijalni"
   }
 }

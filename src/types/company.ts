@@ -3,6 +3,7 @@ export interface Company {
   name?: string
   hqAddress?: string
   industry?: string
+  status?: CompanyStatus
   contactPhone?: string
   numberOfEmployees?: number
   tin?: number
@@ -38,7 +39,14 @@ export interface SearchCompanyDataFormProps {
   name?: string
   hqAddress?: string
   tin?: number
+  status?: string[]
   sortBy?: string
   sortOrder?: string
   contactPhone?: string
+}
+
+export enum CompanyStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+  POTENTIAL = 'POTENTIAL',
 }

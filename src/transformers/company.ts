@@ -31,13 +31,18 @@ export const getSaveCompanyGridData = (
   comment: { type: GridFieldTypes.AREA, required: false },
 })
 
-export const transformCompanyIntoEditPageGridData = (company: Company, skipNameAsLink?: boolean): PageElement => ({
+export const transformCompanyIntoEditPageGridData = (
+  t: TFunction,
+  company: Company,
+  skipNameAsLink?: boolean,
+): PageElement => ({
   name: {
     value: company.name,
     link: `/index/companies/${company.id}`,
     type: skipNameAsLink ? GridFieldTypes.STRING : GridFieldTypes.LINK,
   },
-  hqAddress: { type: GridFieldTypes.STRING, value: company.hqAddress },
+  status: { type: GridFieldTypes.STRING, value: t(`companies:statuses.${company.status?.toLocaleLowerCase()}`) },
+  hqAddress: { type: GridFieldTypes.AREA, value: company.hqAddress },
   contactPhone: { type: GridFieldTypes.STRING, value: company.contactPhone },
   tin: { type: GridFieldTypes.STRING, value: company.tin },
   bankName: { type: GridFieldTypes.STRING, value: company.bankName },
@@ -75,7 +80,7 @@ export const transformCompanyIntoEditPageGridData = (company: Company, skipNameA
 
 export const getCompanyDetailLabels = (t: TFunction): GridLabel[] => [
   { label: t('companies:name'), key: 'name' },
-  { label: t('companies:hqAddress'), key: 'hqAddress' },
+  { label: t('companies:status'), key: 'status' },
   { label: t('companies:industry'), key: 'industry' },
   { label: t('companies:contactPhone'), key: 'contactPhone' },
   { label: t('companies:numberOfEmployees'), key: 'numberOfEmployees' },
@@ -88,12 +93,13 @@ export const getCompanyDetailLabels = (t: TFunction): GridLabel[] => [
   { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
   { label: t('general:dateCreated'), key: 'dateCreated' },
   { label: t('general:dateModified'), key: 'dateModified' },
+  { label: t('companies:hqAddress'), key: 'hqAddress' },
   { label: t('companies:comment'), key: 'comment' },
 ]
 
 export const getCompanyListColumns = (t: TFunction): GridLabel[] => [
   { label: t('companies:name'), key: 'name' },
-  { label: t('companies:hqAddress'), key: 'hqAddress' },
+  { label: t('companies:status'), key: 'status' },
   { label: t('companies:contactPhone'), key: 'contactPhone' },
   { label: t('companies:tin'), key: 'tin' },
   { label: t('companies:assignedTo'), key: 'assignedTo' },

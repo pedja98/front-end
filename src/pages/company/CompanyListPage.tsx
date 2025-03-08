@@ -37,7 +37,9 @@ const CompanyListPage = () => {
   }
 
   const paginatedCompanies = companies.slice((currentPage - 1) * TabelRowPerPage, currentPage * TabelRowPerPage)
-  const listPageCompaniesGridData = paginatedCompanies.map((company) => transformCompanyIntoEditPageGridData(company))
+  const listPageCompaniesGridData = paginatedCompanies.map((company) =>
+    transformCompanyIntoEditPageGridData(t, company),
+  )
 
   const columns = getCompanyListColumns(t)
 

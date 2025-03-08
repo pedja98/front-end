@@ -8,6 +8,7 @@
   "bankName": "Bank name",
   "bankAccountNumber": "Bank account number",
   "comment": "Comment",
+  "status": "Status",
   "companyUpdated": "Company data has been successfully updated",
   "createCompanyLabel": "CREATE COMPANY",
   "editCompanyLabel": "EDIT COMPANY",
@@ -21,5 +22,10 @@
     "hqAddress": "HQ Address",
     "tin": "Tin",
     "dateCreated": "Date created"
+  },
+  "statuses": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "potential": "Potential"
   }
 }

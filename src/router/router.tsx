@@ -5,7 +5,7 @@ import IndexProtectedRoute from '../routes/IndexProtectedRoute'
 import Layout from '../layouts/layout'
 import LoginProtectedRoute from '../routes/LoginProtectedRoute'
 import CompanyPage from '../pages/company/CompanyPage'
-import CustomerSessionPage from '../pages/CustomerSessionPage'
+import CustomerSessionPage from '../pages/customerSession/CustomerSessionPage'
 import OpportunityPage from '../pages/OpportunityPage'
 import OfferPage from '../pages/OfferPage'
 import ContractPage from '../pages/ContractPage'
@@ -32,6 +32,9 @@ import ShopDetailPage from '../pages/shop/ShopDetailPage'
 import ContactSavePage from '../pages/contact/ContactSavePage'
 import ContactListPage from '../pages/contact/ContactListPage'
 import ContactDetailPage from '../pages/contact/ContactDetailPage'
+import CustomerSessionSavePage from '../pages/customerSession/CustomerSessionSavePage'
+import CustomerSessionListPage from '../pages/customerSession/CustomerSessionListPage'
+import CustomerSessionDetailPage from '../pages/customerSession/CustomerSessionDetailPage'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -77,7 +80,13 @@ export default createBrowserRouter([
       {
         path: 'customer-sessions',
         element: <CustomerSessionPage />,
-        children: [{ index: true, element: <EntityIndexPage /> }],
+        children: [
+          { index: true, element: <EntityIndexPage /> },
+          { path: 'create', element: <CustomerSessionSavePage /> },
+          { path: 'list', element: <CustomerSessionListPage /> },
+          { path: ':id', element: <CustomerSessionDetailPage /> },
+          { path: ':id/edit', element: <CustomerSessionSavePage /> },
+        ],
       },
       {
         path: 'opportunities',

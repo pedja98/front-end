@@ -5,6 +5,7 @@ import RegionSearchDialog from '../components/searchDialogs/RegionSearchDialog'
 import CompanySearchDialog from '../components/searchDialogs/CompanySearchDialog'
 import ShopSearchDialog from '../components/searchDialogs/ShopSearchDialog'
 import ContactSearchDialog from '../components/searchDialogs/ContactSearchDialog'
+import CustomerSessionSearchDialog from '../components/searchDialogs/CustomerSessionSearchDialog'
 
 export const getCurrentSearchDialog = (currentModule: ModulesOptions): ReactNode | undefined => {
   const dialogs: Partial<Record<ModulesOptions, ReactNode>> = {
@@ -13,6 +14,7 @@ export const getCurrentSearchDialog = (currentModule: ModulesOptions): ReactNode
     [ModulesOptions.Companies]: <CompanySearchDialog />,
     [ModulesOptions.Shops]: <ShopSearchDialog />,
     [ModulesOptions.Contacts]: <ContactSearchDialog />,
+    [ModulesOptions.CustomerSessions]: <CustomerSessionSearchDialog />,
   }
 
   return dialogs[currentModule]

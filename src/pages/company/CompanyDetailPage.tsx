@@ -34,7 +34,7 @@ const CompanyDetailPage = () => {
     return null
   }
 
-  const detailPageCompanyGridData = transformCompanyIntoEditPageGridData(company, true)
+  const detailPageCompanyGridData = transformCompanyIntoEditPageGridData(t, company, true)
 
   const labels = getCompanyDetailLabels(t)
 
