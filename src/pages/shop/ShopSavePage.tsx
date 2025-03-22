@@ -27,21 +27,22 @@ const ShopSavePage = () => {
   const shopId = useParams().id
 
   const {
-    data: getShopData,
+    data: fetchedShopData,
     isLoading: isLoadingGetShop,
     isError: isErrorGetShop,
     error: errorGetShop,
   } = useGetShopQuery(shopId as string, { skip: !shopId })
 
   useEffect(() => {
-    if (getShopData) {
+    if (fetchedShopData) {
       setShopData({
-        ...getShopData,
-        region: getShopData.regionId,
-        shopLeader: getShopData.shopLeaderId,
+        name: fetchedShopData.name,
+        address: fetchedShopData.address,
+        region: fetchedShopData.regionId,
+        shopLeader: fetchedShopData.shopLeaderId,
       })
     }
-  }, [getShopData])
+  }, [fetchedShopData])
 
   const { data: regions } = useGetRegionsQuery('', {
     selectFromResult: ({ data }) => ({
@@ -162,9 +163,13 @@ const ShopSavePage = () => {
                 <FormControl sx={{ width: '100%' }} variant='standard'>
                   <Autocomplete
                     id={label.key}
-                    value={Object.keys(gridFieldData.autocompleteMap || {}).find(
-                      (key) => gridFieldData.autocompleteMap?.[key] === String(shopData[label.key as keyof SaveShop]),
-                    )}
+                    value={
+                      Object.keys(gridFieldData.autocompleteMap || {}).find(
+                        (key) =>
+                          (gridFieldData.autocompleteMap || {})?.[key] ===
+                          Number(shopData[label.key as keyof SaveShop]),
+                      ) || null
+                    }
                     options={Object.keys(gridFieldData.autocompleteMap || {})}
                     getOptionLabel={(option) => {
                       return option !== undefined ? String(option) : ''
