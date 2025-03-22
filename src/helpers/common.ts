@@ -1,6 +1,7 @@
 import { InitialState as AuthInitialState } from '../consts/auth'
 import { AuthState } from '../types/auth'
 import Cookies from 'js-cookie'
+import { AutocompleteHashMap, AutocompleteEntity } from '../types/common'
 
 export const getRoutePrefixFromCodeString = (prefixText: string): string => {
   return prefixText
@@ -45,4 +46,19 @@ export const dateFormater = (dateString: string): string => {
   const minutes = date.getUTCMinutes().toString().padStart(2, '0')
 
   return `${day}/${month}/${year} ${hours}:${minutes}`
+}
+
+export const getAutocompleteHashMapFromEntityData = <T extends AutocompleteEntity>(
+  entities: T[],
+  keyField: string,
+  valueField: string,
+): AutocompleteHashMap => {
+  return entities.reduce((acc, entity) => {
+    const entityKey = String(entity[keyField])
+    const entityValue = entity[valueField]
+    if (entityKey && entityValue) {
+      acc[entityKey] = entityValue
+    }
+    return acc
+  }, {} as AutocompleteHashMap)
 }

@@ -1,14 +1,4 @@
-import {
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Autocomplete, Button, FormControl, Grid, SelectChangeEvent, TextField, Typography } from '@mui/material'
 import { useGetRegionsQuery } from '../../app/apis/region.api'
 import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
 import { UserType } from '../../types/user'
@@ -22,9 +12,10 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { SaveShop } from '../../types/shop'
 import { getSaveShopGridData, getShopSaveLabels } from '../../transformers/shop'
 import { GridFieldTypes } from '../../consts/common'
-import { ApiException } from '../../types/common'
+import { ApiException, AutocompleteEntity } from '../../types/common'
 import { useCreateShopMutation, useGetShopQuery, useUpdateShopMutation } from '../../app/apis/shop.api'
 import { SaveShopFormInitialState } from '../../consts/shop'
+import { getAutocompleteHashMapFromEntityData } from '../../helpers/common'
 
 const ShopSavePage = () => {
   const [shopData, setShopData] = useState<SaveShop>(SaveShopFormInitialState)
@@ -92,14 +83,9 @@ const ShopSavePage = () => {
     return null
   }
 
-  const shopLeadersWithEmptyValue = [{ id: undefined, username: t('none') }, ...shopLeaders]
-  const regionsWithEmptyValue = [{ id: undefined, name: t('none') }, ...regions]
-
-  const createShopGridData = getSaveShopGridData(
-    shopLeadersWithEmptyValue?.map((shopLeader) => shopLeader.id),
-    shopLeadersWithEmptyValue?.map((shopLeader) => shopLeader.username),
-    regionsWithEmptyValue?.map((region) => region.id),
-    regionsWithEmptyValue?.map((region) => region.name),
+  const saveShopGridData = getSaveShopGridData(
+    getAutocompleteHashMapFromEntityData(shopLeaders as unknown as AutocompleteEntity[], 'username', 'id'),
+    getAutocompleteHashMapFromEntityData(regions, 'name', 'id'),
   )
 
   const labels = getShopSaveLabels(t)
@@ -108,7 +94,7 @@ const ShopSavePage = () => {
     if (
       Object.keys(shopData).some(
         (key) =>
-          createShopGridData[key as keyof SaveShop]?.required && !String(shopData[key as keyof SaveShop] || '').trim(),
+          saveShopGridData[key as keyof SaveShop]?.required && !String(shopData[key as keyof SaveShop] || '').trim(),
       )
     ) {
       dispatch(
@@ -131,7 +117,7 @@ const ShopSavePage = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate(shopId ? `/index/shops/${shopId}` : `/index/contacts`)
+      navigate(shopId ? `/index/shops/${shopId}` : `/index/shops`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `shops:${errorResponse.data}` || 'general:unknownError'
@@ -151,7 +137,7 @@ const ShopSavePage = () => {
       </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
-          const gridFieldData = createShopGridData[label.key]
+          const gridFieldData = saveShopGridData[label.key]
           if (GridFieldTypes.STRING === gridFieldData.type) {
             return (
               <Grid item sx={{ width: '100%' }} key={label.key}>
@@ -170,30 +156,30 @@ const ShopSavePage = () => {
               </Grid>
             )
           }
-          if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
+          if (gridFieldData.type === GridFieldTypes.AUTOCOMPLETE && gridFieldData?.autocompleteMap) {
             return (
               <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                 <FormControl sx={{ width: '100%' }} variant='standard'>
-                  <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
-                    {label.label}
-                  </InputLabel>
-                  <Select
-                    labelId={label.key}
+                  <Autocomplete
                     id={label.key}
-                    name={label.key}
-                    value={String(shopData[label.key as keyof SaveShop])}
-                    variant='standard'
-                    sx={{ width: '100%' }}
-                    onChange={(event: SelectChangeEvent<string>) => {
-                      handleChange(event)
+                    value={Object.keys(gridFieldData.autocompleteMap || {}).find(
+                      (key) => gridFieldData.autocompleteMap?.[key] === String(shopData[label.key as keyof SaveShop]),
+                    )}
+                    options={Object.keys(gridFieldData.autocompleteMap || {})}
+                    getOptionLabel={(option) => {
+                      return option !== undefined ? String(option) : ''
                     }}
-                  >
-                    {gridFieldData?.options.map((option, index) => (
-                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? undefined}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                    onChange={(_, key) => {
+                      handleChange({
+                        target: { name: label.key, value: gridFieldData?.autocompleteMap?.[String(key)] },
+                      } as ChangeEvent<HTMLInputElement>)
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params} label={label.label} variant='standard' required={gridFieldData.required} />
+                    )}
+                    isOptionEqualToValue={(option, value) => option === value}
+                    sx={{ width: '100%' }}
+                  />
                 </FormControl>
               </Grid>
             )

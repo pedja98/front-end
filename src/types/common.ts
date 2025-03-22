@@ -34,6 +34,7 @@ export interface GridFieldAttributes {
   options?: (string | number | undefined)[]
   optionsValues?: (string | number | undefined)[]
   required?: boolean
+  autocompleteMap?: AutocompleteHashMap
 }
 
 export interface PageElement {
@@ -87,4 +88,12 @@ export enum ModulesOptions {
   Regions = 'regions',
   Users = 'users',
   Logout = 'logout',
+}
+
+export type AutocompleteHashMap = {
+  [key: string | number]: unknown
+}
+
+export type AutocompleteEntity = {
+  [key: string]: unknown
 }

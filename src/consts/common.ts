@@ -26,6 +26,7 @@ export const GridFieldTypes = {
   PASSWORD: 'password',
   MULTISELECT: 'multiselect',
   AREA: 'area',
+  AUTOCOMPLETE: 'autocomplete',
 } as const
 
 export const InitialState: CommonState = {}
