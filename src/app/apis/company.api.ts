@@ -1,4 +1,4 @@
-import { Company, SaveCompanyDto } from './../../types/company'
+import { Company, SaveCompany } from './../../types/company'
 import { CrmApiTags } from '../../consts/common'
 import { crmApi } from './core/crm.api'
 
@@ -11,7 +11,7 @@ export const companyApi = crmApi.injectEndpoints({
         body: companyData,
       }),
     }),
-    updateCompany: builder.mutation<{ message: string }, { id: number; company: Partial<SaveCompanyDto> }>({
+    updateCompany: builder.mutation<{ message: string }, { id: number; company: Partial<SaveCompany> }>({
       query: ({ id, company }) => ({
         url: `/companies/${id}`,
         method: 'PUT',

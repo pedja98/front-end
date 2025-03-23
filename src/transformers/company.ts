@@ -1,13 +1,10 @@
 import { TFunction } from 'i18next'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
-import { GridLabel, PageElement } from '../types/common'
+import { AutocompleteHashMap, GridLabel, PageElement } from '../types/common'
 import { Company } from '../types/company'
 
-export const getSaveCompanyGridData = (
-  assignedToIds: (number | undefined)[],
-  assignedToUsernames: (string | undefined)[],
-): PageElement => ({
+export const getSaveCompanyGridData = (assignedToUsersMap: AutocompleteHashMap): PageElement => ({
   name: { type: GridFieldTypes.STRING, required: true },
   hqAddress: { type: GridFieldTypes.STRING, required: true },
   industry: { type: GridFieldTypes.STRING, required: true },
@@ -17,16 +14,14 @@ export const getSaveCompanyGridData = (
   bankName: { type: GridFieldTypes.STRING, required: false },
   bankAccountNumber: { type: GridFieldTypes.STRING, required: false },
   assignedTo: {
-    type: GridFieldTypes.SELECT,
+    type: GridFieldTypes.AUTOCOMPLETE,
     required: true,
-    options: assignedToUsernames,
-    optionsValues: assignedToIds,
+    autocompleteMap: assignedToUsersMap,
   },
   temporaryAssignedTo: {
-    type: GridFieldTypes.SELECT,
+    type: GridFieldTypes.AUTOCOMPLETE,
     required: false,
-    options: assignedToUsernames,
-    optionsValues: assignedToIds,
+    autocompleteMap: assignedToUsersMap,
   },
   comment: { type: GridFieldTypes.AREA, required: false },
 })

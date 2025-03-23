@@ -78,7 +78,7 @@ const ContactSavePage = () => {
     t(`contacts:documentTypes.${type.toLowerCase()}`),
   )
 
-  const createContactGridData = getSaveContactGridData(
+  const saveContactGridData = getSaveContactGridData(
     [t('none'), ...contactDocumentTypesOptions],
     [undefined, ...Object.values(ContactDocumentTypes)],
   )
@@ -88,7 +88,7 @@ const ContactSavePage = () => {
     if (
       Object.keys(contactData).some(
         (key) =>
-          createContactGridData[key as keyof SaveContact]?.required &&
+          saveContactGridData[key as keyof SaveContact]?.required &&
           !String(contactData[key as keyof SaveContact] || '').trim(),
       )
     ) {
@@ -152,7 +152,7 @@ const ContactSavePage = () => {
       </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
-          const gridFieldData = createContactGridData[label.key]
+          const gridFieldData = saveContactGridData[label.key]
           if (GridFieldTypes.STRING === gridFieldData.type) {
             return (
               <Grid item sx={{ width: '100%' }} key={label.key}>

@@ -1,23 +1,14 @@
 import Grid from '@mui/material/Grid'
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Autocomplete, Button, FormControl, SelectChangeEvent, TextField, Typography } from '@mui/material'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../app/hooks'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { ApiException } from '../../types/common'
+import { ApiException, AutocompleteEntity } from '../../types/common'
 import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
-import { SaveCompanyDto } from '../../types/company'
+import { SaveCompany } from '../../types/company'
 import { useCreateCompanyMutation, useGetCompanyQuery, useUpdateCompanyMutation } from '../../app/apis/company.api'
 import { GridFieldTypes } from '../../consts/common'
 import { getCompanySaveLabels, getSaveCompanyGridData } from '../../transformers/company'
@@ -25,9 +16,10 @@ import { GridFieldType } from '../../types/common'
 import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
 import { UserType } from '../../types/user'
 import { SaveCompanyFormInitialState } from '../../consts/company'
+import { getAutocompleteHashMapFromEntityData } from '../../helpers/common'
 
 const CompanySavePage = () => {
-  const [companyData, setCompanyData] = useState<Partial<SaveCompanyDto>>(SaveCompanyFormInitialState)
+  const [companyData, setCompanyData] = useState<Partial<SaveCompany>>(SaveCompanyFormInitialState)
 
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
@@ -76,8 +68,8 @@ const CompanySavePage = () => {
     if (
       Object.keys(companyData).some(
         (key) =>
-          createCompanyGridData[key as keyof SaveCompanyDto]?.required &&
-          !String(companyData[key as keyof SaveCompanyDto] || '').trim(),
+          saveCompanyGridData[key as keyof SaveCompany]?.required &&
+          !String(companyData[key as keyof SaveCompany] || '').trim(),
       )
     ) {
       dispatch(
@@ -109,7 +101,7 @@ const CompanySavePage = () => {
       return
     }
 
-    if (!companyData.numberOfEmployees && isNaN(Number(companyData.numberOfEmployees))) {
+    if (companyData.numberOfEmployees && isNaN(Number(companyData.numberOfEmployees))) {
       dispatch(
         setNotification({
           text: t('invalidFieldValueFormat', { fieldName: t('companies:numberOfEmployees') }),
@@ -160,11 +152,8 @@ const CompanySavePage = () => {
 
   const labels = getCompanySaveLabels(t)
 
-  const assignedToUserDataWithEmptyValue = [{ id: undefined, username: t('none') }, ...assignedToUserData]
-
-  const createCompanyGridData = getSaveCompanyGridData(
-    assignedToUserDataWithEmptyValue?.map((user) => user.id),
-    assignedToUserDataWithEmptyValue?.map((user) => user.username),
+  const saveCompanyGridData = getSaveCompanyGridData(
+    getAutocompleteHashMapFromEntityData(assignedToUserData as unknown as AutocompleteEntity[], 'username', 'id'),
   )
 
   return (
@@ -174,7 +163,7 @@ const CompanySavePage = () => {
       </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
-          const gridFieldData = createCompanyGridData[label.key]
+          const gridFieldData = saveCompanyGridData[label.key]
           if (
             ([GridFieldTypes.STRING, GridFieldTypes.NUMBER, GridFieldTypes.AREA] as GridFieldType[]).includes(
               gridFieldData.type,
@@ -189,7 +178,7 @@ const CompanySavePage = () => {
                   label={label.label}
                   variant='standard'
                   required={!!gridFieldData.required}
-                  value={String(companyData[label.key as keyof SaveCompanyDto] || '')}
+                  value={String(companyData[label.key as keyof SaveCompany] || '')}
                   sx={{ width: '100%' }}
                   minRows={isArea ? 4 : 0}
                   multiline={isArea}
@@ -200,30 +189,34 @@ const CompanySavePage = () => {
               </Grid>
             )
           }
-          if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
+          if (gridFieldData.type === GridFieldTypes.AUTOCOMPLETE && gridFieldData?.autocompleteMap) {
             return (
               <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                 <FormControl sx={{ width: '100%' }} variant='standard'>
-                  <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
-                    {label.label}
-                  </InputLabel>
-                  <Select
-                    labelId={label.key}
+                  <Autocomplete
                     id={label.key}
-                    name={label.key}
-                    value={String(companyData[label.key as keyof SaveCompanyDto])}
-                    variant='standard'
-                    sx={{ width: '100%' }}
-                    onChange={(event: SelectChangeEvent<string>) => {
-                      handleChange(event)
+                    value={
+                      Object.keys(gridFieldData.autocompleteMap || {}).find(
+                        (key) =>
+                          (gridFieldData.autocompleteMap || {})?.[key] ===
+                          Number(companyData[label.key as keyof SaveCompany]),
+                      ) || null
+                    }
+                    options={Object.keys(gridFieldData.autocompleteMap || {})}
+                    getOptionLabel={(option) => {
+                      return option !== undefined ? String(option) : ''
                     }}
-                  >
-                    {gridFieldData?.options.map((option, index) => (
-                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? undefined}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                    onChange={(_, key) => {
+                      handleChange({
+                        target: { name: label.key, value: gridFieldData?.autocompleteMap?.[String(key)] },
+                      } as ChangeEvent<HTMLInputElement>)
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params} label={label.label} variant='standard' required={gridFieldData.required} />
+                    )}
+                    isOptionEqualToValue={(option, value) => option === value}
+                    sx={{ width: '100%' }}
+                  />
                 </FormControl>
               </Grid>
             )

@@ -1,6 +1,6 @@
-import { CompanyStatus, SaveCompanyDto } from '../types/company'
+import { CompanyStatus, SaveCompany } from '../types/company'
 
-export const SaveCompanyFormInitialState: Partial<SaveCompanyDto> = {
+export const SaveCompanyFormInitialState: Partial<SaveCompany> = {
   name: '',
   hqAddress: '',
   industry: '',

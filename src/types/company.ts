@@ -20,7 +20,7 @@ export interface Company {
   dateModified?: string
 }
 
-export interface SaveCompanyDto {
+export interface SaveCompany {
   id?: number
   name?: string
   hqAddress?: string
