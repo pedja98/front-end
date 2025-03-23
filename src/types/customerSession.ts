@@ -4,6 +4,7 @@ export interface SaveCustomerSession {
   status: CustomerSessionsStatus
   type: CustomerSessionType
   mode: CustomerSessionMode
+  outcome: CustomerSessionOutcome
   sessionStart: string
   sessionEnd: string
   companyId: number
@@ -17,6 +18,7 @@ export interface CustomerSession {
   status: CustomerSessionsStatus
   type: CustomerSessionType
   mode: CustomerSessionMode
+  outcome: CustomerSessionOutcome
   sessionStart: string
   sessionEnd: string
   companyId: number
@@ -49,4 +51,11 @@ export enum CustomerSessionType {
   NEGOTIATION = 'NEGOTIATION',
   CONTRACT_SIGNING = 'CONTRACT_SIGNING',
   TENDER = 'TENDER',
+}
+
+export enum CustomerSessionOutcome {
+  NEW_CALL = 'NEW_CALL',
+  NEW_MEETING = 'NEW_MEETING',
+  NEW_OFFER = 'NEW_OFFER',
+  CLOSED = 'CLOSED',
 }

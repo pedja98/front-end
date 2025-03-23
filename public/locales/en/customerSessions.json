@@ -1,0 +1,12 @@
+{
+  "name": "Session name",
+  "description": "Description",
+  "status": "Session status",
+  "type": "Session type",
+  "mode": "Session mode",
+  "sessionStart": "Session start",
+  "sessionEnd": "Session end",
+  "outcome": "Outcome",
+  "company": "Company",
+  "opportunity": "Opportunity"
+}

@@ -27,6 +27,7 @@ export const GridFieldTypes = {
   MULTISELECT: 'multiselect',
   AREA: 'area',
   AUTOCOMPLETE: 'autocomplete',
+  DATE_TIME: 'dateTime',
 } as const
 
 export const InitialState: CommonState = {}

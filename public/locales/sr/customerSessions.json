@@ -1,0 +1,12 @@
+{
+  "name": "Ime sesije",
+  "description": "Opis",
+  "status": "Status sesije",
+  "type": "Tip sesije",
+  "mode": "Način sesije",
+  "sessionStart": "Početak sesije",
+  "sessionEnd": "Kraj sesije",
+  "outcome": "Ishod",
+  "company": "Kompanija",
+  "opportunity": "Poslovna prilika"
+}
