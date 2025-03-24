@@ -7,8 +7,8 @@ export interface SaveCustomerSession {
   outcome: CustomerSessionOutcome | ''
   sessionStart: string
   sessionEnd: string
-  companyId: number
-  opportunityId: number
+  company: number
+  opportunity: number
 }
 
 export interface CustomerSession {

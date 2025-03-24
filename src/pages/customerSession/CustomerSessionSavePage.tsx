@@ -32,13 +32,14 @@ import {
   useCreateCustomerSessionMutation,
   useGetCustomerSessionQuery,
   useUpdateCustomerSessionMutation,
-} from '../../app/apis/customerSession'
+} from '../../app/apis/customerSession.api'
 import { getCustomerSessionSaveLabels, getSaveCustomerSessionGridData } from '../../transformers/customerSession'
 import { DateTimePicker } from '@mui/x-date-pickers'
 import { Dayjs } from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useGetCompaniesQuery } from '../../app/apis/company.api'
+import moment from 'moment'
 
 const CustomerSessionSavePage = () => {
   const [customerSessionData, setCustomerSessionData] = useState<Partial<SaveCustomerSession>>(
@@ -68,6 +69,8 @@ const CustomerSessionSavePage = () => {
   const [updateCustomerSession, { isLoading: isLoadingUpdateCustomerSession }] = useUpdateCustomerSessionMutation()
 
   const [createCustomerSession, { isLoading: isLoadingCreateCustomerSession }] = useCreateCustomerSessionMutation()
+
+  const companiesMap = getAutocompleteHashMapFromEntityData(companies, 'name', 'id')
 
   useEffect(() => {
     if (getCustomerSessionData) {
@@ -101,6 +104,12 @@ const CustomerSessionSavePage = () => {
       )
       return
     }
+
+    customerSessionData.name = customerSessionData.name
+      ? customerSessionData.name
+      : `${customerSessionData.mode} ${Object.keys(companiesMap).find(
+          (key) => companiesMap?.[key] === Number(customerSessionData.company),
+        )} ${moment().format('DD-MM-YYYY')}`
 
     try {
       const response = customerSessionId
@@ -162,13 +171,13 @@ const CustomerSessionSavePage = () => {
   const saveCustomerSessionGridData = getSaveCustomerSessionGridData(
     customerSessionsStatusOptions,
     Object.values(CustomerSessionsStatus),
-    customerSessionModeOptions,
-    Object.values(CustomerSessionMode),
     customerSessionTypeOptions,
     Object.values(CustomerSessionType),
+    customerSessionModeOptions,
+    Object.values(CustomerSessionMode),
     customerSessionOutcomeOptions,
     Object.values(CustomerSessionOutcome),
-    getAutocompleteHashMapFromEntityData(companies, 'name', 'id'),
+    companiesMap,
   )
 
   return (
@@ -266,7 +275,7 @@ const CustomerSessionSavePage = () => {
           }
           if (gridFieldData.type === GridFieldTypes.DATE_TIME) {
             return (
-              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key} id={label.key}>
+              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DateTimePicker
                     name={label.key}
@@ -280,6 +289,8 @@ const CustomerSessionSavePage = () => {
                     slotProps={{
                       textField: {
                         fullWidth: true,
+                        required: !!gridFieldData.required,
+                        id: label.key,
                       },
                     }}
                   />

@@ -9,6 +9,8 @@
   "outcome": "Ishod",
   "company": "Kompanija",
   "opportunity": "Poslovna prilika",
+  "customerSessionCreated": "Korisnička sesija je uspešno napravljena",
+  "customerSessionUpdated": "Korisnička sesija je uspešno ažurirana",
   "createCustomerSessionLabel": "NAPRAVI KORISNIČKU SESIJU",
   "customerSessionsStatuses": {
     "PLANNED": "Planirano",

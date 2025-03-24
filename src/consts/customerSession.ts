@@ -1,7 +1,7 @@
 import { SaveCustomerSession } from '../types/customerSession'
 
 export const SaveCustomerSessionFormInitialState: Partial<SaveCustomerSession> = {
-  name: '',
+  name: undefined,
   description: '',
   status: '',
   type: '',
@@ -9,6 +9,6 @@ export const SaveCustomerSessionFormInitialState: Partial<SaveCustomerSession> =
   outcome: '',
   sessionStart: '',
   sessionEnd: '',
-  companyId: undefined,
-  opportunityId: undefined,
+  company: undefined,
+  opportunity: undefined,
 }

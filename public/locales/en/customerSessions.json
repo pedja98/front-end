@@ -9,6 +9,8 @@
   "outcome": "Outcome",
   "company": "Company",
   "opportunity": "Opportunity",
+  "customerSessionCreated": "Customer session is successfully created",
+  "customerSessionUpdated": "Customer session is successfully updated",
   "createCustomerSessionLabel": "CREATE CUSTOMER SESSION",
   "customerSessionsStatuses": {
     "PLANNED": "Planned",

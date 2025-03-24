@@ -30,13 +30,6 @@ export const customerSessionsApi = crmApi.injectEndpoints({
       query: (queryParams) => `/customer-sessions${queryParams}`,
       providesTags: [CrmApiTags.CUSTOMER_SESSION],
     }),
-    deleteCustomerSession: builder.mutation<{ message: string }, string>({
-      query: (id) => ({
-        url: `/customer-sessions/${id}`,
-        method: 'DELETE',
-      }),
-      invalidatesTags: (result, error, id) => [{ type: CrmApiTags.CUSTOMER_SESSION, id }],
-    }),
   }),
   overrideExisting: false,
 })
@@ -45,6 +38,5 @@ export const {
   useCreateCustomerSessionMutation,
   useGetCustomerSessionQuery,
   useGetCustomerSessionsQuery,
-  useDeleteCustomerSessionMutation,
   useUpdateCustomerSessionMutation,
 } = customerSessionsApi
