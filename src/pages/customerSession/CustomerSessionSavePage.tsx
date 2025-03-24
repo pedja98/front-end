@@ -277,6 +277,11 @@ const CustomerSessionSavePage = () => {
                         [label.key]: newValue && newValue.isValid() ? newValue.toISOString() : '',
                       }))
                     }}
+                    slotProps={{
+                      textField: {
+                        fullWidth: true,
+                      },
+                    }}
                   />
                 </LocalizationProvider>
               </Grid>
