@@ -4,7 +4,7 @@ import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 import { CustomerSession } from '../types/customerSession'
 
-export const getCustomerSessionDetailListLabels = (t: TFunction): GridLabel[] => [
+export const getCustomerSessionDetailPageLabels = (t: TFunction): GridLabel[] => [
   { label: t('customerSessions:name'), key: 'name' },
   { label: t('customerSessions:status'), key: 'status' },
   { label: t('customerSessions:type'), key: 'type' },
