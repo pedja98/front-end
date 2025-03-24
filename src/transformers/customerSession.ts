@@ -19,6 +19,18 @@ export const getCustomerSessionDetailListLabels = (t: TFunction): GridLabel[] =>
   { label: t('general:description'), key: 'description' },
 ]
 
+export const getCustomerSessionTableColumns = (t: TFunction): GridLabel[] => [
+  { label: t('customerSessions:name'), key: 'name' },
+  { label: t('customerSessions:status'), key: 'status' },
+  { label: t('customerSessions:type'), key: 'type' },
+  { label: t('customerSessions:mode'), key: 'mode' },
+  { label: t('customerSessions:outcome'), key: 'outcome' },
+  { label: t('general:createdBy'), key: 'createdByUsername' },
+  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { label: t('general:dateCreated'), key: 'dateCreated' },
+  { label: t('general:dateModified'), key: 'dateModified' },
+]
+
 export const getCustomerSessionSaveLabels = (t: TFunction): GridLabel[] => [
   { label: t('customerSessions:company'), key: 'company' },
   { label: t('customerSessions:status'), key: 'status' },
