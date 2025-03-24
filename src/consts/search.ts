@@ -32,6 +32,7 @@ export const ContactSortedByFields = {
 }
 
 export const CustomerSessionSortedByFields = {
+  name: 'name',
   dateCreated: 'dateCreated',
 }
 

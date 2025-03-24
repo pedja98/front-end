@@ -36,5 +36,9 @@
     "NEW_MEETING": "New meeting",
     "NEW_OFFER": "New offer",
     "CLOSED": "Closed"
+  },
+  "sortByLabels": {
+    "name": "Name",
+    "dateCreated": "Date created"
   }
 }

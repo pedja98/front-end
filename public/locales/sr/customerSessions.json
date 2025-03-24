@@ -36,5 +36,9 @@
     "NEW_MEETING": "Novi sastanak",
     "NEW_OFFER": "Nova ponuda",
     "CLOSED": "Zatvori"
+  },
+  "sortByLabels": {
+    "name": "Ime",
+    "dateCreated": "Datum kreiranja"
   }
 }

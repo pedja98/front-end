@@ -1,7 +1,7 @@
 export interface SaveCustomerSession {
   name: string
   description: string
-  status: CustomerSessionsStatus | ''
+  status: CustomerSessionStatus | ''
   type: CustomerSessionType | ''
   mode: CustomerSessionMode | ''
   outcome: CustomerSessionOutcome | ''
@@ -15,7 +15,7 @@ export interface CustomerSession {
   id: number
   name: string
   description: string
-  status: CustomerSessionsStatus
+  status: CustomerSessionStatus
   type: CustomerSessionType
   mode: CustomerSessionMode
   outcome: CustomerSessionOutcome
@@ -31,7 +31,7 @@ export interface CustomerSession {
   dateModified: string
 }
 
-export enum CustomerSessionsStatus {
+export enum CustomerSessionStatus {
   PLANNED = 'PLANNED',
   HELD = 'HELD',
   NOT_HELD = 'NOT_HELD',
@@ -58,4 +58,14 @@ export enum CustomerSessionOutcome {
   NEW_MEETING = 'NEW_MEETING',
   NEW_OFFER = 'NEW_OFFER',
   CLOSED = 'CLOSED',
+}
+
+export interface CustomerSessionSearchFormProps {
+  name?: string
+  status?: string[]
+  type?: string[]
+  mode?: string[]
+  outcome?: string[]
+  sortBy?: string
+  sortOrder?: string
 }

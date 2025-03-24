@@ -23,7 +23,7 @@ import { GridFieldTypes } from '../../consts/common'
 import {
   CustomerSessionMode,
   CustomerSessionOutcome,
-  CustomerSessionsStatus,
+  CustomerSessionStatus,
   CustomerSessionType,
   SaveCustomerSession,
 } from '../../types/customerSession'
@@ -152,7 +152,7 @@ const CustomerSessionSavePage = () => {
 
   const labels = getCustomerSessionSaveLabels(t)
 
-  const customerSessionsStatusOptions = Object.keys(CustomerSessionsStatus).map((status) =>
+  const customerSessionsStatusOptions = Object.keys(CustomerSessionStatus).map((status) =>
     t(`customerSessions:customerSessionsStatuses.${status}`),
   )
 
@@ -170,7 +170,7 @@ const CustomerSessionSavePage = () => {
 
   const saveCustomerSessionGridData = getSaveCustomerSessionGridData(
     customerSessionsStatusOptions,
-    Object.values(CustomerSessionsStatus),
+    Object.values(CustomerSessionStatus),
     customerSessionTypeOptions,
     Object.values(CustomerSessionType),
     customerSessionModeOptions,
