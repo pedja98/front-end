@@ -8,5 +8,31 @@
   "sessionEnd": "Kraj sesije",
   "outcome": "Ishod",
   "company": "Kompanija",
-  "opportunity": "Poslovna prilika"
+  "opportunity": "Poslovna prilika",
+  "createCustomerSessionLabel": "NAPRAVI KORISNIČKU SESIJU",
+  "customerSessionsStatuses": {
+    "PLANNED": "Planirano",
+    "HELD": "Održano",
+    "NOT_HELD": "Nije održano"
+  },
+  "customerSessionModes": {
+    "CALL": "Poziv",
+    "MEETING": "Sastanak"
+  },
+  "customerSessionTypes": {
+    "COLD_CALL": "Telemarketing",
+    "ACTION_CALL": "Akcioni poziv",
+    "CUSTOMER_CARE": "Briga o korisnicima",
+    "COMPLAINTS": "Žalbe",
+    "NEEDS_RECOGNITION": "Prepoznavanje potreba",
+    "NEGOTIATION": "Pregovaranje",
+    "CONTRACT_SIGNING": "Potpisivanje ugovora",
+    "TENDER": "Tender"
+  },
+  "customerSessionOutcomes": {
+    "NEW_CALL": "Novi poziv",
+    "NEW_MEETING": "Novi sastanak",
+    "NEW_OFFER": "Nova ponuda",
+    "CLOSED": "Zatvori"
+  }
 }

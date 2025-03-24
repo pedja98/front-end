@@ -8,5 +8,31 @@
   "sessionEnd": "Session end",
   "outcome": "Outcome",
   "company": "Company",
-  "opportunity": "Opportunity"
+  "opportunity": "Opportunity",
+  "createCustomerSessionLabel": "CREATE CUSTOMER SESSION",
+  "customerSessionsStatuses": {
+    "PLANNED": "Planned",
+    "HELD": "Held",
+    "NOT_HELD": "Not held"
+  },
+  "customerSessionModes": {
+    "CALL": "Call",
+    "MEETING": "Meeting"
+  },
+  "customerSessionTypes": {
+    "COLD_CALL": "Cold call",
+    "ACTION_CALL": "Action call",
+    "CUSTOMER_CARE": "Customer care",
+    "COMPLAINTS": "Complaints",
+    "NEEDS_RECOGNITION": "Needs recognition",
+    "NEGOTIATION": "Negotion",
+    "CONTRACT_SIGNING": "Contract signing",
+    "TENDER": "Tender"
+  },
+  "customerSessionOutcomes": {
+    "NEW_CALL": "New call",
+    "NEW_MEETING": "New meeting",
+    "NEW_OFFER": "New offer",
+    "CLOSED": "Closed"
+  }
 }

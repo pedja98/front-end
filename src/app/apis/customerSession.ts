@@ -4,7 +4,7 @@ import { crmApi } from './core/crm.api'
 
 export const customerSessionsApi = crmApi.injectEndpoints({
   endpoints: (builder) => ({
-    createCustomerSession: builder.mutation<{ message: string }, Omit<Partial<CustomerSession>, 'id'>>({
+    createCustomerSession: builder.mutation<{ message: string }, Omit<Partial<SaveCustomerSession>, 'id'>>({
       query: (customerSessionData) => ({
         url: '/customer-sessions',
         method: 'POST',

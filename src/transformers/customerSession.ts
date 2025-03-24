@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { GridLabel, PageElement } from '../types/common'
+import { AutocompleteHashMap, GridLabel, PageElement } from '../types/common'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 import { CustomerSession } from '../types/customerSession'
@@ -20,13 +20,14 @@ export const getCustomerSessionDetailListLabels = (t: TFunction): GridLabel[] =>
 ]
 
 export const getCustomerSessionSaveLabels = (t: TFunction): GridLabel[] => [
+  { label: t('customerSessions:company'), key: 'company' },
   { label: t('customerSessions:status'), key: 'status' },
   { label: t('customerSessions:type'), key: 'type' },
   { label: t('customerSessions:mode'), key: 'mode' },
   { label: t('customerSessions:sessionStart'), key: 'sessionStart' },
   { label: t('customerSessions:sessionEnd'), key: 'sessionEnd' },
   { label: t('customerSessions:outcome'), key: 'outcome' },
-  { label: t('general:description'), key: 'description' },
+  { label: t('customerSessions:description'), key: 'description' },
 ]
 
 export const transformCustomerSessionIntoPageGridData = (
@@ -72,7 +73,13 @@ export const getSaveCustomerSessionGridData = (
   customerSessionModeOptionValues: string[],
   customerSessionOutcomeOptions: string[],
   customerSessionOutcomeOptionValues: string[],
+  companiesMap: AutocompleteHashMap,
 ): PageElement => ({
+  company: {
+    required: true,
+    type: GridFieldTypes.AUTOCOMPLETE,
+    autocompleteMap: companiesMap,
+  },
   status: {
     required: true,
     type: GridFieldTypes.SELECT,
