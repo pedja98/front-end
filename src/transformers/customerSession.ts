@@ -52,15 +52,24 @@ export const transformCustomerSessionIntoPageGridData = (
     link: `/index/customer-sessions/${customerSession.id}`,
     type: skipNameAsLink ? GridFieldTypes.STRING : GridFieldTypes.LINK,
   },
-  status: { value: customerSession.status, type: GridFieldTypes.STRING },
-  type: { value: customerSession.type, type: GridFieldTypes.STRING },
+  status: {
+    value: t(`customerSessions:customerSessionsStatuses.${customerSession.status}`),
+    type: GridFieldTypes.STRING,
+  },
+  type: {
+    value: t(`customerSessions:customerSessionTypes.${customerSession.type}`),
+    type: GridFieldTypes.STRING,
+  },
   mode: {
-    value: t(`customerSessions:documentTypes.${customerSession.mode.toLocaleLowerCase()}`),
+    value: t(`customerSessions:customerSessionModes.${customerSession.mode}`),
     type: GridFieldTypes.STRING,
   },
   sessionStart: { value: dateFormater(customerSession.sessionStart as string), type: GridFieldTypes.STRING },
   sessionEnd: { value: dateFormater(customerSession.sessionEnd as string), type: GridFieldTypes.STRING },
-  outcome: { value: customerSession.outcome, type: GridFieldTypes.STRING },
+  outcome: {
+    value: t(`customerSessions:customerSessionOutcomes.${customerSession.outcome}`),
+    type: GridFieldTypes.STRING,
+  },
   createdByUsername: {
     value: customerSession.createdByUsername,
     link: `/index/users/${customerSession.createdByUsername}`,

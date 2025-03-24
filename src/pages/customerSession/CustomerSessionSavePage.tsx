@@ -35,7 +35,7 @@ import {
 } from '../../app/apis/customerSession.api'
 import { getCustomerSessionSaveLabels, getSaveCustomerSessionGridData } from '../../transformers/customerSession'
 import { DateTimePicker } from '@mui/x-date-pickers'
-import { Dayjs } from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useGetCompaniesQuery } from '../../app/apis/company.api'
@@ -280,6 +280,11 @@ const CustomerSessionSavePage = () => {
                   <DateTimePicker
                     name={label.key}
                     label={label.label}
+                    value={
+                      customerSessionData[label.key as keyof SaveCustomerSession]
+                        ? dayjs(customerSessionData[label.key as keyof SaveCustomerSession])
+                        : null
+                    }
                     onChange={(newValue: Dayjs | null) => {
                       setCustomerSessionData((prevData) => ({
                         ...prevData,
