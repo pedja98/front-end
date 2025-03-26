@@ -6,7 +6,7 @@ import { EmailPattern, GridFieldTypes, PhonePattern } from '../../../consts/comm
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useAppDispatch } from '../../../app/hooks'
-import { ApiException } from '../../../types/common'
+import { ApiException, GridFieldType } from '../../../types/common'
 import { setNotification } from '../../../features/notifications.slice'
 import { NotificationType } from '../../../types/notification'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -150,6 +150,7 @@ const EditUserTab = () => {
   const languageOptions = Object.keys(Languages).map((language) => t(`users:userLanguages.${language.toLowerCase()}`))
 
   const editPageUserGridData = transformUserIntoEditPageGridData(
+    userData,
     userTypeOptions,
     Object.values(UserType),
     languageOptions,
@@ -161,6 +162,37 @@ const EditUserTab = () => {
       <Grid item sx={{ width: '100%' }}>
         {labels.map((label) => {
           const gridFieldData = editPageUserGridData[label.key]
+          if (
+            (
+              [
+                GridFieldTypes.STRING,
+                GridFieldTypes.NUMBER,
+                GridFieldTypes.PASSWORD,
+                GridFieldTypes.AREA,
+              ] as GridFieldType[]
+            ).includes(gridFieldData.type)
+          ) {
+            const isArea = gridFieldData.type === GridFieldTypes.AREA
+            return (
+              <Grid item sx={{ width: '100%' }} key={label.key}>
+                <TextField
+                  id={label.key}
+                  name={label.key}
+                  label={label.label}
+                  variant='standard'
+                  type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
+                  required={!!gridFieldData.required}
+                  value={String(gridFieldData.value)}
+                  sx={{ width: '100%' }}
+                  minRows={isArea ? 4 : 0}
+                  multiline={isArea}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    handleChange(event)
+                  }}
+                />
+              </Grid>
+            )
+          }
           if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
             return (
               <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
@@ -172,7 +204,7 @@ const EditUserTab = () => {
                     labelId={label.key}
                     id={label.key}
                     name={label.key}
-                    value={String(userData[label.key as keyof User])}
+                    value={String(gridFieldData.value)}
                     variant='standard'
                     sx={{ width: '100%' }}
                     onChange={(event: SelectChangeEvent<string>) => {
@@ -186,23 +218,6 @@ const EditUserTab = () => {
                     ))}
                   </Select>
                 </FormControl>
-              </Grid>
-            )
-          } else if (gridFieldData.type === GridFieldTypes.STRING) {
-            return (
-              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-                <TextField
-                  sx={{ width: '100%' }}
-                  id={label.key}
-                  name={label.key}
-                  label={label.label}
-                  variant='standard'
-                  required={gridFieldData.required}
-                  value={userData[label.key as keyof User]}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    handleChange(event)
-                  }}
-                />
               </Grid>
             )
           }

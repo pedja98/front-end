@@ -153,6 +153,7 @@ const CompanySavePage = () => {
   const labels = getCompanySaveLabels(t)
 
   const saveCompanyGridData = getSaveCompanyGridData(
+    companyData,
     getAutocompleteHashMapFromEntityData(assignedToUserData as unknown as AutocompleteEntity[], 'username', 'id'),
   )
 
@@ -180,7 +181,7 @@ const CompanySavePage = () => {
                   label={label.label}
                   variant='standard'
                   required={!!gridFieldData.required}
-                  value={String(companyData[label.key as keyof SaveCompany] || '')}
+                  value={gridFieldData.value}
                   sx={{ width: '100%' }}
                   minRows={isArea ? 4 : 0}
                   multiline={isArea}
@@ -199,9 +200,7 @@ const CompanySavePage = () => {
                     id={label.key}
                     value={
                       Object.keys(gridFieldData.autocompleteMap || {}).find(
-                        (key) =>
-                          (gridFieldData.autocompleteMap || {})?.[key] ===
-                          Number(companyData[label.key as keyof SaveCompany]),
+                        (key) => (gridFieldData.autocompleteMap || {})?.[key] === Number(gridFieldData.value),
                       ) || null
                     }
                     options={Object.keys(gridFieldData.autocompleteMap || {})}

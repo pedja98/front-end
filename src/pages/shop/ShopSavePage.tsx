@@ -12,7 +12,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { SaveShop } from '../../types/shop'
 import { getSaveShopGridData, getShopSaveLabels } from '../../transformers/shop'
 import { GridFieldTypes } from '../../consts/common'
-import { ApiException, AutocompleteEntity } from '../../types/common'
+import { ApiException, AutocompleteEntity, GridFieldType } from '../../types/common'
 import { useCreateShopMutation, useGetShopQuery, useUpdateShopMutation } from '../../app/apis/shop.api'
 import { SaveShopFormInitialState } from '../../consts/shop'
 import { getAutocompleteHashMapFromEntityData } from '../../helpers/common'
@@ -85,6 +85,7 @@ const ShopSavePage = () => {
   }
 
   const saveShopGridData = getSaveShopGridData(
+    shopData,
     getAutocompleteHashMapFromEntityData(shopLeaders as unknown as AutocompleteEntity[], 'username', 'id'),
     getAutocompleteHashMapFromEntityData(regions, 'name', 'id'),
   )
@@ -141,7 +142,12 @@ const ShopSavePage = () => {
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = saveShopGridData[label.key]
-          if (GridFieldTypes.STRING === gridFieldData.type) {
+          if (
+            ([GridFieldTypes.STRING, GridFieldTypes.NUMBER, GridFieldTypes.AREA] as GridFieldType[]).includes(
+              gridFieldData.type,
+            )
+          ) {
+            const isArea = gridFieldData.type === GridFieldTypes.AREA
             return (
               <Grid item sx={{ width: '100%' }} key={label.key}>
                 <TextField
@@ -150,8 +156,10 @@ const ShopSavePage = () => {
                   label={label.label}
                   variant='standard'
                   required={!!gridFieldData.required}
-                  value={String(shopData[label.key as keyof SaveShop] || '')}
+                  value={String(gridFieldData.value)}
                   sx={{ width: '100%' }}
+                  minRows={isArea ? 4 : 0}
+                  multiline={isArea}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
                   }}
@@ -167,9 +175,7 @@ const ShopSavePage = () => {
                     id={label.key}
                     value={
                       Object.keys(gridFieldData.autocompleteMap || {}).find(
-                        (key) =>
-                          (gridFieldData.autocompleteMap || {})?.[key] ===
-                          Number(shopData[label.key as keyof SaveShop]),
+                        (key) => (gridFieldData.autocompleteMap || {})?.[key] === Number(gridFieldData.value),
                       ) || null
                     }
                     options={Object.keys(gridFieldData.autocompleteMap || {})}

@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next'
 import { GridLabel, PageElement } from '../types/common'
-import { Contact } from '../types/contact'
+import { Contact, SaveContact } from '../types/contact'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 
@@ -57,24 +57,28 @@ export const transformContactIntoPageGridData = (
 })
 
 export const getSaveContactGridData = (
+  contactData: Partial<SaveContact>,
   documentTypeOptions: string[],
   documentTypeOptionValues: (undefined | string)[],
 ): PageElement => ({
   firstName: {
     type: GridFieldTypes.STRING,
     required: true,
+    value: contactData.firstName,
   },
   lastName: {
     type: GridFieldTypes.STRING,
     required: true,
+    value: contactData.lastName,
   },
-  email: { type: GridFieldTypes.STRING, required: true },
-  phone: { type: GridFieldTypes.STRING, required: true },
+  email: { type: GridFieldTypes.STRING, required: true, value: contactData.email },
+  phone: { type: GridFieldTypes.STRING, required: true, value: contactData.phone },
   documentType: {
     required: true,
     type: GridFieldTypes.SELECT,
     options: documentTypeOptions,
     optionsValues: documentTypeOptionValues,
+    value: contactData.documentType,
   },
-  documentId: { type: GridFieldTypes.STRING, required: true },
+  documentId: { type: GridFieldTypes.STRING, required: true, value: contactData.documentId },
 })

@@ -133,6 +133,7 @@ const UserCreatePage = () => {
   const languageOptions = Object.keys(Languages).map((language) => t(`users:userLanguages.${language.toLowerCase()}`))
 
   const createUserGridData = transformUserIntoEditPageGridData(
+    createUserData,
     userTypeOptions,
     Object.values(UserType),
     languageOptions,
@@ -147,7 +148,17 @@ const UserCreatePage = () => {
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = createUserGridData[label.key]
-          if (([GridFieldTypes.STRING, GridFieldTypes.PASSWORD] as GridFieldType[]).includes(gridFieldData.type)) {
+          if (
+            (
+              [
+                GridFieldTypes.STRING,
+                GridFieldTypes.NUMBER,
+                GridFieldTypes.PASSWORD,
+                GridFieldTypes.AREA,
+              ] as GridFieldType[]
+            ).includes(gridFieldData.type)
+          ) {
+            const isArea = gridFieldData.type === GridFieldTypes.AREA
             return (
               <Grid item sx={{ width: '100%' }} key={label.key}>
                 <TextField
@@ -156,16 +167,19 @@ const UserCreatePage = () => {
                   label={label.label}
                   variant='standard'
                   type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
-                  value={createUserData[label.key as keyof User]}
-                  sx={{ width: '100%' }}
                   required={!!gridFieldData.required}
+                  value={String(gridFieldData.value)}
+                  sx={{ width: '100%' }}
+                  minRows={isArea ? 4 : 0}
+                  multiline={isArea}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
                   }}
                 />
               </Grid>
             )
-          } else if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
+          }
+          if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
             return (
               <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
                 <FormControl sx={{ width: '100%' }} variant='standard'>
@@ -176,7 +190,7 @@ const UserCreatePage = () => {
                     labelId={label.key}
                     id={label.key}
                     name={label.key}
-                    value={String(createUserData[label.key as keyof User])}
+                    value={String(gridFieldData.value)}
                     variant='standard'
                     sx={{ width: '100%' }}
                     onChange={(event: SelectChangeEvent<string>) => {

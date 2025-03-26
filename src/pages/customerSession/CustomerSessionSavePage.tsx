@@ -199,9 +199,14 @@ const CustomerSessionSavePage = () => {
         {labels.map((label) => {
           const gridFieldData = saveCustomerSessionGridData[label.key]
           if (
-            ([GridFieldTypes.STRING, GridFieldTypes.NUMBER, GridFieldTypes.AREA] as GridFieldType[]).includes(
-              gridFieldData.type,
-            )
+            (
+              [
+                GridFieldTypes.STRING,
+                GridFieldTypes.NUMBER,
+                GridFieldTypes.PASSWORD,
+                GridFieldTypes.AREA,
+              ] as GridFieldType[]
+            ).includes(gridFieldData.type)
           ) {
             const isArea = gridFieldData.type === GridFieldTypes.AREA
             return (
@@ -211,6 +216,7 @@ const CustomerSessionSavePage = () => {
                   name={label.key}
                   label={label.label}
                   variant='standard'
+                  type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
                   required={!!gridFieldData.required}
                   value={String(gridFieldData.value)}
                   sx={{ width: '100%' }}
@@ -259,9 +265,7 @@ const CustomerSessionSavePage = () => {
                     id={label.key}
                     value={
                       Object.keys(gridFieldData.autocompleteMap || {}).find(
-                        (key) =>
-                          (gridFieldData.autocompleteMap || {})?.[key] ===
-                          Number(customerSessionData[label.key as keyof SaveCustomerSession]),
+                        (key) => (gridFieldData.autocompleteMap || {})?.[key] === Number(gridFieldData.value),
                       ) || null
                     }
                     options={Object.keys(gridFieldData.autocompleteMap || {})}

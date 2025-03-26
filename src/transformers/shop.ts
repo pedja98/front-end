@@ -3,20 +3,22 @@ import { TFunction } from 'i18next'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 import { PageElement } from '../types/common'
-import { Shop } from '../types/shop'
+import { SaveShop, Shop } from '../types/shop'
 
 export const getSaveShopGridData = (
+  shopData: SaveShop,
   shopLeadersMap: AutocompleteHashMap,
   regionsMap: AutocompleteHashMap,
 ): PageElement => ({
-  name: { type: GridFieldTypes.STRING, required: true },
-  address: { type: GridFieldTypes.STRING, required: true },
+  name: { type: GridFieldTypes.STRING, required: true, value: shopData.name },
+  address: { type: GridFieldTypes.STRING, required: true, value: shopData.address },
   shopLeader: {
     type: GridFieldTypes.AUTOCOMPLETE,
     required: true,
     autocompleteMap: shopLeadersMap,
+    value: shopData.shopLeader,
   },
-  region: { type: GridFieldTypes.AUTOCOMPLETE, required: true, autocompleteMap: regionsMap },
+  region: { type: GridFieldTypes.AUTOCOMPLETE, required: true, autocompleteMap: regionsMap, value: shopData.region },
 })
 
 export const transformShopIntoPageGridData = (shop: Shop, skipNameAsLink?: boolean): PageElement => ({

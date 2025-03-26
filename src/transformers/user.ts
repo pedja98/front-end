@@ -31,29 +31,32 @@ export const transformUserIntoPageGridData = (t: TFunction, user: User, skipUser
 })
 
 export const transformUserIntoEditPageGridData = (
+  userData: Partial<User>,
   userTypeOptions: string[],
   userTypeOptionValues: string[],
   languageOptions: string[],
   languageOptionValues: string[],
 ): PageElement => ({
-  firstName: { type: GridFieldTypes.STRING, required: true },
-  lastName: { type: GridFieldTypes.STRING, required: true },
-  username: { type: GridFieldTypes.STRING, required: true },
-  email: { type: GridFieldTypes.STRING, required: true },
-  phone: { type: GridFieldTypes.STRING, required: true },
-  password: { type: GridFieldTypes.PASSWORD, required: true },
-  confirm: { type: GridFieldTypes.PASSWORD, required: true },
+  firstName: { type: GridFieldTypes.STRING, required: true, value: userData.firstName },
+  lastName: { type: GridFieldTypes.STRING, required: true, value: userData.lastName },
+  username: { type: GridFieldTypes.STRING, required: true, value: userData.username },
+  email: { type: GridFieldTypes.STRING, required: true, value: userData.email },
+  phone: { type: GridFieldTypes.STRING, required: true, value: userData.phone },
+  password: { type: GridFieldTypes.PASSWORD, required: true, value: userData.password },
+  confirm: { type: GridFieldTypes.PASSWORD, required: true, value: userData.confirm },
   type: {
     options: userTypeOptions,
     type: GridFieldTypes.SELECT,
     optionsValues: userTypeOptionValues,
     required: true,
+    value: userData.type,
   },
   language: {
     options: languageOptions,
     type: GridFieldTypes.SELECT,
     optionsValues: languageOptionValues,
     required: true,
+    value: userData.language,
   },
 })
 

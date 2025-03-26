@@ -2,28 +2,33 @@ import { TFunction } from 'i18next'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 import { AutocompleteHashMap, GridLabel, PageElement } from '../types/common'
-import { Company } from '../types/company'
+import { Company, SaveCompany } from '../types/company'
 
-export const getSaveCompanyGridData = (assignedToUsersMap: AutocompleteHashMap): PageElement => ({
-  name: { type: GridFieldTypes.STRING, required: true },
-  hqAddress: { type: GridFieldTypes.STRING, required: true },
-  industry: { type: GridFieldTypes.STRING, required: true },
-  contactPhone: { type: GridFieldTypes.STRING, required: true },
-  tin: { type: GridFieldTypes.NUMBER, required: true },
-  numberOfEmployees: { type: GridFieldTypes.NUMBER, required: false },
-  bankName: { type: GridFieldTypes.STRING, required: false },
-  bankAccountNumber: { type: GridFieldTypes.STRING, required: false },
+export const getSaveCompanyGridData = (
+  companyData: Partial<SaveCompany>,
+  assignedToUsersMap: AutocompleteHashMap,
+): PageElement => ({
+  name: { type: GridFieldTypes.STRING, required: true, value: companyData.name },
+  hqAddress: { type: GridFieldTypes.STRING, required: true, value: companyData.hqAddress },
+  industry: { type: GridFieldTypes.STRING, required: true, value: companyData.industry },
+  contactPhone: { type: GridFieldTypes.STRING, required: true, value: companyData.contactPhone },
+  tin: { type: GridFieldTypes.NUMBER, required: true, value: companyData.tin },
+  numberOfEmployees: { type: GridFieldTypes.NUMBER, required: false, value: companyData.numberOfEmployees },
+  bankName: { type: GridFieldTypes.STRING, required: false, value: companyData.bankName },
+  bankAccountNumber: { type: GridFieldTypes.STRING, required: false, value: companyData.bankAccountNumber },
   assignedTo: {
     type: GridFieldTypes.AUTOCOMPLETE,
     required: true,
     autocompleteMap: assignedToUsersMap,
+    value: companyData.assignedTo,
   },
   temporaryAssignedTo: {
     type: GridFieldTypes.AUTOCOMPLETE,
     required: false,
     autocompleteMap: assignedToUsersMap,
+    value: companyData.temporaryAssignedTo,
   },
-  comment: { type: GridFieldTypes.AREA, required: false },
+  comment: { type: GridFieldTypes.AREA, required: false, value: companyData.comment },
 })
 
 export const transformCompanyIntoEditPageGridData = (

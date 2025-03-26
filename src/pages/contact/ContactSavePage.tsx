@@ -21,7 +21,7 @@ import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { getContactSaveLabels, getSaveContactGridData } from '../../transformers/contact'
-import { ApiException } from '../../types/common'
+import { ApiException, GridFieldType } from '../../types/common'
 
 const ContactSavePage = () => {
   const [contactData, setContactData] = useState<Partial<SaveContact>>(SaveContactFormInitialState)
@@ -79,6 +79,7 @@ const ContactSavePage = () => {
   )
 
   const saveContactGridData = getSaveContactGridData(
+    contactData,
     [t('none'), ...contactDocumentTypesOptions],
     [undefined, ...Object.values(ContactDocumentTypes)],
   )
@@ -155,7 +156,12 @@ const ContactSavePage = () => {
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = saveContactGridData[label.key]
-          if (GridFieldTypes.STRING === gridFieldData.type) {
+          if (
+            ([GridFieldTypes.STRING, GridFieldTypes.NUMBER, GridFieldTypes.AREA] as GridFieldType[]).includes(
+              gridFieldData.type,
+            )
+          ) {
+            const isArea = gridFieldData.type === GridFieldTypes.AREA
             return (
               <Grid item sx={{ width: '100%' }} key={label.key}>
                 <TextField
@@ -164,8 +170,10 @@ const ContactSavePage = () => {
                   label={label.label}
                   variant='standard'
                   required={!!gridFieldData.required}
-                  value={String(contactData[label.key as keyof SaveContact] || '')}
+                  value={String(gridFieldData.value)}
                   sx={{ width: '100%' }}
+                  minRows={isArea ? 4 : 0}
+                  multiline={isArea}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     handleChange(event)
                   }}
@@ -184,7 +192,7 @@ const ContactSavePage = () => {
                     labelId={label.key}
                     id={label.key}
                     name={label.key}
-                    value={String(contactData[label.key as keyof SaveContact])}
+                    value={String(gridFieldData.value)}
                     variant='standard'
                     sx={{ width: '100%' }}
                     onChange={(event: SelectChangeEvent<string>) => {
@@ -192,7 +200,7 @@ const ContactSavePage = () => {
                     }}
                   >
                     {gridFieldData?.options.map((option, index) => (
-                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? undefined}>
+                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? ''}>
                         {option}
                       </MenuItem>
                     ))}
