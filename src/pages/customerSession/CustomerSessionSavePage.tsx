@@ -290,6 +290,8 @@ const CustomerSessionSavePage = () => {
                   <DateTimePicker
                     name={label.key}
                     label={label.label}
+                    format='YYYY-MM-DD HH:mm'
+                    ampm={false}
                     value={gridFieldData.value ? dayjs(gridFieldData.value) : null}
                     onChange={(newValue: Dayjs | null) => {
                       setCustomerSessionData((prevData) => ({
@@ -303,6 +305,7 @@ const CustomerSessionSavePage = () => {
                         required: !!gridFieldData.required,
                         id: label.key,
                       },
+                      digitalClockItem: {},
                     }}
                   />
                 </LocalizationProvider>
