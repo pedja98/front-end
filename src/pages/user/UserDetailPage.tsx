@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
@@ -7,10 +7,9 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useDeleteUsersMutation, useGetUserQuery } from '../../app/apis/user.api'
 import { getUseDetailListPagesLabels, transformUserIntoPageGridData } from '../../transformers/user'
 import { useTranslation } from 'react-i18next'
-import { EmptyValue, GridFieldTypes } from '../../consts/common'
-import { LinkStyled } from '../../styles/common'
 import { hideConfirm, showConfirm } from '../../features/confirm.slice'
 import { confirmEntityIsDeleted } from '../../features/common.slice'
+import DetailPageGridField from '../../components/DetailPageGridField'
 
 const UserDetailPage = () => {
   const username = String(useParams().username)
@@ -107,50 +106,9 @@ const UserDetailPage = () => {
         <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
           <Grid container spacing={2} sx={{ width: '80%' }}>
             {labels.map((label) => {
-              const gridFieldData = detailPageUserGridData[label.key] || EmptyValue
+              const gridFieldData = detailPageUserGridData[label.key]
 
-              return (
-                <Grid item xs={12} sm={6} key={label.key}>
-                  <Grid container alignItems='center' sx={{ height: '50px' }}>
-                    <Grid item sx={{ minWidth: 120 }}>
-                      <Typography variant='subtitle1'>{label.label}</Typography>
-                    </Grid>
-                    <Grid item xs>
-                      <Grid item xs>
-                        {(() => {
-                          if (gridFieldData.type === GridFieldTypes.STRING) {
-                            return (
-                              <TextField
-                                fullWidth
-                                value={gridFieldData.value}
-                                variant='outlined'
-                                disabled
-                                InputProps={{
-                                  readOnly: true,
-                                }}
-                              />
-                            )
-                          } else if (gridFieldData.type === GridFieldTypes.LINK && gridFieldData.value) {
-                            return <LinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</LinkStyled>
-                          } else {
-                            return (
-                              <TextField
-                                fullWidth
-                                value={EmptyValue}
-                                variant='outlined'
-                                disabled
-                                InputProps={{
-                                  readOnly: true,
-                                }}
-                              />
-                            )
-                          }
-                        })()}
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              )
+              return <DetailPageGridField key={label.key} gridFieldData={gridFieldData} label={label} />
             })}
           </Grid>
         </Grid>

@@ -105,3 +105,8 @@ export interface GridFieldProps {
   handleChange?: (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => void
   handleChangeDateTimePicker?: (value: Dayjs | null, name: string) => void
 }
+
+export interface DetailPageGridFieldProps {
+  gridFieldData: GridFieldAttributes
+  label: GridLabel
+}
