@@ -158,9 +158,11 @@ const CompanySavePage = () => {
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
-      <Grid item sx={{ width: '80%', mb: 2 }}>
-        <Typography variant='h4'>{t('companies:createCompanyLabel')}</Typography>
-      </Grid>
+      {!companyId && (
+        <Grid item sx={{ width: '80%', mb: 2 }}>
+          <Typography variant='h4'>{t('companies:createCompanyLabel')}</Typography>
+        </Grid>
+      )}
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = saveCompanyGridData[label.key]

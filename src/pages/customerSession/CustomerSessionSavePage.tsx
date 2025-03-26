@@ -40,6 +40,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useGetCompaniesQuery } from '../../app/apis/company.api'
 import moment from 'moment'
+import { transformFetchedCustomerSessionData } from '../../helpers/customerSession'
 
 const CustomerSessionSavePage = () => {
   const [customerSessionData, setCustomerSessionData] = useState<Partial<SaveCustomerSession>>(
@@ -73,11 +74,9 @@ const CustomerSessionSavePage = () => {
   const companiesMap = getAutocompleteHashMapFromEntityData(companies, 'name', 'id')
 
   useEffect(() => {
-    if (getCustomerSessionData) {
-      setCustomerSessionData({
-        ...getCustomerSessionData,
-      })
-    }
+    setCustomerSessionData({
+      ...transformFetchedCustomerSessionData(getCustomerSessionData),
+    })
   }, [getCustomerSessionData])
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
@@ -105,11 +104,19 @@ const CustomerSessionSavePage = () => {
       return
     }
 
-    customerSessionData.name = customerSessionData.name
-      ? customerSessionData.name
-      : `${customerSessionData.mode} ${Object.keys(companiesMap).find(
-          (key) => companiesMap?.[key] === Number(customerSessionData.company),
-        )} ${moment().format('DD-MM-YYYY')}`
+    if (new Date(customerSessionData.sessionStart as string) > new Date(customerSessionData.sessionEnd as string)) {
+      dispatch(
+        setNotification({
+          text: t('customerSessions:invalidSessionDateTime'),
+          type: NotificationType.Warning,
+        }),
+      )
+      return
+    }
+
+    customerSessionData.name = `${customerSessionData.mode} ${Object.keys(companiesMap).find(
+      (key) => companiesMap?.[key] === Number(customerSessionData.company),
+    )} ${moment().format('DD-MM-YYYY')}`
 
     try {
       const response = customerSessionId
@@ -169,6 +176,7 @@ const CustomerSessionSavePage = () => {
   )
 
   const saveCustomerSessionGridData = getSaveCustomerSessionGridData(
+    customerSessionData,
     customerSessionsStatusOptions,
     Object.values(CustomerSessionStatus),
     customerSessionTypeOptions,
@@ -182,9 +190,11 @@ const CustomerSessionSavePage = () => {
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
-      <Grid item sx={{ width: '80%', mb: 2 }}>
-        <Typography variant='h4'>{t('customerSessions:createCustomerSessionLabel')}</Typography>
-      </Grid>
+      {!customerSessionId && (
+        <Grid item sx={{ width: '80%', mb: 2 }}>
+          <Typography variant='h4'>{t('customerSessions:createCustomerSessionLabel')}</Typography>
+        </Grid>
+      )}
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = saveCustomerSessionGridData[label.key]
@@ -202,7 +212,7 @@ const CustomerSessionSavePage = () => {
                   label={label.label}
                   variant='standard'
                   required={!!gridFieldData.required}
-                  value={String(customerSessionData[label.key as keyof SaveCustomerSession] || '')}
+                  value={String(gridFieldData.value)}
                   sx={{ width: '100%' }}
                   minRows={isArea ? 4 : 0}
                   multiline={isArea}
@@ -224,7 +234,7 @@ const CustomerSessionSavePage = () => {
                     labelId={label.key}
                     id={label.key}
                     name={label.key}
-                    value={String(customerSessionData[label.key as keyof SaveCustomerSession])}
+                    value={String(gridFieldData.value)}
                     variant='standard'
                     sx={{ width: '100%' }}
                     onChange={(event: SelectChangeEvent<string>) => {
@@ -280,11 +290,7 @@ const CustomerSessionSavePage = () => {
                   <DateTimePicker
                     name={label.key}
                     label={label.label}
-                    value={
-                      customerSessionData[label.key as keyof SaveCustomerSession]
-                        ? dayjs(customerSessionData[label.key as keyof SaveCustomerSession])
-                        : null
-                    }
+                    value={gridFieldData.value ? dayjs(gridFieldData.value) : null}
                     onChange={(newValue: Dayjs | null) => {
                       setCustomerSessionData((prevData) => ({
                         ...prevData,

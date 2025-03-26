@@ -55,7 +55,7 @@ const RegionSavePage = () => {
           type: NotificationType.Success,
         }),
       )
-      navigate(regionId ? `/index/regions/${regionId}` : `/index/companies`)
+      navigate(regionId ? `/index/regions/${regionId}` : `/index/regions`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
       const errorCode = `regions:${errorResponse.data}` || 'general:unknowError'
@@ -85,9 +85,11 @@ const RegionSavePage = () => {
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
-      <Grid item sx={{ width: '80%', mb: 2 }}>
-        <Typography variant='h4'>{t('regions:createRegionLabel')}</Typography>
-      </Grid>
+      {!regionId && (
+        <Grid item sx={{ width: '80%', mb: 2 }}>
+          <Typography variant='h4'>{t('regions:createRegionLabel')}</Typography>
+        </Grid>
+      )}
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         <Grid item sx={{ width: '100%' }}>
           <TextField

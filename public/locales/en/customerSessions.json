@@ -12,6 +12,7 @@
   "customerSessionCreated": "Customer session is successfully created",
   "customerSessionUpdated": "Customer session is successfully updated",
   "createCustomerSessionLabel": "CREATE CUSTOMER SESSION",
+  "invalidSessionDateTime": "The session start cannot be later than the session end",
   "customerSessionsStatuses": {
     "PLANNED": "Planned",
     "HELD": "Held",

@@ -12,6 +12,7 @@
   "customerSessionCreated": "Korisnička sesija je uspešno napravljena",
   "customerSessionUpdated": "Korisnička sesija je uspešno ažurirana",
   "createCustomerSessionLabel": "NAPRAVI KORISNIČKU SESIJU",
+  "invalidSessionDateTime": "Početka sesije ne može biti nakon završetka sesije",
   "customerSessionsStatuses": {
     "PLANNED": "Planirano",
     "HELD": "Održano",

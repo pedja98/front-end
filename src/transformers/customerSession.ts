@@ -2,7 +2,7 @@ import { TFunction } from 'i18next'
 import { AutocompleteHashMap, GridLabel, PageElement } from '../types/common'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
-import { CustomerSession } from '../types/customerSession'
+import { CustomerSession, SaveCustomerSession } from '../types/customerSession'
 
 export const getCustomerSessionDetailPageLabels = (t: TFunction): GridLabel[] => [
   { label: t('customerSessions:name'), key: 'name' },
@@ -86,6 +86,7 @@ export const transformCustomerSessionIntoPageGridData = (
 })
 
 export const getSaveCustomerSessionGridData = (
+  customerSessionData: Partial<SaveCustomerSession>,
   customerSessionStatusOptions: string[],
   customerSessionStatusOptionValues: string[],
   customerSessionTypeOptions: string[],
@@ -100,32 +101,37 @@ export const getSaveCustomerSessionGridData = (
     required: true,
     type: GridFieldTypes.AUTOCOMPLETE,
     autocompleteMap: companiesMap,
+    value: customerSessionData.company,
   },
   status: {
     required: true,
     type: GridFieldTypes.SELECT,
     options: customerSessionStatusOptions,
     optionsValues: customerSessionStatusOptionValues,
+    value: customerSessionData.status,
   },
   type: {
     required: true,
     type: GridFieldTypes.SELECT,
     options: customerSessionTypeOptions,
     optionsValues: customerSessionTypeOptionValues,
+    value: customerSessionData.type,
   },
   mode: {
     required: true,
     type: GridFieldTypes.SELECT,
     options: customerSessionModeOptions,
     optionsValues: customerSessionModeOptionValues,
+    value: customerSessionData.mode,
   },
-  sessionStart: { type: GridFieldTypes.DATE_TIME, required: true },
-  sessionEnd: { type: GridFieldTypes.DATE_TIME, required: true },
+  sessionStart: { type: GridFieldTypes.DATE_TIME, required: true, value: customerSessionData.sessionStart },
+  sessionEnd: { type: GridFieldTypes.DATE_TIME, required: true, value: customerSessionData.sessionEnd },
   outcome: {
     required: true,
     type: GridFieldTypes.SELECT,
     options: customerSessionOutcomeOptions,
     optionsValues: customerSessionOutcomeOptionValues,
+    value: customerSessionData.outcome,
   },
-  description: { type: GridFieldTypes.AREA, required: false },
+  description: { type: GridFieldTypes.AREA, required: false, value: customerSessionData.description },
 })
