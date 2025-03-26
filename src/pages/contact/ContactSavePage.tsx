@@ -1,15 +1,5 @@
-import {
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  Typography,
-} from '@mui/material'
-import { EmailPattern, GridFieldTypes, PhonePattern } from '../../consts/common'
+import { Button, Grid, SelectChangeEvent, Typography } from '@mui/material'
+import { EmailPattern, PhonePattern } from '../../consts/common'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { SaveContact } from '../../types/contact'
 import { useAppDispatch } from '../../app/hooks'
@@ -21,7 +11,8 @@ import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { getContactSaveLabels, getSaveContactGridData } from '../../transformers/contact'
-import { ApiException, GridFieldType } from '../../types/common'
+import { ApiException } from '../../types/common'
+import GridField from '../../components/GridField'
 
 const ContactSavePage = () => {
   const [contactData, setContactData] = useState<Partial<SaveContact>>(SaveContactFormInitialState)
@@ -156,60 +147,7 @@ const ContactSavePage = () => {
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = saveContactGridData[label.key]
-          if (
-            ([GridFieldTypes.STRING, GridFieldTypes.NUMBER, GridFieldTypes.AREA] as GridFieldType[]).includes(
-              gridFieldData.type,
-            )
-          ) {
-            const isArea = gridFieldData.type === GridFieldTypes.AREA
-            return (
-              <Grid item sx={{ width: '100%' }} key={label.key}>
-                <TextField
-                  id={label.key}
-                  name={label.key}
-                  label={label.label}
-                  variant='standard'
-                  required={!!gridFieldData.required}
-                  value={String(gridFieldData.value)}
-                  sx={{ width: '100%' }}
-                  minRows={isArea ? 4 : 0}
-                  multiline={isArea}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    handleChange(event)
-                  }}
-                />
-              </Grid>
-            )
-          }
-          if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
-            return (
-              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-                <FormControl sx={{ width: '100%' }} variant='standard'>
-                  <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
-                    {label.label}
-                  </InputLabel>
-                  <Select
-                    labelId={label.key}
-                    id={label.key}
-                    name={label.key}
-                    value={String(gridFieldData.value)}
-                    variant='standard'
-                    sx={{ width: '100%' }}
-                    onChange={(event: SelectChangeEvent<string>) => {
-                      handleChange(event)
-                    }}
-                  >
-                    {gridFieldData?.options.map((option, index) => (
-                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? ''}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-            )
-          }
-          return <Grid key={label.key}></Grid>
+          return <GridField key={label.key} gridFieldData={gridFieldData} label={label} handleChange={handleChange} />
         })}
         <Grid item sx={{ width: '100%' }}>
           <Button sx={{ width: '100%' }} onClick={handleSave}>

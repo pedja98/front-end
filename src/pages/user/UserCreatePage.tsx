@@ -1,16 +1,7 @@
 import Grid from '@mui/material/Grid'
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  Typography,
-} from '@mui/material'
-import { EmailPattern, GridFieldTypes, PasswordPattern, PhonePattern } from '../../consts/common'
-import { GridFieldType, GridLabel } from '../../types/common'
+import { Button, SelectChangeEvent, Typography } from '@mui/material'
+import { EmailPattern, PasswordPattern, PhonePattern } from '../../consts/common'
+import { GridLabel } from '../../types/common'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent, useState } from 'react'
 import { useAppDispatch } from '../../app/hooks'
@@ -23,6 +14,7 @@ import { useCreateUserMutation } from '../../app/apis/user.api'
 import { getCreateUserPagesLabels, transformUserIntoEditPageGridData } from '../../transformers/user'
 import Spinner from '../../components/Spinner'
 import { Languages, SaveUserFormInitialState } from '../../consts/user'
+import GridField from '../../components/GridField'
 
 const UserCreatePage = () => {
   const [createUserData, setCreateUserData] = useState<Partial<User>>(SaveUserFormInitialState)
@@ -148,66 +140,7 @@ const UserCreatePage = () => {
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = createUserGridData[label.key]
-          if (
-            (
-              [
-                GridFieldTypes.STRING,
-                GridFieldTypes.NUMBER,
-                GridFieldTypes.PASSWORD,
-                GridFieldTypes.AREA,
-              ] as GridFieldType[]
-            ).includes(gridFieldData.type)
-          ) {
-            const isArea = gridFieldData.type === GridFieldTypes.AREA
-            return (
-              <Grid item sx={{ width: '100%' }} key={label.key}>
-                <TextField
-                  id={label.key}
-                  name={label.key}
-                  label={label.label}
-                  variant='standard'
-                  type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
-                  required={!!gridFieldData.required}
-                  value={String(gridFieldData.value)}
-                  sx={{ width: '100%' }}
-                  minRows={isArea ? 4 : 0}
-                  multiline={isArea}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    handleChange(event)
-                  }}
-                />
-              </Grid>
-            )
-          }
-          if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
-            return (
-              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-                <FormControl sx={{ width: '100%' }} variant='standard'>
-                  <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
-                    {label.label}
-                  </InputLabel>
-                  <Select
-                    labelId={label.key}
-                    id={label.key}
-                    name={label.key}
-                    value={String(gridFieldData.value)}
-                    variant='standard'
-                    sx={{ width: '100%' }}
-                    onChange={(event: SelectChangeEvent<string>) => {
-                      handleChange(event)
-                    }}
-                  >
-                    {gridFieldData?.options.map((option, index) => (
-                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? ''}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-            )
-          }
-          return <Grid key={label.key}></Grid>
+          return <GridField key={label.key} gridFieldData={gridFieldData} label={label} handleChange={handleChange} />
         })}
         <Grid item sx={{ width: '100%' }}>
           <Button sx={{ width: '100%' }} onClick={handleSave}>

@@ -2,24 +2,12 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../app/hooks'
 import { useNavigate, useParams } from 'react-router-dom'
-import {
-  Autocomplete,
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Button, Grid, SelectChangeEvent, Typography } from '@mui/material'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { ApiException, GridFieldType } from '../../types/common'
+import { ApiException } from '../../types/common'
 import Spinner from '../../components/Spinner'
 import { getAutocompleteHashMapFromEntityData } from '../../helpers/common'
-import { GridFieldTypes } from '../../consts/common'
 import {
   CustomerSessionMode,
   CustomerSessionOutcome,
@@ -34,13 +22,11 @@ import {
   useUpdateCustomerSessionMutation,
 } from '../../app/apis/customerSession.api'
 import { getCustomerSessionSaveLabels, getSaveCustomerSessionGridData } from '../../transformers/customerSession'
-import { DateTimePicker } from '@mui/x-date-pickers'
-import dayjs, { Dayjs } from 'dayjs'
-import { LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useGetCompaniesQuery } from '../../app/apis/company.api'
 import moment from 'moment'
 import { transformFetchedCustomerSessionData } from '../../helpers/customerSession'
+import GridField from '../../components/GridField'
+import { Dayjs } from 'dayjs'
 
 const CustomerSessionSavePage = () => {
   const [customerSessionData, setCustomerSessionData] = useState<Partial<SaveCustomerSession>>(
@@ -84,6 +70,13 @@ const CustomerSessionSavePage = () => {
     setCustomerSessionData((prevData) => ({
       ...prevData,
       [name]: isNaN(Number(value)) || !value ? value : Number(value),
+    }))
+  }, [])
+
+  const handleChangeDateTimePicker = useCallback((value: Dayjs | null, name: string) => {
+    setCustomerSessionData((prevData) => ({
+      ...prevData,
+      [name]: value && value.isValid() ? value.toISOString() : '',
     }))
   }, [])
 
@@ -198,125 +191,15 @@ const CustomerSessionSavePage = () => {
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = saveCustomerSessionGridData[label.key]
-          if (
-            (
-              [
-                GridFieldTypes.STRING,
-                GridFieldTypes.NUMBER,
-                GridFieldTypes.PASSWORD,
-                GridFieldTypes.AREA,
-              ] as GridFieldType[]
-            ).includes(gridFieldData.type)
-          ) {
-            const isArea = gridFieldData.type === GridFieldTypes.AREA
-            return (
-              <Grid item sx={{ width: '100%' }} key={label.key}>
-                <TextField
-                  id={label.key}
-                  name={label.key}
-                  label={label.label}
-                  variant='standard'
-                  type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
-                  required={!!gridFieldData.required}
-                  value={String(gridFieldData.value)}
-                  sx={{ width: '100%' }}
-                  minRows={isArea ? 4 : 0}
-                  multiline={isArea}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    handleChange(event)
-                  }}
-                />
-              </Grid>
-            )
-          }
-          if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
-            return (
-              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-                <FormControl sx={{ width: '100%' }} variant='standard'>
-                  <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
-                    {label.label}
-                  </InputLabel>
-                  <Select
-                    labelId={label.key}
-                    id={label.key}
-                    name={label.key}
-                    value={String(gridFieldData.value)}
-                    variant='standard'
-                    sx={{ width: '100%' }}
-                    onChange={(event: SelectChangeEvent<string>) => {
-                      handleChange(event)
-                    }}
-                  >
-                    {gridFieldData?.options.map((option, index) => (
-                      <MenuItem key={index} value={gridFieldData?.optionsValues?.[index] ?? ''}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-            )
-          }
-          if (gridFieldData.type === GridFieldTypes.AUTOCOMPLETE && gridFieldData?.autocompleteMap) {
-            return (
-              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-                <FormControl sx={{ width: '100%' }} variant='standard'>
-                  <Autocomplete
-                    id={label.key}
-                    value={
-                      Object.keys(gridFieldData.autocompleteMap || {}).find(
-                        (key) => (gridFieldData.autocompleteMap || {})?.[key] === Number(gridFieldData.value),
-                      ) || null
-                    }
-                    options={Object.keys(gridFieldData.autocompleteMap || {})}
-                    getOptionLabel={(option) => {
-                      return option !== undefined ? String(option) : ''
-                    }}
-                    onChange={(_, key) => {
-                      handleChange({
-                        target: { name: label.key, value: gridFieldData?.autocompleteMap?.[String(key)] },
-                      } as ChangeEvent<HTMLInputElement>)
-                    }}
-                    renderInput={(params) => (
-                      <TextField {...params} label={label.label} variant='standard' required={gridFieldData.required} />
-                    )}
-                    isOptionEqualToValue={(option, value) => option === value}
-                    sx={{ width: '100%' }}
-                  />
-                </FormControl>
-              </Grid>
-            )
-          }
-          if (gridFieldData.type === GridFieldTypes.DATE_TIME) {
-            return (
-              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DateTimePicker
-                    name={label.key}
-                    label={label.label}
-                    format='YYYY-MM-DD HH:mm'
-                    ampm={false}
-                    value={gridFieldData.value ? dayjs(gridFieldData.value) : null}
-                    onChange={(newValue: Dayjs | null) => {
-                      setCustomerSessionData((prevData) => ({
-                        ...prevData,
-                        [label.key]: newValue && newValue.isValid() ? newValue.toISOString() : '',
-                      }))
-                    }}
-                    slotProps={{
-                      textField: {
-                        fullWidth: true,
-                        required: !!gridFieldData.required,
-                        id: label.key,
-                      },
-                      digitalClockItem: {},
-                    }}
-                  />
-                </LocalizationProvider>
-              </Grid>
-            )
-          }
-          return <Grid key={label.key}></Grid>
+          return (
+            <GridField
+              key={label.key}
+              gridFieldData={gridFieldData}
+              label={label}
+              handleChange={handleChange}
+              handleChangeDateTimePicker={handleChangeDateTimePicker}
+            />
+          )
         })}
         <Grid item sx={{ width: '100%' }}>
           <Button sx={{ width: '100%' }} onClick={handleSave}>

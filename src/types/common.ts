@@ -1,7 +1,8 @@
 import { SelectChangeEvent } from '@mui/material'
-import { ReactNode } from 'react'
+import { ChangeEvent, ReactNode } from 'react'
 import { UserType } from './user'
 import { GridFieldTypes } from '../consts/common'
+import { Dayjs } from 'dayjs'
 
 export type Language = 'SR' | 'EN'
 
@@ -96,4 +97,11 @@ export type AutocompleteHashMap = {
 
 export type AutocompleteEntity = {
   [key: string]: unknown
+}
+
+export interface GridFieldProps {
+  gridFieldData: GridFieldAttributes
+  label: GridLabel
+  handleChange?: (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => void
+  handleChangeDateTimePicker?: (value: Dayjs | null, name: string) => void
 }

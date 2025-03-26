@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid'
-import { Autocomplete, Button, FormControl, SelectChangeEvent, TextField, Typography } from '@mui/material'
+import { Button, SelectChangeEvent, Typography } from '@mui/material'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../app/hooks'
@@ -10,13 +10,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
 import { SaveCompany } from '../../types/company'
 import { useCreateCompanyMutation, useGetCompanyQuery, useUpdateCompanyMutation } from '../../app/apis/company.api'
-import { GridFieldTypes } from '../../consts/common'
 import { getCompanySaveLabels, getSaveCompanyGridData } from '../../transformers/company'
-import { GridFieldType } from '../../types/common'
 import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
 import { UserType } from '../../types/user'
 import { SaveCompanyFormInitialState } from '../../consts/company'
 import { getAutocompleteHashMapFromEntityData } from '../../helpers/common'
+import GridField from '../../components/GridField'
 
 const CompanySavePage = () => {
   const [companyData, setCompanyData] = useState<Partial<SaveCompany>>(SaveCompanyFormInitialState)
@@ -167,62 +166,7 @@ const CompanySavePage = () => {
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {
           const gridFieldData = saveCompanyGridData[label.key]
-          if (
-            ([GridFieldTypes.STRING, GridFieldTypes.NUMBER, GridFieldTypes.AREA] as GridFieldType[]).includes(
-              gridFieldData.type,
-            )
-          ) {
-            const isArea = gridFieldData.type === GridFieldTypes.AREA
-            return (
-              <Grid item sx={{ width: '100%' }} key={label.key}>
-                <TextField
-                  id={label.key}
-                  name={label.key}
-                  label={label.label}
-                  variant='standard'
-                  required={!!gridFieldData.required}
-                  value={gridFieldData.value}
-                  sx={{ width: '100%' }}
-                  minRows={isArea ? 4 : 0}
-                  multiline={isArea}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    handleChange(event)
-                  }}
-                />
-              </Grid>
-            )
-          }
-          if (gridFieldData.type === GridFieldTypes.AUTOCOMPLETE && gridFieldData?.autocompleteMap) {
-            return (
-              <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-                <FormControl sx={{ width: '100%' }} variant='standard'>
-                  <Autocomplete
-                    id={label.key}
-                    value={
-                      Object.keys(gridFieldData.autocompleteMap || {}).find(
-                        (key) => (gridFieldData.autocompleteMap || {})?.[key] === Number(gridFieldData.value),
-                      ) || null
-                    }
-                    options={Object.keys(gridFieldData.autocompleteMap || {})}
-                    getOptionLabel={(option) => {
-                      return option !== undefined ? String(option) : ''
-                    }}
-                    onChange={(_, key) => {
-                      handleChange({
-                        target: { name: label.key, value: gridFieldData?.autocompleteMap?.[String(key)] },
-                      } as ChangeEvent<HTMLInputElement>)
-                    }}
-                    renderInput={(params) => (
-                      <TextField {...params} label={label.label} variant='standard' required={gridFieldData.required} />
-                    )}
-                    isOptionEqualToValue={(option, value) => option === value}
-                    sx={{ width: '100%' }}
-                  />
-                </FormControl>
-              </Grid>
-            )
-          }
-          return <Grid key={label.key}></Grid>
+          return <GridField key={label.key} gridFieldData={gridFieldData} label={label} handleChange={handleChange} />
         })}
         <Grid item sx={{ width: '100%' }}>
           <Button sx={{ width: '100%' }} onClick={handleSave}>
