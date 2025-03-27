@@ -110,3 +110,7 @@ export interface DetailPageGridFieldProps {
   gridFieldData: GridFieldAttributes
   label: GridLabel
 }
+
+export interface ExpandableTypographyTableProps {
+  title: string
+}

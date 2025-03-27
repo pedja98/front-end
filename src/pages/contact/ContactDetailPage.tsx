@@ -11,6 +11,7 @@ import { getContactDetailListLabels, transformContactIntoPageGridData } from '..
 import { hideConfirm, showConfirm } from '../../features/confirm.slice'
 import { confirmEntityIsDeleted } from '../../features/common.slice'
 import DetailPageGridField from '../../components/DetailPageGridField'
+import ExpandableTable from '../../components/ExpandableTable'
 
 const ContactDetailPage = () => {
   const contactId = String(useParams().id)
@@ -107,13 +108,16 @@ const ContactDetailPage = () => {
             </Button>
           </Grid>
         </Grid>
-        <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
+        <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center', mb: 5 }}>
           <Grid container spacing={2} sx={{ width: '80%' }}>
             {labels.map((label) => {
               const gridFieldData = detailPageContactGridData[label.key] || EmptyValue
               return <DetailPageGridField key={label.key} gridFieldData={gridFieldData} label={label} />
             })}
           </Grid>
+        </Grid>
+        <Grid sx={{ width: '100%' }}>
+          <ExpandableTable title={t('contacts:companyRelationsTitle')} />
         </Grid>
       </Grid>
     </>

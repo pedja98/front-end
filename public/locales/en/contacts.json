@@ -6,6 +6,7 @@
   "email": "Email",
   "phone": "Phone",
   "documentType": "Document type",
+  "companyRelationsTitle": "Company relations",
   "documentId": "Document id",
   "contactUpdated": "Contact data has been successfully updated",
   "createContactLabel": "CREATE COMPANY",

@@ -7,6 +7,7 @@
   "phone": "Telefon",
   "documentType": "Tip dokumenta",
   "documentId": "Broj dokumenta",
+  "companyRelationsTitle": "Relacije ka kompanijama",
   "contactUpdated": "Kontakt je uspešno ažuriran",
   "createContactLabel": "KREIRAJ KONTAKT",
   "editContactLabel": "IZMENI KONTAKT",
