@@ -6,8 +6,8 @@ import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { TabelRowPerPage } from '../../consts/common'
-import { Grid, Pagination, Typography } from '@mui/material'
-import UniformTable from '../../components/UniformTable'
+import { Grid, Typography } from '@mui/material'
+import CustomTable from '../../components/CustomTable'
 import { createQueryParamsForSearch } from '../../helpers/common'
 import { useGetContactsQuery } from '../../app/apis/contact.api'
 import { getContactDetailListLabels, transformContactIntoPageGridData } from '../../transformers/contact'
@@ -51,13 +51,13 @@ const ContactListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.contacts`).toLocaleUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <UniformTable columns={columns} rows={listPageContactGridData} />
-        <Pagination
-          count={Math.ceil(contacts.length / TabelRowPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
-          color='primary'
-          sx={{ display: 'flex', justifyContent: 'center' }}
+        <CustomTable
+          columns={columns}
+          rows={listPageContactGridData}
+          currentPage={currentPage}
+          totalCount={contacts.length}
+          rowsPerPage={TabelRowPerPage}
+          onPageChange={handlePageChange}
         />
       </Grid>
     </Grid>

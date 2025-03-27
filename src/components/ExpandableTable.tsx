@@ -24,7 +24,7 @@ const ExpandableTypographyTable = (props: ExpandableTypographyTableProps) => {
   }
 
   return (
-    <Paper sx={{ width: '80%', margin: 'auto', padding: 2, backgroundColor: PrimaryThemeColor }}>
+    <Paper sx={{ width: '80%', margin: 'auto', padding: 0.5, backgroundColor: PrimaryThemeColor }}>
       <Box
         onClick={toggleExpand}
         sx={{
@@ -36,7 +36,7 @@ const ExpandableTypographyTable = (props: ExpandableTypographyTableProps) => {
           paddingX: 2,
         }}
       >
-        <Typography variant='h5' sx={{ color: WhiteTeamColor }}>
+        <Typography variant='h6' sx={{ color: WhiteTeamColor }}>
           {title.toUpperCase()}
         </Typography>
         <IconButton sx={{ color: WhiteTeamColor }}>{expanded ? <Remove /> : <Add />}</IconButton>

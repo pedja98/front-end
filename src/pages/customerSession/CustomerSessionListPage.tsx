@@ -12,8 +12,8 @@ import {
   getCustomerSessionTableColumns,
   transformCustomerSessionIntoPageGridData,
 } from '../../transformers/customerSession'
-import { Grid, Pagination, Typography } from '@mui/material'
-import UniformTable from '../../components/UniformTable'
+import { Grid, Typography } from '@mui/material'
+import CustomTable from '../../components/CustomTable'
 
 const CustomerSessionListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -59,13 +59,13 @@ const CustomerSessionListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.customerSessions`).toLocaleUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <UniformTable columns={columns} rows={listPageCustomerSessionGridData} />
-        <Pagination
-          count={Math.ceil(customerSessions.length / TabelRowPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
-          color='primary'
-          sx={{ display: 'flex', justifyContent: 'center' }}
+        <CustomTable
+          columns={columns}
+          rows={listPageCustomerSessionGridData}
+          currentPage={currentPage}
+          totalCount={customerSessions.length}
+          rowsPerPage={TabelRowPerPage}
+          onPageChange={handlePageChange}
         />
       </Grid>
     </Grid>

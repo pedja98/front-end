@@ -5,9 +5,9 @@ import { setNotification } from '../../features/notifications.slice'
 import { createQueryParamsForSearch } from '../../helpers/common'
 import { NotificationType } from '../../types/notification'
 import Spinner from '../../components/Spinner'
-import UniformTable from '../../components/UniformTable'
+import CustomTable from '../../components/CustomTable'
 import { getUseDetailListPagesLabels, transformUserIntoPageGridData } from '../../transformers/user'
-import { Pagination, Grid, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useGetUsersQuery } from '../../app/apis/user.api'
 import { TabelRowPerPage } from '../../consts/common'
@@ -51,13 +51,13 @@ const UserListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.users`).toLocaleUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <UniformTable columns={columns} rows={listPageUserGridData} />
-        <Pagination
-          count={Math.ceil(users.length / TabelRowPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
-          color='primary'
-          sx={{ display: 'flex', justifyContent: 'center' }}
+        <CustomTable
+          columns={columns}
+          rows={listPageUserGridData}
+          currentPage={currentPage}
+          totalCount={users.length}
+          rowsPerPage={TabelRowPerPage}
+          onPageChange={handlePageChange}
         />
       </Grid>
     </Grid>

@@ -1,10 +1,10 @@
 import { FC } from 'react'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Pagination } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { TableProps } from '../types/common'
 
-const UniformTable: FC<TableProps> = ({ columns, rows }) => {
+const CustomTable: FC<TableProps> = ({ columns, rows, currentPage, totalCount, rowsPerPage, onPageChange }) => {
   return (
     <TableContainer component={Paper} sx={{ marginBottom: 2 }}>
       <Table>
@@ -31,15 +31,22 @@ const UniformTable: FC<TableProps> = ({ columns, rows }) => {
                     </TableCell>
                   )
                 } else if (gridFieldData.type === GridFieldTypes.STRING) {
-                  return <TableCell key={col.key}> {gridFieldData.value || EmptyValue} </TableCell>
+                  return <TableCell key={col.key}>{gridFieldData.value || EmptyValue}</TableCell>
                 }
               })}
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <Pagination
+        count={Math.ceil(totalCount / rowsPerPage)}
+        page={currentPage}
+        onChange={onPageChange}
+        color='primary'
+        sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}
+      />
     </TableContainer>
   )
 }
 
-export default UniformTable
+export default CustomTable

@@ -51,6 +51,10 @@ export interface TableProps {
   columns: TableColumn[]
   rows: PageElement[]
   emptyValue?: string
+  currentPage: number
+  totalCount: number
+  rowsPerPage: number
+  onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void
 }
 
 export interface GridLabel {

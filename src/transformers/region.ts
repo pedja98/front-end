@@ -1,6 +1,7 @@
+import { TFunction } from 'i18next'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
-import { PageElement } from '../types/common'
+import { GridLabel, PageElement } from '../types/common'
 import { Region } from '../types/region'
 
 export const transformRegionIntoPageGridData = (region: Region, skipNameAsLink?: boolean): PageElement => ({
@@ -22,3 +23,11 @@ export const transformRegionIntoPageGridData = (region: Region, skipNameAsLink?:
   dateCreated: { value: dateFormater(region.dateCreated), type: GridFieldTypes.STRING },
   dateModified: { value: dateFormater(region.dateModified), type: GridFieldTypes.STRING },
 })
+
+export const getRegionPageGridLabels = (t: TFunction): GridLabel[] => [
+  { label: t('regions:name'), key: 'name' },
+  { label: t('general:createdBy'), key: 'createdByUsername' },
+  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { label: t('general:dateCreated'), key: 'dateCreated' },
+  { label: t('general:dateModified'), key: 'dateModified' },
+]

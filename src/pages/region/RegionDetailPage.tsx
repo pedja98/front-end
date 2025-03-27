@@ -5,7 +5,7 @@ import { useDeleteRegionMutation, useGetRegionQuery } from '../../app/apis/regio
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { transformRegionIntoPageGridData } from '../../transformers/region'
+import { getRegionPageGridLabels, transformRegionIntoPageGridData } from '../../transformers/region'
 import { hideConfirm, showConfirm } from '../../features/confirm.slice'
 import { confirmEntityIsDeleted } from '../../features/common.slice'
 import { Button, Grid, TextField, Typography } from '@mui/material'
@@ -84,18 +84,11 @@ const RegionDetailPage = () => {
   }
 
   const detailPageRegionGridData = transformRegionIntoPageGridData(region, true)
+  const labels = getRegionPageGridLabels(t)
 
   const handleEditRedirect = () => {
     navigate(`/index/regions/${regionId}/edit`)
   }
-
-  const labels = [
-    { label: t('regions:name'), key: 'name' },
-    { label: t('general:createdBy'), key: 'createdByUsername' },
-    { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-    { label: t('general:dateCreated'), key: 'dateCreated' },
-    { label: t('general:dateModified'), key: 'dateModified' },
-  ]
 
   return (
     <>

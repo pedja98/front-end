@@ -5,8 +5,8 @@ import { setNotification } from '../../features/notifications.slice'
 import { createQueryParamsForSearch } from '../../helpers/common'
 import { NotificationType } from '../../types/notification'
 import Spinner from '../../components/Spinner'
-import UniformTable from '../../components/UniformTable'
-import { Pagination, Grid, Typography } from '@mui/material'
+import CustomTable from '../../components/CustomTable'
+import { Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { TabelRowPerPage } from '../../consts/common'
 import { useGetCompaniesQuery } from '../../app/apis/company.api'
@@ -53,13 +53,13 @@ const CompanyListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.companies`).toLocaleUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <UniformTable columns={columns} rows={listPageCompaniesGridData} />
-        <Pagination
-          count={Math.ceil(companies.length / TabelRowPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
-          color='primary'
-          sx={{ display: 'flex', justifyContent: 'center' }}
+        <CustomTable
+          columns={columns}
+          rows={listPageCompaniesGridData}
+          currentPage={currentPage}
+          totalCount={companies.length}
+          rowsPerPage={TabelRowPerPage}
+          onPageChange={handlePageChange}
         />
       </Grid>
     </Grid>

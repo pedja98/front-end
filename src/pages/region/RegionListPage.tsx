@@ -8,9 +8,9 @@ import { useTranslation } from 'react-i18next'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { TabelRowPerPage } from '../../consts/common'
-import { transformRegionIntoPageGridData } from '../../transformers/region'
-import { Grid, Pagination, Typography } from '@mui/material'
-import UniformTable from '../../components/UniformTable'
+import { getRegionPageGridLabels, transformRegionIntoPageGridData } from '../../transformers/region'
+import { Grid, Typography } from '@mui/material'
+import CustomTable from '../../components/CustomTable'
 
 const RegionListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -39,18 +39,11 @@ const RegionListPage = () => {
 
   const paginatedRegions = regions.slice((currentPage - 1) * TabelRowPerPage, currentPage * TabelRowPerPage)
   const listPageRegionGridData = paginatedRegions.map((region) => transformRegionIntoPageGridData(region))
+  const columns = getRegionPageGridLabels(t)
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page)
   }
-
-  const columns = [
-    { label: t('regions:name'), key: 'name' },
-    { label: t('general:createdBy'), key: 'createdByUsername' },
-    { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-    { label: t('general:dateCreated'), key: 'dateCreated' },
-    { label: t('general:dateModified'), key: 'dateModified' },
-  ]
 
   return (
     <Grid sx={{ mt: 2 }}>
@@ -58,13 +51,13 @@ const RegionListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.regions`).toLocaleUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <UniformTable columns={columns} rows={listPageRegionGridData} />
-        <Pagination
-          count={Math.ceil(regions.length / TabelRowPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
-          color='primary'
-          sx={{ display: 'flex', justifyContent: 'center' }}
+        <CustomTable
+          columns={columns}
+          rows={listPageRegionGridData}
+          currentPage={currentPage}
+          totalCount={regions.length}
+          rowsPerPage={TabelRowPerPage}
+          onPageChange={handlePageChange}
         />
       </Grid>
     </Grid>

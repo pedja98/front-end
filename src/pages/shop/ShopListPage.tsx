@@ -9,8 +9,8 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { TabelRowPerPage } from '../../consts/common'
 import { getShopDetailListLabels, transformShopIntoPageGridData } from '../../transformers/shop'
-import { Grid, Pagination, Typography } from '@mui/material'
-import UniformTable from '../../components/UniformTable'
+import { Grid, Typography } from '@mui/material'
+import CustomTable from '../../components/CustomTable'
 
 const ShopListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -51,13 +51,13 @@ const ShopListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.shops`).toLocaleUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <UniformTable columns={columns} rows={listPageShopGridData} />
-        <Pagination
-          count={Math.ceil(shops.length / TabelRowPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
-          color='primary'
-          sx={{ display: 'flex', justifyContent: 'center' }}
+        <CustomTable
+          columns={columns}
+          rows={listPageShopGridData}
+          currentPage={currentPage}
+          totalCount={shops.length}
+          rowsPerPage={TabelRowPerPage}
+          onPageChange={handlePageChange}
         />
       </Grid>
     </Grid>
