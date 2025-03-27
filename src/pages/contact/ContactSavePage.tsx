@@ -71,8 +71,8 @@ const ContactSavePage = () => {
 
   const saveContactGridData = getSaveContactGridData(
     contactData,
-    [t('none'), ...contactDocumentTypesOptions],
-    [undefined, ...Object.values(ContactDocumentTypes)],
+    contactDocumentTypesOptions,
+    Object.values(ContactDocumentTypes),
   )
   const labels = getContactSaveLabels(t)
 
@@ -141,7 +141,7 @@ const ContactSavePage = () => {
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
       {!contactId && (
         <Grid item sx={{ width: '80%', mb: 2 }}>
-          <Typography variant='h4'>{t('contacts:createContactLabel')}</Typography>
+          <Typography variant='h4'>{t('contacts:createContactLabel').toUpperCase()}</Typography>
         </Grid>
       )}
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>

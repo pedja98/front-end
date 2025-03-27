@@ -160,7 +160,7 @@ const CompanySavePage = () => {
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
       {!companyId && (
         <Grid item sx={{ width: '80%', mb: 2 }}>
-          <Typography variant='h4'>{t('companies:createCompanyLabel')}</Typography>
+          <Typography variant='h4'>{t('companies:createCompanyLabel').toUpperCase()}</Typography>
         </Grid>
       )}
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>

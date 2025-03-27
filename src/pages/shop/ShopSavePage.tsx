@@ -136,7 +136,7 @@ const ShopSavePage = () => {
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
       {!shopId && (
         <Grid item sx={{ width: '80%', mb: 2 }}>
-          <Typography variant='h4'>{t('shops:createShopLabel')}</Typography>
+          <Typography variant='h4'>{t('shops:createShopLabel').toUpperCase()}</Typography>
         </Grid>
       )}
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>

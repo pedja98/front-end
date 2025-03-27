@@ -9,7 +9,7 @@
   "companyRelationsTitle": "Company relations",
   "documentId": "Document id",
   "contactUpdated": "Contact data has been successfully updated",
-  "createContactLabel": "CREATE COMPANY",
+  "createContactLabel": "CREATE CONTACT",
   "editContactLabel": "EDIT COMPANY",
   "contactDeleted": "Contact {{fullName}} has been successfully deleted",
   "contactCreated": "New contact is successfully created",

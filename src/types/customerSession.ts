@@ -1,10 +1,10 @@
 export interface SaveCustomerSession {
   name: string
   description: string
-  status: CustomerSessionStatus | ''
-  type: CustomerSessionType | ''
-  mode: CustomerSessionMode | ''
-  outcome: CustomerSessionOutcome | ''
+  status: CustomerSessionStatus
+  type: CustomerSessionType
+  mode: CustomerSessionMode
+  outcome: CustomerSessionOutcome
   sessionStart: string
   sessionEnd: string
   company: number

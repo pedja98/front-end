@@ -33,7 +33,7 @@ const GridField = (props: GridFieldProps) => {
           variant='standard'
           type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
           required={!!gridFieldData.required}
-          value={String(gridFieldData.value)}
+          value={gridFieldData.value}
           sx={{ width: '100%' }}
           minRows={isArea ? 4 : 0}
           multiline={isArea}
@@ -53,7 +53,7 @@ const GridField = (props: GridFieldProps) => {
             labelId={label.key}
             id={label.key}
             name={label.key}
-            value={String(gridFieldData.value)}
+            value={String(gridFieldData.value || '')}
             variant='standard'
             sx={{ width: '100%' }}
             onChange={handleChange ? (event: SelectChangeEvent<string>) => handleChange(event) : undefined}

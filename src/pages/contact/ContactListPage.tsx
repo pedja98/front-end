@@ -48,7 +48,7 @@ const ContactListPage = () => {
   return (
     <Grid sx={{ mt: 2 }}>
       <Grid item>
-        <Typography variant='h4'>{t(`pageNamesAndActions.contacts`).toLocaleUpperCase()}</Typography>
+        <Typography variant='h4'>{t(`pageNamesAndActions.contacts`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
         <CustomTable

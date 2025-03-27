@@ -135,7 +135,7 @@ const UserCreatePage = () => {
   return (
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
       <Grid item sx={{ width: '80%', mb: 2 }}>
-        <Typography variant='h4'>{t('users:createUserLabel')}</Typography>
+        <Typography variant='h4'>{t('users:createUserLabel').toUpperCase()}</Typography>
       </Grid>
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>
         {labels.map((label) => {

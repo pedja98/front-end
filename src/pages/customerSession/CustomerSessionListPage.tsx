@@ -56,7 +56,7 @@ const CustomerSessionListPage = () => {
   return (
     <Grid sx={{ mt: 2 }}>
       <Grid item>
-        <Typography variant='h4'>{t(`pageNamesAndActions.customerSessions`).toLocaleUpperCase()}</Typography>
+        <Typography variant='h4'>{t(`pageNamesAndActions.customerSessions`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
         <CustomTable

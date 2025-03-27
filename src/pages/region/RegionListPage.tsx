@@ -48,7 +48,7 @@ const RegionListPage = () => {
   return (
     <Grid sx={{ mt: 2 }}>
       <Grid item>
-        <Typography variant='h4'>{t(`pageNamesAndActions.regions`).toLocaleUpperCase()}</Typography>
+        <Typography variant='h4'>{t(`pageNamesAndActions.regions`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
         <CustomTable

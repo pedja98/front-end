@@ -48,7 +48,7 @@ const ShopListPage = () => {
   return (
     <Grid sx={{ mt: 2 }}>
       <Grid item>
-        <Typography variant='h4'>{t(`pageNamesAndActions.shops`).toLocaleUpperCase()}</Typography>
+        <Typography variant='h4'>{t(`pageNamesAndActions.shops`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
         <CustomTable

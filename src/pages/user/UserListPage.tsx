@@ -48,7 +48,7 @@ const UserListPage = () => {
   return (
     <Grid sx={{ mt: 2 }}>
       <Grid item>
-        <Typography variant='h4'>{t(`pageNamesAndActions.users`).toLocaleUpperCase()}</Typography>
+        <Typography variant='h4'>{t(`pageNamesAndActions.users`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
         <CustomTable

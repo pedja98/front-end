@@ -26,7 +26,7 @@ export interface User {
   username: string
   phone: string
   confirm: string
-  type: UserType | ''
+  type: UserType
   language: Language
   shopId: number
   shopName: string

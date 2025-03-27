@@ -87,7 +87,7 @@ const RegionSavePage = () => {
     <Grid container sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
       {!regionId && (
         <Grid item sx={{ width: '80%', mb: 2 }}>
-          <Typography variant='h4'>{t('regions:createRegionLabel')}</Typography>
+          <Typography variant='h4'>{t('regions:createRegionLabel').toUpperCase()}</Typography>
         </Grid>
       )}
       <Grid container item sx={{ width: '80%' }} direction='column' spacing={2}>

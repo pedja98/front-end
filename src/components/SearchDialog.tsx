@@ -13,9 +13,9 @@ const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const currentModule = getCamelCaseFromKebabString(location.pathname.split('/')[2]) as ModulesOptions
+  const entityName = getCamelCaseFromKebabString(location.pathname.split('/')[2]) as ModulesOptions
 
-  const dialogContent: ReactNode = getCurrentSearchDialog(currentModule) || <Grid>{t('noSearchContent')}</Grid>
+  const dialogContent: ReactNode = getCurrentSearchDialog(entityName) || <Grid>{t('noSearchContent')}</Grid>
 
   const handleSearch = () => {
     navigate(`${location.pathname}/list`)
@@ -31,7 +31,11 @@ const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
     >
       <DialogTitle>
         <Root>
-          <Typography variant='h4'>{t('general:searchDialogTitle')}</Typography>
+          <Typography variant='h4'>
+            {t('general:searchDialogTitle').toUpperCase() +
+              ' ' +
+              t(`pageNamesAndActions.${getCamelCaseFromKebabString(entityName)}`).toLocaleUpperCase()}
+          </Typography>
         </Root>
       </DialogTitle>
       <DialogContent>{dialogContent}</DialogContent>

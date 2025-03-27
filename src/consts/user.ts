@@ -22,7 +22,7 @@ export const SaveUserFormInitialState: Partial<User> = {
   confirm: '',
   email: '',
   phone: '',
-  type: '',
+  type: undefined,
 }
 
 export const ChangePasswordFormInitialState: ChangePasswordFormProps = {
