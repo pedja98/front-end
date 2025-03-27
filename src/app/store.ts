@@ -6,6 +6,7 @@ import searchReducer from '../features/search.slice'
 import authReducer from '../features/auth.slice'
 import confirmReducer from '../features/confirm.slice'
 import commonReducer from '../features/common.slice'
+import entityReducer from '../features/entity.slice'
 import { gwApi } from './apis/core/gw.api'
 import { crmApi } from './apis/core/crm.api'
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   auth: authReducer,
   confirm: confirmReducer,
+  entity: entityReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

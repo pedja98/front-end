@@ -6,7 +6,7 @@ import { getCamelCaseFromKebabString } from '../helpers/common'
 import { ModulesOptions } from '../types/common'
 import { ReactNode } from 'react'
 import { Root } from '../styles/common'
-import { getCurrentSearchDialog } from '../transformers/search'
+import { getSearchDialog } from '../transformers/dialog'
 
 const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
   const { t } = useTranslation()
@@ -15,7 +15,7 @@ const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
 
   const entityName = getCamelCaseFromKebabString(location.pathname.split('/')[2]) as ModulesOptions
 
-  const dialogContent: ReactNode = getCurrentSearchDialog(entityName) || <Grid>{t('noSearchContent')}</Grid>
+  const dialogContent: ReactNode = getSearchDialog(entityName) || <Grid>{t('noContent')}</Grid>
 
   const handleSearch = () => {
     navigate(`${location.pathname}/list`)

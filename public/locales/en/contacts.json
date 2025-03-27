@@ -10,6 +10,8 @@
   "documentId": "Document id",
   "contactUpdated": "Contact data has been successfully updated",
   "createContactLabel": "CREATE CONTACT",
+  "companyRelationType": "Relation type",
+  "relatedCompany": "Company",
   "editContactLabel": "EDIT COMPANY",
   "contactDeleted": "Contact {{fullName}} has been successfully deleted",
   "contactCreated": "New contact is successfully created",

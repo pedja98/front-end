@@ -12,6 +12,7 @@ import { hideConfirm, showConfirm } from '../../features/confirm.slice'
 import { confirmEntityIsDeleted } from '../../features/common.slice'
 import DetailPageGridField from '../../components/DetailPageGridField'
 import ExpandableTable from '../../components/ExpandableTable'
+import { ModulesOptions } from '../../types/common'
 
 const ContactDetailPage = () => {
   const contactId = String(useParams().id)
@@ -117,7 +118,11 @@ const ContactDetailPage = () => {
           </Grid>
         </Grid>
         <Grid sx={{ width: '100%' }}>
-          <ExpandableTable title={t('contacts:companyRelationsTitle')} />
+          <ExpandableTable
+            title={t('contacts:companyRelationsTitle')}
+            hideActionSection={false}
+            moduleOption={ModulesOptions.Contacts}
+          />
         </Grid>
       </Grid>
     </>

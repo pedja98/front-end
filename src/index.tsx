@@ -24,7 +24,7 @@ root.render(
           <Suspense fallback={<Spinner />}>
             <RouterProvider router={router} />
           </Suspense>
-          <SnackbarProvider maxSnack={5} autoHideDuration={8000}>
+          <SnackbarProvider maxSnack={5} autoHideDuration={2000}>
             <Notification />
           </SnackbarProvider>
           <Confirm />

@@ -21,7 +21,7 @@
   "close": "Zatvori",
   "none": "Nijedan",
   "searchDialogTitle": "Pretraži",
-  "noSearchContent": "Ne postoji pretraga",
+  "noContent": "Ne postoji sadržaj",
   "createdBy": "Kreirao",
   "modifiedBy": "Izmenio",
   "dateCreated": "Datum kreiranja",

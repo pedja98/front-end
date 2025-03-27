@@ -26,6 +26,14 @@ export enum ContactDocumentType {
   PASSPORT = 'PASSPORT',
 }
 
+export enum CompanyContactRelationType {
+  THIRD_PARTY_PERSON = 'THIRD_PARTY_PERSON',
+  TECHNICAL_CONTACT = 'TECHNICAL_CONTACT',
+  RESPONSIBLE_PERSON = 'RESPONSIBLE_PERSON',
+  CONTACT_PERSON = 'CONTACT_PERSON',
+  RESPONSIBLE_APR_PERSON = 'RESPONSIBLE_APR_PERSON',
+}
+
 export interface ContactSearchFormProps {
   firstName?: string
   lastName?: string
@@ -35,4 +43,9 @@ export interface ContactSearchFormProps {
   documentId?: string
   sortBy?: string
   sortOrder?: string
+}
+
+export interface CompanyContactRelationFormProps {
+  relationTypes?: string[]
+  companyId?: number
 }

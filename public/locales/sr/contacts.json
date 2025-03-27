@@ -10,6 +10,8 @@
   "companyRelationsTitle": "Relacije ka kompanijama",
   "contactUpdated": "Kontakt je uspešno ažuriran",
   "createContactLabel": "KREIRAJ KONTAKT",
+  "companyRelationType": "Relacioni tip",
+  "relatedCompany": "Kompanija",
   "editContactLabel": "IZMENI KONTAKT",
   "contactCreated": "Novi kontakt je uspešno napravljena",
   "contactDeleted": "Kontakt osoba {{fullName}} je uspešno obrisan",
