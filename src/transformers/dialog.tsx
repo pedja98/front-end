@@ -6,7 +6,7 @@ import CompanySearchDialog from '../components/searchDialogs/CompanySearchDialog
 import ShopSearchDialog from '../components/searchDialogs/ShopSearchDialog'
 import ContactSearchDialog from '../components/searchDialogs/ContactSearchDialog'
 import CustomerSessionSearchDialog from '../components/searchDialogs/CustomerSessionSearchDialog'
-import CompanyContactRelationEntityDialog from '../components/entityDialogs/CompanyContactRelationEntityDialog'
+import CompanyContactRelationCreateDialog from '../components/entityDialogs/CompanyContactRelationCreateDialog'
 
 export const getSearchDialog = (currentModule: ModulesOptions): ReactNode | undefined => {
   const dialogs: Partial<Record<ModulesOptions, ReactNode>> = {
@@ -21,10 +21,15 @@ export const getSearchDialog = (currentModule: ModulesOptions): ReactNode | unde
   return dialogs[currentModule]
 }
 
-export const getEntityDialog = (currentModule: ModulesOptions): ReactNode | undefined => {
-  const dialogs: Partial<Record<ModulesOptions, ReactNode>> = {
-    [ModulesOptions.Contacts]: <CompanyContactRelationEntityDialog />,
+export const getEntityConfirmationDialog = (
+  confirmationComponentContext: string,
+  customConfirmComponentAttributes: Record<string, unknown>,
+): ReactNode | undefined => {
+  const dialogs: Partial<Record<string, ReactNode>> = {
+    ['CompanyContactRelationCreateDialog']: (
+      <CompanyContactRelationCreateDialog contactId={customConfirmComponentAttributes?.contactId as number} />
+    ),
   }
 
-  return dialogs[currentModule]
+  return dialogs[confirmationComponentContext]
 }

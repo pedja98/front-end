@@ -17,29 +17,18 @@ import { hideConfirm, showConfirm } from '../../features/confirm.slice'
 import { confirmEntityIsDeleted } from '../../features/common.slice'
 import DetailPageGridField from '../../components/DetailPageGridField'
 import ExpandableTable from '../../components/ExpandableTable'
-import { ApiException, ModulesOptions } from '../../types/common'
 import {
-  useCreateCompanyContractRelationMutation,
   useDeleteCompanyContractRelationMutation,
   useGetCompanyContractRelationsByContactIdQuery,
 } from '../../app/apis/company-contact-relation.api'
-import {
-  CompanyContactRelationFormProps,
-  CompanyContactRelationType,
-  CreateCompanyContactRelation,
-} from '../../types/contact'
 
 const ContactDetailPage = () => {
-  const contactId = String(useParams().id)
+  const contactId = Number(useParams().id)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { t } = useTranslation()
 
   const entityIsDeleted = !!useAppSelector((state) => state.common.entityIsDeleted)
-  const relationData = useAppSelector((state) => state.entity) as CompanyContactRelationFormProps
-
-  const [createCompanyContractRelation, { isLoading: isLoadingCreateCompanyContractRelation }] =
-    useCreateCompanyContractRelationMutation()
 
   const {
     isLoading: isGetContactLoading,
@@ -125,32 +114,14 @@ const ContactDetailPage = () => {
     }
   }
 
-  const handleRelationCreate = async () => {
-    const createRelationData: CreateCompanyContactRelation = {
-      contactId: Number(contactId),
-      relationTypes: relationData.relationTypes as CompanyContactRelationType[],
-      companyId: Number(relationData.companyId),
-    }
-
-    try {
-      const response = await createCompanyContractRelation(createRelationData).unwrap()
-      const messageCode = `contacts:${response.message}`
-      dispatch(
-        setNotification({
-          text: t(messageCode),
-          type: NotificationType.Success,
-        }),
-      )
-    } catch (err) {
-      const errorResponse = err as { data: ApiException }
-      const errorCode = `contacts:${errorResponse.data}` || 'general:unknownError'
-      dispatch(
-        setNotification({
-          text: t(errorCode),
-          type: NotificationType.Error,
-        }),
-      )
-    }
+  const handleRelationDialogOpen = () => {
+    dispatch(
+      showConfirm({
+        confirmationTitle: (t('create') + ' ' + t('contacts:companyRelationsTitle')).toUpperCase(),
+        customConfirmComponentCode: 'CompanyContactRelationCreateDialog',
+        customConfirmComponentAttributes: { contactId },
+      }),
+    )
   }
 
   const handleConfirmRelationDelete = async (id: number) => {
@@ -218,9 +189,8 @@ const ContactDetailPage = () => {
           <ExpandableTable
             title={t('contacts:companyRelationsTitle')}
             hideActionSection={false}
-            moduleOption={ModulesOptions.Contacts}
-            expandableDialogAction={handleRelationCreate}
-            isLoading={isLoadingGetRelations || isLoadingCreateCompanyContractRelation || isDeleteRelationtLoading}
+            expandableDialogAction={handleRelationDialogOpen}
+            isLoading={isLoadingGetRelations || isDeleteRelationtLoading}
             columns={relationTableColumLabels}
             rows={relationTableGridData}
           />

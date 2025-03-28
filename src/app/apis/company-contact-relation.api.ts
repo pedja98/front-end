@@ -25,7 +25,7 @@ export const companyContractRelationApi = crmApi.injectEndpoints({
       }),
       invalidatesTags: (result, error, { id }) => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION, id }],
     }),
-    getCompanyContractRelationsByContactId: builder.query<CompanyContactRelation[], string>({
+    getCompanyContractRelationsByContactId: builder.query<CompanyContactRelation[], number>({
       query: (contactId) => `/company-contact-relations?contactId=${contactId}`,
       providesTags: (result, error, contactId) => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION, id: contactId }],
     }),

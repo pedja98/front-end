@@ -11,7 +11,7 @@ export const contactApi = crmApi.injectEndpoints({
         body: contactData,
       }),
     }),
-    updateContact: builder.mutation<{ message: string }, { id: string; contact: Partial<SaveContact> }>({
+    updateContact: builder.mutation<{ message: string }, { id: number; contact: Partial<SaveContact> }>({
       query: ({ id, contact }) => ({
         url: `/contacts/${id}`,
         method: 'PUT',
@@ -19,7 +19,7 @@ export const contactApi = crmApi.injectEndpoints({
       }),
       invalidatesTags: (result, error, { id }) => [{ type: CrmApiTags.CONTACT, id }],
     }),
-    getContact: builder.query<Contact, string>({
+    getContact: builder.query<Contact, number>({
       query: (id) => `/contacts/${id}`,
       providesTags: (result, error, id) => [{ type: CrmApiTags.CONTACT, id }],
     }),
@@ -27,7 +27,7 @@ export const contactApi = crmApi.injectEndpoints({
       query: (queryParams) => `/contacts${queryParams}`,
       providesTags: [CrmApiTags.CONTACT],
     }),
-    deleteContact: builder.mutation<{ message: string }, string>({
+    deleteContact: builder.mutation<{ message: string }, number>({
       query: (id) => ({
         url: `/contacts/${id}`,
         method: 'DELETE',

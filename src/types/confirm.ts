@@ -6,4 +6,6 @@ export interface ConfirmState {
   denyButtonLabel?: string
   onConfirm?: () => void | Promise<void>
   onCancel?: () => void | Promise<void>
+  customConfirmComponentCode?: string
+  customConfirmComponentAttributes?: Record<string, unknown>
 }

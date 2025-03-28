@@ -4,32 +4,20 @@ import { Add, Remove } from '@mui/icons-material'
 import { ExpandableTabelRowPerPage, PrimaryThemeColor, WhiteTeamColor } from '../consts/common'
 import { ExpandableTypographyTableProps } from '../types/common'
 import { useTranslation } from 'react-i18next'
-import EntityDialog from './EntityDialog'
-import { cleanEntityState } from '../features/entity.slice'
-import { useAppDispatch } from '../app/hooks'
 import Spinner from './Spinner'
 import CustomTable from './CustomTable'
 
 const ExpandableTable = (props: ExpandableTypographyTableProps) => {
   const [expanded, setExpanded] = useState(false)
-  const { title, hideActionSection, moduleOption, expandableDialogAction, isLoading, columns, rows } = props
+  const { title, hideActionSection, expandableDialogAction, isLoading, columns, rows } = props
   const { t } = useTranslation()
-  const [isDialogOpen, setDialogOpen] = useState(false)
-  const [dialogTitle, setDialogTitle] = useState('')
-  const dispatch = useAppDispatch()
 
   const toggleExpand = () => {
     setExpanded((prev) => !prev)
   }
 
-  const handleCloseDialog = () => {
-    setDialogOpen(false)
-  }
-
-  const handleCreateButtonClick = () => {
-    dispatch(cleanEntityState())
-    setDialogTitle((t('create') + ' ' + title).toUpperCase())
-    setDialogOpen(true)
+  const handleActionButtonClick = () => {
+    expandableDialogAction()
   }
 
   if (isLoading) {
@@ -64,7 +52,7 @@ const ExpandableTable = (props: ExpandableTypographyTableProps) => {
                 <Button
                   id='extended-table-create-action-btn'
                   sx={{ float: 'right', mb: 1 }}
-                  onClick={handleCreateButtonClick}
+                  onClick={handleActionButtonClick}
                 >
                   {t('general:create')}
                 </Button>
@@ -74,13 +62,6 @@ const ExpandableTable = (props: ExpandableTypographyTableProps) => {
           </Grid>
         )}
       </Paper>
-      <EntityDialog
-        title={dialogTitle}
-        isOpen={isDialogOpen}
-        onClose={handleCloseDialog}
-        moduleOption={moduleOption}
-        entityAction={expandableDialogAction}
-      />
     </Grid>
   )
 }

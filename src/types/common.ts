@@ -24,14 +24,6 @@ export interface SearchDialogProps {
   onClose: () => void
 }
 
-export interface EntityDialogProps {
-  title: string
-  isOpen: boolean
-  onClose: () => void
-  entityAction: () => void
-  moduleOption: ModulesOptions
-}
-
 export interface BasicTabProps {
   tabs: Record<string, ReactNode>
 }
@@ -119,7 +111,6 @@ export interface DetailPageGridFieldProps {
 export interface ExpandableTypographyTableProps {
   title: string
   hideActionSection: boolean
-  moduleOption: ModulesOptions
   expandableDialogAction: () => void
   isLoading: boolean
   columns: GridLabel[]

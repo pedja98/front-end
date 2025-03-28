@@ -45,11 +45,6 @@ export interface ContactSearchFormProps {
   sortOrder?: string
 }
 
-export interface CompanyContactRelationFormProps {
-  relationTypes?: string[]
-  companyId?: number
-}
-
 export interface CreateCompanyContactRelation {
   companyId: number
   contactId: number

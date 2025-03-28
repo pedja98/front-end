@@ -21,14 +21,14 @@ const ContactSavePage = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const contactId = useParams().id
+  const contactId = Number(useParams().id)
 
   const {
     data: getContactData,
     isLoading: isLoadingGetContact,
     isError: isErrorGetContact,
     error: errorGetContact,
-  } = useGetContactQuery(contactId as string, { skip: !contactId })
+  } = useGetContactQuery(contactId, { skip: !contactId })
 
   useEffect(() => {
     if (getContactData) {
@@ -115,7 +115,7 @@ const ContactSavePage = () => {
 
     try {
       const response = contactId
-        ? await updateContact({ id: contactId as string, contact: contactData }).unwrap()
+        ? await updateContact({ id: contactId, contact: contactData }).unwrap()
         : await createContact(contactData).unwrap()
       const messageCode = `contacts:${response.message}`
       dispatch(
