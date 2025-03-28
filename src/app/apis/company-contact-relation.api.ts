@@ -13,6 +13,7 @@ export const companyContractRelationApi = crmApi.injectEndpoints({
         method: 'POST',
         body: relationData,
       }),
+      invalidatesTags: () => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION }],
     }),
     updateCompanyContractRelation: builder.mutation<
       { message: string },
@@ -23,18 +24,18 @@ export const companyContractRelationApi = crmApi.injectEndpoints({
         method: 'PUT',
         body: relation,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION, id }],
+      invalidatesTags: () => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION }],
     }),
     getCompanyContractRelationsByContactId: builder.query<CompanyContactRelation[], number>({
       query: (contactId) => `/company-contact-relations?contactId=${contactId}`,
-      providesTags: (result, error, contactId) => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION, id: contactId }],
+      providesTags: () => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION }],
     }),
     deleteCompanyContractRelation: builder.mutation<{ message: string }, number>({
       query: (id) => ({
         url: `/company-contact-relations/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, id) => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION, id }],
+      invalidatesTags: () => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION }],
     }),
   }),
   overrideExisting: false,
