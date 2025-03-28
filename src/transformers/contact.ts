@@ -97,12 +97,12 @@ export const getCompanyContactRelationColumnLabels = (t: TFunction): GridLabel[]
 export const transformCompanyContactRelationIntoPageGridData = (
   t: TFunction,
   relation: CompanyContactRelation,
-  skipFullNameAsLink?: boolean,
+  handleRelationDelete: (id: number) => void,
 ): PageElement => ({
   relatedCompany: {
     value: relation.companyName,
     link: `/index/companies/${relation.companyId}`,
-    type: skipFullNameAsLink ? GridFieldTypes.STRING : GridFieldTypes.LINK,
+    type: GridFieldTypes.LINK,
   },
   companyRelationType: {
     value: t(`contacts:companyContactRelationType.${relation.relationType}`),
@@ -121,5 +121,5 @@ export const transformCompanyContactRelationIntoPageGridData = (
   dateCreated: { value: dateFormater(relation.dateCreated as string), type: GridFieldTypes.STRING },
   dateModified: { value: dateFormater(relation.dateModified as string), type: GridFieldTypes.STRING },
   edit: { type: GridFieldTypes.BUTTON },
-  delete: { type: GridFieldTypes.BUTTON },
+  delete: { type: GridFieldTypes.BUTTON, handleClick: handleRelationDelete, id: relation.id },
 })

@@ -29,7 +29,7 @@ export const companyContractRelationApi = crmApi.injectEndpoints({
       query: (contactId) => `/company-contact-relations?contactId=${contactId}`,
       providesTags: (result, error, id) => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION, id }],
     }),
-    deleteCompanyContractRelation: builder.mutation<{ message: string }, string>({
+    deleteCompanyContractRelation: builder.mutation<{ message: string }, number>({
       query: (id) => ({
         url: `/company-contact-relations/${id}`,
         method: 'DELETE',

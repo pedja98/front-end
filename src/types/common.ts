@@ -37,6 +37,7 @@ export interface BasicTabProps {
 }
 
 export interface GridFieldAttributes {
+  id?: string | number
   value?: string | number
   type: GridFieldType
   link?: string
@@ -44,6 +45,7 @@ export interface GridFieldAttributes {
   optionsValues?: (string | number | undefined)[]
   required?: boolean
   autocompleteMap?: AutocompleteHashMap
+  handleClick?: (id: number) => void
 }
 
 export interface PageElement {

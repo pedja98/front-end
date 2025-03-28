@@ -1,5 +1,7 @@
 {
   "contactDeletionText": "Da li ste sigurni da želite da obrišete kontakt osobu {{firstName}} {{lastName}}?",
+  "companyContactRelationDeletionText": "Da li ste sigurni da želite da obrišete relaciju",
+  "relationDeleted": "Relacija je uspešno obrisana",
   "fullName": "Puno ime",
   "firstName": "Ime",
   "lastName": "Prezime",
@@ -15,6 +17,7 @@
   "editContactLabel": "IZMENI KONTAKT",
   "contactCreated": "Novi kontakt je uspešno napravljena",
   "contactDeleted": "Kontakt osoba {{fullName}} je uspešno obrisan",
+  "allRelationsCreated": "Nove relacije su uspešno napravljene",
   "sortByLabels": {
     "firstName": "Ime",
     "lastName": "Prezime",

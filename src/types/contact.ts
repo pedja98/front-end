@@ -62,6 +62,7 @@ export interface UpdateCompanyContactRelation {
 }
 
 export interface CompanyContactRelation {
+  id: number
   companyId: number
   companyName: number
   relationType: CompanyContactRelationType

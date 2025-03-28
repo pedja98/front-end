@@ -20,6 +20,7 @@ import ExpandableTable from '../../components/ExpandableTable'
 import { ApiException, ModulesOptions } from '../../types/common'
 import {
   useCreateCompanyContractRelationMutation,
+  useDeleteCompanyContractRelationMutation,
   useGetCompanyContractRelationByContactIdQuery,
 } from '../../app/apis/company-contact-relation.api'
 import {
@@ -55,6 +56,8 @@ const ContactDetailPage = () => {
   } = useGetCompanyContractRelationByContactIdQuery(contactId, { skip: !!entityIsDeleted })
 
   const [deleteContact, { isLoading: isDeleteContactLoading }] = useDeleteContactMutation()
+
+  const [deleteRelation, { isLoading: isDeleteRelationtLoading }] = useDeleteCompanyContractRelationMutation()
 
   if (isGetContactLoading || isDeleteContactLoading) {
     return <Spinner />
@@ -150,8 +153,43 @@ const ContactDetailPage = () => {
     }
   }
 
+  const handleConfirmRelationDelete = async (id: number) => {
+    try {
+      dispatch(confirmEntityIsDeleted())
+      await deleteRelation(id).unwrap()
+      dispatch(
+        setNotification({
+          text: t('contacts:relationDeleted'),
+          type: NotificationType.Success,
+        }),
+      )
+    } catch (error) {
+      dispatch(
+        setNotification({
+          text: JSON.stringify(error),
+          type: NotificationType.Error,
+        }),
+      )
+    } finally {
+      dispatch(hideConfirm())
+    }
+  }
+
+  const handleRelationDelete = (id: number) => {
+    dispatch(
+      showConfirm({
+        confirmationText: t('contacts:companyContactRelationDeletionText'),
+        confirmationTitle: t('general:confirmDeletionTitle'),
+        onConfirm: () => handleConfirmRelationDelete(id),
+        onCancel: handleConfirmClose,
+        confirmButtonLabel: t('dialogConfirmationButtonLabels.yes'),
+        denyButtonLabel: t('dialogConfirmationButtonLabels.no'),
+      }),
+    )
+  }
+
   const relationTableGridData = Array.isArray(relations)
-    ? relations.map((relation) => transformCompanyContactRelationIntoPageGridData(t, relation))
+    ? relations.map((relation) => transformCompanyContactRelationIntoPageGridData(t, relation, handleRelationDelete))
     : []
   const relationTableColumLabels = getCompanyContactRelationColumnLabels(t)
 
@@ -182,7 +220,7 @@ const ContactDetailPage = () => {
             hideActionSection={false}
             moduleOption={ModulesOptions.Contacts}
             expandableDialogAction={handleRelationCreate}
-            isLoading={isLoadingGetRelations || isLoadingCreateCompanyContractRelation}
+            isLoading={isLoadingGetRelations || isLoadingCreateCompanyContractRelation || isDeleteRelationtLoading}
             columns={relationTableColumLabels}
             rows={relationTableGridData}
           />
