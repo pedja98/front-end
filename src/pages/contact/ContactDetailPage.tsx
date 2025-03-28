@@ -21,7 +21,7 @@ import { ApiException, ModulesOptions } from '../../types/common'
 import {
   useCreateCompanyContractRelationMutation,
   useDeleteCompanyContractRelationMutation,
-  useGetCompanyContractRelationByContactIdQuery,
+  useGetCompanyContractRelationsByContactIdQuery,
 } from '../../app/apis/company-contact-relation.api'
 import {
   CompanyContactRelationFormProps,
@@ -53,7 +53,7 @@ const ContactDetailPage = () => {
     data: relations,
     isError: isErrorGetRelations,
     error: errorGetRelations,
-  } = useGetCompanyContractRelationByContactIdQuery(contactId, { skip: !!entityIsDeleted })
+  } = useGetCompanyContractRelationsByContactIdQuery(contactId)
 
   const [deleteContact, { isLoading: isDeleteContactLoading }] = useDeleteContactMutation()
 

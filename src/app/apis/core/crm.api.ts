@@ -15,6 +15,14 @@ export const crmApi = createApi({
       return headers
     },
   }),
-  tagTypes: [CrmApiTags.USER, CrmApiTags.USER],
+  tagTypes: [
+    CrmApiTags.USER,
+    CrmApiTags.REGION,
+    CrmApiTags.COMPANY,
+    CrmApiTags.SHOP,
+    CrmApiTags.CONTACT,
+    CrmApiTags.CUSTOMER_SESSION,
+    CrmApiTags.COMPANY_CONTACT_RELATION,
+  ],
   endpoints: () => ({}),
 })
