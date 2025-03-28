@@ -28,6 +28,7 @@ export interface EntityDialogProps {
   title: string
   isOpen: boolean
   onClose: () => void
+  entityAction: () => void
   moduleOption: ModulesOptions
 }
 
@@ -49,13 +50,8 @@ export interface PageElement {
   [key: string]: GridFieldAttributes
 }
 
-export interface TableColumn {
-  label: string
-  key: string
-}
-
 export interface TableProps {
-  columns: TableColumn[]
+  columns: GridLabel[]
   rows: PageElement[]
   emptyValue?: string
   currentPage: number
@@ -126,4 +122,8 @@ export interface ExpandableTypographyTableProps {
   title: string
   hideActionSection: boolean
   moduleOption: ModulesOptions
+  expandableDialogAction: () => void
+  isLoading: boolean
+  columns: GridLabel[]
+  rows: PageElement[]
 }

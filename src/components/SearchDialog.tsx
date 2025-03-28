@@ -15,7 +15,12 @@ const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
 
   const entityName = getCamelCaseFromKebabString(location.pathname.split('/')[2]) as ModulesOptions
 
-  const dialogContent: ReactNode = getSearchDialog(entityName) || <Grid>{t('noContent')}</Grid>
+  const searchDialog = getSearchDialog(entityName)
+  const dialogContent: ReactNode = searchDialog || (
+    <Grid>
+      <Typography variant='h5'>{t('noContent')}</Typography>
+    </Grid>
+  )
 
   const handleSearch = () => {
     navigate(`${location.pathname}/list`)
@@ -39,21 +44,23 @@ const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
         </Root>
       </DialogTitle>
       <DialogContent>{dialogContent}</DialogContent>
-      <DialogActions
-        sx={{
-          width: '100%',
-          display: 'flex',
-          alignContent: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Button sx={{ width: '35%' }} onClick={handleSearch} color='primary'>
-          {t('general:search')}
-        </Button>
-        <Button sx={{ width: '35%' }} onClick={onClose} color='primary'>
-          {t('general:close')}
-        </Button>
-      </DialogActions>
+      {!!searchDialog && (
+        <DialogActions
+          sx={{
+            width: '100%',
+            display: 'flex',
+            alignContent: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Button sx={{ width: '35%' }} onClick={handleSearch} color='primary'>
+            {t('general:search')}
+          </Button>
+          <Button sx={{ width: '35%' }} onClick={onClose} color='primary'>
+            {t('general:close')}
+          </Button>
+        </DialogActions>
+      )}
     </Dialog>
   )
 }

@@ -20,7 +20,7 @@ import {
   useCreateCustomerSessionMutation,
   useGetCustomerSessionQuery,
   useUpdateCustomerSessionMutation,
-} from '../../app/apis/customerSession.api'
+} from '../../app/apis/customer-session.api'
 import { getCustomerSessionSaveLabels, getSaveCustomerSessionGridData } from '../../transformers/customerSession'
 import { useGetCompaniesQuery } from '../../app/apis/company.api'
 import moment from 'moment'

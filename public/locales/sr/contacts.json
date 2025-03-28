@@ -24,5 +24,12 @@
   "documentTypes": {
     "identity_card": "Lična karta",
     "passport": "Pasoš"
+  },
+  "companyContactRelationType": {
+    "THIRD_PARTY_PERSON": "Posrednička osoba",
+    "TECHNICAL_CONTACT": "Tehnički kontakt",
+    "RESPONSIBLE_PERSON": "Odgovorna osoba",
+    "CONTACT_PERSON": "Kontakt osoba",
+    "RESPONSIBLE_APR_PERSON": "Odgovorna apr osoba"
   }
 }

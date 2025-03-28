@@ -14,16 +14,18 @@ import {
   Button,
 } from '@mui/material'
 import { Add, Remove } from '@mui/icons-material'
-import { PrimaryThemeColor, WhiteTeamColor } from '../consts/common'
+import { EmptyValue, GridFieldTypes, PrimaryThemeColor, WhiteTeamColor } from '../consts/common'
 import { ExpandableTypographyTableProps } from '../types/common'
 import { useTranslation } from 'react-i18next'
 import EntityDialog from './EntityDialog'
 import { cleanEntityState } from '../features/entity.slice'
 import { useAppDispatch } from '../app/hooks'
+import Spinner from './Spinner'
+import { Link } from 'react-router-dom'
 
 const ExpandableTable = (props: ExpandableTypographyTableProps) => {
   const [expanded, setExpanded] = useState(false)
-  const { title, hideActionSection, moduleOption } = props
+  const { title, hideActionSection, moduleOption, expandableDialogAction, isLoading, columns, rows } = props
   const { t } = useTranslation()
   const [isDialogOpen, setDialogOpen] = useState(false)
   const [dialogTitle, setDialogTitle] = useState('')
@@ -41,6 +43,10 @@ const ExpandableTable = (props: ExpandableTypographyTableProps) => {
     dispatch(cleanEntityState())
     setDialogTitle((t('create') + ' ' + title).toUpperCase())
     setDialogOpen(true)
+  }
+
+  if (isLoading) {
+    return <Spinner />
   }
 
   return (
@@ -81,26 +87,45 @@ const ExpandableTable = (props: ExpandableTypographyTableProps) => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Field</TableCell>
-                    <TableCell>Value</TableCell>
+                    {columns.map((col) => (
+                      <TableCell key={col.key}>{col.label}</TableCell>
+                    ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>Custom Field 1</TableCell>
-                    <TableCell>Value 1</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Custom Field 2</TableCell>
-                    <TableCell>Value 2</TableCell>
-                  </TableRow>
+                  {rows.map((row, rowIndex) => (
+                    <TableRow key={rowIndex}>
+                      {columns.map((col) => {
+                        const gridFieldData = row[col.key]
+                        if (gridFieldData.type === GridFieldTypes.LINK) {
+                          return (
+                            <TableCell key={col.key}>
+                              {gridFieldData?.value ? (
+                                <Link to={String(gridFieldData.link)}>{gridFieldData.value}</Link>
+                              ) : (
+                                EmptyValue
+                              )}
+                            </TableCell>
+                          )
+                        } else if (gridFieldData.type === GridFieldTypes.STRING) {
+                          return <TableCell key={col.key}>{gridFieldData.value || EmptyValue}</TableCell>
+                        }
+                      })}
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </TableContainer>
           </Grid>
         )}
       </Paper>
-      <EntityDialog title={dialogTitle} isOpen={isDialogOpen} onClose={handleCloseDialog} moduleOption={moduleOption} />
+      <EntityDialog
+        title={dialogTitle}
+        isOpen={isDialogOpen}
+        onClose={handleCloseDialog}
+        moduleOption={moduleOption}
+        entityAction={expandableDialogAction}
+      />
     </Grid>
   )
 }

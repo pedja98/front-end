@@ -5,7 +5,7 @@ import { Root } from '../styles/common'
 import { ReactNode } from 'react'
 import { getEntityDialog } from '../transformers/dialog'
 
-const EntityDialog = ({ isOpen, onClose, moduleOption, title }: EntityDialogProps) => {
+const EntityDialog = ({ isOpen, onClose, moduleOption, title, entityAction }: EntityDialogProps) => {
   const { t } = useTranslation()
 
   const dialogContent: ReactNode = getEntityDialog(moduleOption) || <Grid>{t('noContent')}</Grid>
@@ -32,7 +32,7 @@ const EntityDialog = ({ isOpen, onClose, moduleOption, title }: EntityDialogProp
           justifyContent: 'center',
         }}
       >
-        <Button sx={{ width: '35%' }} color='primary'>
+        <Button sx={{ width: '35%' }} onClick={entityAction} color='primary'>
           {t('general:create')}
         </Button>
         <Button sx={{ width: '35%' }} onClick={onClose} color='primary'>

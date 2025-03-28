@@ -49,3 +49,24 @@ export interface CompanyContactRelationFormProps {
   relationTypes?: string[]
   companyId?: number
 }
+
+export interface CreateCompanyContactRelation {
+  companyId: number
+  contactId: number
+  relationTypes: CompanyContactRelationType[]
+}
+
+export interface UpdateCompanyContactRelation {
+  companyId: number
+  relationType: CompanyContactRelationType
+}
+
+export interface CompanyContactRelation {
+  companyId: number
+  companyName: number
+  relationType: CompanyContactRelationType
+  createdByUsername: string
+  modifiedByUsername: string
+  dateCreated: string
+  dateModified: string
+}

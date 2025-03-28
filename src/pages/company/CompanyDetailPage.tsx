@@ -6,7 +6,7 @@ import { NotificationType } from '../../types/notification'
 import { useAppDispatch } from '../../app/hooks'
 import { useTranslation } from 'react-i18next'
 import { useGetCompanyQuery } from '../../app/apis/company.api'
-import { getCompanyDetailLabels, transformCompanyIntoEditPageGridData } from '../../transformers/company'
+import { getCompanyDetailLabels, transformCompanyDataIntoGridData } from '../../transformers/company'
 import DetailPageGridField from '../../components/DetailPageGridField'
 
 const CompanyDetailPage = () => {
@@ -32,7 +32,7 @@ const CompanyDetailPage = () => {
     return null
   }
 
-  const detailPageCompanyGridData = transformCompanyIntoEditPageGridData(t, company, true)
+  const detailPageCompanyGridData = transformCompanyDataIntoGridData(t, company, true)
 
   const labels = getCompanyDetailLabels(t)
 

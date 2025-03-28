@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { useGetCustomerSessionsQuery } from '../../app/apis/customerSession.api'
+import { useGetCustomerSessionsQuery } from '../../app/apis/customer-session.api'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { createQueryParamsForSearch } from '../../helpers/common'
 import { useTranslation } from 'react-i18next'

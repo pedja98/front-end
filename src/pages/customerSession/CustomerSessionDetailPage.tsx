@@ -6,7 +6,7 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { Button, Grid } from '@mui/material'
 import { EmptyValue } from '../../consts/common'
-import { useGetCustomerSessionQuery } from '../../app/apis/customerSession.api'
+import { useGetCustomerSessionQuery } from '../../app/apis/customer-session.api'
 import {
   getCustomerSessionDetailPageLabels,
   transformCustomerSessionIntoPageGridData,

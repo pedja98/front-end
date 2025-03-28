@@ -10,7 +10,7 @@ import { Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { TabelRowPerPage } from '../../consts/common'
 import { useGetCompaniesQuery } from '../../app/apis/company.api'
-import { getCompanyListColumns, transformCompanyIntoEditPageGridData } from '../../transformers/company'
+import { getCompanyListColumns, transformCompanyDataIntoGridData } from '../../transformers/company'
 
 const CompanyListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -37,9 +37,7 @@ const CompanyListPage = () => {
   }
 
   const paginatedCompanies = companies.slice((currentPage - 1) * TabelRowPerPage, currentPage * TabelRowPerPage)
-  const listPageCompaniesGridData = paginatedCompanies.map((company) =>
-    transformCompanyIntoEditPageGridData(t, company),
-  )
+  const listPageCompaniesGridData = paginatedCompanies.map((company) => transformCompanyDataIntoGridData(t, company))
 
   const columns = getCompanyListColumns(t)
 

@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next'
 import { GridLabel, PageElement } from '../types/common'
-import { Contact, SaveContact } from '../types/contact'
+import { CompanyContactRelation, Contact, SaveContact } from '../types/contact'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 
@@ -81,4 +81,41 @@ export const getSaveContactGridData = (
     value: contactData.documentType,
   },
   documentId: { type: GridFieldTypes.STRING, required: true, value: contactData.documentId },
+})
+
+export const getCompanyContactRelationColumnLabels = (t: TFunction): GridLabel[] => [
+  { label: t('contacts:relatedCompany'), key: 'relatedCompany' },
+  { label: t('contacts:companyRelationType'), key: 'companyRelationType' },
+  { label: t('general:createdBy'), key: 'createdByUsername' },
+  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { label: t('general:dateCreated'), key: 'dateCreated' },
+  { label: t('general:dateModified'), key: 'dateModified' },
+]
+
+export const transformCompanyContactRelationIntoPageGridData = (
+  t: TFunction,
+  relation: CompanyContactRelation,
+  skipFullNameAsLink?: boolean,
+): PageElement => ({
+  relatedCompany: {
+    value: relation.companyName,
+    link: `/index/companies/${relation.companyId}`,
+    type: skipFullNameAsLink ? GridFieldTypes.STRING : GridFieldTypes.LINK,
+  },
+  companyRelationType: {
+    value: t(`contacts:companyContactRelationType.${relation.relationType}`),
+    type: GridFieldTypes.STRING,
+  },
+  createdByUsername: {
+    value: relation.createdByUsername,
+    link: `/index/users/${relation.createdByUsername}`,
+    type: GridFieldTypes.LINK,
+  },
+  modifiedByUsername: {
+    value: relation.modifiedByUsername,
+    link: `/index/users/${relation.modifiedByUsername}`,
+    type: GridFieldTypes.LINK,
+  },
+  dateCreated: { value: dateFormater(relation.dateCreated as string), type: GridFieldTypes.STRING },
+  dateModified: { value: dateFormater(relation.dateModified as string), type: GridFieldTypes.STRING },
 })

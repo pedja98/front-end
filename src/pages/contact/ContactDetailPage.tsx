@@ -7,12 +7,26 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useTranslation } from 'react-i18next'
 import { useDeleteContactMutation, useGetContactQuery } from '../../app/apis/contact.api'
-import { getContactDetailListLabels, transformContactIntoPageGridData } from '../../transformers/contact'
+import {
+  getCompanyContactRelationColumnLabels,
+  getContactDetailListLabels,
+  transformCompanyContactRelationIntoPageGridData,
+  transformContactIntoPageGridData,
+} from '../../transformers/contact'
 import { hideConfirm, showConfirm } from '../../features/confirm.slice'
 import { confirmEntityIsDeleted } from '../../features/common.slice'
 import DetailPageGridField from '../../components/DetailPageGridField'
 import ExpandableTable from '../../components/ExpandableTable'
-import { ModulesOptions } from '../../types/common'
+import { ApiException, ModulesOptions } from '../../types/common'
+import {
+  useCreateCompanyContractRelationMutation,
+  useGetCompanyContractRelationByContactIdQuery,
+} from '../../app/apis/company-contact-relation.api'
+import {
+  CompanyContactRelationFormProps,
+  CompanyContactRelationType,
+  CreateCompanyContactRelation,
+} from '../../types/contact'
 
 const ContactDetailPage = () => {
   const contactId = String(useParams().id)
@@ -21,23 +35,35 @@ const ContactDetailPage = () => {
   const { t } = useTranslation()
 
   const entityIsDeleted = !!useAppSelector((state) => state.common.entityIsDeleted)
+  const relationData = useAppSelector((state) => state.entity) as CompanyContactRelationFormProps
+
+  const [createCompanyContractRelation, { isLoading: isLoadingCreateCompanyContractRelation }] =
+    useCreateCompanyContractRelationMutation()
 
   const {
     isLoading: isGetContactLoading,
     data: contact,
-    isError,
-    error,
+    isError: isErrorGetContact,
+    error: errorGetContact,
   } = useGetContactQuery(contactId, { skip: !!entityIsDeleted })
+
+  const {
+    isLoading: isLoadingGetRelations,
+    data: relations,
+    isError: isErrorGetRelations,
+    error: errorGetRelations,
+  } = useGetCompanyContractRelationByContactIdQuery(contactId, { skip: !!entityIsDeleted })
+
   const [deleteContact, { isLoading: isDeleteContactLoading }] = useDeleteContactMutation()
 
   if (isGetContactLoading || isDeleteContactLoading) {
     return <Spinner />
   }
 
-  if (isError || !contact) {
+  if (isErrorGetContact || isErrorGetRelations || !contact) {
     dispatch(
       setNotification({
-        text: JSON.stringify(error),
+        text: JSON.stringify(errorGetContact || errorGetRelations),
         type: NotificationType.Error,
       }),
     )
@@ -96,6 +122,39 @@ const ContactDetailPage = () => {
     }
   }
 
+  const handleRelationCreate = async () => {
+    const createRelationData: CreateCompanyContactRelation = {
+      contactId: Number(contactId),
+      relationTypes: relationData.relationTypes as CompanyContactRelationType[],
+      companyId: Number(relationData.companyId),
+    }
+
+    try {
+      const response = await createCompanyContractRelation(createRelationData).unwrap()
+      const messageCode = `contacts:${response.message}`
+      dispatch(
+        setNotification({
+          text: t(messageCode),
+          type: NotificationType.Success,
+        }),
+      )
+    } catch (err) {
+      const errorResponse = err as { data: ApiException }
+      const errorCode = `contacts:${errorResponse.data}` || 'general:unknownError'
+      dispatch(
+        setNotification({
+          text: t(errorCode),
+          type: NotificationType.Error,
+        }),
+      )
+    }
+  }
+
+  const relationTableGridData = Array.isArray(relations)
+    ? relations.map((relation) => transformCompanyContactRelationIntoPageGridData(t, relation))
+    : []
+  const relationTableColumLabels = getCompanyContactRelationColumnLabels(t)
+
   return (
     <>
       <Grid sx={{ width: '100%', mt: 1, mb: 1 }}>
@@ -122,6 +181,10 @@ const ContactDetailPage = () => {
             title={t('contacts:companyRelationsTitle')}
             hideActionSection={false}
             moduleOption={ModulesOptions.Contacts}
+            expandableDialogAction={handleRelationCreate}
+            isLoading={isLoadingGetRelations || isLoadingCreateCompanyContractRelation}
+            columns={relationTableColumLabels}
+            rows={relationTableGridData}
           />
         </Grid>
       </Grid>

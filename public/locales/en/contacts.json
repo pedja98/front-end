@@ -24,5 +24,12 @@
   "documentTypes": {
     "identity_card": "Identity card",
     "passport": "Passport"
+  },
+  "companyContactRelationType": {
+    "THIRD_PARTY_PERSON": "Third party person",
+    "TECHNICAL_CONTACT": "Technical contact",
+    "RESPONSIBLE_PERSON": "Responsible person",
+    "CONTACT_PERSON": "Contact person",
+    "RESPONSIBLE_APR_PERSON": "Responsible apr person"
   }
 }

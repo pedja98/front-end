@@ -31,7 +31,7 @@ export const getSaveCompanyGridData = (
   comment: { type: GridFieldTypes.AREA, required: false, value: companyData.comment },
 })
 
-export const transformCompanyIntoEditPageGridData = (
+export const transformCompanyDataIntoGridData = (
   t: TFunction,
   company: Company,
   skipNameAsLink?: boolean,
@@ -44,6 +44,8 @@ export const transformCompanyIntoEditPageGridData = (
   status: { type: GridFieldTypes.STRING, value: t(`companies:statuses.${company.status?.toLocaleLowerCase()}`) },
   hqAddress: { type: GridFieldTypes.AREA, value: company.hqAddress },
   contactPhone: { type: GridFieldTypes.STRING, value: company.contactPhone },
+  industry: { type: GridFieldTypes.STRING, value: company.industry },
+  numberOfEmployees: { type: GridFieldTypes.STRING, value: company.numberOfEmployees },
   tin: { type: GridFieldTypes.STRING, value: company.tin },
   bankName: { type: GridFieldTypes.STRING, value: company.bankName },
   bankAccountNumber: { type: GridFieldTypes.STRING, value: company.bankAccountNumber },

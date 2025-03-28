@@ -1,7 +1,7 @@
 import { Grid, TextField, Typography } from '@mui/material'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { DetailPageGridFieldProps, GridFieldType } from '../types/common'
-import { LinkStyled } from '../styles/common'
+import { DetailGridLinkStyled } from '../styles/common'
 
 const DetailPageGridField = ({ gridFieldData, label }: DetailPageGridFieldProps) => {
   const isArea = gridFieldData.type === GridFieldTypes.AREA
@@ -12,7 +12,9 @@ const DetailPageGridField = ({ gridFieldData, label }: DetailPageGridFieldProps)
     <Grid item xs={12} sm={isArea ? 12 : 6} key={label.key}>
       <Grid container alignItems='center' sx={{ height: '50px' }}>
         <Grid item sx={{ minWidth: 120 }}>
-          <Typography variant='subtitle1'>{label.label}</Typography>
+          <Typography variant='subtitle1' sx={{ mr: 0.5 }}>
+            {label.label}
+          </Typography>
         </Grid>
         <Grid item xs>
           {isTextField ? (
@@ -24,7 +26,7 @@ const DetailPageGridField = ({ gridFieldData, label }: DetailPageGridFieldProps)
               InputProps={{ readOnly: true }}
             />
           ) : isLink ? (
-            <LinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</LinkStyled>
+            <DetailGridLinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</DetailGridLinkStyled>
           ) : (
             <TextField fullWidth value={EmptyValue} variant='outlined' disabled InputProps={{ readOnly: true }} />
           )}

@@ -8,9 +8,8 @@ import { NotificationType } from '../../types/notification'
 import { getRegionPageGridLabels, transformRegionIntoPageGridData } from '../../transformers/region'
 import { hideConfirm, showConfirm } from '../../features/confirm.slice'
 import { confirmEntityIsDeleted } from '../../features/common.slice'
-import { Button, Grid, TextField, Typography } from '@mui/material'
-import { EmptyValue, GridFieldTypes } from '../../consts/common'
-import { LinkStyled } from '../../styles/common'
+import { Button, Grid } from '@mui/material'
+import DetailPageGridField from '../../components/DetailPageGridField'
 
 const RegionDetailPage = () => {
   const regionId = String(useParams().id)
@@ -106,50 +105,8 @@ const RegionDetailPage = () => {
         <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
           <Grid container spacing={2} sx={{ width: '80%' }}>
             {labels.map((label) => {
-              const gridFieldData = detailPageRegionGridData[label.key] || EmptyValue
-
-              return (
-                <Grid item xs={12} sm={6} key={label.key}>
-                  <Grid container alignItems='center' sx={{ height: '50px' }}>
-                    <Grid item sx={{ minWidth: 120 }}>
-                      <Typography variant='subtitle1'>{label.label}</Typography>
-                    </Grid>
-                    <Grid item xs>
-                      <Grid item xs>
-                        {(() => {
-                          if (gridFieldData.type === GridFieldTypes.STRING) {
-                            return (
-                              <TextField
-                                fullWidth
-                                value={gridFieldData.value}
-                                variant='outlined'
-                                disabled
-                                InputProps={{
-                                  readOnly: true,
-                                }}
-                              />
-                            )
-                          } else if (gridFieldData.type === GridFieldTypes.LINK && gridFieldData.value) {
-                            return <LinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</LinkStyled>
-                          } else {
-                            return (
-                              <TextField
-                                fullWidth
-                                value={EmptyValue}
-                                variant='outlined'
-                                disabled
-                                InputProps={{
-                                  readOnly: true,
-                                }}
-                              />
-                            )
-                          }
-                        })()}
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              )
+              const gridFieldData = detailPageRegionGridData[label.key]
+              return <DetailPageGridField key={label.key} gridFieldData={gridFieldData} label={label} />
             })}
           </Grid>
         </Grid>
