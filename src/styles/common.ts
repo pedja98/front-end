@@ -157,7 +157,7 @@ export const CenteredCircularProgress = styled(CircularProgress)({
   color: 'black !important',
 })
 
-export const DetailGridLinkStyled = styled(Link)(() => ({
+export const GridLinkStyled = styled(Link)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'start',
@@ -166,6 +166,13 @@ export const DetailGridLinkStyled = styled(Link)(() => ({
   border: '1px solid rgba(0, 0, 0, 0.23)',
   padding: '0 14px',
   borderRadius: '5px',
+  color: 'black',
+  textDecoration: 'none',
+  fontSize: '1rem !important',
+  backgroundColor: 'white',
+}))
+
+export const TableLinkStyled = styled(Link)(() => ({
   color: 'black',
   textDecoration: 'none',
   fontSize: '1rem !important',

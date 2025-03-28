@@ -28,6 +28,7 @@ export const GridFieldTypes = {
   AREA: 'area',
   AUTOCOMPLETE: 'autocomplete',
   DATE_TIME: 'dateTime',
+  BUTTON: 'button',
 } as const
 
 export const InitialState: CommonState = {}
@@ -43,3 +44,5 @@ export const CrmApiTags = {
 }
 
 export const TabelRowPerPage = 20
+
+export const ExpandableTabelRowPerPage = 5

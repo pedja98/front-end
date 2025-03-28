@@ -1,7 +1,7 @@
 import { Grid, TextField, Typography } from '@mui/material'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { DetailPageGridFieldProps, GridFieldType } from '../types/common'
-import { DetailGridLinkStyled } from '../styles/common'
+import { GridLinkStyled } from '../styles/common'
 
 const DetailPageGridField = ({ gridFieldData, label }: DetailPageGridFieldProps) => {
   const isArea = gridFieldData.type === GridFieldTypes.AREA
@@ -26,7 +26,7 @@ const DetailPageGridField = ({ gridFieldData, label }: DetailPageGridFieldProps)
               InputProps={{ readOnly: true }}
             />
           ) : isLink ? (
-            <DetailGridLinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</DetailGridLinkStyled>
+            <GridLinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</GridLinkStyled>
           ) : (
             <TextField fullWidth value={EmptyValue} variant='outlined' disabled InputProps={{ readOnly: true }} />
           )}

@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { setNotification } from '../../features/notifications.slice'
@@ -19,8 +18,6 @@ const UserListPage = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const [currentPage, setCurrentPage] = useState(1)
-
   if (isLoading) {
     return <Spinner />
   }
@@ -36,14 +33,9 @@ const UserListPage = () => {
     return null
   }
 
-  const paginatedUsers = users.slice((currentPage - 1) * TabelRowPerPage, currentPage * TabelRowPerPage)
-  const listPageUserGridData = paginatedUsers.map((user) => transformUserIntoPageGridData(t, user))
+  const listPageUserGridData = users.map((user) => transformUserIntoPageGridData(t, user))
 
   const columns = getUseDetailListPagesLabels(t)
-
-  const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
-    setCurrentPage(page)
-  }
 
   return (
     <Grid sx={{ mt: 2 }}>
@@ -51,14 +43,7 @@ const UserListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.users`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <CustomTable
-          columns={columns}
-          rows={listPageUserGridData}
-          currentPage={currentPage}
-          totalCount={users.length}
-          rowsPerPage={TabelRowPerPage}
-          onPageChange={handlePageChange}
-        />
+        <CustomTable columns={columns} rows={listPageUserGridData} rowPerPage={TabelRowPerPage} />
       </Grid>
     </Grid>
   )

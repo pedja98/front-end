@@ -3,17 +3,16 @@ import { useGetCustomerSessionsQuery } from '../../app/apis/customer-session.api
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { createQueryParamsForSearch } from '../../helpers/common'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { TabelRowPerPage } from '../../consts/common'
 import {
   getCustomerSessionTableColumns,
   transformCustomerSessionIntoPageGridData,
 } from '../../transformers/customerSession'
 import { Grid, Typography } from '@mui/material'
 import CustomTable from '../../components/CustomTable'
+import { TabelRowPerPage } from '../../consts/common'
 
 const CustomerSessionListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -21,8 +20,6 @@ const CustomerSessionListPage = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { t } = useTranslation()
-
-  const [currentPage, setCurrentPage] = useState(1)
 
   if (isLoading) {
     return <Spinner />
@@ -39,17 +36,9 @@ const CustomerSessionListPage = () => {
     return null
   }
 
-  const paginatedCustomerSessions = customerSessions.slice(
-    (currentPage - 1) * TabelRowPerPage,
-    currentPage * TabelRowPerPage,
-  )
-  const listPageCustomerSessionGridData = paginatedCustomerSessions.map((customerSession) =>
+  const listPageCustomerSessionGridData = customerSessions.map((customerSession) =>
     transformCustomerSessionIntoPageGridData(t, customerSession),
   )
-
-  const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
-    setCurrentPage(page)
-  }
 
   const columns = getCustomerSessionTableColumns(t)
 
@@ -59,14 +48,7 @@ const CustomerSessionListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.customerSessions`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <CustomTable
-          columns={columns}
-          rows={listPageCustomerSessionGridData}
-          currentPage={currentPage}
-          totalCount={customerSessions.length}
-          rowsPerPage={TabelRowPerPage}
-          onPageChange={handlePageChange}
-        />
+        <CustomTable columns={columns} rows={listPageCustomerSessionGridData} rowPerPage={TabelRowPerPage} />
       </Grid>
     </Grid>
   )

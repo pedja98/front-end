@@ -1,12 +1,30 @@
-import { FC } from 'react'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Pagination } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { FC, useState } from 'react'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  TablePagination,
+  Button,
+} from '@mui/material'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { TableProps } from '../types/common'
+import { TableLinkStyled } from '../styles/common'
 
-const CustomTable: FC<TableProps> = ({ columns, rows, currentPage, totalCount, rowsPerPage, onPageChange }) => {
+const CustomTable: FC<TableProps> = ({ columns, rows, rowPerPage }) => {
+  const [page, setPage] = useState(0)
+
+  const handleChangePage = (_: unknown, newPage: number) => {
+    setPage(newPage)
+  }
+
+  const paginatedRows = rows.slice(page * rowPerPage, (page + 1) * rowPerPage)
+
   return (
-    <TableContainer component={Paper} sx={{ marginBottom: 2 }}>
+    <TableContainer component={Paper} sx={{ mt: 1, mb: 2 }}>
       <Table>
         <TableHead>
           <TableRow>
@@ -16,7 +34,7 @@ const CustomTable: FC<TableProps> = ({ columns, rows, currentPage, totalCount, r
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, rowIndex) => (
+          {paginatedRows.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
               {columns.map((col) => {
                 const gridFieldData = row[col.key]
@@ -24,7 +42,7 @@ const CustomTable: FC<TableProps> = ({ columns, rows, currentPage, totalCount, r
                   return (
                     <TableCell key={col.key}>
                       {gridFieldData?.value ? (
-                        <Link to={String(gridFieldData.link)}>{gridFieldData.value}</Link>
+                        <TableLinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</TableLinkStyled>
                       ) : (
                         EmptyValue
                       )}
@@ -32,18 +50,26 @@ const CustomTable: FC<TableProps> = ({ columns, rows, currentPage, totalCount, r
                   )
                 } else if (gridFieldData.type === GridFieldTypes.STRING) {
                   return <TableCell key={col.key}>{gridFieldData.value || EmptyValue}</TableCell>
+                } else if (gridFieldData.type === GridFieldTypes.BUTTON) {
+                  return (
+                    <TableCell key={col.key}>
+                      <Button sx={{ minWidth: '50px', width: '100px' }}>{col.label}</Button>
+                    </TableCell>
+                  )
                 }
+                return null
               })}
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Pagination
-        count={Math.ceil(totalCount / rowsPerPage)}
-        page={currentPage}
-        onChange={onPageChange}
-        color='primary'
-        sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}
+      <TablePagination
+        component='div'
+        count={rows.length}
+        rowsPerPage={rowPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        rowsPerPageOptions={[]}
       />
     </TableContainer>
   )

@@ -90,6 +90,8 @@ export const getCompanyContactRelationColumnLabels = (t: TFunction): GridLabel[]
   { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
   { label: t('general:dateCreated'), key: 'dateCreated' },
   { label: t('general:dateModified'), key: 'dateModified' },
+  { label: t('general:edit'), key: 'edit' },
+  { label: t('general:delete'), key: 'delete' },
 ]
 
 export const transformCompanyContactRelationIntoPageGridData = (
@@ -118,4 +120,6 @@ export const transformCompanyContactRelationIntoPageGridData = (
   },
   dateCreated: { value: dateFormater(relation.dateCreated as string), type: GridFieldTypes.STRING },
   dateModified: { value: dateFormater(relation.dateModified as string), type: GridFieldTypes.STRING },
+  edit: { type: GridFieldTypes.BUTTON },
+  delete: { type: GridFieldTypes.BUTTON },
 })
