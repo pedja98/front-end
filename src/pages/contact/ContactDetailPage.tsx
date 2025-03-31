@@ -21,6 +21,7 @@ import {
   useDeleteCompanyContractRelationMutation,
   useGetCompanyContractRelationsByContactIdQuery,
 } from '../../app/apis/company-contact-relation.api'
+import { EntityConfirmationDialogOptions } from '../../types/common'
 
 const ContactDetailPage = () => {
   const contactId = Number(useParams().id)
@@ -118,7 +119,7 @@ const ContactDetailPage = () => {
     dispatch(
       showConfirm({
         confirmationTitle: (t('create') + ' ' + t('contacts:companyRelationsTitle')).toUpperCase(),
-        customConfirmComponentCode: 'CompanyContactRelationCreateDialog',
+        customConfirmComponentCode: EntityConfirmationDialogOptions.CompanyContactRelationCreateDialog,
         customConfirmComponentAttributes: { contactId },
       }),
     )

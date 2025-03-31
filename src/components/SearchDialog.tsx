@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { SearchDialogProps } from '../types/common'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { getCamelCaseFromKebabString } from '../helpers/common'
-import { ModulesOptions } from '../types/common'
+import { ModuleOptions } from '../types/common'
 import { ReactNode } from 'react'
 import { Root } from '../styles/common'
 import { getSearchDialog } from '../transformers/dialog'
@@ -13,7 +13,7 @@ const SearchDialog = ({ isOpen, onClose }: SearchDialogProps) => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const entityName = getCamelCaseFromKebabString(location.pathname.split('/')[2]) as ModulesOptions
+  const entityName = getCamelCaseFromKebabString(location.pathname.split('/')[2]) as ModuleOptions
 
   const searchDialog = getSearchDialog(entityName)
   const dialogContent: ReactNode = searchDialog || (

@@ -6,7 +6,7 @@ import { ChangeEvent } from 'react'
 import { Grid, SelectChangeEvent, TextField } from '@mui/material'
 import { RegionSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
-import { ModulesOptions } from '../../types/common'
+import { ModuleOptions } from '../../types/common'
 
 const RegionSearchDialog = () => {
   const { t } = useTranslation()
@@ -34,7 +34,7 @@ const RegionSearchDialog = () => {
           />
         </Grid>
         <SearchDialogSort
-          moduleOption={ModulesOptions.Regions}
+          moduleOption={ModuleOptions.Regions}
           sortByFields={RegionSortedByFields}
           sortByValue={regionSearchData.sortBy}
           sortOrder={regionSearchData.sortOrder}

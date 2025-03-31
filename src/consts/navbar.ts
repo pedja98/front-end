@@ -1,22 +1,22 @@
-import { ModulesOptions } from '../types/common'
+import { ModuleOptions } from '../types/common'
 
 export const NavbarLinks = [
-  ModulesOptions.Home,
-  ModulesOptions.Companies,
-  ModulesOptions.Contacts,
-  ModulesOptions.CustomerSessions,
-  ModulesOptions.Opportunities,
-  ModulesOptions.Offers,
-  ModulesOptions.Contracts,
-  ModulesOptions.Shops,
+  ModuleOptions.Home,
+  ModuleOptions.Companies,
+  ModuleOptions.Contacts,
+  ModuleOptions.CustomerSessions,
+  ModuleOptions.Opportunities,
+  ModuleOptions.Offers,
+  ModuleOptions.Contracts,
+  ModuleOptions.Shops,
 ]
 
-export const NavbarFadeMenueUserOptions = [ModulesOptions.EditProfile, ModulesOptions.Logout]
+export const NavbarFadeMenueUserOptions = [ModuleOptions.EditProfile, ModuleOptions.Logout]
 
 export const NavbarFadeMenueAdminOptions = [
-  ModulesOptions.EditProfile,
-  ModulesOptions.Regions,
-  ModulesOptions.Catalogue,
-  ModulesOptions.Users,
-  ModulesOptions.Logout,
+  ModuleOptions.EditProfile,
+  ModuleOptions.Regions,
+  ModuleOptions.Catalogue,
+  ModuleOptions.Users,
+  ModuleOptions.Logout,
 ]

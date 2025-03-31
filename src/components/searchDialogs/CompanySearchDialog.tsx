@@ -16,7 +16,7 @@ import { updateSearchAttribute } from '../../features/search.slice'
 import { CompanySortedByFields } from '../../consts/search'
 import { CompanyStatus, SearchCompanyDataFormProps } from '../../types/company'
 import SearchDialogSort from '../SearchDialogSort'
-import { ModulesOptions } from '../../types/common'
+import { ModuleOptions } from '../../types/common'
 import { CompanyStatuses } from '../../consts/company'
 
 const CompanySearchDialog = () => {
@@ -117,7 +117,7 @@ const CompanySearchDialog = () => {
           </FormControl>
         </Grid>
         <SearchDialogSort
-          moduleOption={ModulesOptions.Companies}
+          moduleOption={ModuleOptions.Companies}
           sortByFields={CompanySortedByFields}
           sortByValue={companySearchData.sortBy}
           sortOrder={companySearchData.sortOrder}

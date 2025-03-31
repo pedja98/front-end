@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { updateSearchAttribute } from '../../features/search.slice'
 import { CustomerSessionSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
-import { ModulesOptions } from '../../types/common'
+import { ModuleOptions } from '../../types/common'
 import {
   CustomerSessionMode,
   CustomerSessionOutcome,
@@ -178,7 +178,7 @@ const CustomerSessionSearchDialog = () => {
           </FormControl>
         </Grid>
         <SearchDialogSort
-          moduleOption={ModulesOptions.CustomerSessions}
+          moduleOption={ModuleOptions.CustomerSessions}
           sortByFields={CustomerSessionSortedByFields}
           sortByValue={customerSessionSearchData.sortBy}
           sortOrder={customerSessionSearchData.sortOrder}

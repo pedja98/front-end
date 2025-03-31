@@ -65,14 +65,14 @@ export interface ApiException {
 }
 
 export interface SearchDialogSortProps {
-  moduleOption: ModulesOptions
+  moduleOption: ModuleOptions
   sortByFields: Record<string, string>
   sortByValue?: string
   sortOrder?: string
   handleChange: (event: SelectChangeEvent<string>) => void
 }
 
-export enum ModulesOptions {
+export enum ModuleOptions {
   Home = 'home',
   Companies = 'companies',
   Contacts = 'contacts',
@@ -86,6 +86,11 @@ export enum ModulesOptions {
   Regions = 'regions',
   Users = 'users',
   Logout = 'logout',
+}
+
+export enum EntityConfirmationDialogOptions {
+  CompanyContactRelationCreateDialog = 'CompanyContactRelationCreateDialog',
+  CompanyContactRelationUpdateDialog = 'CompanyContactRelationUpdateDialog',
 }
 
 export type AutocompleteHashMap = {

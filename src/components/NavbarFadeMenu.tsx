@@ -3,7 +3,7 @@ import Menu from '@mui/material/Menu'
 import Fade from '@mui/material/Fade'
 import { NavbarUserOptionsButtonStyled, NavbarUserOptionsMenuItemStyled } from '../styles/navbar'
 import { useTranslation } from 'react-i18next'
-import { ModulesOptions } from '../types/common'
+import { ModuleOptions } from '../types/common'
 import Grid from '@mui/material/Grid'
 import { useLogoutMutation } from '../app/apis/core/gw.api'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
@@ -15,7 +15,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { getRoutePrefixFromCodeString } from '../helpers/common'
 
 interface Props {
-  menuOptions: ModulesOptions[]
+  menuOptions: ModuleOptions[]
   mainComponentText: string
 }
 
@@ -38,7 +38,7 @@ const NavbarFadeMenu: FC<Props> = (props): JSX.Element => {
   }
 
   const handleClick = async (option: string) => {
-    if (option === ModulesOptions.Logout) {
+    if (option === ModuleOptions.Logout) {
       try {
         const messageCode = `general:${(await logout({ username }).unwrap()).message}`
         dispatch(

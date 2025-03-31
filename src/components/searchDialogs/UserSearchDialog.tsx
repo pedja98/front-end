@@ -17,7 +17,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { updateSearchAttribute } from '../../features/search.slice'
 import { UserSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
-import { ModulesOptions } from '../../types/common'
+import { ModuleOptions } from '../../types/common'
 
 const UserSearchDialog = () => {
   const { t } = useTranslation()
@@ -127,7 +127,7 @@ const UserSearchDialog = () => {
           </FormControl>
         </Grid>
         <SearchDialogSort
-          moduleOption={ModulesOptions.Users}
+          moduleOption={ModuleOptions.Users}
           sortByFields={UserSortedByFields}
           sortByValue={userSearchData.sortBy}
           sortOrder={userSearchData.sortOrder}

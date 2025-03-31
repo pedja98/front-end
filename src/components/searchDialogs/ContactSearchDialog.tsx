@@ -17,7 +17,7 @@ import { ContactSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
 import { ContactDocumentType, ContactSearchFormProps } from '../../types/contact'
 import { ContactDocumentTypes } from '../../consts/contact'
-import { ModulesOptions } from '../../types/common'
+import { ModuleOptions } from '../../types/common'
 
 const ContactSearchDialog = () => {
   const { t } = useTranslation()
@@ -129,7 +129,7 @@ const ContactSearchDialog = () => {
           />
         </Grid>
         <SearchDialogSort
-          moduleOption={ModulesOptions.Contacts}
+          moduleOption={ModuleOptions.Contacts}
           sortByFields={ContactSortedByFields}
           sortByValue={contactSearchData.sortBy}
           sortOrder={contactSearchData.sortOrder}

@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next'
 import { ShopSearchFormProps } from '../../types/shop'
 import { ShopSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
-import { ModulesOptions } from '../../types/common'
+import { ModuleOptions } from '../../types/common'
 
 const ShopSearchDialog = () => {
   const dispatch = useAppDispatch()
@@ -141,7 +141,7 @@ const ShopSearchDialog = () => {
           </FormControl>
         </Grid>
         <SearchDialogSort
-          moduleOption={ModulesOptions.Shops}
+          moduleOption={ModuleOptions.Shops}
           sortByFields={ShopSortedByFields}
           sortByValue={shopSearchData.sortBy}
           sortOrder={shopSearchData.sortOrder}

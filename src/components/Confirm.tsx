@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from '@mui/material'
 import { useAppSelector } from '../app/hooks'
 import { getEntityConfirmationDialog } from '../transformers/dialog'
+import { EntityConfirmationDialogOptions } from '../types/common'
 
 const Confirm: FC = () => {
   const confirm = useAppSelector((state) => state.confirm)
@@ -19,7 +20,7 @@ const Confirm: FC = () => {
   }
 
   const customDialogContent = getEntityConfirmationDialog(
-    confirm.customConfirmComponentCode as string,
+    confirm.customConfirmComponentCode as EntityConfirmationDialogOptions,
     confirm.customConfirmComponentAttributes as Record<string, unknown>,
   )
 

@@ -26,7 +26,7 @@ import { ApiException } from '../../types/common'
 import Spinner from '../Spinner'
 import { hideConfirm } from '../../features/confirm.slice'
 
-const CompanyContactRelationCreateCard: FC<{ contactId: number }> = ({ contactId }) => {
+const CompanyContactRelationCreateDialog: FC<{ contactId: number }> = ({ contactId }) => {
   const { t } = useTranslation()
   const { data: companies } = useGetCompaniesQuery('', {
     selectFromResult: ({ data }) => ({
@@ -162,4 +162,4 @@ const CompanyContactRelationCreateCard: FC<{ contactId: number }> = ({ contactId
   )
 }
 
-export default CompanyContactRelationCreateCard
+export default CompanyContactRelationCreateDialog
