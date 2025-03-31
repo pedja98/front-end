@@ -115,12 +115,27 @@ const ContactDetailPage = () => {
     }
   }
 
-  const handleRelationDialogOpen = () => {
+  const handleCreateRelationDialogOpen = () => {
     dispatch(
       showConfirm({
         confirmationTitle: (t('create') + ' ' + t('contacts:companyRelationsTitle')).toUpperCase(),
         customConfirmComponentCode: EntityConfirmationDialogOptions.CompanyContactRelationCreateDialog,
         customConfirmComponentAttributes: { contactId },
+      }),
+    )
+  }
+
+  const handleUpdateRelationDialogOpen = (id: number) => {
+    const relation = relations?.find((relation) => relation.id === id)
+    dispatch(
+      showConfirm({
+        confirmationTitle: (t('edit') + ' ' + t('contacts:companyRelationsTitle')).toUpperCase(),
+        customConfirmComponentCode: EntityConfirmationDialogOptions.CompanyContactRelationUpdateDialog,
+        customConfirmComponentAttributes: {
+          relationId: relation?.id,
+          relationType: relation?.relationType,
+          companyId: relation?.companyId,
+        },
       }),
     )
   }
@@ -161,7 +176,14 @@ const ContactDetailPage = () => {
   }
 
   const relationTableGridData = Array.isArray(relations)
-    ? relations.map((relation) => transformCompanyContactRelationIntoPageGridData(t, relation, handleRelationDelete))
+    ? relations.map((relation) =>
+        transformCompanyContactRelationIntoPageGridData(
+          t,
+          relation,
+          handleRelationDelete,
+          handleUpdateRelationDialogOpen,
+        ),
+      )
     : []
   const relationTableColumLabels = getCompanyContactRelationColumnLabels(t)
 
@@ -190,7 +212,7 @@ const ContactDetailPage = () => {
           <ExpandableTable
             title={t('contacts:companyRelationsTitle')}
             hideActionSection={false}
-            expandableDialogAction={handleRelationDialogOpen}
+            expandableDialogAction={handleCreateRelationDialogOpen}
             isLoading={isLoadingGetRelations || isDeleteRelationtLoading}
             columns={relationTableColumLabels}
             rows={relationTableGridData}

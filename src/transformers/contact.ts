@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next'
-import { GridLabel, PageElement } from '../types/common'
-import { CompanyContactRelation, Contact, SaveContact } from '../types/contact'
+import { AutocompleteHashMap, GridLabel, PageElement } from '../types/common'
+import { CompanyContactRelation, Contact, SaveContact, UpdateCompanyContactRelation } from '../types/contact'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 
@@ -94,10 +94,38 @@ export const getCompanyContactRelationColumnLabels = (t: TFunction): GridLabel[]
   { label: t('general:delete'), key: 'delete' },
 ]
 
+export const getUpdateContactRelationDialogFormLabels = (t: TFunction): GridLabel[] => [
+  { label: t('contacts:relatedCompany'), key: 'companyId' },
+  { label: t('contacts:companyRelationType'), key: 'relationType' },
+]
+
+export const getUpdateContactRelationDialogFormGridData = (
+  relationData: UpdateCompanyContactRelation,
+  relationTypeOptions: string[],
+  relationTypeOptionValues: string[],
+  companiesMap: AutocompleteHashMap,
+): PageElement => ({
+  companyId: {
+    required: true,
+    type: GridFieldTypes.AUTOCOMPLETE,
+    autocompleteMap: companiesMap,
+    value: relationData.companyId,
+  },
+  relationType: {
+    required: true,
+    type: GridFieldTypes.SELECT,
+    options: relationTypeOptions,
+    optionsValues: relationTypeOptionValues,
+    value: relationData.relationType,
+    selectDialogField: true,
+  },
+})
+
 export const transformCompanyContactRelationIntoPageGridData = (
   t: TFunction,
   relation: CompanyContactRelation,
   handleRelationDelete: (id: number) => void,
+  handleUpdateRelationDialogOpen: (id: number) => void,
 ): PageElement => ({
   relatedCompany: {
     value: relation.companyName,
@@ -120,6 +148,6 @@ export const transformCompanyContactRelationIntoPageGridData = (
   },
   dateCreated: { value: dateFormater(relation.dateCreated as string), type: GridFieldTypes.STRING },
   dateModified: { value: dateFormater(relation.dateModified as string), type: GridFieldTypes.STRING },
-  edit: { type: GridFieldTypes.BUTTON },
+  edit: { type: GridFieldTypes.BUTTON, handleClick: handleUpdateRelationDialogOpen, id: relation.id },
   delete: { type: GridFieldTypes.BUTTON, handleClick: handleRelationDelete, id: relation.id },
 })

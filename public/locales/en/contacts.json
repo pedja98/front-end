@@ -2,6 +2,7 @@
   "contactDeletionText": "Are you sure that you want to delete contact {{firstName}} {{lastName}}?",
   "companyContactRelationDeletionText": "Are you sure that you want to delete relation",
   "relationDeleted": "Relation has been successfully deleted",
+  "relationUpdated": "Relation has been successfully updated",
   "fullName": "Full name",
   "firstName": "First name",
   "lastName": "Last name",

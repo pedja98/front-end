@@ -37,6 +37,7 @@ export interface GridFieldAttributes {
   optionsValues?: (string | number | undefined)[]
   required?: boolean
   autocompleteMap?: AutocompleteHashMap
+  selectDialogField?: boolean
   handleClick?: (id: number) => void
 }
 

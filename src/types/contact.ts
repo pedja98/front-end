@@ -54,7 +54,6 @@ export interface CreateCompanyContactRelation {
 export interface UpdateCompanyContactRelation {
   companyId: number
   relationType: CompanyContactRelationType
-  contactId: number
 }
 
 export interface CompanyContactRelation {

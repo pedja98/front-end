@@ -46,7 +46,11 @@ const GridField = (props: GridFieldProps) => {
     return (
       <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
         <FormControl sx={{ width: '100%' }} variant='standard'>
-          <InputLabel id={label.key} sx={{ pl: 9.3 }} required={gridFieldData.required}>
+          <InputLabel
+            id={label.key}
+            sx={{ pl: gridFieldData.selectDialogField ? 2.5 : 9.3 }}
+            required={gridFieldData.required}
+          >
             {label.label}
           </InputLabel>
           <Select

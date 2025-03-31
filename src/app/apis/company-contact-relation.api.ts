@@ -17,7 +17,7 @@ export const companyContractRelationApi = crmApi.injectEndpoints({
     }),
     updateCompanyContractRelation: builder.mutation<
       { message: string },
-      { id: string; relation: Partial<UpdateCompanyContactRelation> }
+      { id: number; relation: Partial<UpdateCompanyContactRelation> }
     >({
       query: ({ id, relation }) => ({
         url: `/company-contact-relations/${id}`,

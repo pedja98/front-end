@@ -1,12 +1,14 @@
 import { ReactNode } from 'react'
 import { EntityConfirmationDialogOptions, ModuleOptions } from '../types/common'
-import UserSearchDialog from '../components/searchDialogs/UserSearchDialog'
-import RegionSearchDialog from '../components/searchDialogs/RegionSearchDialog'
-import CompanySearchDialog from '../components/searchDialogs/CompanySearchDialog'
-import ShopSearchDialog from '../components/searchDialogs/ShopSearchDialog'
-import ContactSearchDialog from '../components/searchDialogs/ContactSearchDialog'
-import CustomerSessionSearchDialog from '../components/searchDialogs/CustomerSessionSearchDialog'
-import CompanyContactRelationCreateDialog from '../components/entityDialogs/CompanyContactRelationCreateDialog'
+import UserSearchDialog from '../components/SearchDialogs/UserSearchDialog'
+import RegionSearchDialog from '../components/SearchDialogs/RegionSearchDialog'
+import CompanySearchDialog from '../components/SearchDialogs/CompanySearchDialog'
+import ShopSearchDialog from '../components/SearchDialogs/ShopSearchDialog'
+import ContactSearchDialog from '../components/SearchDialogs/ContactSearchDialog'
+import CustomerSessionSearchDialog from '../components/SearchDialogs/CustomerSessionSearchDialog'
+import CompanyContactRelationCreateDialog from '../components/EntityDialogs/CompanyContactRelationCreateDialog'
+import CompanyContactRelationUpdateDialog from '../components/EntityDialogs/CompanyContactRelationUpdateDialog'
+import { CompanyContactRelationType } from '../types/contact'
 
 export const getSearchDialog = (currentModule: ModuleOptions): ReactNode | undefined => {
   const dialogs: Partial<Record<ModuleOptions, ReactNode>> = {
@@ -28,6 +30,13 @@ export const getEntityConfirmationDialog = (
   const dialogs: Partial<Record<string, ReactNode>> = {
     [EntityConfirmationDialogOptions.CompanyContactRelationCreateDialog]: (
       <CompanyContactRelationCreateDialog contactId={customConfirmComponentAttributes?.contactId as number} />
+    ),
+    [EntityConfirmationDialogOptions.CompanyContactRelationUpdateDialog]: (
+      <CompanyContactRelationUpdateDialog
+        relationId={customConfirmComponentAttributes?.relationId as number}
+        relationType={customConfirmComponentAttributes?.relationType as CompanyContactRelationType}
+        companyId={customConfirmComponentAttributes?.companyId as number}
+      />
     ),
   }
 
