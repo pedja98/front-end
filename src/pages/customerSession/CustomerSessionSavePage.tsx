@@ -136,7 +136,7 @@ const CustomerSessionSavePage = () => {
     if (getCustomerSessionData?.status && getCustomerSessionData?.status !== CustomerSessionStatus.PLANNED) {
       dispatch(
         setNotification({
-          text: t('notEditableNotificationText'),
+          text: t('notEditable'),
           type: NotificationType.Info,
         }),
       )

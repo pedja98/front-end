@@ -16,7 +16,7 @@
   "entityUpdateError": "Error occures while updating",
   "pageNotFound": "PAGE NOT FOUND",
   "backToPreviousPage": "Back to previous page",
-  "notEditableNotificationText": "Module is not editable in this status",
+  "notEditable": "Module is not editable in this status",
   "create": "Create",
   "search": "Search",
   "close": "Close",
