@@ -5,5 +5,13 @@
     "CHANGE": "Izmena",
     "TERMINATION": "Raskid"
   },
-  "opportunityType": "Tip poslovne prilike"
+  "opportunityType": "Tip poslovne prilike",
+  "types": "Tipovi",
+  "statuses": "Statusi",
+  "name": "Ime",
+  "sortByLabels": {
+    "name": "Ime",
+    "status": "Status",
+    "dateCreated": "Datum kreiranja"
+  }
 }

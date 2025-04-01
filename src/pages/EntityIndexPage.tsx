@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react'
 import SearchDialog from '../components/SearchDialog'
 import { useAppDispatch } from '../app/hooks'
 import { cleanSearch } from '../features/search.slice'
-import { getCamelCaseFromKebabString } from '../helpers/common'
+import { canCreateModule, getCamelCaseFromKebabString } from '../helpers/common'
 import { cleanCommonState } from '../features/common.slice'
+import { ModuleOptions } from '../types/common'
 
 const EntityIndexPage = () => {
   const { t } = useTranslation()
@@ -16,7 +17,7 @@ const EntityIndexPage = () => {
 
   const [isDialogOpen, setDialogOpen] = useState(false)
 
-  const entityName = String(location.pathname.split('/').pop())
+  const entityName = String(location.pathname.split('/').pop()) as ModuleOptions
 
   useEffect(() => {
     dispatch(cleanCommonState())
@@ -43,11 +44,13 @@ const EntityIndexPage = () => {
         </Typography>
       </Grid>
       <Grid container direction='row' spacing={2}>
-        <Grid item>
-          <Button variant='contained' color='primary' sx={{ marginTop: 2 }} onClick={handleNavigateToCreatePage}>
-            {t('general:create')}
-          </Button>
-        </Grid>
+        {canCreateModule(entityName) && (
+          <Grid item>
+            <Button variant='contained' color='primary' sx={{ marginTop: 2 }} onClick={handleNavigateToCreatePage}>
+              {t('general:create')}
+            </Button>
+          </Grid>
+        )}
         <Grid item>
           <Button variant='contained' color='primary' sx={{ marginTop: 2 }} onClick={handleOpenDialog}>
             {t('general:search')}

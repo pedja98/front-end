@@ -36,6 +36,12 @@ export const CustomerSessionSortedByFields = {
   dateCreated: 'dateCreated',
 }
 
+export const OpportunitySortedByFields = {
+  name: 'name',
+  status: 'status',
+  dateCreated: 'dateCreated',
+}
+
 export const SortedOrderValues = {
   Asc: 'asc',
   Desc: 'desc',

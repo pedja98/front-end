@@ -5,5 +5,13 @@
     "CHANGE": "Change",
     "TERMINATION": "Termination"
   },
-  "opportunityType": "Opportunity type"
+  "opportunityType": "Opportunity type",
+  "types": "Types",
+  "statuses": "Statuses",
+  "name": "Name",
+  "sortByLabels": {
+    "name": "Name",
+    "status": "Status",
+    "dateCreated": "Date created"
+  }
 }

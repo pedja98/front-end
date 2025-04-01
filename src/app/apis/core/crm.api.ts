@@ -23,6 +23,7 @@ export const crmApi = createApi({
     CrmApiTags.CONTACT,
     CrmApiTags.CUSTOMER_SESSION,
     CrmApiTags.COMPANY_CONTACT_RELATION,
+    CrmApiTags.OPPORTUNITY,
   ],
   endpoints: () => ({}),
 })

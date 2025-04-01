@@ -6,7 +6,7 @@ import Layout from '../layouts/layout'
 import LoginProtectedRoute from '../routes/LoginProtectedRoute'
 import CompanyPage from '../pages/company/CompanyPage'
 import CustomerSessionPage from '../pages/customerSession/CustomerSessionPage'
-import OpportunityPage from '../pages/OpportunityPage'
+import OpportunityPage from '../pages/opportunity/OpportunityPage'
 import OfferPage from '../pages/OfferPage'
 import ContractPage from '../pages/ContractPage'
 import ShopPage from '../pages/shop/ShopPage'
@@ -91,7 +91,11 @@ export default createBrowserRouter([
       {
         path: 'opportunities',
         element: <OpportunityPage />,
-        children: [{ index: true, element: <EntityIndexPage /> }],
+        children: [
+          { index: true, element: <EntityIndexPage /> },
+          { path: 'list', element: <CustomerSessionListPage /> },
+          { path: ':id', element: <CustomerSessionDetailPage /> },
+        ],
       },
       { path: 'offers', element: <OfferPage />, children: [{ index: true, element: <EntityIndexPage /> }] },
       {

@@ -9,6 +9,7 @@ import CustomerSessionSearchDialog from '../components/SearchDialogs/CustomerSes
 import CompanyContactRelationCreateDialog from '../components/EntityDialogs/CompanyContactRelationCreateDialog'
 import CompanyContactRelationUpdateDialog from '../components/EntityDialogs/CompanyContactRelationUpdateDialog'
 import { CompanyContactRelationType } from '../types/contact'
+import OpportunitySearchDialog from '../components/SearchDialogs/OpportunitySearchDialog'
 
 export const getSearchDialog = (currentModule: ModuleOptions): ReactNode | undefined => {
   const dialogs: Partial<Record<ModuleOptions, ReactNode>> = {
@@ -18,6 +19,7 @@ export const getSearchDialog = (currentModule: ModuleOptions): ReactNode | undef
     [ModuleOptions.Shops]: <ShopSearchDialog />,
     [ModuleOptions.Contacts]: <ContactSearchDialog />,
     [ModuleOptions.CustomerSessions]: <CustomerSessionSearchDialog />,
+    [ModuleOptions.Opportunities]: <OpportunitySearchDialog />,
   }
 
   return dialogs[currentModule]

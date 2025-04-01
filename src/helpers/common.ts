@@ -1,7 +1,7 @@
 import { InitialState as AuthInitialState } from '../consts/auth'
 import { AuthState } from '../types/auth'
 import Cookies from 'js-cookie'
-import { AutocompleteHashMap, AutocompleteEntity } from '../types/common'
+import { AutocompleteHashMap, AutocompleteEntity, ModuleOptions } from '../types/common'
 
 export const getRoutePrefixFromCodeString = (prefixText: string): string => {
   return prefixText
@@ -55,4 +55,8 @@ export const getAutocompleteHashMapFromEntityData = <T extends AutocompleteEntit
     }
     return acc
   }, {} as AutocompleteHashMap)
+}
+
+export const canCreateModule = (entityName: ModuleOptions): boolean => {
+  return ![ModuleOptions.Opportunities, ModuleOptions.Contracts, ModuleOptions.Offers].includes(entityName)
 }

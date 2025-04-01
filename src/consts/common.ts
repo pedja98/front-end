@@ -41,6 +41,7 @@ export const CrmApiTags = {
   CONTACT: 'Contact',
   CUSTOMER_SESSION: 'CustomerSession',
   COMPANY_CONTACT_RELATION: 'CompanyContractRelation',
+  OPPORTUNITY: 'Opportunity',
 }
 
 export const TabelRowPerPage = 20
