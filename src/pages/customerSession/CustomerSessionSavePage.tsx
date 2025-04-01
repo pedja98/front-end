@@ -23,7 +23,6 @@ import {
 } from '../../app/apis/customer-session.api'
 import { getCustomerSessionSaveLabels, getSaveCustomerSessionGridData } from '../../transformers/customerSession'
 import { useGetCompaniesQuery } from '../../app/apis/company.api'
-import moment from 'moment'
 import { transformFetchedCustomerSessionData } from '../../helpers/customerSession'
 import GridField from '../../components/GridField'
 import { Dayjs } from 'dayjs'
@@ -107,12 +106,6 @@ const CustomerSessionSavePage = () => {
         }),
       )
       return
-    }
-
-    customerSessionData.name = `${customerSessionData.mode} ${customerSessionData.company} ${moment().format('DD-MM-YYYY')}`
-
-    if (customerSessionData.opportunityType) {
-      customerSessionData.opportunityName = `OPP ${customerSessionData.company} ${moment().format('DD-MM-YYYY')}`
     }
 
     try {

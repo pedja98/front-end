@@ -1,7 +1,6 @@
 import { OpportunityType } from './opportunity'
 
 export interface SaveCustomerSession {
-  name: string
   description: string
   status: CustomerSessionStatus
   type: CustomerSessionType
@@ -10,7 +9,6 @@ export interface SaveCustomerSession {
   sessionStart: string
   sessionEnd: string
   company: number
-  opportunityName: string
   opportunityType: OpportunityType
 }
 
