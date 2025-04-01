@@ -16,7 +16,7 @@ export const SaveCustomerSessionFormInitialState: Partial<SaveCustomerSession> =
   sessionStart: '',
   sessionEnd: '',
   company: undefined,
-  opportunity: undefined,
+  opportunityType: undefined,
 }
 
 export const CustomerSessionStatuses: Record<CustomerSessionStatus, CustomerSessionStatus> = {

@@ -38,6 +38,7 @@ export interface GridFieldAttributes {
   required?: boolean
   autocompleteMap?: AutocompleteHashMap
   selectDialogField?: boolean
+  disabled?: boolean
   handleClick?: (id: number) => void
 }
 

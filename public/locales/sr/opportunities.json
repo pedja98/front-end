@@ -1,0 +1,9 @@
+{
+  "opportunityTypes": {
+    "ACQUISITION": "Akvizicija",
+    "RENEWAL": "Obnova",
+    "CHANGE": "Izmena",
+    "TERMINATION": "Raskid"
+  },
+  "opportunityType": "Tip poslovne prilike"
+}

@@ -12,6 +12,7 @@ import {
   transformCustomerSessionIntoPageGridData,
 } from '../../transformers/customerSession'
 import DetailPageGridField from '../../components/DetailPageGridField'
+import { CustomerSessionStatus } from '../../types/customerSession'
 
 const CustomerSessionDetailPage = () => {
   const params = useParams()
@@ -50,16 +51,20 @@ const CustomerSessionDetailPage = () => {
     navigate(`/index/customer-sessions/${customerSessionId}/edit`)
   }
 
+  const shouldEditActionBeVisible = customerSession.status === CustomerSessionStatus.PLANNED
+
   return (
     <>
       <Grid sx={{ width: '100%', mt: 1, mb: 1 }}>
-        <Grid sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <Grid sx={{ width: '80%' }}>
-            <Button onClick={handleEditRedirect} sx={{ ml: 0.5, width: '100px' }}>
-              {t('general:edit')}
-            </Button>
+        {shouldEditActionBeVisible && (
+          <Grid sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <Grid sx={{ width: '80%' }}>
+              <Button onClick={handleEditRedirect} sx={{ ml: 0.5, width: '100px' }}>
+                {t('general:edit')}
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
         <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
           <Grid container spacing={2} sx={{ width: '80%' }}>
             {labels.map((label) => {

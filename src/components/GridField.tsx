@@ -30,6 +30,7 @@ const GridField = (props: GridFieldProps) => {
           id={label.key}
           name={label.key}
           label={label.label}
+          disabled={gridFieldData.disabled}
           variant='standard'
           type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
           required={!!gridFieldData.required}
@@ -45,7 +46,7 @@ const GridField = (props: GridFieldProps) => {
   if (gridFieldData.type === GridFieldTypes.SELECT && gridFieldData?.options) {
     return (
       <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
-        <FormControl sx={{ width: '100%' }} variant='standard'>
+        <FormControl sx={{ width: '100%' }} variant='standard' disabled={gridFieldData.disabled}>
           <InputLabel
             id={label.key}
             sx={{ pl: gridFieldData.selectDialogField ? 2.5 : 9.3 }}
@@ -84,6 +85,7 @@ const GridField = (props: GridFieldProps) => {
               ) || null
             }
             options={Object.keys(gridFieldData.autocompleteMap || {})}
+            disabled={gridFieldData.disabled}
             getOptionLabel={(option) => (option !== undefined ? String(option) : '')}
             onChange={(_, key) => {
               if (handleChange) {
@@ -111,6 +113,7 @@ const GridField = (props: GridFieldProps) => {
             label={label.label}
             format='YYYY-MM-DD HH:mm'
             ampm={false}
+            disabled={gridFieldData.disabled}
             value={gridFieldData.value ? dayjs(gridFieldData.value) : null}
             onChange={(newValue) => {
               if (handleChangeDateTimePicker) {

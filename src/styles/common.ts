@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles'
-import { TernaryColor, PrimaryThemeColor, WhiteTeamColor } from '../consts/common'
+import { TernaryColor, PrimaryThemeColor, WhiteTeamColor, SecondaryThemeColor } from '../consts/common'
 import { Button, CardActions, CardContent, CircularProgress, TextField } from '@mui/material'
 import { Link } from 'react-router-dom'
 
@@ -169,12 +169,16 @@ export const GridLinkStyled = styled(Link)(() => ({
   color: 'black',
   textDecoration: 'none',
   fontSize: '1rem !important',
-  backgroundColor: 'white',
+  '&:hover': {
+    color: SecondaryThemeColor,
+  },
 }))
 
 export const TableLinkStyled = styled(Link)(() => ({
   color: 'black',
   textDecoration: 'none',
   fontSize: '1rem !important',
-  backgroundColor: 'white',
+  '&:hover': {
+    color: SecondaryThemeColor,
+  },
 }))

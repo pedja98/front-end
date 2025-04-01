@@ -16,6 +16,7 @@
   "entityUpdateError": "Nastala je greška pri ažuriranju podataka",
   "pageNotFound": "STRANICA NIJE PRONADJENA",
   "backToPreviousPage": "Vrati me na predhodnu stranicu",
+  "notEditableNotificationText": "Moduo nije editabilan u ovom statusu",
   "create": "Napravi",
   "search": "Pretraži",
   "close": "Zatvori",

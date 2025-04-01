@@ -2,7 +2,12 @@ import { TFunction } from 'i18next'
 import { AutocompleteHashMap, GridLabel, PageElement } from '../types/common'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
-import { CustomerSession, SaveCustomerSession } from '../types/customerSession'
+import {
+  CustomerSession,
+  CustomerSessionOutcome,
+  CustomerSessionStatus,
+  SaveCustomerSession,
+} from '../types/customerSession'
 
 export const getCustomerSessionDetailPageLabels = (t: TFunction): GridLabel[] => [
   { label: t('customerSessions:name'), key: 'name' },
@@ -40,6 +45,7 @@ export const getCustomerSessionSaveLabels = (t: TFunction): GridLabel[] => [
   { label: t('customerSessions:sessionEnd'), key: 'sessionEnd' },
   { label: t('customerSessions:outcome'), key: 'outcome' },
   { label: t('customerSessions:description'), key: 'description' },
+  { label: t('opportunities:opportunityType'), key: 'opportunityType' },
 ]
 
 export const transformCustomerSessionIntoPageGridData = (
@@ -96,6 +102,8 @@ export const getSaveCustomerSessionGridData = (
   customerSessionOutcomeOptions: string[],
   customerSessionOutcomeOptionValues: string[],
   companiesMap: AutocompleteHashMap,
+  opportunityTypeOptions: string[],
+  opportunityTypeOptionValues: string[],
 ): PageElement => ({
   company: {
     required: true,
@@ -134,4 +142,14 @@ export const getSaveCustomerSessionGridData = (
     value: customerSessionData.outcome,
   },
   description: { type: GridFieldTypes.AREA, required: false, value: customerSessionData.description },
+  opportunityType: {
+    required: true,
+    type: GridFieldTypes.SELECT,
+    options: opportunityTypeOptions,
+    optionsValues: opportunityTypeOptionValues,
+    value: customerSessionData.opportunityType,
+    disabled:
+      customerSessionData.status !== CustomerSessionStatus.HELD ||
+      customerSessionData.outcome !== CustomerSessionOutcome.NEW_OFFER,
+  },
 })

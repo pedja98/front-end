@@ -1,0 +1,9 @@
+{
+  "opportunityTypes": {
+    "ACQUISITION": "Acquisition",
+    "RENEWAL": "Renewal",
+    "CHANGE": "Change",
+    "TERMINATION": "Termination"
+  },
+  "opportunityType": "Opportunity type"
+}

@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../../app/hooks'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { Button, Grid, SelectChangeEvent, Typography } from '@mui/material'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
@@ -27,6 +27,7 @@ import moment from 'moment'
 import { transformFetchedCustomerSessionData } from '../../helpers/customerSession'
 import GridField from '../../components/GridField'
 import { Dayjs } from 'dayjs'
+import { OpportunityType } from '../../types/opportunity'
 
 const CustomerSessionSavePage = () => {
   const [customerSessionData, setCustomerSessionData] = useState<Partial<SaveCustomerSession>>(
@@ -85,6 +86,7 @@ const CustomerSessionSavePage = () => {
       Object.keys(customerSessionData).some(
         (key) =>
           saveCustomerSessionGridData[key as keyof SaveCustomerSession]?.required &&
+          !saveCustomerSessionGridData[key as keyof SaveCustomerSession]?.disabled &&
           !String(customerSessionData[key as keyof SaveCustomerSession] || '').trim(),
       )
     ) {
@@ -107,9 +109,11 @@ const CustomerSessionSavePage = () => {
       return
     }
 
-    customerSessionData.name = `${customerSessionData.mode} ${Object.keys(companiesMap).find(
-      (key) => companiesMap?.[key] === Number(customerSessionData.company),
-    )} ${moment().format('DD-MM-YYYY')}`
+    customerSessionData.name = `${customerSessionData.mode} ${customerSessionData.company} ${moment().format('DD-MM-YYYY')}`
+
+    if (customerSessionData.opportunityType) {
+      customerSessionData.opportunityName = `OPP ${customerSessionData.company} ${moment().format('DD-MM-YYYY')}`
+    }
 
     try {
       const response = customerSessionId
@@ -133,6 +137,21 @@ const CustomerSessionSavePage = () => {
         }),
       )
     }
+  }
+
+  useEffect(() => {
+    if (getCustomerSessionData?.status && getCustomerSessionData?.status !== CustomerSessionStatus.PLANNED) {
+      dispatch(
+        setNotification({
+          text: t('notEditableNotificationText'),
+          type: NotificationType.Info,
+        }),
+      )
+    }
+  }, [getCustomerSessionData?.status, dispatch, t])
+
+  if (getCustomerSessionData?.status && getCustomerSessionData?.status !== CustomerSessionStatus.PLANNED) {
+    return <Navigate to={`/index/customer-sessions/${customerSessionId}`} replace />
   }
 
   if (isLoadingCreateCustomerSession || isLoadingGetCustomerSession || isLoadingUpdateCustomerSession) {
@@ -168,6 +187,8 @@ const CustomerSessionSavePage = () => {
     t(`customerSessions:customerSessionOutcomes.${outcome}`),
   )
 
+  const opportunityTypeOptions = Object.keys(OpportunityType).map((type) => t(`opportunities:opportunityTypes.${type}`))
+
   const saveCustomerSessionGridData = getSaveCustomerSessionGridData(
     customerSessionData,
     customerSessionsStatusOptions,
@@ -179,6 +200,8 @@ const CustomerSessionSavePage = () => {
     customerSessionOutcomeOptions,
     Object.values(CustomerSessionOutcome),
     companiesMap,
+    opportunityTypeOptions,
+    Object.values(OpportunityType),
   )
 
   return (
