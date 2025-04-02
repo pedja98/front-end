@@ -12,12 +12,12 @@ export const opportunityApi = crmApi.injectEndpoints({
       query: (queryParams) => `/opportunities${queryParams}`,
       providesTags: [CrmApiTags.OPPORTUNITY],
     }),
-    closeOpportunity: builder.mutation<{ message: string }, { id: string }>({
-      query: ({ id }) => ({
+    closeOpportunity: builder.mutation<{ message: string }, string>({
+      query: (id) => ({
         url: `/opportunities/${id}/close`,
         method: 'PATCH',
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: CrmApiTags.OPPORTUNITY, id }],
+      invalidatesTags: (result, error, id) => [{ type: CrmApiTags.OPPORTUNITY, id }],
     }),
   }),
   overrideExisting: false,

@@ -63,14 +63,14 @@ const OpportunitySearchDialog = () => {
               }}
               renderValue={(selected) =>
                 selected && selected.length > 0
-                  ? selected.map((outcome) => OpportunityTypes[outcome as OpportunityType]).join(', ')
+                  ? selected.map((type) => OpportunityTypes[type as OpportunityType]).join(', ')
                   : ''
               }
             >
-              {Object.keys(OpportunityTypes).map((outcome) => (
-                <MenuItem key={outcome} value={outcome}>
-                  <Checkbox checked={opportunitySearchData.type?.includes(outcome) || false} />
-                  <ListItemText primary={OpportunityTypes[outcome as OpportunityType]} />
+              {Object.keys(OpportunityTypes).map((type) => (
+                <MenuItem key={type} value={type}>
+                  <Checkbox checked={opportunitySearchData.type?.includes(type) || false} />
+                  <ListItemText primary={OpportunityTypes[type as OpportunityType]} />
                 </MenuItem>
               ))}
             </Select>
@@ -93,14 +93,14 @@ const OpportunitySearchDialog = () => {
               }}
               renderValue={(selected) =>
                 selected && selected.length > 0
-                  ? selected.map((outcome) => OpportunityStatuses[outcome as OpportunityStatus]).join(', ')
+                  ? selected.map((status) => OpportunityStatuses[status as OpportunityStatus]).join(', ')
                   : ''
               }
             >
-              {Object.keys(OpportunityStatuses).map((outcome) => (
-                <MenuItem key={outcome} value={outcome}>
-                  <Checkbox checked={opportunitySearchData.status?.includes(outcome) || false} />
-                  <ListItemText primary={OpportunityStatuses[outcome as OpportunityStatus]} />
+              {Object.keys(OpportunityStatuses).map((status) => (
+                <MenuItem key={status} value={status}>
+                  <Checkbox checked={opportunitySearchData.status?.includes(status) || false} />
+                  <ListItemText primary={OpportunityStatuses[status as OpportunityStatus]} />
                 </MenuItem>
               ))}
             </Select>

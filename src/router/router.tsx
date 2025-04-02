@@ -35,6 +35,8 @@ import ContactDetailPage from '../pages/contact/ContactDetailPage'
 import CustomerSessionSavePage from '../pages/customerSession/CustomerSessionSavePage'
 import CustomerSessionListPage from '../pages/customerSession/CustomerSessionListPage'
 import CustomerSessionDetailPage from '../pages/customerSession/CustomerSessionDetailPage'
+import OpportunityListPage from '../pages/opportunity/OpportunityListPage'
+import OpportunityDetailPage from '../pages/opportunity/OpportunityDetailPage'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -93,8 +95,8 @@ export default createBrowserRouter([
         element: <OpportunityPage />,
         children: [
           { index: true, element: <EntityIndexPage /> },
-          { path: 'list', element: <CustomerSessionListPage /> },
-          { path: ':id', element: <CustomerSessionDetailPage /> },
+          { path: 'list', element: <OpportunityListPage /> },
+          { path: ':id', element: <OpportunityDetailPage /> },
         ],
       },
       { path: 'offers', element: <OfferPage />, children: [{ index: true, element: <EntityIndexPage /> }] },

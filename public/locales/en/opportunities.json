@@ -5,10 +5,19 @@
     "CHANGE": "Change",
     "TERMINATION": "Termination"
   },
+  "opportunityStatuses": {
+    "CREATED": "Created",
+    "NEGOTIATIONS": "Negotiations",
+    "CLOSE_LOST": "Close lost",
+    "CLOSE_WON": "Close won"
+  },
   "opportunityType": "Opportunity type",
+  "opportunityClosed": "Opportunity has been successfully closed",
   "types": "Types",
   "statuses": "Statuses",
   "name": "Name",
+  "type": "Type",
+  "status": "Status",
   "sortByLabels": {
     "name": "Name",
     "status": "Status",

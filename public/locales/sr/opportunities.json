@@ -5,10 +5,19 @@
     "CHANGE": "Izmena",
     "TERMINATION": "Raskid"
   },
+  "opportunityStatuses": {
+    "CREATED": "Kreiran",
+    "NEGOTIATIONS": "U pregovorima",
+    "CLOSE_LOST": "Neuspešno zatvoreno",
+    "CLOSE_WON": "Uspešno zatvoreno"
+  },
   "opportunityType": "Tip poslovne prilike",
+  "opportunityClosed": "Poslovna prilika je uspešno zatvorena",
   "types": "Tipovi",
   "statuses": "Statusi",
   "name": "Ime",
+  "type": "Tip",
+  "status": "Status",
   "sortByLabels": {
     "name": "Ime",
     "status": "Status",
