@@ -1,15 +1,15 @@
 {
   "opportunityTypes": {
-    "ACQUISITION": "Acquisition",
-    "RENEWAL": "Renewal",
-    "CHANGE": "Change",
-    "TERMINATION": "Termination"
+    "acquisition": "Acquisition",
+    "renewal": "Renewal",
+    "change": "Change",
+    "termination": "Termination"
   },
   "opportunityStatuses": {
-    "CREATED": "Created",
-    "NEGOTIATIONS": "Negotiations",
-    "CLOSE_LOST": "Close lost",
-    "CLOSE_WON": "Close won"
+    "created": "Created",
+    "negotiations": "Negotiations",
+    "close_lost": "Close lost",
+    "close_won": "Close won"
   },
   "opportunityType": "Opportunity type",
   "opportunityClosed": "Opportunity has been successfully closed",

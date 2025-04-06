@@ -12,6 +12,7 @@
   "createUserLabel": "CREATE USER",
   "userDeleted": "User {{username}} has been successfully deleted",
   "type": "User type",
+  "types": "User types",
   "userCreated": "New user is successfully created",
   "sortByLabels": {
     "username": "Username",

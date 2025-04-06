@@ -17,7 +17,7 @@ import { OpportunitySearchFormProps, OpportunityStatus, OpportunityType } from '
 import { ChangeEvent } from 'react'
 import { updateSearchAttribute } from '../../features/search.slice'
 import { OpportunitySortedByFields } from '../../consts/search'
-import { OpportunityStatuses, OpportunityTypes } from '../../consts/opportunity'
+import { getEnumTranslations } from '../../helpers/common'
 
 const OpportunitySearchDialog = () => {
   const { t } = useTranslation()
@@ -29,6 +29,9 @@ const OpportunitySearchDialog = () => {
   ) => {
     dispatch(updateSearchAttribute({ attribute: event.target.name, value: event.target.value }))
   }
+
+  const opportunityStatuses = getEnumTranslations(OpportunityStatus, t, 'opportunities:opportunityStatuses')
+  const opportunityTypes = getEnumTranslations(OpportunityType, t, 'opportunities:opportunityTypes')
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -63,14 +66,14 @@ const OpportunitySearchDialog = () => {
               }}
               renderValue={(selected) =>
                 selected && selected.length > 0
-                  ? selected.map((type) => OpportunityTypes[type as OpportunityType]).join(', ')
+                  ? selected.map((type) => opportunityTypes[type as OpportunityType]).join(', ')
                   : ''
               }
             >
-              {Object.keys(OpportunityTypes).map((type) => (
+              {Object.keys(opportunityTypes).map((type) => (
                 <MenuItem key={type} value={type}>
                   <Checkbox checked={opportunitySearchData.type?.includes(type) || false} />
-                  <ListItemText primary={OpportunityTypes[type as OpportunityType]} />
+                  <ListItemText primary={opportunityTypes[type as OpportunityType]} />
                 </MenuItem>
               ))}
             </Select>
@@ -93,14 +96,14 @@ const OpportunitySearchDialog = () => {
               }}
               renderValue={(selected) =>
                 selected && selected.length > 0
-                  ? selected.map((status) => OpportunityStatuses[status as OpportunityStatus]).join(', ')
+                  ? selected.map((status) => opportunityStatuses[status as OpportunityStatus]).join(', ')
                   : ''
               }
             >
-              {Object.keys(OpportunityStatuses).map((status) => (
+              {Object.keys(opportunityStatuses).map((status) => (
                 <MenuItem key={status} value={status}>
                   <Checkbox checked={opportunitySearchData.status?.includes(status) || false} />
-                  <ListItemText primary={OpportunityStatuses[status as OpportunityStatus]} />
+                  <ListItemText primary={opportunityStatuses[status as OpportunityStatus]} />
                 </MenuItem>
               ))}
             </Select>

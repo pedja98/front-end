@@ -17,7 +17,7 @@ import { CompanySortedByFields } from '../../consts/search'
 import { CompanyStatus, SearchCompanyDataFormProps } from '../../types/company'
 import SearchDialogSort from '../SearchDialogSort'
 import { ModuleOptions } from '../../types/common'
-import { CompanyStatuses } from '../../consts/company'
+import { getEnumTranslations } from '../../helpers/common'
 
 const CompanySearchDialog = () => {
   const { t } = useTranslation()
@@ -29,6 +29,8 @@ const CompanySearchDialog = () => {
   ) => {
     dispatch(updateSearchAttribute({ attribute: event.target.name, value: event.target.value }))
   }
+
+  const companyStatuses = getEnumTranslations(CompanyStatus, t, 'companies:statuses')
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -103,14 +105,14 @@ const CompanySearchDialog = () => {
               }}
               renderValue={(selected) =>
                 selected && selected.length > 0
-                  ? selected.map((status) => CompanyStatuses[status as CompanyStatus]).join(', ')
+                  ? selected.map((status) => companyStatuses[status as CompanyStatus]).join(', ')
                   : ''
               }
             >
-              {Object.keys(CompanyStatuses).map((status) => (
+              {Object.keys(companyStatuses).map((status) => (
                 <MenuItem key={status} value={status}>
                   <Checkbox checked={companySearchData.status?.includes(status) || false} />
-                  <ListItemText primary={CompanyStatuses[status as CompanyStatus]} />
+                  <ListItemText primary={companyStatuses[status as CompanyStatus]} />
                 </MenuItem>
               ))}
             </Select>

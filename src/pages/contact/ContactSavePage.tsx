@@ -1,12 +1,12 @@
 import { Button, Grid, SelectChangeEvent, Typography } from '@mui/material'
 import { EmailPattern, PhonePattern } from '../../consts/common'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
-import { SaveContact } from '../../types/contact'
+import { ContactDocumentType, SaveContact } from '../../types/contact'
 import { useAppDispatch } from '../../app/hooks'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useCreateContactMutation, useGetContactQuery, useUpdateContactMutation } from '../../app/apis/contact.api'
-import { ContactDocumentTypes, SaveContactFormInitialState } from '../../consts/contact'
+import { SaveContactFormInitialState } from '../../consts/contact'
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
@@ -65,14 +65,14 @@ const ContactSavePage = () => {
     return null
   }
 
-  const contactDocumentTypesOptions = Object.keys(ContactDocumentTypes).map((type) =>
+  const contactDocumentTypesOptions = Object.keys(ContactDocumentType).map((type) =>
     t(`contacts:documentTypes.${type.toLowerCase()}`),
   )
 
   const saveContactGridData = getSaveContactGridData(
     contactData,
     contactDocumentTypesOptions,
-    Object.values(ContactDocumentTypes),
+    Object.values(ContactDocumentType),
   )
   const labels = getContactSaveLabels(t)
 

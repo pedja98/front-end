@@ -23,12 +23,7 @@ import {
   CustomerSessionType,
 } from '../../types/customerSession'
 import { useTranslation } from 'react-i18next'
-import {
-  CustomerSessionModes,
-  CustomerSessionOutcomes,
-  CustomerSessionStatuses,
-  CustomerSessionTypes,
-} from '../../consts/customerSession'
+import { getEnumTranslations } from '../../helpers/common'
 
 const CustomerSessionSearchDialog = () => {
   const { t } = useTranslation()
@@ -40,6 +35,19 @@ const CustomerSessionSearchDialog = () => {
   ) => {
     dispatch(updateSearchAttribute({ attribute: event.target.name, value: event.target.value }))
   }
+
+  const customerSessionModes = getEnumTranslations(CustomerSessionMode, t, 'customerSessions:customerSessionsStatuses')
+  const customerSessionOutcomes = getEnumTranslations(
+    CustomerSessionOutcome,
+    t,
+    'customerSessions:customerSessionsStatuses',
+  )
+  const customerSessionStatuses = getEnumTranslations(
+    CustomerSessionStatus,
+    t,
+    'customerSessions:customerSessionsStatuses',
+  )
+  const customerSessionTypes = getEnumTranslations(CustomerSessionType, t, 'customerSessions:customerSessionsStatuses')
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -74,14 +82,14 @@ const CustomerSessionSearchDialog = () => {
               }}
               renderValue={(selected) =>
                 selected && selected.length > 0
-                  ? selected.map((status) => CustomerSessionStatuses[status as CustomerSessionStatus]).join(', ')
+                  ? selected.map((status) => customerSessionStatuses[status as CustomerSessionStatus]).join(', ')
                   : ''
               }
             >
-              {Object.keys(CustomerSessionStatuses).map((status) => (
+              {Object.keys(customerSessionStatuses).map((status) => (
                 <MenuItem key={status} value={status}>
                   <Checkbox checked={customerSessionSearchData.status?.includes(status) || false} />
-                  <ListItemText primary={CustomerSessionStatuses[status as CustomerSessionStatus]} />
+                  <ListItemText primary={customerSessionStatuses[status as CustomerSessionStatus]} />
                 </MenuItem>
               ))}
             </Select>
@@ -104,14 +112,14 @@ const CustomerSessionSearchDialog = () => {
               }}
               renderValue={(selected) =>
                 selected && selected.length > 0
-                  ? selected.map((mode) => CustomerSessionModes[mode as CustomerSessionMode]).join(', ')
+                  ? selected.map((mode) => customerSessionModes[mode as CustomerSessionMode]).join(', ')
                   : ''
               }
             >
-              {Object.keys(CustomerSessionModes).map((mode) => (
+              {Object.keys(customerSessionModes).map((mode) => (
                 <MenuItem key={mode} value={mode}>
                   <Checkbox checked={customerSessionSearchData.mode?.includes(mode) || false} />
-                  <ListItemText primary={CustomerSessionModes[mode as CustomerSessionMode]} />
+                  <ListItemText primary={customerSessionModes[mode as CustomerSessionMode]} />
                 </MenuItem>
               ))}
             </Select>
@@ -134,14 +142,14 @@ const CustomerSessionSearchDialog = () => {
               }}
               renderValue={(selected) =>
                 selected && selected.length > 0
-                  ? selected.map((type) => CustomerSessionTypes[type as CustomerSessionType]).join(', ')
+                  ? selected.map((type) => customerSessionTypes[type as CustomerSessionType]).join(', ')
                   : ''
               }
             >
-              {Object.keys(CustomerSessionTypes).map((type) => (
+              {Object.keys(customerSessionTypes).map((type) => (
                 <MenuItem key={type} value={type}>
                   <Checkbox checked={customerSessionSearchData.type?.includes(type) || false} />
-                  <ListItemText primary={CustomerSessionTypes[type as CustomerSessionType]} />
+                  <ListItemText primary={customerSessionTypes[type as CustomerSessionType]} />
                 </MenuItem>
               ))}
             </Select>
@@ -164,14 +172,14 @@ const CustomerSessionSearchDialog = () => {
               }}
               renderValue={(selected) =>
                 selected && selected.length > 0
-                  ? selected.map((outcome) => CustomerSessionOutcomes[outcome as CustomerSessionOutcome]).join(', ')
+                  ? selected.map((outcome) => customerSessionOutcomes[outcome as CustomerSessionOutcome]).join(', ')
                   : ''
               }
             >
-              {Object.keys(CustomerSessionOutcomes).map((outcome) => (
+              {Object.keys(customerSessionOutcomes).map((outcome) => (
                 <MenuItem key={outcome} value={outcome}>
                   <Checkbox checked={customerSessionSearchData.outcome?.includes(outcome) || false} />
-                  <ListItemText primary={CustomerSessionOutcomes[outcome as CustomerSessionOutcome]} />
+                  <ListItemText primary={customerSessionOutcomes[outcome as CustomerSessionOutcome]} />
                 </MenuItem>
               ))}
             </Select>

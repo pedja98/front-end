@@ -1,9 +1,4 @@
-import { CompanyContactRelationType, ContactDocumentType } from '../types/contact'
-
-export const ContactDocumentTypes: Record<ContactDocumentType, ContactDocumentType> = {
-  IDENTITY_CARD: ContactDocumentType.IDENTITY_CARD,
-  PASSPORT: ContactDocumentType.PASSPORT,
-}
+import { CompanyContactRelationType } from '../types/contact'
 
 export const CompanyContactRelationTypes: Record<CompanyContactRelationType, CompanyContactRelationType> = {
   THIRD_PARTY_PERSON: CompanyContactRelationType.THIRD_PARTY_PERSON,

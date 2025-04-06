@@ -111,3 +111,12 @@ export const getUserChangePasswordGridData = (): PageElement => ({
   newPassword: { type: GridFieldTypes.PASSWORD, required: true },
   confirmNewPassword: { type: GridFieldTypes.PASSWORD, required: true },
 })
+
+export const getUserSearchFormLabels = (t: TFunction): GridLabel[] => [
+  { label: t('users:firstName'), key: 'firstName' },
+  { label: t('users:lastName'), key: 'lastName' },
+  { label: t('users:username'), key: 'username' },
+  { label: t('users:email'), key: 'email' },
+  { label: t('users:phone'), key: 'phone' },
+  { label: t('users:types'), key: 'type' },
+]

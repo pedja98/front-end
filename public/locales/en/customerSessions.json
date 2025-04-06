@@ -14,29 +14,29 @@
   "createCustomerSessionLabel": "CREATE CUSTOMER SESSION",
   "invalidSessionDateTime": "The session start cannot be later than the session end",
   "customerSessionsStatuses": {
-    "PLANNED": "Planned",
-    "HELD": "Held",
-    "NOT_HELD": "Not held"
+    "planned": "Planned",
+    "held": "Held",
+    "not_held": "Not held"
   },
   "customerSessionModes": {
-    "CALL": "Call",
-    "MEETING": "Meeting"
+    "call": "Call",
+    "meeting": "Meeting"
   },
   "customerSessionTypes": {
-    "COLD_CALL": "Cold call",
-    "ACTION_CALL": "Action call",
-    "CUSTOMER_CARE": "Customer care",
-    "COMPLAINTS": "Complaints",
-    "NEEDS_RECOGNITION": "Needs recognition",
-    "NEGOTIATION": "Negotion",
-    "CONTRACT_SIGNING": "Contract signing",
-    "TENDER": "Tender"
+    "cold_call": "Cold call",
+    "action_call": "Action call",
+    "customer_care": "Customer care",
+    "complaints": "Complaints",
+    "needs_recognition": "Needs recognition",
+    "negotiation": "Negotion",
+    "contract_signing": "Contract signing",
+    "tender": "Tender"
   },
   "customerSessionOutcomes": {
-    "NEW_CALL": "New call",
-    "NEW_MEETING": "New meeting",
-    "NEW_OFFER": "New offer",
-    "CLOSED": "Closed"
+    "new_call": "New call",
+    "new_meeting": "New meeting",
+    "new_offer": "New offer",
+    "closed": "Closed"
   },
   "sortByLabels": {
     "name": "Name",

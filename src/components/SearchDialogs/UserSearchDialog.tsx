@@ -11,13 +11,13 @@ import {
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { ChangeEvent } from 'react'
-import { UserTypes } from '../../consts/user'
 import { UserSearchFormProps, UserType } from '../../types/user'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { updateSearchAttribute } from '../../features/search.slice'
 import { UserSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
 import { ModuleOptions } from '../../types/common'
+import { getEnumTranslations } from '../../helpers/common'
 
 const UserSearchDialog = () => {
   const { t } = useTranslation()
@@ -29,6 +29,8 @@ const UserSearchDialog = () => {
   ) => {
     dispatch(updateSearchAttribute({ attribute: event.target.name, value: event.target.value }))
   }
+
+  const userTypes = getEnumTranslations(UserType, t, 'users:userTypes')
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -114,13 +116,13 @@ const UserSearchDialog = () => {
                 handleChange(event)
               }}
               renderValue={(selected) =>
-                selected && selected.length > 0 ? selected.map((type) => UserTypes[type as UserType]).join(', ') : ''
+                selected && selected.length > 0 ? selected.map((type) => userTypes[type as UserType]).join(', ') : ''
               }
             >
-              {Object.keys(UserTypes).map((type) => (
+              {Object.keys(userTypes).map((type) => (
                 <MenuItem key={type} value={type}>
                   <Checkbox checked={userSearchData.type?.includes(type) || false} />
-                  <ListItemText primary={UserTypes[type as UserType]} />
+                  <ListItemText primary={userTypes[type as UserType]} />
                 </MenuItem>
               ))}
             </Select>

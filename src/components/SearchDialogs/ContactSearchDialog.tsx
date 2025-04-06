@@ -16,8 +16,8 @@ import { updateSearchAttribute } from '../../features/search.slice'
 import { ContactSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
 import { ContactDocumentType, ContactSearchFormProps } from '../../types/contact'
-import { ContactDocumentTypes } from '../../consts/contact'
 import { ModuleOptions } from '../../types/common'
+import { getEnumTranslations } from '../../helpers/common'
 
 const ContactSearchDialog = () => {
   const { t } = useTranslation()
@@ -29,6 +29,8 @@ const ContactSearchDialog = () => {
   ) => {
     dispatch(updateSearchAttribute({ attribute: event.target.name, value: event.target.value }))
   }
+
+  const documentTypes = getEnumTranslations(ContactDocumentType, t, 'contacts:documentTypes')
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -102,14 +104,14 @@ const ContactSearchDialog = () => {
               }}
               renderValue={(selected) =>
                 selected && selected.length > 0
-                  ? selected.map((type) => ContactDocumentTypes[type as ContactDocumentType]).join(', ')
+                  ? selected.map((type) => documentTypes[type as ContactDocumentType]).join(', ')
                   : ''
               }
             >
-              {Object.keys(ContactDocumentTypes).map((type) => (
+              {Object.keys(documentTypes).map((type) => (
                 <MenuItem key={type} value={type}>
                   <Checkbox checked={contactSearchData.documentType?.includes(type) || false} />
-                  <ListItemText primary={ContactDocumentTypes[type as ContactDocumentType]} />
+                  <ListItemText primary={documentTypes[type as ContactDocumentType]} />
                 </MenuItem>
               ))}
             </Select>
