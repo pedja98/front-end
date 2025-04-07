@@ -2,7 +2,7 @@ import { TFunction } from 'i18next'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 import { PageElement, GridLabel } from '../types/common'
-import { User } from '../types/user'
+import { User, UserSearchFormProps, UserType } from '../types/user'
 
 export const transformUserIntoPageGridData = (t: TFunction, user: User, skipUsernameAsLink?: boolean): PageElement => ({
   username: {
@@ -120,3 +120,21 @@ export const getUserSearchFormLabels = (t: TFunction): GridLabel[] => [
   { label: t('users:phone'), key: 'phone' },
   { label: t('users:types'), key: 'type' },
 ]
+
+export const getUserSearchGridData = (
+  userSearch: Partial<UserSearchFormProps>,
+  userTypes: Record<UserType, string>,
+): PageElement => ({
+  firstName: { type: GridFieldTypes.STRING, value: userSearch.firstName },
+  lastName: { type: GridFieldTypes.STRING, value: userSearch.lastName },
+  username: { type: GridFieldTypes.STRING, value: userSearch.username },
+  email: { type: GridFieldTypes.STRING, value: userSearch.email },
+  phone: { type: GridFieldTypes.STRING, value: userSearch.phone },
+  type: {
+    type: GridFieldTypes.MULTISELECT,
+    multiselectValue: userSearch.type,
+    multiselectOptionValues: UserType,
+    multiselectOptions: userTypes,
+    dialogField: true,
+  },
+})

@@ -55,7 +55,7 @@ const CompanySavePage = () => {
     }
   }, [getCompanyData])
 
-  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string | string[]>) => {
     const { name, value } = event.target
     setCompanyData((prevData) => ({
       ...prevData,

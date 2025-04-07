@@ -65,7 +65,7 @@ const CustomerSessionSavePage = () => {
     })
   }, [getCustomerSessionData])
 
-  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string | string[]>) => {
     const { name, value } = event.target
     setCustomerSessionData((prevData) => ({
       ...prevData,

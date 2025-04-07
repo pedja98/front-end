@@ -1,8 +1,10 @@
 import {
   Autocomplete,
+  Checkbox,
   FormControl,
   Grid,
   InputLabel,
+  ListItemText,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -49,7 +51,7 @@ const GridField = (props: GridFieldProps) => {
         <FormControl sx={{ width: '100%' }} variant='standard' disabled={gridFieldData.disabled}>
           <InputLabel
             id={label.key}
-            sx={{ pl: gridFieldData.selectDialogField ? 2.5 : 9.3 }}
+            sx={{ pl: gridFieldData.dialogField ? 2.5 : 9.3 }}
             required={gridFieldData.required}
           >
             {label.label}
@@ -130,6 +132,44 @@ const GridField = (props: GridFieldProps) => {
             }}
           />
         </LocalizationProvider>
+      </Grid>
+    )
+  }
+  if (gridFieldData.type === GridFieldTypes.MULTISELECT && gridFieldData?.multiselectOptions) {
+    const selectedValues = gridFieldData.multiselectValue || []
+
+    return (
+      <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
+        <FormControl sx={{ width: '100%' }} variant='standard'>
+          <InputLabel
+            id={`${label.key}-label`}
+            sx={{ pl: gridFieldData.dialogField ? 2.5 : 9.3 }}
+            required={gridFieldData.required}
+          >
+            {label.label}
+          </InputLabel>
+          <Select
+            labelId={`${label.key}-label`}
+            id={label.key}
+            name={label.key}
+            multiple
+            variant='standard'
+            value={selectedValues}
+            onChange={(event: SelectChangeEvent<string[]>) => {
+              if (handleChange) handleChange(event)
+            }}
+            renderValue={(selected) =>
+              selected.length > 0 ? selected.map((val) => gridFieldData.multiselectOptions?.[val]).join(', ') : ''
+            }
+          >
+            {Object.keys(gridFieldData.multiselectOptions).map((val) => (
+              <MenuItem key={val} value={val}>
+                <Checkbox checked={selectedValues.includes(val)} />
+                <ListItemText primary={gridFieldData.multiselectOptions?.[val]} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </Grid>
     )
   }

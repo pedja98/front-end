@@ -13,7 +13,7 @@ const RegionSearchDialog = () => {
   const dispatch = useAppDispatch()
   const regionSearchData = useAppSelector((state) => state.search) as SearchRegionDataFormProps
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string | string[]>) => {
     dispatch(updateSearchAttribute({ attribute: event.target.name, value: event.target.value }))
   }
 

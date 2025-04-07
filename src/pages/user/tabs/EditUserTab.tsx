@@ -46,7 +46,7 @@ const EditUserTab = () => {
     }
   }, [fetchedUser])
 
-  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string | string[]>) => {
     const { name, value } = event.target
     setUserData((prevData) => ({
       ...prevData,

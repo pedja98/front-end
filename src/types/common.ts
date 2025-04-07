@@ -28,7 +28,9 @@ export interface BasicTabProps {
   tabs: Record<string, ReactNode>
 }
 
-export interface GridFieldAttributes {
+type EnumValue<T extends Record<string, string | number>> = T[keyof T]
+
+export interface GridFieldAttributes<TEnum extends Record<string, string | number> = Record<string, string>> {
   id?: string | number
   value?: string | number
   type: GridFieldType
@@ -37,9 +39,12 @@ export interface GridFieldAttributes {
   optionsValues?: (string | number | undefined)[]
   required?: boolean
   autocompleteMap?: AutocompleteHashMap
-  selectDialogField?: boolean
+  dialogField?: boolean
   disabled?: boolean
   handleClick?: (id: number) => void
+  multiselectValue?: string[]
+  multiselectOptions?: Record<EnumValue<TEnum>, string>
+  multiselectOptionValues?: TEnum
 }
 
 export interface PageElement {
@@ -106,7 +111,7 @@ export type AutocompleteEntity = {
 export interface GridFieldProps {
   gridFieldData: GridFieldAttributes
   label: GridLabel
-  handleChange?: (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => void
+  handleChange?: (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string | string[]>) => void
   handleChangeDateTimePicker?: (value: Dayjs | null, name: string) => void
 }
 

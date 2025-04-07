@@ -9,6 +9,7 @@
   "bankAccountNumber": "Bank account number",
   "comment": "Comment",
   "status": "Status",
+  "companyStatuses": "Statuses",
   "companyUpdated": "Company data has been successfully updated",
   "createCompanyLabel": "CREATE COMPANY",
   "editCompanyLabel": "EDIT COMPANY",

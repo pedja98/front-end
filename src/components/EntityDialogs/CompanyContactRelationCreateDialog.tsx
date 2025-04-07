@@ -47,7 +47,7 @@ const CompanyContactRelationCreateDialog: FC<{ contactId: number }> = ({ contact
   const dispatch = useAppDispatch()
 
   const handleChange = (
-    event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string[]> | SelectChangeEvent<string>,
+    event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string[]> | SelectChangeEvent<string | string[]>,
   ) => {
     const { name, value } = event.target
     setRelationData((prevState) => ({

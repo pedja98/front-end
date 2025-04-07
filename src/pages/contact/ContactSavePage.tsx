@@ -42,7 +42,7 @@ const ContactSavePage = () => {
 
   const [updateContact, { isLoading: isLoadingUpdateContact }] = useUpdateContactMutation()
 
-  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string | string[]>) => {
     const { name, value } = event.target
     setContactData((prevData) => ({
       ...prevData,

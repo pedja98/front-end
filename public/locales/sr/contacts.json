@@ -9,6 +9,7 @@
   "email": "Email",
   "phone": "Telefon",
   "documentType": "Tip dokumenta",
+  "contactDocumentType": "Tipovi dokumenata",
   "documentId": "Broj dokumenta",
   "companyRelationsTitle": "Relacije ka kompanijama",
   "contactUpdated": "Kontakt je uspešno ažuriran",

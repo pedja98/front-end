@@ -41,5 +41,9 @@
   "sortByLabels": {
     "name": "Ime",
     "dateCreated": "Datum kreiranja"
-  }
+  },
+  "statuses": "Statusi",
+  "types": "Tipovi",
+  "modes": "Modovi",
+  "outcomes": "Ishodi"
 }

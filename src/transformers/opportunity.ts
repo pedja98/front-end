@@ -2,7 +2,7 @@ import { TFunction } from 'i18next'
 import { GridLabel, PageElement } from '../types/common'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
-import { Opportunity } from '../types/opportunity'
+import { Opportunity, OpportunitySearchFormProps, OpportunityStatus, OpportunityType } from '../types/opportunity'
 
 export const getOpportunityDetailGridLabels = (t: TFunction): GridLabel[] => [
   { label: t('opportunities:name'), key: 'name' },
@@ -49,5 +49,33 @@ export const transformOpportunityDataIntoGridData = (
   dateModified: {
     value: opportunity.dateModified ? dateFormater(String(opportunity.dateModified)) : EmptyValue,
     type: GridFieldTypes.STRING,
+  },
+})
+
+export const getOpportunitySearchLabels = (t: TFunction): GridLabel[] => [
+  { label: t('opportunities:name'), key: 'name' },
+  { label: t('opportunities:statuses'), key: 'status' },
+  { label: t('opportunities:types'), key: 'type' },
+]
+
+export const getOpportunitySearchGridData = (
+  opportunitySearchData: OpportunitySearchFormProps,
+  opportunityStatuses: Record<OpportunityStatus, string>,
+  opportunityTypes: Record<OpportunityType, string>,
+): PageElement => ({
+  name: { type: GridFieldTypes.STRING, value: opportunitySearchData.name },
+  status: {
+    type: GridFieldTypes.MULTISELECT,
+    multiselectOptions: opportunityStatuses,
+    multiselectOptionValues: OpportunityStatus,
+    multiselectValue: opportunitySearchData.status,
+    dialogField: true,
+  },
+  type: {
+    type: GridFieldTypes.MULTISELECT,
+    multiselectOptions: opportunityTypes,
+    multiselectOptionValues: OpportunityType,
+    multiselectValue: opportunitySearchData.type,
+    dialogField: true,
   },
 })

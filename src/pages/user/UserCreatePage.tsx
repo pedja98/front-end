@@ -25,7 +25,7 @@ const UserCreatePage = () => {
 
   const [createUser, { isLoading }] = useCreateUserMutation()
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string | string[]>) => {
     const { name, value } = event.target
     setCreateUserData((prevData) => ({
       ...prevData,

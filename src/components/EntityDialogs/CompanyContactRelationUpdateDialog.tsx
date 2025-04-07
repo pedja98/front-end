@@ -41,9 +41,7 @@ const CompanyContactRelationUpdateDialog: FC<{
 
   const dispatch = useAppDispatch()
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string[]> | SelectChangeEvent<string>,
-  ) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string | string[]>) => {
     const { name, value } = event.target
     setRelationData((prevState) => ({
       ...prevState,

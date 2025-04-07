@@ -4,8 +4,11 @@ import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 import {
   CustomerSession,
+  CustomerSessionMode,
   CustomerSessionOutcome,
+  CustomerSessionSearchFormProps,
   CustomerSessionStatus,
+  CustomerSessionType,
   SaveCustomerSession,
 } from '../types/customerSession'
 
@@ -151,5 +154,54 @@ export const getSaveCustomerSessionGridData = (
     disabled:
       customerSessionData.status !== CustomerSessionStatus.HELD ||
       customerSessionData.outcome !== CustomerSessionOutcome.NEW_OFFER,
+  },
+})
+
+export const getCustomerSessionSearchLabels = (t: TFunction): GridLabel[] => [
+  { label: t('customerSessions:name'), key: 'name' },
+  { label: t('customerSessions:statuses'), key: 'status' },
+  { label: t('customerSessions:types'), key: 'type' },
+  { label: t('customerSessions:modes'), key: 'mode' },
+  { label: t('customerSessions:outcomes'), key: 'outcome' },
+]
+
+export const getCustomerSessionSearchGridData = (
+  customerSessionSearchData: CustomerSessionSearchFormProps,
+  customerSessionStatuses: Record<CustomerSessionStatus, string>,
+  customerSessionModes: Record<CustomerSessionMode, string>,
+  customerSessionTypes: Record<CustomerSessionType, string>,
+  customerSessionOutcomes: Record<CustomerSessionOutcome, string>,
+): PageElement => ({
+  name: {
+    value: customerSessionSearchData.name,
+    type: GridFieldTypes.STRING,
+  },
+  status: {
+    type: GridFieldTypes.MULTISELECT,
+    multiselectOptions: customerSessionStatuses,
+    multiselectOptionValues: CustomerSessionStatus,
+    multiselectValue: customerSessionSearchData.status,
+    dialogField: true,
+  },
+  mode: {
+    type: GridFieldTypes.MULTISELECT,
+    multiselectOptions: customerSessionModes,
+    multiselectOptionValues: CustomerSessionMode,
+    multiselectValue: customerSessionSearchData.mode,
+    dialogField: true,
+  },
+  type: {
+    type: GridFieldTypes.MULTISELECT,
+    multiselectOptions: customerSessionTypes,
+    multiselectOptionValues: CustomerSessionType,
+    multiselectValue: customerSessionSearchData.type,
+    dialogField: true,
+  },
+  outcome: {
+    type: GridFieldTypes.MULTISELECT,
+    multiselectOptions: customerSessionOutcomes,
+    multiselectOptionValues: CustomerSessionOutcome,
+    multiselectValue: customerSessionSearchData.outcome,
+    dialogField: true,
   },
 })

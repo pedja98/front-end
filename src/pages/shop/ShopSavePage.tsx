@@ -54,7 +54,7 @@ const ShopSavePage = () => {
 
   const [updateShop, { isLoading: isLoadingUpdateShop }] = useUpdateShopMutation()
 
-  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>) => {
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string | string[]>) => {
     const { name, value } = event.target
     setShopData((prevData) => ({
       ...prevData,

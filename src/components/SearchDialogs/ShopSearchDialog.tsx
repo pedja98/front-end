@@ -46,7 +46,7 @@ const ShopSearchDialog = () => {
   } = useGetAssignedToUserDataQuery(UserType.L1_MANAGER)
 
   const handleChange = (
-    event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string[]> | SelectChangeEvent<string>,
+    event: ChangeEvent<HTMLInputElement> | SelectChangeEvent<string[]> | SelectChangeEvent<string | string[]>,
   ) => {
     dispatch(updateSearchAttribute({ attribute: event.target.name, value: event.target.value }))
   }

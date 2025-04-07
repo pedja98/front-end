@@ -9,6 +9,7 @@
   "bankAccountNumber": "Bankovni račun",
   "comment": "Komentar",
   "status": "Status",
+  "companyStatuses": "Statusi",
   "companyUpdated": "Kompanijski podaci su uspešno ažurirani",
   "createCompanyLabel": "KREIRAJ KOMPANIJU",
   "editCompanyLabel": "IZMENI KOMPANIJU",

@@ -2,7 +2,7 @@ import { TFunction } from 'i18next'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 import { AutocompleteHashMap, GridLabel, PageElement } from '../types/common'
-import { Company, SaveCompany } from '../types/company'
+import { Company, CompanyStatus, SaveCompany, SearchCompanyDataFormProps } from '../types/company'
 
 export const getSaveCompanyGridData = (
   companyData: Partial<SaveCompany>,
@@ -125,3 +125,28 @@ export const getCompanySaveLabels = (t: TFunction): GridLabel[] => [
   { label: t('companies:temporaryAssignedTo'), key: 'temporaryAssignedTo' },
   { label: t('companies:comment'), key: 'comment' },
 ]
+
+export const getCompanySearchLabels = (t: TFunction): GridLabel[] => [
+  { label: t('companies:name'), key: 'name' },
+  { label: t('companies:hqAddress'), key: 'hqAddress' },
+  { label: t('companies:contactPhone'), key: 'contactPhone' },
+  { label: t('companies:tin'), key: 'tin' },
+  { label: t('companies:companyStatuses'), key: 'status' },
+]
+
+export const getCompanySearchGridData = (
+  companySearchData: Partial<SearchCompanyDataFormProps>,
+  companyStatuses: Record<CompanyStatus, string>,
+): PageElement => ({
+  name: { type: GridFieldTypes.STRING, value: companySearchData.name },
+  hqAddress: { type: GridFieldTypes.STRING, value: companySearchData.hqAddress },
+  contactPhone: { type: GridFieldTypes.STRING, value: companySearchData.contactPhone },
+  tin: { type: GridFieldTypes.NUMBER, value: companySearchData.tin },
+  status: {
+    type: GridFieldTypes.MULTISELECT,
+    multiselectValue: companySearchData.status,
+    multiselectOptions: companyStatuses,
+    multiselectOptionValues: CompanyStatus,
+    dialogField: true,
+  },
+})

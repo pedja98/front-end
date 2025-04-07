@@ -41,5 +41,9 @@
   "sortByLabels": {
     "name": "Name",
     "dateCreated": "Date created"
-  }
+  },
+  "statuses": "Statuses",
+  "types": "Types",
+  "modes": "Modes",
+  "outcomes": "Outcomes"
 }
