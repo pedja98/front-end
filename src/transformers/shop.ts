@@ -3,7 +3,7 @@ import { TFunction } from 'i18next'
 import { GridFieldTypes } from '../consts/common'
 import { dateFormater } from '../helpers/common'
 import { PageElement } from '../types/common'
-import { SaveShop, Shop } from '../types/shop'
+import { SaveShop, Shop, ShopSearchFormProps } from '../types/shop'
 
 export const getSaveShopGridData = (
   shopData: SaveShop,
@@ -69,3 +69,13 @@ export const getShopSaveLabels = (t: TFunction): GridLabel[] => [
   { label: t('shops:shopLeader'), key: 'shopLeader' },
   { label: t('shops:region'), key: 'region' },
 ]
+
+export const getShopSearchLabels = (t: TFunction): GridLabel[] => [
+  { label: t('shops:name'), key: 'name' },
+  { label: t('shops:shopLeaders'), key: 'shopLeader' },
+  { label: t('shops:regions'), key: 'region' },
+]
+
+export const getShopSearchGridData = (shopSearchData: Partial<ShopSearchFormProps>): PageElement => ({
+  name: { type: GridFieldTypes.STRING, required: true, value: shopSearchData.name },
+})
