@@ -8,8 +8,8 @@ i18n
   .use(HttpBackend)
   .use(initReactI18next)
   .init({
-    lng: store.getState().auth.language.toLowerCase() || Languages.SR,
-    fallbackLng: Languages.EN,
+    lng: store.getState().auth.language.toLowerCase() || Languages.SR.toLowerCase(),
+    fallbackLng: Languages.EN.toLowerCase(),
     debug: false,
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',

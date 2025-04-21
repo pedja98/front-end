@@ -9,6 +9,7 @@
   "bankAccountNumber": "Bankovni račun",
   "comment": "Komentar",
   "status": "Status",
+  "canNotFetchAssignedUsers": "Greška pri dohvatanju korisnika",
   "companyStatuses": "Statusi",
   "companyUpdated": "Kompanijski podaci su uspešno ažurirani",
   "createCompanyLabel": "KREIRAJ KOMPANIJU",

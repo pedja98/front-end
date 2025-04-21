@@ -141,7 +141,7 @@ const CompanySavePage = () => {
   if (isErrorGetAssignedToUserData || !assignedToUserData || isErrorGetCompany) {
     dispatch(
       setNotification({
-        text: JSON.stringify(errorGetAssignedToUserData || errorGetCompany),
+        text: JSON.stringify(errorGetAssignedToUserData || errorGetCompany || t('.companies:canNotFetchAssignedUsers')),
         type: NotificationType.Error,
       }),
     )
