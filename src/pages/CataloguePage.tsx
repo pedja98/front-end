@@ -1,7 +1,12 @@
-import Grid from '@mui/material/Grid'
+import React, { lazy, Suspense } from 'react'
+import Spinner from '../components/Spinner'
 
-const CataloguePage = () => {
-  return <Grid>Catalogue</Grid>
+const RemoteCatalogueApp = lazy(() => import('catalogue/CatalogueApp'))
+
+export default function Wrapper() {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <RemoteCatalogueApp />
+    </Suspense>
+  )
 }
-
-export default CataloguePage

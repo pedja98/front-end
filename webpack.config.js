@@ -35,7 +35,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'shell',
+      name: 'crm',
       remotes: {
         catalogue: 'catalogue@http://localhost:3001/remoteEntry.js',
       },
