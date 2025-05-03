@@ -1,12 +1,18 @@
 import React, { lazy, Suspense } from 'react'
 import Spinner from '../components/Spinner'
+import { useAppSelector } from '../app/hooks'
+import { CatalogueProps } from '../types/catalogue'
 
-const RemoteCatalogueApp = lazy(() => import('catalogue/CatalogueApp'))
+const RemoteCatalogueApp = lazy(() => import('catalogue/CatalogueApp')) as React.ComponentType<CatalogueProps>
 
-export default function Wrapper() {
+const CataloguePage: React.FC = () => {
+  const auth = useAppSelector((state) => state.auth)
+
   return (
     <Suspense fallback={<Spinner />}>
-      <RemoteCatalogueApp />
+      <RemoteCatalogueApp language={auth.language} username={auth.username as string} type={auth.type} />
     </Suspense>
   )
 }
+
+export default CataloguePage

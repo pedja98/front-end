@@ -7,14 +7,14 @@ export interface AuthRequest {
 }
 
 export interface AuthResponse {
-  username: string | undefined | null
-  type: UserType | undefined | null
+  username?: string
+  type?: UserType
   language: Language
 }
 
 export interface AuthState {
-  username: string | undefined | null
-  type: UserType | undefined | null
+  username?: string
+  type?: UserType
   language: Language
 }
 
