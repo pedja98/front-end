@@ -1,6 +1,6 @@
 import { Card, SelectChangeEvent, Typography } from '@mui/material'
 import {
-  FormButtonStyled,
+  ButtonStyled,
   FormCartActionStyled,
   FormCartContextStyled,
   FormTextFieldStyled,
@@ -99,9 +99,9 @@ const LoginPage = () => {
           />
         </FormCartContextStyled>
         <FormCartActionStyled>
-          <FormButtonStyled sx={{ m: 1 }} onClick={handleLogin} ref={loginButtonRef}>
+          <ButtonStyled sx={{ m: 1 }} onClick={handleLogin} ref={loginButtonRef}>
             {t('loginButtonText')}
-          </FormButtonStyled>
+          </ButtonStyled>
         </FormCartActionStyled>
       </Card>
     </StyledCenterBackgroundContainer>

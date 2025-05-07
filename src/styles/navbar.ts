@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Button, MenuItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
+import { PrimaryThemeColor } from '../consts/common'
 
 export const NavbarLinkStyled = styled(NavLink)(() => ({
   textDecoration: 'none',
@@ -13,7 +14,7 @@ export const NavbarLinkStyled = styled(NavLink)(() => ({
   justifyContent: 'center',
   marginLeft: '1px',
   '&:hover': {
-    backgroundColor: '#525252',
+    backgroundColor: PrimaryThemeColor,
     cursor: 'pointer',
   },
 }))
@@ -29,7 +30,7 @@ export const NavbarUserOptionsButtonStyled = styled(Button)(() => ({
   backgroundColor: 'black',
   width: '90%',
   '&:hover': {
-    backgroundColor: '#525252',
+    backgroundColor: PrimaryThemeColor,
     cursor: 'pointer',
   },
 }))
@@ -45,6 +46,6 @@ export const NavbarUserOptionsMenuItemStyled = styled(MenuItem)(() => ({
   fontSize: '15px',
   '&:hover': {
     cursor: 'pointer',
-    backgroundColor: '#c2c1be',
+    backgroundColor: PrimaryThemeColor,
   },
 }))

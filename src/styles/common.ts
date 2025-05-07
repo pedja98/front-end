@@ -87,14 +87,14 @@ export const FormSmallTextFieldStyled = styled(TextField)(({ theme }) => ({
   },
 }))
 
-export const FormButtonStyled = styled(Button)(() => ({
+export const ButtonStyled = styled(Button)(() => ({
   margin: '30',
   padding: '10',
   minWidth: 250,
   height: 35,
 }))
 
-export const FormSmallButtonStyled = styled(Button)(() => ({
+export const SmallButtonStyled = styled(Button)(() => ({
   margin: '30',
   padding: '10',
   minWidth: 150,
