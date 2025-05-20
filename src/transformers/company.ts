@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
-import { dateFormater } from '../helpers/common'
+import { dateFormatter } from '../helpers/common'
 import { AutocompleteHashMap, GridLabel, PageElement } from '../types/common'
 import { Company, CompanyStatus, SaveCompany, SearchCompanyDataFormProps } from '../types/company'
 
@@ -71,11 +71,11 @@ export const transformCompanyDataIntoGridData = (
     type: GridFieldTypes.LINK,
   },
   dateCreated: {
-    value: company.dateCreated ? dateFormater(String(company.dateCreated)) : EmptyValue,
+    value: company.dateCreated ? dateFormatter(String(company.dateCreated)) : EmptyValue,
     type: GridFieldTypes.STRING,
   },
   dateModified: {
-    value: company.dateModified ? dateFormater(String(company.dateModified)) : EmptyValue,
+    value: company.dateModified ? dateFormatter(String(company.dateModified)) : EmptyValue,
     type: GridFieldTypes.STRING,
   },
 })

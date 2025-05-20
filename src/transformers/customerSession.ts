@@ -1,7 +1,7 @@
 import { TFunction } from 'i18next'
 import { AutocompleteHashMap, GridLabel, PageElement } from '../types/common'
 import { GridFieldTypes } from '../consts/common'
-import { dateFormater } from '../helpers/common'
+import { dateFormatter } from '../helpers/common'
 import {
   CustomerSession,
   CustomerSessionMode,
@@ -73,8 +73,8 @@ export const transformCustomerSessionIntoPageGridData = (
     value: t(`customerSessions:customerSessionModes.${customerSession.mode}`),
     type: GridFieldTypes.STRING,
   },
-  sessionStart: { value: dateFormater(customerSession.sessionStart as string), type: GridFieldTypes.STRING },
-  sessionEnd: { value: dateFormater(customerSession.sessionEnd as string), type: GridFieldTypes.STRING },
+  sessionStart: { value: dateFormatter(customerSession.sessionStart as string), type: GridFieldTypes.STRING },
+  sessionEnd: { value: dateFormatter(customerSession.sessionEnd as string), type: GridFieldTypes.STRING },
   outcome: {
     value: t(`customerSessions:customerSessionOutcomes.${customerSession.outcome}`),
     type: GridFieldTypes.STRING,
@@ -89,8 +89,8 @@ export const transformCustomerSessionIntoPageGridData = (
     link: `/index/users/${customerSession.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
-  dateCreated: { value: dateFormater(customerSession.dateCreated as string), type: GridFieldTypes.STRING },
-  dateModified: { value: dateFormater(customerSession.dateModified as string), type: GridFieldTypes.STRING },
+  dateCreated: { value: dateFormatter(customerSession.dateCreated as string), type: GridFieldTypes.STRING },
+  dateModified: { value: dateFormatter(customerSession.dateModified as string), type: GridFieldTypes.STRING },
   description: { type: GridFieldTypes.AREA, value: customerSession.description },
 })
 

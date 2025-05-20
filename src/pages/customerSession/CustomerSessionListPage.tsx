@@ -12,7 +12,7 @@ import {
 } from '../../transformers/customerSession'
 import { Grid, Typography } from '@mui/material'
 import CustomTable from '../../components/CustomTable'
-import { TabelRowPerPage } from '../../consts/common'
+import { TableRowPerPage } from '../../consts/common'
 
 const CustomerSessionListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -48,7 +48,7 @@ const CustomerSessionListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.customerSessions`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <CustomTable columns={columns} rows={listPageCustomerSessionGridData} rowPerPage={TabelRowPerPage} />
+        <CustomTable columns={columns} rows={listPageCustomerSessionGridData} rowPerPage={TableRowPerPage} />
       </Grid>
     </Grid>
   )

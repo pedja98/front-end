@@ -9,7 +9,7 @@ import { Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useGetCompaniesQuery } from '../../app/apis/company.api'
 import { getCompanyListColumns, transformCompanyDataIntoGridData } from '../../transformers/company'
-import { TabelRowPerPage } from '../../consts/common'
+import { TableRowPerPage } from '../../consts/common'
 
 const CompanyListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -43,7 +43,7 @@ const CompanyListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.companies`).toLocaleUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <CustomTable columns={columns} rows={listPageCompaniesGridData} rowPerPage={TabelRowPerPage} />
+        <CustomTable columns={columns} rows={listPageCompaniesGridData} rowPerPage={TableRowPerPage} />
       </Grid>
     </Grid>
   )

@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material'
 import CustomTable from '../../components/CustomTable'
-import { TabelRowPerPage } from '../../consts/common'
+import { TableRowPerPage } from '../../consts/common'
 import { getOpportunityDetailGridLabels, transformOpportunityDataIntoGridData } from '../../transformers/opportunity'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useGetOpportunitiesQuery } from '../../app/apis/opportunity.api'
@@ -45,7 +45,7 @@ const OpportunityListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.opportunities`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <CustomTable columns={columns} rows={listPageOpportunityGridData} rowPerPage={TabelRowPerPage} />
+        <CustomTable columns={columns} rows={listPageOpportunityGridData} rowPerPage={TableRowPerPage} />
       </Grid>
     </Grid>
   )

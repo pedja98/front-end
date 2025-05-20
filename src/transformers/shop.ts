@@ -1,7 +1,7 @@
 import { AutocompleteHashMap, GridLabel } from './../types/common'
 import { TFunction } from 'i18next'
 import { GridFieldTypes } from '../consts/common'
-import { dateFormater } from '../helpers/common'
+import { dateFormatter } from '../helpers/common'
 import { PageElement } from '../types/common'
 import { SaveShop, Shop, ShopSearchFormProps } from '../types/shop'
 
@@ -48,8 +48,8 @@ export const transformShopIntoPageGridData = (shop: Shop, skipNameAsLink?: boole
     link: `/index/users/${shop.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
-  dateCreated: { value: dateFormater(shop.dateCreated as string), type: GridFieldTypes.STRING },
-  dateModified: { value: dateFormater(shop.dateModified as string), type: GridFieldTypes.STRING },
+  dateCreated: { value: dateFormatter(shop.dateCreated as string), type: GridFieldTypes.STRING },
+  dateModified: { value: dateFormatter(shop.dateModified as string), type: GridFieldTypes.STRING },
 })
 
 export const getShopDetailListLabels = (t: TFunction): GridLabel[] => [

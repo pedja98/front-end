@@ -105,7 +105,7 @@ const UserCreatePage = () => {
       navigate(`/index/users/${userData.username}`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `users:${errorResponse.data}` || 'general:unknowError'
+      const errorCode = `users:${errorResponse.data}` || 'general:unknownError'
       dispatch(
         setNotification({
           text: t(errorCode),

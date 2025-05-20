@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Paper, Typography, Box, IconButton, Grid, Button } from '@mui/material'
 import { Add, Remove } from '@mui/icons-material'
-import { ExpandableTabelRowPerPage, PrimaryThemeColor, WhiteTeamColor } from '../consts/common'
+import { ExpandableTableRowPerPage, PrimaryThemeColor, WhiteTeamColor } from '../consts/common'
 import { ExpandableTypographyTableProps } from '../types/common'
 import { useTranslation } from 'react-i18next'
 import Spinner from './Spinner'
@@ -58,7 +58,7 @@ const ExpandableTable = (props: ExpandableTypographyTableProps) => {
                 </Button>
               </Grid>
             )}
-            <CustomTable columns={columns} rows={rows} rowPerPage={ExpandableTabelRowPerPage} />
+            <CustomTable columns={columns} rows={rows} rowPerPage={ExpandableTableRowPerPage} />
           </Grid>
         )}
       </Paper>

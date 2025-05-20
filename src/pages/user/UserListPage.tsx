@@ -9,7 +9,7 @@ import { getUseDetailListPagesLabels, transformUserIntoPageGridData } from '../.
 import { Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useGetUsersQuery } from '../../app/apis/user.api'
-import { TabelRowPerPage } from '../../consts/common'
+import { TableRowPerPage } from '../../consts/common'
 
 const UserListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -43,7 +43,7 @@ const UserListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.users`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <CustomTable columns={columns} rows={listPageUserGridData} rowPerPage={TabelRowPerPage} />
+        <CustomTable columns={columns} rows={listPageUserGridData} rowPerPage={TableRowPerPage} />
       </Grid>
     </Grid>
   )

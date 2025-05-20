@@ -9,7 +9,7 @@ import { NotificationType } from '../../types/notification'
 import { getRegionPageGridLabels, transformRegionIntoPageGridData } from '../../transformers/region'
 import { Grid, Typography } from '@mui/material'
 import CustomTable from '../../components/CustomTable'
-import { TabelRowPerPage } from '../../consts/common'
+import { TableRowPerPage } from '../../consts/common'
 
 const RegionListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -43,7 +43,7 @@ const RegionListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.regions`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <CustomTable columns={columns} rows={listPageRegionGridData} rowPerPage={TabelRowPerPage} />
+        <CustomTable columns={columns} rows={listPageRegionGridData} rowPerPage={TableRowPerPage} />
       </Grid>
     </Grid>
   )

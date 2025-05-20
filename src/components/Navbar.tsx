@@ -1,7 +1,7 @@
 import React from 'react'
 import Grid from '@mui/material/Grid'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { NavbarFadeMenueAdminOptions, NavbarFadeMenueUserOptions, NavbarLinks } from '../consts/navbar'
+import { NavbarFadeMenuAdminOptions, NavbarFadeMenuUserOptions, NavbarLinks } from '../consts/navbar'
 import { useTranslation } from 'react-i18next'
 import { NavbarLinkStyled } from '../styles/navbar'
 import NavbarFadeMenu from './NavbarFadeMenu'
@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const auth = useAppSelector((state) => state.auth)
 
-  const navbarFadeMenueOptions = auth.type === UserType.ADMIN ? NavbarFadeMenueAdminOptions : NavbarFadeMenueUserOptions
+  const navbarFadeMenuOptions = auth.type === UserType.ADMIN ? NavbarFadeMenuAdminOptions : NavbarFadeMenuUserOptions
 
   return (
     <Grid container style={{ backgroundColor: 'black', width: '100%' }}>
@@ -34,7 +34,7 @@ const Navbar = () => {
         )}
       </Grid>
       <Grid style={{ width: userOptionsWidth }}>
-        <NavbarFadeMenu menuOptions={navbarFadeMenueOptions} mainComponentText={String(auth.username)} />
+        <NavbarFadeMenu menuOptions={navbarFadeMenuOptions} mainComponentText={String(auth.username)} />
       </Grid>
     </Grid>
   )

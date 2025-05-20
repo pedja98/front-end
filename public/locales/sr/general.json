@@ -5,7 +5,7 @@
   "wrongPassword": "Pogrešna lozinka. Molimo Vas pokušajte ponovo",
   "username": "Korisničko ime",
   "password": "Lozinka",
-  "unknowError": "Nepoznata greška",
+  "unknownError": "Nepoznata greška",
   "logoutSuccessfully": "Uspešno ste se izlogovali",
   "saveButtonLabel": "Sačuvaj",
   "emailFormatError": "Email nije u odgovarajućem formatu",

@@ -1,7 +1,7 @@
 import { TFunction } from 'i18next'
 import { GridLabel, PageElement } from '../types/common'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
-import { dateFormater } from '../helpers/common'
+import { dateFormatter } from '../helpers/common'
 import { Opportunity, OpportunitySearchFormProps, OpportunityStatus, OpportunityType } from '../types/opportunity'
 
 export const getOpportunityDetailGridLabels = (t: TFunction): GridLabel[] => [
@@ -43,11 +43,11 @@ export const transformOpportunityDataIntoGridData = (
     type: GridFieldTypes.LINK,
   },
   dateCreated: {
-    value: opportunity.dateCreated ? dateFormater(String(opportunity.dateCreated)) : EmptyValue,
+    value: opportunity.dateCreated ? dateFormatter(String(opportunity.dateCreated)) : EmptyValue,
     type: GridFieldTypes.STRING,
   },
   dateModified: {
-    value: opportunity.dateModified ? dateFormater(String(opportunity.dateModified)) : EmptyValue,
+    value: opportunity.dateModified ? dateFormatter(String(opportunity.dateModified)) : EmptyValue,
     type: GridFieldTypes.STRING,
   },
 })

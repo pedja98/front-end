@@ -9,7 +9,7 @@ import { NotificationType } from '../../types/notification'
 import { getShopDetailListLabels, transformShopIntoPageGridData } from '../../transformers/shop'
 import { Grid, Typography } from '@mui/material'
 import CustomTable from '../../components/CustomTable'
-import { TabelRowPerPage } from '../../consts/common'
+import { TableRowPerPage } from '../../consts/common'
 
 const ShopListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -43,7 +43,7 @@ const ShopListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.shops`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <CustomTable columns={columns} rows={listPageShopGridData} rowPerPage={TabelRowPerPage} />
+        <CustomTable columns={columns} rows={listPageShopGridData} rowPerPage={TableRowPerPage} />
       </Grid>
     </Grid>
   )

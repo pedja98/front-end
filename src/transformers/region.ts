@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next'
 import { GridFieldTypes } from '../consts/common'
-import { dateFormater } from '../helpers/common'
+import { dateFormatter } from '../helpers/common'
 import { GridLabel, PageElement } from '../types/common'
 import { Region } from '../types/region'
 
@@ -20,8 +20,8 @@ export const transformRegionIntoPageGridData = (region: Region, skipNameAsLink?:
     link: `/index/users/${region.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
-  dateCreated: { value: dateFormater(region.dateCreated), type: GridFieldTypes.STRING },
-  dateModified: { value: dateFormater(region.dateModified), type: GridFieldTypes.STRING },
+  dateCreated: { value: dateFormatter(region.dateCreated), type: GridFieldTypes.STRING },
+  dateModified: { value: dateFormatter(region.dateModified), type: GridFieldTypes.STRING },
 })
 
 export const getRegionPageGridLabels = (t: TFunction): GridLabel[] => [

@@ -9,7 +9,7 @@ import CustomTable from '../../components/CustomTable'
 import { createQueryParamsForSearch } from '../../helpers/common'
 import { useGetContactsQuery } from '../../app/apis/contact.api'
 import { getContactDetailListLabels, transformContactIntoPageGridData } from '../../transformers/contact'
-import { TabelRowPerPage } from '../../consts/common'
+import { TableRowPerPage } from '../../consts/common'
 
 const ContactListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
@@ -43,7 +43,7 @@ const ContactListPage = () => {
         <Typography variant='h4'>{t(`pageNamesAndActions.contacts`).toUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <CustomTable columns={columns} rows={listPageContactGridData} rowPerPage={TabelRowPerPage} />
+        <CustomTable columns={columns} rows={listPageContactGridData} rowPerPage={TableRowPerPage} />
       </Grid>
     </Grid>
   )

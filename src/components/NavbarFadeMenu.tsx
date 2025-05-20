@@ -50,7 +50,7 @@ const NavbarFadeMenu: FC<Props> = (props): JSX.Element => {
         navigate('/')
       } catch (err) {
         const errorResponse = err as { data: ApiException }
-        const errorCode = errorResponse.data?.error || 'general:unknowError'
+        const errorCode = errorResponse.data?.error || 'general:unknownError'
         dispatch(
           setNotification({
             text: t(errorCode),

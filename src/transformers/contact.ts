@@ -9,7 +9,7 @@ import {
   UpdateCompanyContactRelation,
 } from '../types/contact'
 import { GridFieldTypes } from '../consts/common'
-import { dateFormater } from '../helpers/common'
+import { dateFormatter } from '../helpers/common'
 
 export const getContactDetailListLabels = (t: TFunction): GridLabel[] => [
   { label: t('contacts:fullName'), key: 'fullName' },
@@ -59,8 +59,8 @@ export const transformContactIntoPageGridData = (
     link: `/index/users/${contact.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
-  dateCreated: { value: dateFormater(contact.dateCreated as string), type: GridFieldTypes.STRING },
-  dateModified: { value: dateFormater(contact.dateModified as string), type: GridFieldTypes.STRING },
+  dateCreated: { value: dateFormatter(contact.dateCreated as string), type: GridFieldTypes.STRING },
+  dateModified: { value: dateFormatter(contact.dateModified as string), type: GridFieldTypes.STRING },
 })
 
 export const getSaveContactGridData = (
@@ -153,8 +153,8 @@ export const transformCompanyContactRelationIntoPageGridData = (
     link: `/index/users/${relation.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
-  dateCreated: { value: dateFormater(relation.dateCreated as string), type: GridFieldTypes.STRING },
-  dateModified: { value: dateFormater(relation.dateModified as string), type: GridFieldTypes.STRING },
+  dateCreated: { value: dateFormatter(relation.dateCreated as string), type: GridFieldTypes.STRING },
+  dateModified: { value: dateFormatter(relation.dateModified as string), type: GridFieldTypes.STRING },
   edit: { type: GridFieldTypes.BUTTON, handleClick: handleUpdateRelationDialogOpen, id: relation.id },
   delete: { type: GridFieldTypes.BUTTON, handleClick: handleRelationDelete, id: relation.id },
 })

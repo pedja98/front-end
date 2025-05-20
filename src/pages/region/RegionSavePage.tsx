@@ -58,7 +58,7 @@ const RegionSavePage = () => {
       navigate(regionId ? `/index/regions/${regionId}` : `/index/regions`)
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `regions:${errorResponse.data}` || 'general:unknowError'
+      const errorCode = `regions:${errorResponse.data}` || 'general:unknownError'
       dispatch(
         setNotification({
           text: t(errorCode),

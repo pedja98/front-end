@@ -44,6 +44,6 @@ export const CrmApiTags = {
   OPPORTUNITY: 'Opportunity',
 }
 
-export const TabelRowPerPage = 20
+export const TableRowPerPage = 20
 
-export const ExpandableTabelRowPerPage = 5
+export const ExpandableTableRowPerPage = 5

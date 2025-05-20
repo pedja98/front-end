@@ -56,7 +56,7 @@ const LoginPage = () => {
       navigate('/index')
     } catch (err) {
       const errorResponse = err as { data: ApiException }
-      const errorCode = `${errorResponse.data?.error}` || 'unknowError'
+      const errorCode = `${errorResponse.data?.error}` || 'unknownError'
       dispatch(
         setNotification({
           text: t(errorCode),

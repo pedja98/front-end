@@ -11,9 +11,9 @@ export const NavbarLinks = [
   ModuleOptions.Shops,
 ]
 
-export const NavbarFadeMenueUserOptions = [ModuleOptions.EditProfile, ModuleOptions.Logout]
+export const NavbarFadeMenuUserOptions = [ModuleOptions.EditProfile, ModuleOptions.Logout]
 
-export const NavbarFadeMenueAdminOptions = [
+export const NavbarFadeMenuAdminOptions = [
   ModuleOptions.EditProfile,
   ModuleOptions.Regions,
   ModuleOptions.Catalogue,

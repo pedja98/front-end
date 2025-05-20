@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next'
 import { GridFieldTypes } from '../consts/common'
-import { dateFormater } from '../helpers/common'
+import { dateFormatter } from '../helpers/common'
 import { PageElement, GridLabel } from '../types/common'
 import { User, UserSearchFormProps, UserType } from '../types/user'
 
@@ -26,8 +26,8 @@ export const transformUserIntoPageGridData = (t: TFunction, user: User, skipUser
     link: `/index/users/${user.modifiedByUsername}`,
     type: GridFieldTypes.LINK,
   },
-  dateCreated: { value: dateFormater(user.dateCreated), type: GridFieldTypes.STRING },
-  dateModified: { value: dateFormater(user.dateModified), type: GridFieldTypes.STRING },
+  dateCreated: { value: dateFormatter(user.dateCreated), type: GridFieldTypes.STRING },
+  dateModified: { value: dateFormatter(user.dateModified), type: GridFieldTypes.STRING },
 })
 
 export const transformUserIntoEditPageGridData = (

@@ -38,7 +38,7 @@ export const createQueryParamsForSearch = (searchData: Record<string, unknown>):
   return queryParams
 }
 
-export const dateFormater = (dateString: string): string => {
+export const dateFormatter = (dateString: string): string => {
   const date = new Date(dateString)
   return date.toLocaleString('en-GB', { hour12: false })
 }
