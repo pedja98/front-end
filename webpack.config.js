@@ -12,6 +12,13 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'public'),
     },
+    historyApiFallback: {
+      index: '/index.html',
+      rewrites: [
+        { from: /^\/index\/catalogue/, to: '/index.html' },
+        { from: /^\/index/, to: '/index.html' },
+      ],
+    },
   },
   output: {
     publicPath: 'auto',
