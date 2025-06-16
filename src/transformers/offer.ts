@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next'
 import { GridLabel, PageElement } from '../types/common'
-import { Offer } from '../types/offer'
+import { Offer, OfferSearchFormProps, OfferStatus } from '../types/offer'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormatter } from '../helpers/common'
 
@@ -46,6 +46,25 @@ export const transformOfferDataIntoGridData = (t: TFunction, offer: Offer, skipN
   dateModified: {
     value: offer.dateModified ? dateFormatter(offer.dateModified) : EmptyValue,
     type: GridFieldTypes.STRING,
+  },
+})
+
+export const getOfferSearchLabels = (t: TFunction): GridLabel[] => [
+  { label: t('offers:name'), key: 'name' },
+  { label: t('offers:status'), key: 'status' },
+]
+
+export const getOfferSearchGridData = (
+  offerSearchData: OfferSearchFormProps,
+  offerStatuses: Record<OfferStatus, string>,
+): PageElement => ({
+  name: { type: GridFieldTypes.STRING, value: offerSearchData.name },
+  status: {
+    type: GridFieldTypes.MULTISELECT,
+    multiselectOptions: offerStatuses,
+    multiselectOptionValues: OfferStatus,
+    multiselectValue: offerSearchData.status,
+    dialogField: true,
   },
 })
 

@@ -42,6 +42,12 @@ export const OpportunitySortedByFields = {
   dateCreated: 'dateCreated',
 }
 
+export const OfferSortedByFields = {
+  name: 'name',
+  status: 'status',
+  dateCreated: 'dateCreated',
+}
+
 export const SortedOrderValues = {
   Asc: 'asc',
   Desc: 'desc',

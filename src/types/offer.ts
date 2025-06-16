@@ -28,3 +28,10 @@ export enum OfferStatus {
   CUSTOMER_ACCEPTED = 'CUSTOMER_ACCEPTED',
   CONCLUDED = 'CONCLUDED',
 }
+
+export interface OfferSearchFormProps {
+  name: string
+  status?: string[]
+  sortBy?: string
+  sortOrder?: string
+}
