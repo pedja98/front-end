@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
-import { useGetRegionsQuery } from '../../app/apis/region.api'
-import { useGetAssignedToUserDataQuery } from '../../app/apis/user.api'
+import { useGetRegionsQuery } from '../../app/apis/crm/region.api'
+import { useGetAssignedToUserDataQuery } from '../../app/apis/crm/user.api'
 import { UserType } from '../../types/user'
 import Spinner from '../Spinner'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'

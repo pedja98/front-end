@@ -5,7 +5,7 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { useAppDispatch } from '../../app/hooks'
 import { useTranslation } from 'react-i18next'
-import { useGetCompanyQuery } from '../../app/apis/company.api'
+import { useGetCompanyQuery } from '../../app/apis/crm/company.api'
 import { getCompanyDetailLabels, transformCompanyDataIntoGridData } from '../../transformers/company'
 import DetailPageGridField from '../../components/DetailPageGridField'
 

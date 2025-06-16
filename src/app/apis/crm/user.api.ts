@@ -1,7 +1,7 @@
-import { AssignedToUserData, User, UserType } from '../../types/user'
-import { ChangePasswordRequest } from '../../types/auth'
-import { crmApi } from './core/crm.api'
-import { CrmApiTags } from '../../consts/common'
+import { AssignedToUserData, User, UserType } from '../../../types/user'
+import { ChangePasswordRequest } from '../../../types/auth'
+import { crmApi } from '../core/crm.api'
+import { CrmApiTags } from '../../../consts/common'
 
 export const userApi = crmApi.injectEndpoints({
   endpoints: (builder) => ({

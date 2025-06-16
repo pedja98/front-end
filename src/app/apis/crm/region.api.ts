@@ -1,6 +1,6 @@
-import { Region } from './../../types/region'
-import { CrmApiTags } from '../../consts/common'
-import { crmApi } from './core/crm.api'
+import { Region } from '../../../types/region'
+import { CrmApiTags } from '../../../consts/common'
+import { crmApi } from '../core/crm.api'
 
 export const regionApi = crmApi.injectEndpoints({
   endpoints: (builder) => ({

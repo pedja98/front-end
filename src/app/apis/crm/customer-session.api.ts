@@ -1,6 +1,6 @@
-import { CrmApiTags } from '../../consts/common'
-import { CustomerSession, SaveCustomerSession } from '../../types/customerSession'
-import { crmApi } from './core/crm.api'
+import { CrmApiTags } from '../../../consts/common'
+import { CustomerSession, SaveCustomerSession } from '../../../types/customerSession'
+import { crmApi } from '../core/crm.api'
 
 export const customerSessionsApi = crmApi.injectEndpoints({
   endpoints: (builder) => ({

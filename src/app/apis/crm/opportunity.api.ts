@@ -1,6 +1,6 @@
-import { CrmApiTags } from '../../consts/common'
-import { Opportunity } from '../../types/opportunity'
-import { crmApi } from './core/crm.api'
+import { CrmApiTags } from '../../../consts/common'
+import { Opportunity } from '../../../types/opportunity'
+import { crmApi } from '../core/crm.api'
 
 export const opportunityApi = crmApi.injectEndpoints({
   endpoints: (builder) => ({

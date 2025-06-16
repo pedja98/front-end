@@ -6,7 +6,7 @@ import { NotificationType } from '../../types/notification'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useTranslation } from 'react-i18next'
-import { useDeleteContactMutation, useGetContactQuery } from '../../app/apis/contact.api'
+import { useDeleteContactMutation, useGetContactQuery } from '../../app/apis/crm/contact.api'
 import {
   getCompanyContactRelationColumnLabels,
   getContactDetailListLabels,
@@ -20,7 +20,7 @@ import ExpandableTable from '../../components/ExpandableTable'
 import {
   useDeleteCompanyContractRelationMutation,
   useGetCompanyContractRelationsByContactIdQuery,
-} from '../../app/apis/company-contact-relation.api'
+} from '../../app/apis/crm/company-contact-relation.api'
 import { EntityConfirmationDialogOptions } from '../../types/common'
 
 const ContactDetailPage = () => {

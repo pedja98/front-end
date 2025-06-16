@@ -7,7 +7,7 @@ import Spinner from '../../components/Spinner'
 import CustomTable from '../../components/CustomTable'
 import { Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useGetCompaniesQuery } from '../../app/apis/company.api'
+import { useGetCompaniesQuery } from '../../app/apis/crm/company.api'
 import { getCompanyListColumns, transformCompanyDataIntoGridData } from '../../transformers/company'
 import { TableRowPerPage } from '../../consts/common'
 

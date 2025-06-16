@@ -7,7 +7,7 @@ import LoginProtectedRoute from '../routes/LoginProtectedRoute'
 import CompanyPage from '../pages/company/CompanyPage'
 import CustomerSessionPage from '../pages/customerSession/CustomerSessionPage'
 import OpportunityPage from '../pages/opportunity/OpportunityPage'
-import OfferPage from '../pages/OfferPage'
+import OfferPage from '../pages/offer/OfferPage'
 import ContractPage from '../pages/ContractPage'
 import ShopPage from '../pages/shop/ShopPage'
 import CataloguePage from '../pages/CataloguePage'
@@ -37,6 +37,9 @@ import CustomerSessionListPage from '../pages/customerSession/CustomerSessionLis
 import CustomerSessionDetailPage from '../pages/customerSession/CustomerSessionDetailPage'
 import OpportunityListPage from '../pages/opportunity/OpportunityListPage'
 import OpportunityDetailPage from '../pages/opportunity/OpportunityDetailPage'
+import OfferEditPage from '../pages/offer/OfferEditPage'
+import OfferDetailPage from '../pages/offer/OfferDetailPage'
+import OfferListPage from '../pages/offer/OfferListPage'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -99,7 +102,16 @@ export default createBrowserRouter([
           { path: ':id', element: <OpportunityDetailPage /> },
         ],
       },
-      { path: 'offers', element: <OfferPage />, children: [{ index: true, element: <EntityIndexPage /> }] },
+      {
+        path: 'offers',
+        element: <OfferPage />,
+        children: [
+          { index: true, element: <EntityIndexPage /> },
+          { path: 'list', element: <OfferListPage /> },
+          { path: ':id', element: <OfferDetailPage /> },
+          { path: ':id/edit', element: <OfferEditPage /> },
+        ],
+      },
       {
         path: 'users',
         element: <UserPage />,

@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid'
-import { useGetUserQuery, useUpdateUserMutation } from '../../../app/apis/user.api'
+import { useGetUserQuery, useUpdateUserMutation } from '../../../app/apis/crm/user.api'
 import Spinner from '../../../components/Spinner'
 import { Button, SelectChangeEvent } from '@mui/material'
 import { EmailPattern, PhonePattern } from '../../../consts/common'

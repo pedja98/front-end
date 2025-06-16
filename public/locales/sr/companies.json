@@ -26,8 +26,8 @@
     "dateCreated": "Date created"
   },
   "statuses": {
-    "active": "Aktivni",
-    "inactive": "Neaktivni",
+    "active": "Aktivna",
+    "inactive": "Neaktivna",
     "potential": "Potencijalni"
   }
 }

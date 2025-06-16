@@ -43,7 +43,7 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'crm',
       remotes: {
-        catalogue: 'catalogue@http://localhost:3001/remoteEntry.js',
+        catalogue: `catalogue@${process.env.REACT_APP_PC_FE_API}/remoteEntry.js`,
       },
       shared: {
         react: { singleton: true, eager: true, requiredVersion: '^18.0.0' },

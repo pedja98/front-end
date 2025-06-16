@@ -20,9 +20,9 @@ import {
   useCreateCustomerSessionMutation,
   useGetCustomerSessionQuery,
   useUpdateCustomerSessionMutation,
-} from '../../app/apis/customer-session.api'
+} from '../../app/apis/crm/customer-session.api'
 import { getCustomerSessionSaveLabels, getSaveCustomerSessionGridData } from '../../transformers/customerSession'
-import { useGetCompaniesQuery } from '../../app/apis/company.api'
+import { useGetCompaniesQuery } from '../../app/apis/crm/company.api'
 import { transformFetchedCustomerSessionData } from '../../helpers/customerSession'
 import GridField from '../../components/GridField'
 import { Dayjs } from 'dayjs'

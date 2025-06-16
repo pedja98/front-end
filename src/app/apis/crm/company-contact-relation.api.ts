@@ -1,6 +1,10 @@
-import { CrmApiTags } from '../../consts/common'
-import { CompanyContactRelation, CreateCompanyContactRelation, UpdateCompanyContactRelation } from '../../types/contact'
-import { crmApi } from './core/crm.api'
+import { CrmApiTags } from '../../../consts/common'
+import {
+  CompanyContactRelation,
+  CreateCompanyContactRelation,
+  UpdateCompanyContactRelation,
+} from '../../../types/contact'
+import { crmApi } from '../core/crm.api'
 
 export const companyContractRelationApi = crmApi.injectEndpoints({
   endpoints: (builder) => ({

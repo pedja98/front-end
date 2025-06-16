@@ -1,6 +1,6 @@
-import { CrmApiTags } from '../../consts/common'
-import { SaveShop, Shop } from '../../types/shop'
-import { crmApi } from './core/crm.api'
+import { CrmApiTags } from '../../../consts/common'
+import { SaveShop, Shop } from '../../../types/shop'
+import { crmApi } from '../core/crm.api'
 
 export const shopApi = crmApi.injectEndpoints({
   endpoints: (builder) => ({

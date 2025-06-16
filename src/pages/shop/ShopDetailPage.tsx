@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
 import { useTranslation } from 'react-i18next'
-import { useGetShopQuery } from '../../app/apis/shop.api'
+import { useGetShopQuery } from '../../app/apis/crm/shop.api'
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'

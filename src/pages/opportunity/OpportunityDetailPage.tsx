@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
 import { useTranslation } from 'react-i18next'
-import { useCloseOpportunityMutation, useGetOpportunityQuery } from '../../app/apis/opportunity.api'
+import { useCloseOpportunityMutation, useGetOpportunityQuery } from '../../app/apis/crm/opportunity.api'
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'

@@ -5,15 +5,15 @@ import { createQueryParamsForSearch } from '../../helpers/common'
 import { NotificationType } from '../../types/notification'
 import Spinner from '../../components/Spinner'
 import CustomTable from '../../components/CustomTable'
-import { getUseDetailListPagesLabels, transformUserIntoPageGridData } from '../../transformers/user'
 import { Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useGetUsersQuery } from '../../app/apis/crm/user.api'
+import { useGetOffersQuery } from '../../app/apis/crm/offer.api'
+import { getOfferListColumns, transformOfferDataIntoGridData } from '../../transformers/offer'
 import { TableRowPerPage } from '../../consts/common'
 
-const UserListPage = () => {
+const OfferListPage = () => {
   const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
-  const { isLoading, data: users, isError, error } = useGetUsersQuery(queryParams)
+  const { isLoading, data: offers, isError, error } = useGetOffersQuery(queryParams)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { t } = useTranslation()
@@ -22,31 +22,30 @@ const UserListPage = () => {
     return <Spinner />
   }
 
-  if (isError || !users) {
+  if (isError || !offers) {
     dispatch(
       setNotification({
         text: JSON.stringify(error),
         type: NotificationType.Error,
       }),
     )
-    navigate('/index/users')
+    navigate('/index/offers')
     return null
   }
 
-  const listPageUserGridData = users.map((user) => transformUserIntoPageGridData(t, user))
-
-  const columns = getUseDetailListPagesLabels(t)
+  const rows = offers.map((offer) => transformOfferDataIntoGridData(t, offer))
+  const columns = getOfferListColumns(t)
 
   return (
     <Grid sx={{ mt: 2 }}>
       <Grid item>
-        <Typography variant='h4'>{t(`pageNamesAndActions.users`).toUpperCase()}</Typography>
+        <Typography variant='h4'>{t('pageNamesAndActions.offers').toLocaleUpperCase()}</Typography>
       </Grid>
       <Grid sx={{ mt: 2 }}>
-        <CustomTable columns={columns} rows={listPageUserGridData} rowPerPage={TableRowPerPage} />
+        <CustomTable columns={columns} rows={rows} rowPerPage={TableRowPerPage} />
       </Grid>
     </Grid>
   )
 }
 
-export default UserListPage
+export default OfferListPage

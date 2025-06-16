@@ -1,6 +1,6 @@
-import { Contact, SaveContact } from './../../types/contact'
-import { CrmApiTags } from '../../consts/common'
-import { crmApi } from './core/crm.api'
+import { Contact, SaveContact } from '../../../types/contact'
+import { CrmApiTags } from '../../../consts/common'
+import { crmApi } from '../core/crm.api'
 
 export const contactApi = crmApi.injectEndpoints({
   endpoints: (builder) => ({

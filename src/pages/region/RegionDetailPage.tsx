@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useTranslation } from 'react-i18next'
-import { useDeleteRegionMutation, useGetRegionQuery } from '../../app/apis/region.api'
+import { useDeleteRegionMutation, useGetRegionQuery } from '../../app/apis/crm/region.api'
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'

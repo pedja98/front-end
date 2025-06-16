@@ -1,4 +1,4 @@
-import { useGetRegionsQuery } from '../../app/apis/region.api'
+import { useGetRegionsQuery } from '../../app/apis/crm/region.api'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { createQueryParamsForSearch } from '../../helpers/common'
 import Spinner from '../../components/Spinner'
