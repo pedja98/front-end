@@ -68,17 +68,18 @@ export const getOfferSearchGridData = (
   },
 })
 
-export const getOfferListColumns = (t: TFunction): GridLabel[] => [
-  { label: t('offers:name'), key: 'name' },
-  { label: t('offers:company'), key: 'companyName' },
-  { label: t('offers:opportunity'), key: 'opportunityName' },
-  { label: t('offers:contract'), key: 'contractName' },
-  { label: t('offers:status'), key: 'status' },
-  { label: t('general:createdBy'), key: 'createdByUsername' },
-  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-  { label: t('general:dateCreated'), key: 'dateCreated' },
-  { label: t('general:dateModified'), key: 'dateModified' },
-]
+export const getOfferListColumns = (t: TFunction, hideOpportunity?: boolean): GridLabel[] =>
+  [
+    { label: t('offers:name'), key: 'name' },
+    { label: t('offers:company'), key: 'companyName' },
+    !hideOpportunity && { label: t('offers:opportunity'), key: 'opportunityName' },
+    { label: t('offers:contract'), key: 'contractName' },
+    { label: t('offers:status'), key: 'status' },
+    { label: t('general:createdBy'), key: 'createdByUsername' },
+    { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
+    { label: t('general:dateCreated'), key: 'dateCreated' },
+    { label: t('general:dateModified'), key: 'dateModified' },
+  ].filter(Boolean) as GridLabel[]
 
 export const getOfferDetailLabels = (t: TFunction): GridLabel[] => [
   { label: t('offers:name'), key: 'name' },

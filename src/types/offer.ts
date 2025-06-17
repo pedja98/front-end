@@ -15,6 +15,13 @@ export interface Offer {
   dateModified: string
 }
 
+export interface CrmCreateOffer {
+  name: string
+  omOfferId: string
+  companyId: number
+  opportunityId: number
+}
+
 export enum OfferStatus {
   DRAFT = 'DRAFT',
   WHAT_IF_ANALYSIS = 'WHAT_IF_ANALYSIS',

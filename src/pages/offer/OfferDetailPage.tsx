@@ -5,7 +5,7 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { useAppDispatch } from '../../app/hooks'
 import { useTranslation } from 'react-i18next'
-import { useGetOfferQuery } from '../../app/apis/crm/offer.api'
+import { useGetOfferByIdQuery } from '../../app/apis/crm/offer.api'
 import { getOfferDetailLabels, transformOfferDataIntoGridData } from '../../transformers/offer'
 import DetailPageGridField from '../../components/DetailPageGridField'
 
@@ -15,7 +15,7 @@ const OfferDetailPage = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const { isLoading: isGetOfferLoading, data: offer, isError, error } = useGetOfferQuery(offerId)
+  const { isLoading: isGetOfferLoading, data: offer, isError, error } = useGetOfferByIdQuery(offerId)
 
   if (isGetOfferLoading) {
     return <Spinner />

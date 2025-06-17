@@ -47,7 +47,7 @@ const ContactDetailPage = () => {
 
   const [deleteContact, { isLoading: isDeleteContactLoading }] = useDeleteContactMutation()
 
-  const [deleteRelation, { isLoading: isDeleteRelationtLoading }] = useDeleteCompanyContractRelationMutation()
+  const [deleteRelation, { isLoading: isDeleteRelationLoading }] = useDeleteCompanyContractRelationMutation()
 
   if (isGetContactLoading || isDeleteContactLoading) {
     return <Spinner />
@@ -213,7 +213,7 @@ const ContactDetailPage = () => {
             title={t('contacts:companyRelationsTitle')}
             hideActionSection={false}
             expandableDialogAction={handleCreateRelationDialogOpen}
-            isLoading={isLoadingGetRelations || isDeleteRelationtLoading}
+            isLoading={isLoadingGetRelations || isDeleteRelationLoading}
             columns={relationTableColumLabels}
             rows={relationTableGridData}
           />

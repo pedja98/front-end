@@ -14,10 +14,12 @@
   "opportunityType": "Tip poslovne prilike",
   "opportunityClosed": "Poslovna prilika je uspešno zatvorena",
   "types": "Tipovi",
+  "company": "Kompani",
   "statuses": "Statusi",
   "name": "Ime",
   "type": "Tip",
   "status": "Status",
+  "offersTableTitle": "Ponude",
   "sortByLabels": {
     "name": "Ime",
     "status": "Status",

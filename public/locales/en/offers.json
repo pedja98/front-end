@@ -4,6 +4,7 @@
   "opportunity": "Opportunity",
   "contract": "Contract",
   "status": "Status",
+  "offerCreated": "Offer is created successfully",
   "statuses": {
     "draft": "Draft",
     "what_if_analysis": "What-if Analysis",

@@ -14,10 +14,12 @@
   "opportunityType": "Opportunity type",
   "opportunityClosed": "Opportunity has been successfully closed",
   "types": "Types",
+  "company": "Company",
   "statuses": "Statuses",
   "name": "Name",
   "type": "Type",
   "status": "Status",
+  "offersTableTitle": "Offers",
   "sortByLabels": {
     "name": "Name",
     "status": "Status",

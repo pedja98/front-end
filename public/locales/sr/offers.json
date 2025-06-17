@@ -4,6 +4,7 @@
   "opportunity": "Poslovna prilika",
   "contract": "Ugovor",
   "status": "Status",
+  "offerCreated": "Ponuda je uspešno kreirana",
   "statuses": {
     "draft": "Nacrt",
     "what_if_analysis": "Šta-ako analiza",

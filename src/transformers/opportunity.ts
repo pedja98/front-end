@@ -30,8 +30,11 @@ export const transformOpportunityDataIntoGridData = (
     value: opportunity.companyName,
     link: `/index/companies/${opportunity.companyId}`,
   },
-  status: { type: GridFieldTypes.STRING, value: t(`opportunities:opportunityStatuses.${opportunity.status}`) },
-  type: { type: GridFieldTypes.STRING, value: t(`opportunities:opportunityTypes.${opportunity.status}`) },
+  status: {
+    type: GridFieldTypes.STRING,
+    value: t(`opportunities:opportunityStatuses.${opportunity.status?.toLowerCase()}`),
+  },
+  type: { type: GridFieldTypes.STRING, value: t(`opportunities:opportunityTypes.${opportunity.type?.toLowerCase()}`) },
   createdByUsername: {
     value: opportunity.createdByUsername,
     link: `/index/users/${opportunity.createdByUsername}`,

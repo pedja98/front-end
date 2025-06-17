@@ -11,6 +11,10 @@ import DetailPageGridField from '../../components/DetailPageGridField'
 import { EmptyValue } from '../../consts/common'
 import { ApiException } from '../../types/common'
 import { OpportunityStatus } from '../../types/opportunity'
+import { useCreateCrmOfferMutation, useGetOffersByOpportunityIdQuery } from '../../app/apis/crm/offer.api'
+import { getOfferListColumns, transformOfferDataIntoGridData } from '../../transformers/offer'
+import ExpandableTable from '../../components/ExpandableTable'
+import { CrmCreateOffer } from '../../types/offer'
 
 const OpportunityDetailPage = () => {
   const opportunityId = String(useParams().id)
@@ -25,16 +29,26 @@ const OpportunityDetailPage = () => {
     error,
   } = useGetOpportunityQuery(opportunityId)
 
+  const {
+    isLoading: isGetOffersLoading,
+    data: offers,
+    isError: isErrorGetOffers,
+    error: errorGetOffers,
+    refetch: refetchGetOffersByOpportunityId,
+  } = useGetOffersByOpportunityIdQuery(opportunityId)
+
+  const [createCrmOffer, { isLoading: isCreateCrmOfferLoading }] = useCreateCrmOfferMutation()
+
   const [closeOpportunity, { isLoading: closeOpportunityIsLoading }] = useCloseOpportunityMutation()
 
-  if (isGetOpportunityLoading || closeOpportunityIsLoading) {
+  if (isGetOpportunityLoading || closeOpportunityIsLoading || isGetOffersLoading || isCreateCrmOfferLoading) {
     return <Spinner />
   }
 
-  if (isError || !opportunity) {
+  if (isError || !opportunity || isErrorGetOffers) {
     dispatch(
       setNotification({
-        text: JSON.stringify(error),
+        text: JSON.stringify(error || errorGetOffers),
         type: NotificationType.Error,
       }),
     )
@@ -68,9 +82,42 @@ const OpportunityDetailPage = () => {
     }
   }
 
+  const handleCreateOffer = async () => {
+    try {
+      const createOfferData = {
+        name: 'Offer ' + opportunity.companyName + ' - ' + offers?.length + 1,
+        companyId: opportunity.companyId,
+        omOfferId: 'dad60d24-d097-416e-be6c-f8bc03ab2ba8',
+        opportunityId: opportunity.id,
+      } as CrmCreateOffer
+
+      const response = await createCrmOffer(createOfferData).unwrap()
+      const messageCode = `offers:${response.message}`
+      dispatch(
+        setNotification({
+          text: t(messageCode),
+          type: NotificationType.Success,
+        }),
+      )
+      refetchGetOffersByOpportunityId()
+    } catch (err) {
+      const errorResponse = err as { data: ApiException }
+      const errorCode = `opportunities:${errorResponse.data}` || 'general:unknownError'
+      dispatch(
+        setNotification({
+          text: t(errorCode),
+          type: NotificationType.Error,
+        }),
+      )
+    }
+  }
+
   const shouldCloseActionBeVisible = ![OpportunityStatus.CLOSE_LOST, OpportunityStatus.CLOSE_WON].includes(
     opportunity.status as OpportunityStatus,
   )
+
+  const offerTableRows = (offers || []).map((offer) => transformOfferDataIntoGridData(t, offer))
+  const offerTableColumns = getOfferListColumns(t)
 
   return (
     <>
@@ -84,13 +131,23 @@ const OpportunityDetailPage = () => {
             </Grid>
           )}
         </Grid>
-        <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
+        <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center', mb: 2 }}>
           <Grid container spacing={2} sx={{ width: '80%' }}>
             {labels.map((label) => {
               const gridFieldData = detailPageOpportunityGridData[label.key] || EmptyValue
               return <DetailPageGridField key={label.key} gridFieldData={gridFieldData} label={label} />
             })}
           </Grid>
+        </Grid>
+        <Grid sx={{ width: '100%' }}>
+          <ExpandableTable
+            title={t('opportunities:offersTableTitle')}
+            hideActionSection={false}
+            expandableDialogAction={handleCreateOffer}
+            isLoading={isGetOffersLoading}
+            columns={offerTableColumns}
+            rows={offerTableRows}
+          />
         </Grid>
       </Grid>
     </>
