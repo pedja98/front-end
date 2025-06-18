@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { AuthRequest, AuthResponse } from '../../../types/auth'
 import { getCurrentUser } from '../../../helpers/common'
+import { CreateOffer } from '../../../types/offer'
 
 export const gwApi = createApi({
   reducerPath: 'gwApi',
@@ -30,7 +31,14 @@ export const gwApi = createApi({
         body: credentials,
       }),
     }),
+    createOffer: builder.mutation<{ message: string }, CreateOffer>({
+      query: (body) => ({
+        url: '/offers',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
 
-export const { useLoginMutation, useLogoutMutation } = gwApi
+export const { useLoginMutation, useLogoutMutation, useCreateOfferMutation } = gwApi

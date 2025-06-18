@@ -11,10 +11,12 @@ import DetailPageGridField from '../../components/DetailPageGridField'
 import { EmptyValue } from '../../consts/common'
 import { ApiException } from '../../types/common'
 import { OpportunityStatus } from '../../types/opportunity'
-import { useCreateCrmOfferMutation, useGetOffersByOpportunityIdQuery } from '../../app/apis/crm/offer.api'
+import { useGetOffersByOpportunityIdQuery } from '../../app/apis/crm/offer.api'
 import { getOfferListColumns, transformOfferDataIntoGridData } from '../../transformers/offer'
 import ExpandableTable from '../../components/ExpandableTable'
-import { CrmCreateOffer } from '../../types/offer'
+import { CreateOffer } from '../../types/offer'
+import { useCreateOfferMutation } from '../../app/apis/core/gw.api'
+import moment from 'moment'
 
 const OpportunityDetailPage = () => {
   const opportunityId = String(useParams().id)
@@ -37,11 +39,11 @@ const OpportunityDetailPage = () => {
     refetch: refetchGetOffersByOpportunityId,
   } = useGetOffersByOpportunityIdQuery(opportunityId)
 
-  const [createCrmOffer, { isLoading: isCreateCrmOfferLoading }] = useCreateCrmOfferMutation()
+  const [createOffer, { isLoading: isCreateOfferLoading }] = useCreateOfferMutation()
 
   const [closeOpportunity, { isLoading: closeOpportunityIsLoading }] = useCloseOpportunityMutation()
 
-  if (isGetOpportunityLoading || closeOpportunityIsLoading || isGetOffersLoading || isCreateCrmOfferLoading) {
+  if (isGetOpportunityLoading || closeOpportunityIsLoading || isGetOffersLoading || isCreateOfferLoading) {
     return <Spinner />
   }
 
@@ -85,13 +87,18 @@ const OpportunityDetailPage = () => {
   const handleCreateOffer = async () => {
     try {
       const createOfferData = {
-        name: 'Offer ' + opportunity.companyName + ' - ' + offers?.length + 1,
+        name:
+          'Offer ' +
+          opportunity.companyName +
+          ' ' +
+          moment().format('DD/MM/YYYY') +
+          ' - ' +
+          String(Number(offers?.length) + 1),
         companyId: opportunity.companyId,
-        omOfferId: 'dad60d24-d097-416e-be6c-f8bc03ab2ba8',
         opportunityId: opportunity.id,
-      } as CrmCreateOffer
+      } as CreateOffer
 
-      const response = await createCrmOffer(createOfferData).unwrap()
+      const response = await createOffer(createOfferData).unwrap()
       const messageCode = `offers:${response.message}`
       dispatch(
         setNotification({

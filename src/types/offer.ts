@@ -15,7 +15,7 @@ export interface Offer {
   dateModified: string
 }
 
-export interface CrmCreateOffer {
+export interface CreateOffer {
   name: string
   omOfferId: string
   companyId: number

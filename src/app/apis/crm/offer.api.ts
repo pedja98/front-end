@@ -1,5 +1,5 @@
 import { CrmApiTags } from '../../../consts/common'
-import { CrmCreateOffer, Offer } from '../../../types/offer'
+import { Offer } from '../../../types/offer'
 import { crmApi } from '../core/crm.api'
 
 export const offerApi = crmApi.injectEndpoints({
@@ -16,16 +16,8 @@ export const offerApi = crmApi.injectEndpoints({
       query: (queryParams) => `/offers/opportunity/${queryParams}`,
       providesTags: [CrmApiTags.OFFER],
     }),
-    createCrmOffer: builder.mutation<{ message: string }, CrmCreateOffer>({
-      query: (body) => ({
-        url: '/offers',
-        method: 'POST',
-        body,
-      }),
-    }),
   }),
   overrideExisting: false,
 })
 
-export const { useGetOfferByIdQuery, useGetOffersQuery, useGetOffersByOpportunityIdQuery, useCreateCrmOfferMutation } =
-  offerApi
+export const { useGetOfferByIdQuery, useGetOffersQuery, useGetOffersByOpportunityIdQuery } = offerApi
