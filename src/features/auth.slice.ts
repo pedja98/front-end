@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import { AuthResponse } from '../types/auth'
 import { InitialState as AuthInitialState } from '../consts/auth'
 import { UpdateAttributePayload } from '../types/common'
-import { gwApi } from '../app/apis/core/gw.api'
+import { authApi } from '../app/apis/gw/auth.api'
 
 const authSlice = createSlice({
   name: 'auth',
@@ -32,13 +32,13 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(gwApi.endpoints.login.matchFulfilled, (state, { payload }: PayloadAction<AuthResponse>) => {
+      .addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }: PayloadAction<AuthResponse>) => {
         state.username = payload.username
         state.type = payload.type
         state.language = payload.language
         Cookies.set('currentUser', JSON.stringify(state), { expires: 0.5, sameSite: 'None', secure: true })
       })
-      .addMatcher(gwApi.endpoints.logout.matchFulfilled, (state) => {
+      .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
         Object.assign(state, {
           username: AuthInitialState.username,
           type: AuthInitialState.type,

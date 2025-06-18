@@ -9,7 +9,7 @@ import {
 } from '../styles/common'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { AuthRequest } from '../types/auth'
-import { useLoginMutation } from '../app/apis/core/gw.api'
+import { useLoginMutation } from '../app/apis/gw/auth.api'
 import { useAppDispatch } from '../app/hooks'
 import { setNotification } from '../features/notifications.slice'
 import { NotificationType } from '../types/notification'

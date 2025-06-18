@@ -5,7 +5,6 @@ import { NavbarUserOptionsButtonStyled, NavbarUserOptionsMenuItemStyled } from '
 import { useTranslation } from 'react-i18next'
 import { ModuleOptions } from '../types/common'
 import Grid from '@mui/material/Grid'
-import { useLogoutMutation } from '../app/apis/core/gw.api'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { useNavigate } from 'react-router-dom'
 import { setNotification } from '../features/notifications.slice'
@@ -13,6 +12,7 @@ import { NotificationType } from '../types/notification'
 import { ApiException } from '../types/common'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { getRoutePrefixFromCodeString } from '../helpers/common'
+import { useLogoutMutation } from '../app/apis/gw/auth.api'
 
 interface Props {
   menuOptions: ModuleOptions[]

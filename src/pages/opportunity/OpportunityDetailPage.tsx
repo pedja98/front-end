@@ -15,8 +15,8 @@ import { useGetOffersByOpportunityIdQuery } from '../../app/apis/crm/offer.api'
 import { getOfferListColumns, transformOfferDataIntoGridData } from '../../transformers/offer'
 import ExpandableTable from '../../components/ExpandableTable'
 import { CreateOffer } from '../../types/offer'
-import { useCreateOfferMutation } from '../../app/apis/core/gw.api'
 import moment from 'moment'
+import { useCreateOfferMutation } from '../../app/apis/gw/offer.api'
 
 const OpportunityDetailPage = () => {
   const opportunityId = String(useParams().id)
