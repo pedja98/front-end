@@ -1,3 +1,5 @@
+import { UserType } from './user'
+
 export interface Offer {
   id: number
   name: string
@@ -41,4 +43,11 @@ export interface OfferSearchFormProps {
   status?: string[]
   sortBy?: string
   sortOrder?: string
+}
+
+export interface OfferEditProps {
+  crmOfferId: number
+  language?: string
+  username?: string
+  type?: UserType
 }

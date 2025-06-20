@@ -44,6 +44,7 @@ module.exports = {
       name: 'crm',
       remotes: {
         catalogue: `catalogue@${process.env.REACT_APP_PC_FE_API}/remoteEntry.js`,
+        offerEdit: `offerEdit@${process.env.REACT_APP_OFFER_EDIT_API}/remoteEntry.js`,
       },
       shared: {
         react: { singleton: true, eager: true, requiredVersion: '^18.0.0' },

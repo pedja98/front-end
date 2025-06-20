@@ -1,7 +1,7 @@
 import { UserType } from './user'
 
 export interface CatalogueProps {
-  language: string
+  language?: string
   username?: string
   type?: UserType
 }
