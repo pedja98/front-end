@@ -61,28 +61,28 @@ export const transformUserIntoEditPageGridData = (
 })
 
 export const getUseDetailListPagesLabels = (t: TFunction): GridLabel[] => [
-  { label: t('users:username'), key: 'username' },
-  { label: t('users:firstName'), key: 'firstName' },
-  { label: t('users:lastName'), key: 'lastName' },
-  { label: t('users:email'), key: 'email' },
-  { label: t('users:phone'), key: 'phone' },
-  { label: t('users:type'), key: 'type' },
-  { label: t('shops:shopLabel'), key: 'shopName' },
-  { label: t('general:createdBy'), key: 'createdByUsername' },
-  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-  { label: t('general:dateCreated'), key: 'dateCreated' },
-  { label: t('general:dateModified'), key: 'dateModified' },
+  { text: t('users:username'), key: 'username' },
+  { text: t('users:firstName'), key: 'firstName' },
+  { text: t('users:lastName'), key: 'lastName' },
+  { text: t('users:email'), key: 'email' },
+  { text: t('users:phone'), key: 'phone' },
+  { text: t('users:type'), key: 'type' },
+  { text: t('shops:shopLabel'), key: 'shopName' },
+  { text: t('general:createdBy'), key: 'createdByUsername' },
+  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { text: t('general:dateCreated'), key: 'dateCreated' },
+  { text: t('general:dateModified'), key: 'dateModified' },
 ]
 
 export const getCreateUserPagesLabels = (t: TFunction): GridLabel[] => [
-  { label: t('users:firstName'), key: 'firstName' },
-  { label: t('users:lastName'), key: 'lastName' },
-  { label: t('users:username'), key: 'username' },
-  { label: t('users:password'), key: 'password' },
-  { label: t('users:confirm'), key: 'confirm' },
-  { label: t('users:email'), key: 'email' },
-  { label: t('users:phone'), key: 'phone' },
-  { label: t('users:type'), key: 'type' },
+  { text: t('users:firstName'), key: 'firstName' },
+  { text: t('users:lastName'), key: 'lastName' },
+  { text: t('users:username'), key: 'username' },
+  { text: t('users:password'), key: 'password' },
+  { text: t('users:confirm'), key: 'confirm' },
+  { text: t('users:email'), key: 'email' },
+  { text: t('users:phone'), key: 'phone' },
+  { text: t('users:type'), key: 'type' },
 ]
 
 export const getEditUserPagesLabels = (t: TFunction, removeType: boolean): GridLabel[] => {
@@ -101,9 +101,9 @@ export const getEditUserPagesLabels = (t: TFunction, removeType: boolean): GridL
 }
 
 export const getUserChangePasswordLabels = (t: TFunction): GridLabel[] => [
-  { label: t('users:currentPassword'), key: 'currentPassword' },
-  { label: t('users:newPassword'), key: 'newPassword' },
-  { label: t('users:confirmNewPassword'), key: 'confirmNewPassword' },
+  { text: t('users:currentPassword'), key: 'currentPassword' },
+  { text: t('users:newPassword'), key: 'newPassword' },
+  { text: t('users:confirmNewPassword'), key: 'confirmNewPassword' },
 ]
 
 export const getUserChangePasswordGridData = (): PageElement => ({
@@ -113,12 +113,12 @@ export const getUserChangePasswordGridData = (): PageElement => ({
 })
 
 export const getUserSearchFormLabels = (t: TFunction): GridLabel[] => [
-  { label: t('users:firstName'), key: 'firstName' },
-  { label: t('users:lastName'), key: 'lastName' },
-  { label: t('users:username'), key: 'username' },
-  { label: t('users:email'), key: 'email' },
-  { label: t('users:phone'), key: 'phone' },
-  { label: t('users:types'), key: 'type' },
+  { text: t('users:firstName'), key: 'firstName' },
+  { text: t('users:lastName'), key: 'lastName' },
+  { text: t('users:username'), key: 'username' },
+  { text: t('users:email'), key: 'email' },
+  { text: t('users:phone'), key: 'phone' },
+  { text: t('users:types'), key: 'type' },
 ]
 
 export const getUserSearchGridData = (

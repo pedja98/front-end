@@ -50,8 +50,8 @@ export const transformOfferDataIntoGridData = (t: TFunction, offer: Offer, skipN
 })
 
 export const getOfferSearchLabels = (t: TFunction): GridLabel[] => [
-  { label: t('offers:name'), key: 'name' },
-  { label: t('offers:status'), key: 'status' },
+  { text: t('offers:name'), key: 'name' },
+  { text: t('offers:status'), key: 'status' },
 ]
 
 export const getOfferSearchGridData = (
@@ -82,13 +82,13 @@ export const getOfferListColumns = (t: TFunction, hideOpportunity?: boolean): Gr
   ].filter(Boolean) as GridLabel[]
 
 export const getOfferDetailLabels = (t: TFunction): GridLabel[] => [
-  { label: t('offers:name'), key: 'name' },
-  { label: t('offers:company'), key: 'companyName' },
-  { label: t('offers:opportunity'), key: 'opportunityName' },
-  { label: t('offers:contract'), key: 'contractName' },
-  { label: t('offers:status'), key: 'status' },
-  { label: t('general:createdBy'), key: 'createdByUsername' },
-  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-  { label: t('general:dateCreated'), key: 'dateCreated' },
-  { label: t('general:dateModified'), key: 'dateModified' },
+  { text: t('offers:name'), key: 'name' },
+  { text: t('offers:company'), key: 'companyName' },
+  { text: t('offers:opportunity'), key: 'opportunityName' },
+  { text: t('offers:contract'), key: 'contractName' },
+  { text: t('offers:status'), key: 'status' },
+  { text: t('general:createdBy'), key: 'createdByUsername' },
+  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { text: t('general:dateCreated'), key: 'dateCreated' },
+  { text: t('general:dateModified'), key: 'dateModified' },
 ]

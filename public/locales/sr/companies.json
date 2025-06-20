@@ -4,7 +4,7 @@
   "industry": "Industrija",
   "contactPhone": "Kontakt telefon",
   "numberOfEmployees": "Br. zap",
-  "tin": "Pib",
+  "tin": "PIB",
   "bankName": "Ime banke",
   "bankAccountNumber": "Bankovni račun",
   "comment": "Komentar",
@@ -22,12 +22,12 @@
   "sortByLabels": {
     "name": "Ime kompanije",
     "hqAddress": "Adresa sedišta",
-    "tin": "Pib",
+    "tin": "PIB",
     "dateCreated": "Date created"
   },
   "statuses": {
     "active": "Aktivna",
     "inactive": "Neaktivna",
-    "potential": "Potencijalni"
+    "potential": "Potencijalan"
   }
 }

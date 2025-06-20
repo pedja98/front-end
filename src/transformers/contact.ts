@@ -12,24 +12,24 @@ import { GridFieldTypes } from '../consts/common'
 import { dateFormatter } from '../helpers/common'
 
 export const getContactDetailListLabels = (t: TFunction): GridLabel[] => [
-  { label: t('contacts:fullName'), key: 'fullName' },
-  { label: t('contacts:email'), key: 'email' },
-  { label: t('contacts:phone'), key: 'phone' },
-  { label: t('contacts:documentType'), key: 'documentType' },
-  { label: t('contacts:documentId'), key: 'documentId' },
-  { label: t('general:createdBy'), key: 'createdByUsername' },
-  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-  { label: t('general:dateCreated'), key: 'dateCreated' },
-  { label: t('general:dateModified'), key: 'dateModified' },
+  { text: t('contacts:fullName'), key: 'fullName' },
+  { text: t('contacts:email'), key: 'email' },
+  { text: t('contacts:phone'), key: 'phone' },
+  { text: t('contacts:documentType'), key: 'documentType' },
+  { text: t('contacts:documentId'), key: 'documentId' },
+  { text: t('general:createdBy'), key: 'createdByUsername' },
+  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { text: t('general:dateCreated'), key: 'dateCreated' },
+  { text: t('general:dateModified'), key: 'dateModified' },
 ]
 
 export const getContactSaveLabels = (t: TFunction): GridLabel[] => [
-  { label: t('contacts:firstName'), key: 'firstName' },
-  { label: t('contacts:lastName'), key: 'lastName' },
-  { label: t('contacts:email'), key: 'email' },
-  { label: t('contacts:phone'), key: 'phone' },
-  { label: t('contacts:documentType'), key: 'documentType' },
-  { label: t('contacts:documentId'), key: 'documentId' },
+  { text: t('contacts:firstName'), key: 'firstName' },
+  { text: t('contacts:lastName'), key: 'lastName' },
+  { text: t('contacts:email'), key: 'email' },
+  { text: t('contacts:phone'), key: 'phone' },
+  { text: t('contacts:documentType'), key: 'documentType' },
+  { text: t('contacts:documentId'), key: 'documentId' },
 ]
 
 export const transformContactIntoPageGridData = (
@@ -91,19 +91,19 @@ export const getSaveContactGridData = (
 })
 
 export const getCompanyContactRelationColumnLabels = (t: TFunction): GridLabel[] => [
-  { label: t('contacts:relatedCompany'), key: 'relatedCompany' },
-  { label: t('contacts:companyRelationType'), key: 'companyRelationType' },
-  { label: t('general:createdBy'), key: 'createdByUsername' },
-  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-  { label: t('general:dateCreated'), key: 'dateCreated' },
-  { label: t('general:dateModified'), key: 'dateModified' },
-  { label: t('general:edit'), key: 'edit' },
-  { label: t('general:delete'), key: 'delete' },
+  { text: t('contacts:relatedCompany'), key: 'relatedCompany' },
+  { text: t('contacts:companyRelationType'), key: 'companyRelationType' },
+  { text: t('general:createdBy'), key: 'createdByUsername' },
+  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { text: t('general:dateCreated'), key: 'dateCreated' },
+  { text: t('general:dateModified'), key: 'dateModified' },
+  { text: t('general:edit'), key: 'edit' },
+  { text: t('general:delete'), key: 'delete' },
 ]
 
 export const getUpdateContactRelationDialogFormLabels = (t: TFunction): GridLabel[] => [
-  { label: t('contacts:relatedCompany'), key: 'companyId' },
-  { label: t('contacts:companyRelationType'), key: 'relationType' },
+  { text: t('contacts:relatedCompany'), key: 'companyId' },
+  { text: t('contacts:companyRelationType'), key: 'relationType' },
 ]
 
 export const getUpdateContactRelationDialogFormGridData = (
@@ -160,12 +160,12 @@ export const transformCompanyContactRelationIntoPageGridData = (
 })
 
 export const getContactSearchLabels = (t: TFunction): GridLabel[] => [
-  { label: t('contacts:firstName'), key: 'firstName' },
-  { label: t('contacts:lastName'), key: 'lastName' },
-  { label: t('contacts:email'), key: 'email' },
-  { label: t('contacts:phone'), key: 'phone' },
-  { label: t('contacts:contactDocumentType'), key: 'documentType' },
-  { label: t('contacts:documentId'), key: 'documentId' },
+  { text: t('contacts:firstName'), key: 'firstName' },
+  { text: t('contacts:lastName'), key: 'lastName' },
+  { text: t('contacts:email'), key: 'email' },
+  { text: t('contacts:phone'), key: 'phone' },
+  { text: t('contacts:contactDocumentType'), key: 'documentType' },
+  { text: t('contacts:documentId'), key: 'documentId' },
 ]
 
 export const getContactSearchGridData = (

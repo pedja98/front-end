@@ -58,7 +58,7 @@ export interface TableProps {
 }
 
 export interface GridLabel {
-  label: string
+  text: string
   key: string
 }
 

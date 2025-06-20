@@ -29,7 +29,7 @@ const CustomTable: FC<TableProps> = ({ columns, rows, rowPerPage }) => {
         <TableHead>
           <TableRow>
             {columns.map((col) => (
-              <TableCell key={col.key}>{col.label}</TableCell>
+              <TableCell key={col.key}>{col.text}</TableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -61,7 +61,7 @@ const CustomTable: FC<TableProps> = ({ columns, rows, rowPerPage }) => {
                           }
                         }}
                       >
-                        {col.label}
+                        {col.text}
                       </Button>
                     </TableCell>
                   )

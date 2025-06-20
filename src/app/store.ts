@@ -1,11 +1,11 @@
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import notificationsReducer from '../features/notifications.slice'
-import searchReducer from '../features/search.slice'
-import authReducer from '../features/auth.slice'
-import confirmReducer from '../features/confirm.slice'
-import commonReducer from '../features/common.slice'
+import NotificationsReducer from '../features/notifications.slice'
+import SearchReducer from '../features/search.slice'
+import AuthReducer from '../features/auth.slice'
+import ConfirmReducer from '../features/confirm.slice'
+import CommonReducer from '../features/common.slice'
 import { gwApi } from './apis/core/gw.api'
 import { crmApi } from './apis/core/crm.api'
 
@@ -18,11 +18,11 @@ const persistConfig = {
 const rootReducer = combineReducers({
   [gwApi.reducerPath]: gwApi.reducer,
   [crmApi.reducerPath]: crmApi.reducer,
-  common: commonReducer,
-  notifications: notificationsReducer,
-  search: searchReducer,
-  auth: authReducer,
-  confirm: confirmReducer,
+  common: CommonReducer,
+  notifications: NotificationsReducer,
+  search: SearchReducer,
+  auth: AuthReducer,
+  confirm: ConfirmReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

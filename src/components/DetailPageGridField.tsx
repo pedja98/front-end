@@ -13,7 +13,7 @@ const DetailPageGridField = ({ gridFieldData, label }: DetailPageGridFieldProps)
       <Grid container alignItems='center' sx={{ height: '50px' }}>
         <Grid item sx={{ minWidth: 120 }}>
           <Typography variant='subtitle1' sx={{ mr: 0.5 }}>
-            {label.label}
+            {label.text}
           </Typography>
         </Grid>
         <Grid item xs>

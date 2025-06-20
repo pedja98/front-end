@@ -25,9 +25,9 @@ export const transformRegionIntoPageGridData = (region: Region, skipNameAsLink?:
 })
 
 export const getRegionPageGridLabels = (t: TFunction): GridLabel[] => [
-  { label: t('regions:name'), key: 'name' },
-  { label: t('general:createdBy'), key: 'createdByUsername' },
-  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-  { label: t('general:dateCreated'), key: 'dateCreated' },
-  { label: t('general:dateModified'), key: 'dateModified' },
+  { text: t('regions:name'), key: 'name' },
+  { text: t('general:createdBy'), key: 'createdByUsername' },
+  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { text: t('general:dateCreated'), key: 'dateCreated' },
+  { text: t('general:dateModified'), key: 'dateModified' },
 ]

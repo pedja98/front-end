@@ -4,7 +4,7 @@
   "industry": "Industry",
   "contactPhone": "Contact phone",
   "numberOfEmployees": "No. of emp",
-  "tin": "Tin",
+  "tin": "TIN",
   "bankName": "Bank name",
   "bankAccountNumber": "Bank account number",
   "comment": "Comment",
@@ -22,7 +22,7 @@
   "sortByLabels": {
     "name": "Company name",
     "hqAddress": "HQ Address",
-    "tin": "Tin",
+    "tin": "TIN",
     "dateCreated": "Date created"
   },
   "statuses": {

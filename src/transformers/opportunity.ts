@@ -5,14 +5,14 @@ import { dateFormatter } from '../helpers/common'
 import { Opportunity, OpportunitySearchFormProps, OpportunityStatus, OpportunityType } from '../types/opportunity'
 
 export const getOpportunityDetailGridLabels = (t: TFunction): GridLabel[] => [
-  { label: t('opportunities:name'), key: 'name' },
-  { label: t('opportunities:company'), key: 'company' },
-  { label: t('opportunities:status'), key: 'status' },
-  { label: t('opportunities:type'), key: 'type' },
-  { label: t('general:createdBy'), key: 'createdByUsername' },
-  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-  { label: t('general:dateCreated'), key: 'dateCreated' },
-  { label: t('general:dateModified'), key: 'dateModified' },
+  { text: t('opportunities:name'), key: 'name' },
+  { text: t('opportunities:company'), key: 'company' },
+  { text: t('opportunities:status'), key: 'status' },
+  { text: t('opportunities:type'), key: 'type' },
+  { text: t('general:createdBy'), key: 'createdByUsername' },
+  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { text: t('general:dateCreated'), key: 'dateCreated' },
+  { text: t('general:dateModified'), key: 'dateModified' },
 ]
 
 export const transformOpportunityDataIntoGridData = (
@@ -56,9 +56,9 @@ export const transformOpportunityDataIntoGridData = (
 })
 
 export const getOpportunitySearchLabels = (t: TFunction): GridLabel[] => [
-  { label: t('opportunities:name'), key: 'name' },
-  { label: t('opportunities:statuses'), key: 'status' },
-  { label: t('opportunities:types'), key: 'type' },
+  { text: t('opportunities:name'), key: 'name' },
+  { text: t('opportunities:statuses'), key: 'status' },
+  { text: t('opportunities:types'), key: 'type' },
 ]
 
 export const getOpportunitySearchGridData = (

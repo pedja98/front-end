@@ -119,7 +119,7 @@ const ChangePasswordTab = () => {
             <TextField
               id={label.key}
               name={label.key}
-              label={label.label}
+              label={label.text}
               type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
               variant='standard'
               required={!!gridFieldData.required}

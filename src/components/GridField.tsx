@@ -31,7 +31,7 @@ const GridField = (props: GridFieldProps) => {
         <TextField
           id={label.key}
           name={label.key}
-          label={label.label}
+          label={label.text}
           disabled={gridFieldData.disabled}
           variant='standard'
           type={gridFieldData.type === GridFieldTypes.PASSWORD ? 'password' : undefined}
@@ -54,7 +54,7 @@ const GridField = (props: GridFieldProps) => {
             sx={{ pl: gridFieldData.dialogField ? 2.5 : 9.3 }}
             required={gridFieldData.required}
           >
-            {label.label}
+            {label.text}
           </InputLabel>
           <Select
             labelId={label.key}
@@ -97,7 +97,7 @@ const GridField = (props: GridFieldProps) => {
               }
             }}
             renderInput={(params) => (
-              <TextField {...params} label={label.label} variant='standard' required={gridFieldData.required} />
+              <TextField {...params} label={label.text} variant='standard' required={gridFieldData.required} />
             )}
             isOptionEqualToValue={(option, value) => option === value}
             sx={{ width: '100%' }}
@@ -112,7 +112,7 @@ const GridField = (props: GridFieldProps) => {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateTimePicker
             name={label.key}
-            label={label.label}
+            label={label.text}
             format='YYYY-MM-DD HH:mm'
             ampm={false}
             disabled={gridFieldData.disabled}
@@ -146,7 +146,7 @@ const GridField = (props: GridFieldProps) => {
             sx={{ pl: gridFieldData.dialogField ? 2.5 : 9.3 }}
             required={gridFieldData.required}
           >
-            {label.label}
+            {label.text}
           </InputLabel>
           <Select
             labelId={`${label.key}-label`}

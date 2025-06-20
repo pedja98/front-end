@@ -13,42 +13,42 @@ import {
 } from '../types/customerSession'
 
 export const getCustomerSessionDetailPageLabels = (t: TFunction): GridLabel[] => [
-  { label: t('customerSessions:name'), key: 'name' },
-  { label: t('customerSessions:status'), key: 'status' },
-  { label: t('customerSessions:type'), key: 'type' },
-  { label: t('customerSessions:mode'), key: 'mode' },
-  { label: t('customerSessions:sessionStart'), key: 'sessionStart' },
-  { label: t('customerSessions:sessionEnd'), key: 'sessionEnd' },
-  { label: t('customerSessions:outcome'), key: 'outcome' },
-  { label: t('general:createdBy'), key: 'createdByUsername' },
-  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-  { label: t('general:dateCreated'), key: 'dateCreated' },
-  { label: t('general:dateModified'), key: 'dateModified' },
-  { label: t('general:description'), key: 'description' },
+  { text: t('customerSessions:name'), key: 'name' },
+  { text: t('customerSessions:status'), key: 'status' },
+  { text: t('customerSessions:type'), key: 'type' },
+  { text: t('customerSessions:mode'), key: 'mode' },
+  { text: t('customerSessions:sessionStart'), key: 'sessionStart' },
+  { text: t('customerSessions:sessionEnd'), key: 'sessionEnd' },
+  { text: t('customerSessions:outcome'), key: 'outcome' },
+  { text: t('general:createdBy'), key: 'createdByUsername' },
+  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { text: t('general:dateCreated'), key: 'dateCreated' },
+  { text: t('general:dateModified'), key: 'dateModified' },
+  { text: t('general:description'), key: 'description' },
 ]
 
 export const getCustomerSessionTableColumns = (t: TFunction): GridLabel[] => [
-  { label: t('customerSessions:name'), key: 'name' },
-  { label: t('customerSessions:status'), key: 'status' },
-  { label: t('customerSessions:type'), key: 'type' },
-  { label: t('customerSessions:mode'), key: 'mode' },
-  { label: t('customerSessions:outcome'), key: 'outcome' },
-  { label: t('general:createdBy'), key: 'createdByUsername' },
-  { label: t('general:modifiedBy'), key: 'modifiedByUsername' },
-  { label: t('general:dateCreated'), key: 'dateCreated' },
-  { label: t('general:dateModified'), key: 'dateModified' },
+  { text: t('customerSessions:name'), key: 'name' },
+  { text: t('customerSessions:status'), key: 'status' },
+  { text: t('customerSessions:type'), key: 'type' },
+  { text: t('customerSessions:mode'), key: 'mode' },
+  { text: t('customerSessions:outcome'), key: 'outcome' },
+  { text: t('general:createdBy'), key: 'createdByUsername' },
+  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { text: t('general:dateCreated'), key: 'dateCreated' },
+  { text: t('general:dateModified'), key: 'dateModified' },
 ]
 
 export const getCustomerSessionSaveLabels = (t: TFunction): GridLabel[] => [
-  { label: t('customerSessions:company'), key: 'company' },
-  { label: t('customerSessions:status'), key: 'status' },
-  { label: t('customerSessions:type'), key: 'type' },
-  { label: t('customerSessions:mode'), key: 'mode' },
-  { label: t('customerSessions:sessionStart'), key: 'sessionStart' },
-  { label: t('customerSessions:sessionEnd'), key: 'sessionEnd' },
-  { label: t('customerSessions:outcome'), key: 'outcome' },
-  { label: t('customerSessions:description'), key: 'description' },
-  { label: t('opportunities:opportunityType'), key: 'opportunityType' },
+  { text: t('customerSessions:company'), key: 'company' },
+  { text: t('customerSessions:status'), key: 'status' },
+  { text: t('customerSessions:type'), key: 'type' },
+  { text: t('customerSessions:mode'), key: 'mode' },
+  { text: t('customerSessions:sessionStart'), key: 'sessionStart' },
+  { text: t('customerSessions:sessionEnd'), key: 'sessionEnd' },
+  { text: t('customerSessions:outcome'), key: 'outcome' },
+  { text: t('customerSessions:description'), key: 'description' },
+  { text: t('opportunities:opportunityType'), key: 'opportunityType' },
 ]
 
 export const transformCustomerSessionIntoPageGridData = (
@@ -158,11 +158,11 @@ export const getSaveCustomerSessionGridData = (
 })
 
 export const getCustomerSessionSearchLabels = (t: TFunction): GridLabel[] => [
-  { label: t('customerSessions:name'), key: 'name' },
-  { label: t('customerSessions:statuses'), key: 'status' },
-  { label: t('customerSessions:types'), key: 'type' },
-  { label: t('customerSessions:modes'), key: 'mode' },
-  { label: t('customerSessions:outcomes'), key: 'outcome' },
+  { text: t('customerSessions:name'), key: 'name' },
+  { text: t('customerSessions:statuses'), key: 'status' },
+  { text: t('customerSessions:types'), key: 'type' },
+  { text: t('customerSessions:modes'), key: 'mode' },
+  { text: t('customerSessions:outcomes'), key: 'outcome' },
 ]
 
 export const getCustomerSessionSearchGridData = (
