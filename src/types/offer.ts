@@ -3,7 +3,6 @@ import { UserType } from './user'
 export interface Offer {
   id: number
   name: string
-  omOfferId: string
   companyId: number
   companyName: string
   opportunityId: number
@@ -19,21 +18,18 @@ export interface Offer {
 
 export interface CreateOffer {
   name: string
-  omOfferId: string
   companyId: number
   opportunityId: number
 }
 
 export enum OfferStatus {
   DRAFT = 'DRAFT',
-  WHAT_IF_ANALYSIS = 'WHAT_IF_ANALYSIS',
   L1_PENDING = 'L1_PENDING',
   L2_PENDING = 'L2_PENDING',
   SALESMEN_CLOSED = 'SALESMEN_CLOSED',
   CLOSED_BY_SYSTEM = 'CLOSED_BY_SYSTEM',
   L1_REJECTED = 'L1_REJECTED',
   L2_REJECTED = 'L2_REJECTED',
-  CUSTOMER_PENDING = 'CUSTOMER_PENDING',
   CUSTOMER_ACCEPTED = 'CUSTOMER_ACCEPTED',
   CONCLUDED = 'CONCLUDED',
 }
