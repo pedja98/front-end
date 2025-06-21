@@ -40,6 +40,7 @@ import OpportunityDetailPage from '../pages/opportunity/OpportunityDetailPage'
 import OfferEditPage from '../pages/offer/OfferEditPage'
 import OfferDetailPage from '../pages/offer/OfferDetailPage'
 import OfferListPage from '../pages/offer/OfferListPage'
+import AdminProtectedRoute from '../routes/AdminProtectedRoute'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -62,7 +63,7 @@ export default createBrowserRouter([
       },
       {
         path: 'regions',
-        element: <RegionPage />,
+        element: <AdminProtectedRoute element={<RegionPage />} />,
         children: [
           { index: true, element: <EntityIndexPage /> },
           { path: 'create', element: <RegionSavePage /> },
@@ -114,7 +115,7 @@ export default createBrowserRouter([
       },
       {
         path: 'users',
-        element: <UserPage />,
+        element: <AdminProtectedRoute element={<UserPage />} />,
         children: [
           { index: true, element: <EntityIndexPage /> },
           { path: 'create', element: <UserCreatePage /> },
@@ -140,7 +141,7 @@ export default createBrowserRouter([
         ],
       },
       { path: 'edit-profile', element: <UserEditPage /> },
-      { path: 'catalogue', element: <CataloguePage /> },
+      { path: 'catalogue', element: <AdminProtectedRoute element={<CataloguePage />} /> },
     ],
   },
   { path: '*', element: <NotFoundPage /> },
