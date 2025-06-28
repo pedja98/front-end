@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { InitialState as CommonInitialState } from '../consts/common'
 
 const commonSlice = createSlice({
-  name: 'confirm',
+  name: 'common',
   initialState: CommonInitialState,
   reducers: {
     confirmEntityIsDeleted: (state) => {

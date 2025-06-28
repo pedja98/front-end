@@ -9,11 +9,17 @@
     "draft": "Draft",
     "l1_pending": "L1 Pending",
     "l2_pending": "L2 Pending",
-    "salesmen_closed": "Closed by Salesman",
+    "salesmen_closed": "Closed",
     "closed_by_system": "Closed by System",
     "l1_rejected": "L1 Rejected",
     "l2_rejected": "L2 Rejected",
     "customer_accepted": "Customer Accepted",
+    "offer_approved": "Offer approved",
     "concluded": "Concluded"
+  },
+  "sortByLabels": {
+    "name": "Name",
+    "status": "Status",
+    "dateCreated": "Date created"
   }
 }

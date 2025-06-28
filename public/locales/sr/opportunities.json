@@ -1,15 +1,15 @@
 {
   "opportunityTypes": {
-    "ACQUISITION": "Akvizicija",
-    "RENEWAL": "Obnova",
-    "CHANGE": "Izmena",
-    "TERMINATION": "Raskid"
+    "acquisition": "Akvizicija",
+    "renewal": "Obnova",
+    "change": "Izmena",
+    "termination": "Raskid"
   },
   "opportunityStatuses": {
-    "CREATED": "Kreiran",
-    "NEGOTIATIONS": "U pregovorima",
-    "CLOSE_LOST": "Neuspešno zatvoreno",
-    "CLOSE_WON": "Uspešno zatvoreno"
+    "created": "Kreiran",
+    "negotiations": "U pregovorima",
+    "close_lost": "Neuspešno zatvoreno",
+    "close_won": "Uspešno zatvoreno"
   },
   "opportunityType": "Tip poslovne prilike",
   "opportunityClosed": "Poslovna prilika je uspešno zatvorena",

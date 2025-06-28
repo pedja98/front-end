@@ -9,11 +9,17 @@
     "draft": "Nacrt",
     "l1_pending": "L1 na čekanju",
     "l2_pending": "L2 na čekanju",
-    "salesmen_closed": "Zatvoreno od strane prodavca",
+    "salesmen_closed": "Zatvoreno",
     "closed_by_system": "Zatvoreno od sistema",
     "l1_rejected": "L1 odbijeno",
     "l2_rejected": "L2 odbijeno",
     "customer_accepted": "Kupac prihvatio",
+    "offer_approved": "Ponuda odobrena",
     "concluded": "Zaključeno"
+  },
+  "sortByLabels": {
+    "name": "Ime",
+    "status": "Status",
+    "dateCreated": "Datum kreiranja"
   }
 }

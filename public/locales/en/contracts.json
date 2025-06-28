@@ -1,0 +1,22 @@
+{
+  "name": "Name",
+  "referenceNumber": "Reference No.",
+  "contractObligation": "Contract obligation",
+  "status": "Status",
+  "company": "Company",
+  "opportunity": "Opportunity",
+  "offer": "Offer",
+  "statuses": {
+    "created": "Created",
+    "finalized": "Finalized",
+    "contract_signed": "Signed",
+    "salesman_closed": "Closed",
+    "closed_by_system": "closed by system",
+    "contract_signed_and_verified": "Signed and verified"
+  },
+  "sortByLabels": {
+    "name": "Name",
+    "status": "Status",
+    "dateCreated": "Date created"
+  }
+}

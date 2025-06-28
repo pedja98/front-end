@@ -48,6 +48,12 @@ export const OfferSortedByFields = {
   dateCreated: 'dateCreated',
 }
 
+export const ContractSortedByFields = {
+  name: 'name',
+  status: 'status',
+  dateCreated: 'dateCreated',
+}
+
 export const SortedOrderValues = {
   Asc: 'asc',
   Desc: 'desc',

@@ -24,6 +24,7 @@ i18n
       'customerSessions',
       'opportunities',
       'offers',
+      'contracts',
     ],
     defaultNS: 'general',
     interpolation: {

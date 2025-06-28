@@ -8,7 +8,7 @@ import CompanyPage from '../pages/company/CompanyPage'
 import CustomerSessionPage from '../pages/customerSession/CustomerSessionPage'
 import OpportunityPage from '../pages/opportunity/OpportunityPage'
 import OfferPage from '../pages/offer/OfferPage'
-import ContractPage from '../pages/ContractPage'
+import ContractPage from '../pages/contract/ContractPage'
 import ShopPage from '../pages/shop/ShopPage'
 import CataloguePage from '../pages/CataloguePage'
 import ContactPage from '../pages/contact/ContactPage'
@@ -41,6 +41,8 @@ import OfferEditPage from '../pages/offer/OfferEditPage'
 import OfferDetailPage from '../pages/offer/OfferDetailPage'
 import OfferListPage from '../pages/offer/OfferListPage'
 import AdminProtectedRoute from '../routes/AdminProtectedRoute'
+import ContractListPage from '../pages/contract/ContractListPage'
+import ContractDetailPage from '../pages/contract/ContractDetailPage'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -127,7 +129,11 @@ export default createBrowserRouter([
       {
         path: 'contracts',
         element: <ContractPage />,
-        children: [{ index: true, element: <EntityIndexPage /> }],
+        children: [
+          { index: true, element: <EntityIndexPage /> },
+          { path: 'list', element: <ContractListPage /> },
+          { path: ':id', element: <ContractDetailPage /> },
+        ],
       },
       {
         path: 'shops',

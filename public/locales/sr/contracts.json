@@ -1,0 +1,22 @@
+{
+  "name": "Ime",
+  "referenceNumber": "Referentni br.",
+  "contractObligation": "Ugovorna obaveza",
+  "status": "Status",
+  "company": "Kompanija",
+  "opportunity": "Poslovna prilika",
+  "offer": "Ponuda",
+  "statuses": {
+    "created": "Kreiran",
+    "finalized": "Finalizovan",
+    "contract_signed": "Potpisan",
+    "salesman_closed": "Zatvoren",
+    "closed_by_system": "Zatovren od strane sistema",
+    "contract_signed_and_verified": "Potpisan i verifikovan"
+  },
+  "sortByLabels": {
+    "name": "Ime",
+    "status": "Status",
+    "dateCreated": "Datum kreiranja"
+  }
+}
