@@ -23,15 +23,10 @@ export const documentApi = crmApi.injectEndpoints({
       }),
       invalidatesTags: [CrmApiTags.DOCUMENT],
     }),
-    downloadDocument: builder.mutation<Blob, number>({
+    downloadDocument: builder.mutation<{ response: string }, number>({
       query: (documentId) => ({
         url: `documents/download/${documentId}`,
         method: 'GET',
-        responseHandler: async (response) => {
-          return new Blob([await response.arrayBuffer()], {
-            type: 'application/pdf',
-          })
-        },
       }),
     }),
   }),

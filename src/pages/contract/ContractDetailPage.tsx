@@ -85,18 +85,25 @@ const ContractDetailPage = () => {
 
   const handleDownloadDocument = async (id: number) => {
     try {
-      const pdfBlob = await downloadDocument(id).unwrap()
-      const pdfFileName = `contract.pdf`
-      const url = window.URL.createObjectURL(pdfBlob)
+      const base64Doc = await downloadDocument(id).unwrap()
+      const base64 = base64Doc.response
+
+      const byteCharacters = atob(base64)
+      const byteNumbers = new Array(byteCharacters.length)
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i)
+      }
+      const byteArray = new Uint8Array(byteNumbers)
+
+      const blob = new Blob([byteArray], { type: 'application/pdf' })
+
+      const blobUrl = URL.createObjectURL(blob)
       const link = document.createElement('a')
-      link.href = url
-      link.download = pdfFileName
-      link.setAttribute('type', 'application/pdf')
-      document.body.appendChild(link)
+      link.href = blobUrl
+      link.download = `document_${id}.pdf`
       link.click()
-      link.remove()
-      window.URL.revokeObjectURL(url)
-      window.URL.revokeObjectURL(url)
+
+      URL.revokeObjectURL(blobUrl)
     } catch (error) {
       dispatch(
         setNotification({
