@@ -30,6 +30,7 @@ export const getContractLabels = (t: TFunction): GridLabel[] => [
   { text: t('contracts:name'), key: 'name' },
   { text: t('contracts:status'), key: 'status' },
   { text: t('contracts:referenceNumber'), key: 'referenceNumber' },
+  { text: t('contracts:dateSigned'), key: 'dateSigned' },
   { text: t('contracts:company'), key: 'company' },
   { text: t('contracts:opportunity'), key: 'opportunity' },
   { text: t('contracts:offer'), key: 'offer' },
@@ -51,6 +52,10 @@ export const transformContractDataIntoGridData = (
   },
   status: {
     value: t(`contracts:statuses.${contract.status.toLocaleLowerCase()}`),
+    type: GridFieldTypes.STRING,
+  },
+  dateSigned: {
+    value: contract.dateSigned,
     type: GridFieldTypes.STRING,
   },
   referenceNumber: {

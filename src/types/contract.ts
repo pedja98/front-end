@@ -12,6 +12,7 @@ export interface Contract {
   id: number
   name: string
   referenceNumber: string
+  dateSigned: string
   contractObligation: number
   status: ContractStatus
   companyId: number

@@ -2,6 +2,7 @@
   "name": "Name",
   "referenceNumber": "Reference No.",
   "contractObligation": "Contract obligation",
+  "dateSigned": "Date signed",
   "status": "Status",
   "company": "Company",
   "documents": "Documents",

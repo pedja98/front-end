@@ -2,6 +2,7 @@
   "name": "Ime",
   "referenceNumber": "Referentni br.",
   "contractObligation": "Ugovorna obaveza",
+  "dateSigned": "Datum potpisivanja",
   "status": "Status",
   "company": "Kompanija",
   "documents": "Dokumenti",
