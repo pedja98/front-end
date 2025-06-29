@@ -3,6 +3,7 @@ import { GridLabel, PageElement } from '../types/common'
 import { Contract, ContractSearchFormProps, ContractStatus } from '../types/contract'
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormatter } from '../helpers/common'
+import { Document } from '../types/document'
 
 export const getContractSearchLabels = (t: TFunction): GridLabel[] => [
   { text: t('contracts:name'), key: 'name' },
@@ -89,4 +90,45 @@ export const transformContractDataIntoGridData = (
     value: contract.dateModified ? dateFormatter(contract.dateModified) : EmptyValue,
     type: GridFieldTypes.STRING,
   },
+})
+
+export const getDocumentTableColumns = (t: TFunction): GridLabel[] => [
+  { text: t('contracts:name'), key: 'name' },
+  { text: t('general:createdBy'), key: 'createdByUsername' },
+  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { text: t('general:dateCreated'), key: 'dateCreated' },
+  { text: t('general:dateModified'), key: 'dateModified' },
+  { text: t('general:download'), key: 'download' },
+  { text: t('general:remove'), key: 'remove' },
+]
+
+export const transformIntoDocumentTableRows = (
+  document: Document,
+  handleRemoveDocument: (id: number) => void,
+  handleDownload: (id: number) => void,
+): PageElement => ({
+  name: {
+    value: document.documentName,
+    type: GridFieldTypes.STRING,
+  },
+  createdByUsername: {
+    value: document.createdByUsername,
+    link: `/index/users/${document.createdByUsername}`,
+    type: GridFieldTypes.LINK,
+  },
+  modifiedByUsername: {
+    value: document.modifiedByUsername,
+    link: `/index/users/${document.modifiedByUsername}`,
+    type: GridFieldTypes.LINK,
+  },
+  dateCreated: {
+    value: document.dateCreated ? dateFormatter(document.dateCreated) : EmptyValue,
+    type: GridFieldTypes.STRING,
+  },
+  dateModified: {
+    value: document.dateModified ? dateFormatter(document.dateModified) : EmptyValue,
+    type: GridFieldTypes.STRING,
+  },
+  download: { type: GridFieldTypes.BUTTON, handleClick: handleDownload, id: document.id },
+  remove: { type: GridFieldTypes.BUTTON, handleClick: handleRemoveDocument, id: document.id },
 })

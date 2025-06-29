@@ -54,5 +54,8 @@
     "yes": "Yes",
     "no": "No"
   },
-  "confirmDeletionTitle": "Confirm deletion"
+  "confirmDeletionTitle": "Confirm deletion",
+  "upload": "Upload",
+  "download": "Download",
+  "remove": "Remove"
 }

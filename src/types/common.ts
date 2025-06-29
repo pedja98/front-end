@@ -98,6 +98,7 @@ export enum ModuleOptions {
 export enum EntityConfirmationDialogOptions {
   CompanyContactRelationCreateDialog = 'CompanyContactRelationCreateDialog',
   CompanyContactRelationUpdateDialog = 'CompanyContactRelationUpdateDialog',
+  UploadContractDocument = 'UploadContractDocument',
 }
 
 export type AutocompleteHashMap = {
@@ -127,4 +128,5 @@ export interface ExpandableTypographyTableProps {
   isLoading: boolean
   columns: GridLabel[]
   rows: PageElement[]
+  actionText: string
 }

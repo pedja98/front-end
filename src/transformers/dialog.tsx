@@ -12,6 +12,7 @@ import { CompanyContactRelationType } from '../types/contact'
 import OpportunitySearchDialog from '../components/SearchDialogs/OpportunitySearchDialog'
 import OfferSearchDialog from '../components/SearchDialogs/OfferSearchDialog'
 import ContractSearchDialog from '../components/SearchDialogs/ContractSearchDialog'
+import UploadContractDocument from '../components/EntityDialogs/UploadContractDocument'
 
 export const getSearchDialog = (currentModule: ModuleOptions): ReactNode | undefined => {
   const dialogs: Partial<Record<ModuleOptions, ReactNode>> = {
@@ -43,6 +44,9 @@ export const getEntityConfirmationDialog = (
         relationType={customConfirmComponentAttributes?.relationType as CompanyContactRelationType}
         companyId={customConfirmComponentAttributes?.companyId as number}
       />
+    ),
+    [EntityConfirmationDialogOptions.UploadContractDocument]: (
+      <UploadContractDocument contractId={customConfirmComponentAttributes?.contractId as number} />
     ),
   }
 

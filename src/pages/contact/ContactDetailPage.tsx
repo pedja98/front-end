@@ -216,6 +216,7 @@ const ContactDetailPage = () => {
             isLoading={isLoadingGetRelations || isDeleteRelationLoading}
             columns={relationTableColumLabels}
             rows={relationTableGridData}
+            actionText={t('general:create')}
           />
         </Grid>
       </Grid>

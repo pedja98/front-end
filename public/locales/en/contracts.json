@@ -4,6 +4,11 @@
   "contractObligation": "Contract obligation",
   "status": "Status",
   "company": "Company",
+  "documents": "Documents",
+  "uploadDocument": "Upload document",
+  "documentRemoved": "Document removed",
+  "documentUploaded": "Document is successfully uploaded",
+  "selectFileToUpload": "Please select to upload",
   "opportunity": "Opportunity",
   "offer": "Offer",
   "statuses": {

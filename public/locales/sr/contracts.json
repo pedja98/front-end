@@ -4,6 +4,11 @@
   "contractObligation": "Ugovorna obaveza",
   "status": "Status",
   "company": "Kompanija",
+  "documents": "Dokumenti",
+  "uploadDocument": "Dodaj dokument",
+  "documentUploaded": "Uspešno ste dodali dokument",
+  "selectFileToUpload": "Molimo Vas odaberite fajl za dodavanje",
+  "documentRemoved": "Document je uklonjen",
   "opportunity": "Poslovna prilika",
   "offer": "Ponuda",
   "statuses": {

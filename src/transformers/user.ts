@@ -15,7 +15,7 @@ export const transformUserIntoPageGridData = (t: TFunction, user: User, skipUser
   email: { value: user.email, type: GridFieldTypes.STRING },
   phone: { value: user.phone, type: GridFieldTypes.STRING },
   type: { value: t(`users:userTypes.${user.type.toLocaleLowerCase()}`), type: GridFieldTypes.STRING },
-  shopName: { value: user.shopName, link: `/index/shop/${user.shopId}`, type: GridFieldTypes.LINK },
+  shopName: { value: user.shopName, link: `/index/shops/${user.shopId}`, type: GridFieldTypes.LINK },
   createdByUsername: {
     value: user.createdByUsername,
     link: `/index/users/${user.createdByUsername}`,

@@ -3,14 +3,12 @@ import { Paper, Typography, Box, IconButton, Grid, Button } from '@mui/material'
 import { Add, Remove } from '@mui/icons-material'
 import { ExpandableTableRowPerPage, PrimaryThemeColor, WhiteTeamColor } from '../consts/common'
 import { ExpandableTypographyTableProps } from '../types/common'
-import { useTranslation } from 'react-i18next'
 import Spinner from './Spinner'
 import CustomTable from './CustomTable'
 
 const ExpandableTable = (props: ExpandableTypographyTableProps) => {
   const [expanded, setExpanded] = useState(false)
-  const { title, hideActionSection, expandableDialogAction, isLoading, columns, rows } = props
-  const { t } = useTranslation()
+  const { title, hideActionSection, expandableDialogAction, isLoading, columns, rows, actionText } = props
 
   const toggleExpand = () => {
     setExpanded((prev) => !prev)
@@ -54,7 +52,7 @@ const ExpandableTable = (props: ExpandableTypographyTableProps) => {
                   sx={{ float: 'right', mb: 1 }}
                   onClick={handleActionButtonClick}
                 >
-                  {t('general:create')}
+                  {actionText}
                 </Button>
               </Grid>
             )}

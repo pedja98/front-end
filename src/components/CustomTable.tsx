@@ -54,7 +54,7 @@ const CustomTable: FC<TableProps> = ({ columns, rows, rowPerPage }) => {
                   return (
                     <TableCell key={col.key}>
                       <Button
-                        sx={{ minWidth: '50px', width: '100px' }}
+                        sx={{ minWidth: '50px', width: '110px' }}
                         onClick={() => {
                           if (gridFieldData.handleClick) {
                             gridFieldData.handleClick(gridFieldData.id as number)

@@ -54,5 +54,8 @@
     "yes": "Da",
     "no": "Ne"
   },
-  "confirmDeletionTitle": "Potvrdite brisanje"
+  "confirmDeletionTitle": "Potvrdite brisanje",
+  "upload": "Dodaj",
+  "download": "Preuzmi",
+  "remove": "Ukloni"
 }

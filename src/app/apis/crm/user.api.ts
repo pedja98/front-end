@@ -17,6 +17,14 @@ export const userApi = crmApi.injectEndpoints({
       query: (type) => `/users/assign-to?type=${type}`,
       providesTags: [CrmApiTags.USER],
     }),
+    setUserShop: builder.mutation<{ message: string }, { username: string; shopId: number }>({
+      query: ({ username, shopId }) => ({
+        url: `/users/${username}/shop`,
+        method: 'PATCH',
+        body: { shopId },
+      }),
+      invalidatesTags: (result, error, { username }) => [{ type: CrmApiTags.USER, id: username }],
+    }),
     updateUser: builder.mutation<{ message: string }, { username: string; user: Partial<User> }>({
       query: ({ username, user }) => ({
         url: `/users/${username}`,
@@ -58,4 +66,5 @@ export const {
   useCreateUserMutation,
   useChangePasswordMutation,
   useGetAssignedToUserDataQuery,
+  useSetUserShopMutation,
 } = userApi

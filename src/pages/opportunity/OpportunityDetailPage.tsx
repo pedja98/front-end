@@ -154,6 +154,7 @@ const OpportunityDetailPage = () => {
             isLoading={isGetOffersLoading}
             columns={offerTableColumns}
             rows={offerTableRows}
+            actionText={t('general:create')}
           />
         </Grid>
       </Grid>

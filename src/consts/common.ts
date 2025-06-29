@@ -44,6 +44,7 @@ export const CrmApiTags = {
   OPPORTUNITY: 'Opportunity',
   OFFER: 'Offer',
   CONTRACT: 'Contract',
+  DOCUMENT: 'Document',
 }
 
 export const TableRowPerPage = 20

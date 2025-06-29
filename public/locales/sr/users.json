@@ -20,6 +20,7 @@
     "dateCreated": "Datum kreiranja"
   },
   "changePasswordLabel": "Izmeni lozinku",
+  "changeShop": "Promeni prodavnicu",
   "editUserData": "Uredite korisničke podatke",
   "userTypes": {
     "admin": "Admin",
