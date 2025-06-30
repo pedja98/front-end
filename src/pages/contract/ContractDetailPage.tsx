@@ -26,8 +26,12 @@ import {
   useGetDocumentsByContractIdQuery,
 } from '../../app/apis/crm/document.api'
 import { ContractStatus } from '../../types/contract'
+import { useReactToPrint } from 'react-to-print'
+import { useRef } from 'react'
+import PrintableContract from './Print/PrintableContract'
 
 const ContractDetailPage = () => {
+  const componentRef = useRef(null)
   const contractId = useParams().id as string
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -48,6 +52,11 @@ const ContractDetailPage = () => {
   } = useGetDocumentsByContractIdQuery(contractId)
 
   const [deleteDocument, { isLoading: isLoadingDeleteDocument }] = useDeleteDocumentMutation()
+
+  // useReactToPrint hook
+  const handlePrint = useReactToPrint({
+    contentRef: componentRef,
+  })
 
   if (
     isLoadingContractClose ||
@@ -246,6 +255,9 @@ const ContractDetailPage = () => {
               {t('contracts:close')}
             </Button>
           )}
+          <Button onClick={handlePrint} sx={{ ml: 0.5, width: '100px' }}>
+            {t('contracts:print')}
+          </Button>
         </Grid>
       </Grid>
       <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center' }}>
@@ -266,6 +278,9 @@ const ContractDetailPage = () => {
           rows={documentTableRows}
           actionText={t('upload')}
         />
+      </Grid>
+      <Grid style={{ display: 'none' }}>
+        <PrintableContract ref={componentRef} contract={contract} />
       </Grid>
     </Grid>
   )
