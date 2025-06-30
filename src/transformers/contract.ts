@@ -4,6 +4,7 @@ import { Contract, ContractSearchFormProps, ContractStatus } from '../types/cont
 import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormatter } from '../helpers/common'
 import { Document } from '../types/document'
+import moment from 'moment'
 
 export const getContractSearchLabels = (t: TFunction): GridLabel[] => [
   { text: t('contracts:name'), key: 'name' },
@@ -55,7 +56,7 @@ export const transformContractDataIntoGridData = (
     type: GridFieldTypes.STRING,
   },
   dateSigned: {
-    value: contract.dateSigned,
+    value: moment(contract.dateSigned).format('MM/DD/YYYY'),
     type: GridFieldTypes.STRING,
   },
   referenceNumber: {

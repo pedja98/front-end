@@ -13,6 +13,7 @@ import OpportunitySearchDialog from '../components/SearchDialogs/OpportunitySear
 import OfferSearchDialog from '../components/SearchDialogs/OfferSearchDialog'
 import ContractSearchDialog from '../components/SearchDialogs/ContractSearchDialog'
 import UploadContractDocument from '../components/EntityDialogs/UploadContractDocument'
+import SignContractDialog from '../components/EntityDialogs/SignContractDialog'
 
 export const getSearchDialog = (currentModule: ModuleOptions): ReactNode | undefined => {
   const dialogs: Partial<Record<ModuleOptions, ReactNode>> = {
@@ -47,6 +48,9 @@ export const getEntityConfirmationDialog = (
     ),
     [EntityConfirmationDialogOptions.UploadContractDocument]: (
       <UploadContractDocument contractId={customConfirmComponentAttributes?.contractId as number} />
+    ),
+    [EntityConfirmationDialogOptions.SignContractDialog]: (
+      <SignContractDialog contractId={customConfirmComponentAttributes?.contractId as number} />
     ),
   }
 

@@ -99,6 +99,7 @@ export enum EntityConfirmationDialogOptions {
   CompanyContactRelationCreateDialog = 'CompanyContactRelationCreateDialog',
   CompanyContactRelationUpdateDialog = 'CompanyContactRelationUpdateDialog',
   UploadContractDocument = 'UploadContractDocument',
+  SignContractDialog = 'SignContractDialog',
 }
 
 export type AutocompleteHashMap = {
