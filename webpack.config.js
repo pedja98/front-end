@@ -60,6 +60,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.REACT_APP_GW_API': JSON.stringify(process.env.REACT_APP_GW_API),
       'process.env.REACT_APP_CRM_API': JSON.stringify(process.env.REACT_APP_CRM_API),
+      'process.env.REACT_APP_OM_API': JSON.stringify(process.env.REACT_APP_OM_API),
     }),
   ],
 }
