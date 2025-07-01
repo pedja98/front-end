@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
+import AcquisitionContractContent from './acquisition/AcquisitionContractContent'
 import { Contract } from '../../../types/contract'
-import Barcode from 'react-barcode'
+import { forwardRef } from 'react'
 
 const PrintableContract = forwardRef<
   HTMLDivElement,
@@ -10,31 +10,9 @@ const PrintableContract = forwardRef<
   }
 >(({ contract }, ref) => {
   return (
-    <Box ref={ref} sx={{ p: 4 }}>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          mb: 4,
-        }}
-      >
-        <Typography variant='h4' sx={{ mt: 4 }}>
-          {'UGOVOR'}
-        </Typography>
-
-        <Box sx={{ mt: 4, pr: 2 }}>
-          <Barcode
-            value={contract?.referenceNumber || '0000000000'}
-            height={40}
-            width={0.7}
-            fontSize={13}
-            displayValue={true}
-            margin={0}
-          />
-        </Box>
-      </Box>
-    </Box>
+    <Grid ref={ref}>
+      <AcquisitionContractContent contract={contract} />
+    </Grid>
   )
 })
 
