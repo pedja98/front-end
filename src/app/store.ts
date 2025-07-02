@@ -9,6 +9,7 @@ import CommonReducer from '../features/common.slice'
 import { gwApi } from './apis/core/gw.api'
 import { crmApi } from './apis/core/crm.api'
 import { omApi } from './apis/core/om.api'
+import { pcApi } from './apis/core/pc.api'
 
 const persistConfig = {
   key: 'root',
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   [gwApi.reducerPath]: gwApi.reducer,
   [crmApi.reducerPath]: crmApi.reducer,
   [omApi.reducerPath]: omApi.reducer,
+  [pcApi.reducerPath]: pcApi.reducer,
   common: CommonReducer,
   notifications: NotificationsReducer,
   search: SearchReducer,
@@ -41,6 +43,7 @@ export const store = configureStore({
     })
       .concat(gwApi.middleware)
       .concat(omApi.middleware)
+      .concat(pcApi.middleware)
       .concat(crmApi.middleware),
 })
 

@@ -14,22 +14,55 @@ import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { TableProps } from '../types/common'
 import { TableLinkStyled } from '../styles/common'
 
-const CustomTable: FC<TableProps> = ({ columns, rows, rowPerPage }) => {
+const CustomTable: FC<TableProps> = ({ columns, rows, rowPerPage, printing }) => {
   const [page, setPage] = useState(0)
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage)
   }
 
-  const paginatedRows = rows.slice(page * rowPerPage, (page + 1) * rowPerPage)
+  const paginatedRows = rowPerPage ? rows.slice(page * rowPerPage, (page + 1) * rowPerPage) : rows
 
   return (
-    <TableContainer component={Paper} sx={{ mt: 1, mb: 2 }}>
-      <Table>
+    <TableContainer
+      component={Paper}
+      sx={{
+        mt: 1,
+        mb: 2,
+        ...(printing && {
+          boxShadow: 'none',
+          elevation: 0,
+          border: '1px solid #000',
+        }),
+      }}
+    >
+      <Table
+        sx={{
+          ...(printing && {
+            '& .MuiTableCell-root': {
+              border: '1px solid #000',
+            },
+            borderCollapse: 'collapse',
+            width: '100%',
+          }),
+        }}
+      >
         <TableHead>
           <TableRow>
             {columns.map((col) => (
-              <TableCell key={col.key}>{col.text}</TableCell>
+              <TableCell
+                key={col.key}
+                sx={{
+                  ...(printing && {
+                    backgroundColor: '#000',
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    border: '1px solid #000',
+                  }),
+                }}
+              >
+                {col.text}
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -40,7 +73,14 @@ const CustomTable: FC<TableProps> = ({ columns, rows, rowPerPage }) => {
                 const gridFieldData = row[col.key]
                 if (gridFieldData.type === GridFieldTypes.LINK) {
                   return (
-                    <TableCell key={col.key}>
+                    <TableCell
+                      key={col.key}
+                      sx={{
+                        ...(printing && {
+                          border: '1px solid #000',
+                        }),
+                      }}
+                    >
                       {gridFieldData?.value ? (
                         <TableLinkStyled to={String(gridFieldData.link)}>{gridFieldData.value}</TableLinkStyled>
                       ) : (
@@ -49,10 +89,28 @@ const CustomTable: FC<TableProps> = ({ columns, rows, rowPerPage }) => {
                     </TableCell>
                   )
                 } else if (gridFieldData.type === GridFieldTypes.STRING) {
-                  return <TableCell key={col.key}>{gridFieldData.value || EmptyValue}</TableCell>
+                  return (
+                    <TableCell
+                      key={col.key}
+                      sx={{
+                        ...(printing && {
+                          border: '1px solid #000',
+                        }),
+                      }}
+                    >
+                      {gridFieldData.value || EmptyValue}
+                    </TableCell>
+                  )
                 } else if (gridFieldData.type === GridFieldTypes.BUTTON) {
                   return (
-                    <TableCell key={col.key}>
+                    <TableCell
+                      key={col.key}
+                      sx={{
+                        ...(printing && {
+                          border: '1px solid #000',
+                        }),
+                      }}
+                    >
                       <Button
                         sx={{ minWidth: '50px', width: '110px' }}
                         onClick={() => {
@@ -72,14 +130,16 @@ const CustomTable: FC<TableProps> = ({ columns, rows, rowPerPage }) => {
           ))}
         </TableBody>
       </Table>
-      <TablePagination
-        component='div'
-        count={rows.length}
-        rowsPerPage={rowPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        rowsPerPageOptions={[]}
-      />
+      {rowPerPage && !printing && (
+        <TablePagination
+          component='div'
+          count={rows.length}
+          rowsPerPage={rowPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPageOptions={[]}
+        />
+      )}
     </TableContainer>
   )
 }

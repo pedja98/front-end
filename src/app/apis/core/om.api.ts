@@ -17,7 +17,7 @@ export const omApi = createApi({
   }),
   endpoints: (build) => ({
     getGroupedTariffPlansByCrmOfferId: build.query<TariffPlanGroupedByStatus, number>({
-      query: (crmOfferId) => `/offer/${crmOfferId}/grouped-tariff-plans`,
+      query: (crmOfferId) => `/tariff-plans/offer/${crmOfferId}/grouped-tariff-plans`,
     }),
   }),
 })

@@ -5,6 +5,7 @@ import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormatter } from '../helpers/common'
 import { Document } from '../types/document'
 import moment from 'moment'
+import { PrintTariffPlan, TariffPlanCharacteristicChar } from '../types/tariffPlans'
 
 export const getContractSearchLabels = (t: TFunction): GridLabel[] => [
   { text: t('contracts:name'), key: 'name' },
@@ -137,4 +138,34 @@ export const transformIntoDocumentTableRows = (
   },
   download: { type: GridFieldTypes.BUTTON, handleClick: handleDownload, id: document.id },
   remove: { type: GridFieldTypes.BUTTON, handleClick: handleRemoveDocument, id: document.id },
+})
+
+export const getPrintTariffPlanCountTableColumns = (): GridLabel[] => [
+  { text: 'Ime', key: 'name' },
+  { text: 'Mesečna cena (RSD)', key: 'price' },
+  { text: 'Količina', key: 'count' },
+]
+
+export const transformPrintTariffPlanCountTableRows = (tariffPlanData: PrintTariffPlan): PageElement => ({
+  name: {
+    value: tariffPlanData.name.sr,
+    type: GridFieldTypes.STRING,
+  },
+  price: {
+    value: tariffPlanData.price.toLocaleString('de-DE', { maximumFractionDigits: 2, minimumFractionDigits: 2 }),
+    type: GridFieldTypes.STRING,
+  },
+  count: {
+    value: tariffPlanData.count,
+    type: GridFieldTypes.STRING,
+  },
+})
+
+export const getTariffPlanCharTableColumn = (name: string): GridLabel[] => [{ text: name, key: 'char' }]
+
+export const transformTariffPlanCharTableRows = (char: TariffPlanCharacteristicChar): PageElement => ({
+  char: {
+    value: char.name.sr,
+    type: GridFieldTypes.STRING,
+  },
 })

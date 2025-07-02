@@ -54,7 +54,8 @@ export interface PageElement {
 export interface TableProps {
   columns: GridLabel[]
   rows: PageElement[]
-  rowPerPage: number
+  rowPerPage?: number
+  printing?: boolean
 }
 
 export interface GridLabel {

@@ -14,6 +14,7 @@ import ArticleSeven from './ArticleSeven'
 import ArticleEight from './ArticleEight'
 import { Contract } from '../../../../types/contract'
 import ContractTitle from '../ContractTitle'
+import TariffPlanAttachment from '../common/TariffPlanAttachment'
 
 const AcquisitionContractContent: React.FC<{
   contract: Contract
@@ -31,6 +32,7 @@ const AcquisitionContractContent: React.FC<{
       <ArticleSeven />
       <ArticleEight />
       <Signatories dateSign={contract.dateSigned || moment(new Date()).format('MM/DD/YYYY')} />
+      <TariffPlanAttachment offerId={contract.offerId} />
     </Grid>
   )
 }

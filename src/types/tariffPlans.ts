@@ -14,3 +14,23 @@ export interface ItemName {
   sr: string
   en: string
 }
+
+export interface TariffPlanCharacteristicResponse {
+  tariffPlan: TariffPlanRelationship
+  characteristics: TariffPlanCharacteristicChar[]
+}
+
+export interface TariffPlanRelationship {
+  id: string
+  name: ItemName
+  identifier: string
+}
+
+export interface TariffPlanCharacteristicChar {
+  charId: string
+  relationId: string
+  name: ItemName
+  identifier: string
+  createdByUser: string
+  dateCreated: string
+}
