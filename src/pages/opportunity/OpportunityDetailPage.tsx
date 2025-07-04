@@ -96,6 +96,7 @@ const OpportunityDetailPage = () => {
           String(Number(offers?.length) + 1),
         companyId: opportunity.companyId,
         opportunityId: opportunity.id,
+        opportunityType: opportunity.type,
       } as CreateOffer
 
       const response = await createOffer(createOfferData).unwrap()
