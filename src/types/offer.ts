@@ -22,6 +22,7 @@ export interface CreateOffer {
   companyId: number
   opportunityId: number
   opportunityType: OpportunityType
+  opportunityName: string
 }
 
 export enum OfferStatus {

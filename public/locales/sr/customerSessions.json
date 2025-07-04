@@ -10,6 +10,7 @@
   "company": "Kompanija",
   "opportunity": "Poslovna prilika",
   "customerSessionCreated": "Korisnička sesija je uspešno napravljena",
+  "canNotCreateOpportunityForCompanyInThisStatus": "Ne možete kreirati poslovnu priliku za kompaniju u trenutnom statusu",
   "customerSessionUpdated": "Korisnička sesija je uspešno ažurirana",
   "createCustomerSessionLabel": "NAPRAVI KORISNIČKU SESIJU",
   "invalidSessionDateTime": "Početka sesije ne može biti nakon završetka sesije",
