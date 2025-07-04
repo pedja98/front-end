@@ -6,13 +6,20 @@ import {
   transformPrintTariffPlanCountTableRows,
 } from '../../../../transformers/contract'
 import TariffPlanCharTable from './TariffPlanCharTable'
+import { Addon } from '../../../../types/tariffPlans'
+import TariffPlanAddonTable from './TariffPlanAddonTable'
 
 const TariffPlanAttachment = ({ offerId }: { offerId: number }) => {
-  const { data: groupTps } = useGetGroupedTariffPlansByCrmOfferIdQuery(Number(offerId))
-
+  const { data: groupTpsData } = useGetGroupedTariffPlansByCrmOfferIdQuery(Number(offerId))
   const activeColumns = getPrintTariffPlanCountTableColumns()
   const activeRows =
-    groupTps?.activeTariffPlans.map((tariffPlan) => transformPrintTariffPlanCountTableRows(tariffPlan)) || []
+    groupTpsData?.activeTariffPlans.map((tariffPlan) =>
+      transformPrintTariffPlanCountTableRows(tariffPlan, Number(groupTpsData?.activeDiscounts[tariffPlan.identifier])),
+    ) || []
+
+  const shouldShowAddonTable = Object.values(
+    (groupTpsData?.activeTariffPlansAddons as Record<string, Addon[]>) || {},
+  ).some((addon) => addon.length > 0)
 
   return (
     <Grid>
@@ -22,10 +29,27 @@ const TariffPlanAttachment = ({ offerId }: { offerId: number }) => {
       </Grid>
       <Grid sx={{ width: '400px' }}>
         <Typography variant='subtitle1'>{'Prilog 2 – Karakteristike tarifnih planova'}</Typography>
-        {groupTps?.activeTariffPlans.map((tp) => (
+        {groupTpsData?.activeTariffPlans.map((tp) => (
           <TariffPlanCharTable key={tp.identifier} tariffPlanIdentifier={tp.identifier} />
         ))}
       </Grid>
+      {shouldShowAddonTable && (
+        <Grid sx={{ width: '400px' }}>
+          <Typography variant='subtitle1'>{'Prilog 3 – Tabela tarifnih dodataka'}</Typography>
+          {Object.entries((groupTpsData?.activeTariffPlansAddons as Record<string, Addon[]>) || {}).map(
+            ([identifier, addons]) =>
+              addons.length > 0 && (
+                <TariffPlanAddonTable
+                  key={identifier}
+                  tariffPlanName={
+                    groupTpsData?.activeTariffPlans.find((tp) => tp.identifier === identifier)?.name.sr as string
+                  }
+                  addons={addons}
+                />
+              ),
+          )}
+        </Grid>
+      )}
     </Grid>
   )
 }

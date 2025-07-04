@@ -180,7 +180,9 @@ const CustomerSessionSavePage = () => {
     t(`customerSessions:customerSessionOutcomes.${outcome}`),
   )
 
-  const opportunityTypeOptions = Object.keys(OpportunityType).map((type) => t(`opportunities:opportunityTypes.${type}`))
+  const opportunityTypeOptions = Object.keys(OpportunityType).map((type) =>
+    t(`opportunities:opportunityTypes.${type.toLowerCase()}`),
+  )
 
   const saveCustomerSessionGridData = getSaveCustomerSessionGridData(
     customerSessionData,

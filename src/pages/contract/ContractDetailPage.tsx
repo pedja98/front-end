@@ -19,7 +19,7 @@ import {
 } from '../../transformers/contract'
 import ExpandableTable from '../../components/ExpandableTable'
 import { hideConfirm, showConfirm } from '../../features/confirm.slice'
-import { EntityConfirmationDialogOptions } from '../../types/common'
+import { ApiException, EntityConfirmationDialogOptions } from '../../types/common'
 import {
   useDeleteDocumentMutation,
   useDownloadDocumentMutation,
@@ -52,8 +52,6 @@ const ContractDetailPage = () => {
   } = useGetDocumentsByContractIdQuery(contractId)
 
   const [deleteDocument, { isLoading: isLoadingDeleteDocument }] = useDeleteDocumentMutation()
-
-  // useReactToPrint hook
   const handlePrint = useReactToPrint({
     contentRef: componentRef,
   })
@@ -189,10 +187,12 @@ const ContractDetailPage = () => {
           type: NotificationType.Success,
         }),
       )
-    } catch (error) {
+    } catch (err) {
+      const errorResponse = err as { data: ApiException }
+      const errorCode = `contracts:${errorResponse.data}` || 'general:unknownError'
       dispatch(
         setNotification({
-          text: JSON.stringify(error),
+          text: t(errorCode),
           type: NotificationType.Error,
         }),
       )

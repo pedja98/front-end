@@ -9,6 +9,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { Dayjs } from 'dayjs'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
+import { ApiException } from '../../types/common'
 
 const SignContractDialog: FC<{ contractId: number }> = ({ contractId }) => {
   const { t } = useTranslation()
@@ -23,7 +24,7 @@ const SignContractDialog: FC<{ contractId: number }> = ({ contractId }) => {
     try {
       const response = await signedContract({
         contractId,
-        dateSigned: dateSigned.format('DD-MM-YYYY'),
+        dateSigned: dateSigned.format('DD/MM/YYYY'),
       }).unwrap()
       const messageCode = `contracts:${response.message}`
       dispatch(
@@ -33,9 +34,12 @@ const SignContractDialog: FC<{ contractId: number }> = ({ contractId }) => {
         }),
       )
     } catch (error) {
+      const errorResponse = error as { data: ApiException }
+      const errorCode = `contracts:${errorResponse.data}` || 'general:unknownError'
+
       dispatch(
         setNotification({
-          text: JSON.stringify(error),
+          text: t(errorCode),
           type: NotificationType.Error,
         }),
       )

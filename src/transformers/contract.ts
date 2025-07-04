@@ -5,7 +5,7 @@ import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormatter } from '../helpers/common'
 import { Document } from '../types/document'
 import moment from 'moment'
-import { PrintTariffPlan, TariffPlanCharacteristicChar } from '../types/tariffPlans'
+import { Addon, PrintTariffPlan, TariffPlanCharacteristicChar } from '../types/tariffPlans'
 
 export const getContractSearchLabels = (t: TFunction): GridLabel[] => [
   { text: t('contracts:name'), key: 'name' },
@@ -57,7 +57,7 @@ export const transformContractDataIntoGridData = (
     type: GridFieldTypes.STRING,
   },
   dateSigned: {
-    value: moment(contract.dateSigned).format('MM/DD/YYYY'),
+    value: contract.dateSigned ? moment(contract.dateSigned).format('MM/DD/YYYY') : EmptyValue,
     type: GridFieldTypes.STRING,
   },
   referenceNumber: {
@@ -146,13 +146,19 @@ export const getPrintTariffPlanCountTableColumns = (): GridLabel[] => [
   { text: 'Količina', key: 'count' },
 ]
 
-export const transformPrintTariffPlanCountTableRows = (tariffPlanData: PrintTariffPlan): PageElement => ({
+export const transformPrintTariffPlanCountTableRows = (
+  tariffPlanData: PrintTariffPlan,
+  discount: number,
+): PageElement => ({
   name: {
     value: tariffPlanData.name.sr,
     type: GridFieldTypes.STRING,
   },
   price: {
-    value: tariffPlanData.price.toLocaleString('de-DE', { maximumFractionDigits: 2, minimumFractionDigits: 2 }),
+    value: ((tariffPlanData.price * (100 - discount)) / 100).toLocaleString('de-DE', {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2,
+    }),
     type: GridFieldTypes.STRING,
   },
   count: {
@@ -166,6 +172,22 @@ export const getTariffPlanCharTableColumn = (name: string): GridLabel[] => [{ te
 export const transformTariffPlanCharTableRows = (char: TariffPlanCharacteristicChar): PageElement => ({
   char: {
     value: char.name.sr,
+    type: GridFieldTypes.STRING,
+  },
+})
+
+export const getPrintTariffPlanAddonTableColumns = (): GridLabel[] => [
+  { text: 'Ime', key: 'name' },
+  { text: 'Mesečna cena (RSD)', key: 'price' },
+]
+
+export const transformPrintTariffPlanAddonTableRows = (addonData: Addon): PageElement => ({
+  name: {
+    value: addonData.name.sr,
+    type: GridFieldTypes.STRING,
+  },
+  price: {
+    value: Number(addonData.price).toLocaleString('de-DE', { maximumFractionDigits: 2, minimumFractionDigits: 2 }),
     type: GridFieldTypes.STRING,
   },
 })
