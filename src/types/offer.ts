@@ -1,4 +1,4 @@
-import { OpportunityType } from './opportunity'
+import { OpportunityStatus, OpportunityType } from './opportunity'
 import { UserType } from './user'
 
 export interface Offer {
@@ -23,6 +23,7 @@ export interface CreateOffer {
   opportunityId: number
   opportunityType: OpportunityType
   opportunityName: string
+  opportunityStatus: OpportunityStatus
 }
 
 export enum OfferStatus {

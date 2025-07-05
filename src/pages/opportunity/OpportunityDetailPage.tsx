@@ -98,6 +98,7 @@ const OpportunityDetailPage = () => {
         opportunityId: opportunity.id,
         opportunityType: opportunity.type,
         opportunityName: opportunity.name,
+        opportunityStatus: opportunity.status,
       } as CreateOffer
 
       const response = await createOffer(createOfferData).unwrap()
@@ -151,7 +152,9 @@ const OpportunityDetailPage = () => {
         <Grid sx={{ width: '100%' }}>
           <ExpandableTable
             title={t('opportunities:offersTableTitle')}
-            hideActionSection={false}
+            hideActionSection={[OpportunityStatus.CLOSE_LOST, OpportunityStatus.CLOSE_WON].includes(
+              opportunity.status as OpportunityStatus,
+            )}
             expandableDialogAction={handleCreateOffer}
             isLoading={isGetOffersLoading}
             columns={offerTableColumns}
