@@ -191,3 +191,52 @@ export const transformPrintTariffPlanAddonTableRows = (addonData: Addon): PageEl
     type: GridFieldTypes.STRING,
   },
 })
+
+export const getContractColumnsForExpandableTable = (t: TFunction): GridLabel[] => [
+  { text: t('contracts:name'), key: 'name' },
+  { text: t('contracts:status'), key: 'status' },
+  { text: t('contracts:referenceNumber'), key: 'referenceNumber' },
+  { text: t('contracts:dateSigned'), key: 'dateSigned' },
+  { text: t('general:createdBy'), key: 'createdByUsername' },
+  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+  { text: t('general:dateCreated'), key: 'dateCreated' },
+  { text: t('general:dateModified'), key: 'dateModified' },
+]
+
+export const transformContractDataIntoGridDataForExpandableTable = (t: TFunction, contract: Contract): PageElement => ({
+  name: {
+    value: contract.name,
+    link: `/index/contracts/${contract.id}`,
+    type: GridFieldTypes.LINK,
+  },
+  status: {
+    value: t(`contracts:statuses.${contract.status.toLocaleLowerCase()}`),
+    type: GridFieldTypes.STRING,
+  },
+  dateSigned: {
+    value: contract.dateSigned ? moment(contract.dateSigned).format('MM/DD/YYYY') : EmptyValue,
+    type: GridFieldTypes.STRING,
+  },
+  referenceNumber: {
+    value: contract.referenceNumber,
+    type: GridFieldTypes.STRING,
+  },
+  createdByUsername: {
+    value: contract.createdByUsername,
+    link: `/index/users/${contract.createdByUsername}`,
+    type: GridFieldTypes.LINK,
+  },
+  modifiedByUsername: {
+    value: contract.modifiedByUsername,
+    link: `/index/users/${contract.modifiedByUsername}`,
+    type: GridFieldTypes.LINK,
+  },
+  dateCreated: {
+    value: contract.dateCreated ? dateFormatter(contract.dateCreated) : EmptyValue,
+    type: GridFieldTypes.STRING,
+  },
+  dateModified: {
+    value: contract.dateModified ? dateFormatter(contract.dateModified) : EmptyValue,
+    type: GridFieldTypes.STRING,
+  },
+})

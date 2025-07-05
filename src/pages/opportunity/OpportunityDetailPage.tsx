@@ -11,12 +11,22 @@ import DetailPageGridField from '../../components/DetailPageGridField'
 import { EmptyValue } from '../../consts/common'
 import { ApiException } from '../../types/common'
 import { OpportunityStatus } from '../../types/opportunity'
-import { useGetOffersByOpportunityIdQuery } from '../../app/apis/crm/offer.api'
+import { useGetOffersQuery } from '../../app/apis/crm/offer.api'
 import { getOfferListColumns, transformOfferDataIntoGridData } from '../../transformers/offer'
 import ExpandableTable from '../../components/ExpandableTable'
 import { CreateOffer } from '../../types/offer'
 import moment from 'moment'
 import { useCreateOfferMutation } from '../../app/apis/gw/offer.api'
+import { useGetAllContractsQuery } from '../../app/apis/crm/contract.api'
+import {
+  getContractColumnsForExpandableTable,
+  transformContractDataIntoGridDataForExpandableTable,
+} from '../../transformers/contract'
+import { useGetCustomerSessionsQuery } from '../../app/apis/crm/customer-session.api'
+import {
+  getCustomerSessionTableColumns,
+  transformCustomerSessionIntoPageGridData,
+} from '../../transformers/customerSession'
 
 const OpportunityDetailPage = () => {
   const opportunityId = String(useParams().id)
@@ -31,13 +41,29 @@ const OpportunityDetailPage = () => {
     error,
   } = useGetOpportunityQuery(opportunityId)
 
+  const gettingRelatedEntitiesQueryParam = `?opportunityId=${opportunityId}`
+
+  const {
+    isLoading: isLoadingGetContracts,
+    data: contracts,
+    isError: isErrorGetContract,
+    error: errorGetContract,
+  } = useGetAllContractsQuery(gettingRelatedEntitiesQueryParam)
+
   const {
     isLoading: isGetOffersLoading,
     data: offers,
     isError: isErrorGetOffers,
     error: errorGetOffers,
     refetch: refetchGetOffersByOpportunityId,
-  } = useGetOffersByOpportunityIdQuery(opportunityId)
+  } = useGetOffersQuery(gettingRelatedEntitiesQueryParam)
+
+  const {
+    isLoading: isLoadingGetCustomerSession,
+    data: customerSessions,
+    isError: isErrorGetCustomerSession,
+    error: errorGetCustomerSession,
+  } = useGetCustomerSessionsQuery(gettingRelatedEntitiesQueryParam)
 
   const [createOffer, { isLoading: isCreateOfferLoading }] = useCreateOfferMutation()
 
@@ -47,10 +73,17 @@ const OpportunityDetailPage = () => {
     return <Spinner />
   }
 
-  if (isError || !opportunity || isErrorGetOffers) {
+  if (
+    isError ||
+    !opportunity ||
+    isErrorGetOffers ||
+    isErrorGetContract ||
+    errorGetContract ||
+    isErrorGetCustomerSession
+  ) {
     dispatch(
       setNotification({
-        text: JSON.stringify(error || errorGetOffers),
+        text: JSON.stringify(error || errorGetOffers || errorGetCustomerSession),
         type: NotificationType.Error,
       }),
     )
@@ -122,6 +155,10 @@ const OpportunityDetailPage = () => {
     }
   }
 
+  const handleRedirectToCreateCustomerSession = () => {
+    navigate(`/index/customer-sessions/create`)
+  }
+
   const shouldCloseActionBeVisible = ![OpportunityStatus.CLOSE_LOST, OpportunityStatus.CLOSE_WON].includes(
     opportunity.status as OpportunityStatus,
   )
@@ -129,41 +166,69 @@ const OpportunityDetailPage = () => {
   const offerTableRows = (offers || []).map((offer) => transformOfferDataIntoGridData(t, offer))
   const offerTableColumns = getOfferListColumns(t)
 
+  const contractExpandableTableColumns = getContractColumnsForExpandableTable(t)
+  const contractExpandableTableColumnsRows = (contracts || []).map((contract) =>
+    transformContractDataIntoGridDataForExpandableTable(t, contract),
+  )
+
+  const customerSessionTableRows = (customerSessions || []).map((customerSession) =>
+    transformCustomerSessionIntoPageGridData(t, customerSession),
+  )
+  const customerSessionsTableColumns = getCustomerSessionTableColumns(t)
+
   return (
-    <>
-      <Grid sx={{ width: '100%', mt: 1, mb: 1 }}>
-        <Grid sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-          {shouldCloseActionBeVisible && (
-            <Grid sx={{ width: '80%' }}>
-              <Button onClick={handleCloseOpportunity} sx={{ ml: 0.5, width: '100px' }}>
-                {t('general:close')}
-              </Button>
-            </Grid>
-          )}
-        </Grid>
-        <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center', mb: 2 }}>
-          <Grid container spacing={2} sx={{ width: '80%' }}>
-            {labels.map((label) => {
-              const gridFieldData = detailPageOpportunityGridData[label.key] || EmptyValue
-              return <DetailPageGridField key={label.key} gridFieldData={gridFieldData} label={label} />
-            })}
+    <Grid sx={{ width: '100%', mt: 1, mb: 1 }}>
+      <Grid sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        {shouldCloseActionBeVisible && (
+          <Grid sx={{ width: '80%' }}>
+            <Button onClick={handleCloseOpportunity} sx={{ ml: 0.5, width: '100px' }}>
+              {t('general:close')}
+            </Button>
           </Grid>
-        </Grid>
-        <Grid sx={{ width: '100%' }}>
-          <ExpandableTable
-            title={t('opportunities:offersTableTitle')}
-            hideActionSection={[OpportunityStatus.CLOSE_LOST, OpportunityStatus.CLOSE_WON].includes(
-              opportunity.status as OpportunityStatus,
-            )}
-            expandableDialogAction={handleCreateOffer}
-            isLoading={isGetOffersLoading}
-            columns={offerTableColumns}
-            rows={offerTableRows}
-            actionText={t('general:create')}
-          />
+        )}
+      </Grid>
+      <Grid sx={{ display: 'flex', mt: 1, justifyContent: 'center', mb: 2 }}>
+        <Grid container spacing={2} sx={{ width: '80%' }}>
+          {labels.map((label) => {
+            const gridFieldData = detailPageOpportunityGridData[label.key] || EmptyValue
+            return <DetailPageGridField key={label.key} gridFieldData={gridFieldData} label={label} />
+          })}
         </Grid>
       </Grid>
-    </>
+      <Grid sx={{ width: '100%', mt: 1 }}>
+        <ExpandableTable
+          title={t('pageNamesAndActions.customerSessions')}
+          hideActionSection={false}
+          expandableDialogAction={handleRedirectToCreateCustomerSession}
+          isLoading={isLoadingGetCustomerSession}
+          columns={customerSessionsTableColumns}
+          rows={customerSessionTableRows}
+          actionText={t('general:create')}
+        />
+      </Grid>
+      <Grid sx={{ width: '100%', mt: 1 }}>
+        <ExpandableTable
+          title={t('opportunities:offersTableTitle')}
+          hideActionSection={[OpportunityStatus.CLOSE_LOST, OpportunityStatus.CLOSE_WON].includes(
+            opportunity.status as OpportunityStatus,
+          )}
+          expandableDialogAction={handleCreateOffer}
+          isLoading={isGetOffersLoading}
+          columns={offerTableColumns}
+          rows={offerTableRows}
+          actionText={t('general:create')}
+        />
+      </Grid>
+      <Grid sx={{ width: '100%', mt: 1 }}>
+        <ExpandableTable
+          title={t('pageNamesAndActions.contracts')}
+          hideActionSection={true}
+          isLoading={isLoadingGetContracts}
+          columns={contractExpandableTableColumns}
+          rows={contractExpandableTableColumnsRows}
+        />
+      </Grid>
+    </Grid>
   )
 }
 

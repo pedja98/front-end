@@ -4,9 +4,9 @@ import { EmptyValue, GridFieldTypes } from '../consts/common'
 import { dateFormatter } from '../helpers/common'
 import { Opportunity, OpportunitySearchFormProps, OpportunityStatus, OpportunityType } from '../types/opportunity'
 
-export const getOpportunityDetailGridLabels = (t: TFunction): GridLabel[] => [
+export const getOpportunityDetailGridLabels = (t: TFunction, isExpandableTable?: boolean): GridLabel[] => [
   { text: t('opportunities:name'), key: 'name' },
-  { text: t('opportunities:company'), key: 'company' },
+  ...(!isExpandableTable ? [{ text: t('opportunities:company'), key: 'company' }] : []),
   { text: t('opportunities:status'), key: 'status' },
   { text: t('opportunities:type'), key: 'type' },
   { text: t('general:createdBy'), key: 'createdByUsername' },

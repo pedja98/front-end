@@ -126,9 +126,9 @@ export interface DetailPageGridFieldProps {
 export interface ExpandableTypographyTableProps {
   title: string
   hideActionSection: boolean
-  expandableDialogAction: () => void
+  expandableDialogAction?: () => void
   isLoading: boolean
   columns: GridLabel[]
   rows: PageElement[]
-  actionText: string
+  actionText?: string
 }

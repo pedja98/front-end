@@ -31,7 +31,11 @@ export const companyContractRelationApi = crmApi.injectEndpoints({
       invalidatesTags: () => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION }],
     }),
     getCompanyContractRelationsByContactId: builder.query<CompanyContactRelation[], number>({
-      query: (contactId) => `/company-contact-relations?contactId=${contactId}`,
+      query: (contactId) => `/company-contact-relations/contact/${contactId}`,
+      providesTags: () => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION }],
+    }),
+    getCompanyContractRelationsByCompanyId: builder.query<CompanyContactRelation[], number>({
+      query: (companyId) => `/company-contact-relations/company/${companyId}`,
       providesTags: () => [{ type: CrmApiTags.COMPANY_CONTACT_RELATION }],
     }),
     deleteCompanyContractRelation: builder.mutation<{ message: string }, number>({
@@ -50,4 +54,5 @@ export const {
   useGetCompanyContractRelationsByContactIdQuery,
   useUpdateCompanyContractRelationMutation,
   useDeleteCompanyContractRelationMutation,
+  useGetCompanyContractRelationsByCompanyIdQuery,
 } = companyContractRelationApi

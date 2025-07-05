@@ -15,7 +15,9 @@ const ExpandableTable = (props: ExpandableTypographyTableProps) => {
   }
 
   const handleActionButtonClick = () => {
-    expandableDialogAction()
+    if (expandableDialogAction) {
+      expandableDialogAction()
+    }
   }
 
   if (isLoading) {

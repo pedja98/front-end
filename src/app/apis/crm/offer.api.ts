@@ -12,12 +12,8 @@ export const offerApi = crmApi.injectEndpoints({
       query: (queryParams) => `/offers${queryParams}`,
       providesTags: [CrmApiTags.OFFER],
     }),
-    getOffersByOpportunityId: builder.query<Offer[], string>({
-      query: (queryParams) => `/offers/opportunity/${queryParams}`,
-      providesTags: [CrmApiTags.OFFER],
-    }),
   }),
   overrideExisting: false,
 })
 
-export const { useGetOfferByIdQuery, useGetOffersQuery, useGetOffersByOpportunityIdQuery } = offerApi
+export const { useGetOfferByIdQuery, useGetOffersQuery } = offerApi

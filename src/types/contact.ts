@@ -58,6 +58,7 @@ export interface UpdateCompanyContactRelation {
 
 export interface CompanyContactRelation {
   id: number
+  contactFullName: string
   companyId: number
   companyName: number
   relationType: CompanyContactRelationType
