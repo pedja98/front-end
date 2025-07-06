@@ -10,6 +10,7 @@ export const regionApi = crmApi.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
+      invalidatesTags: [CrmApiTags.REGION],
     }),
     updateRegion: builder.mutation<{ message: string }, { id: string; region: Partial<Region> }>({
       query: ({ id, region }) => ({

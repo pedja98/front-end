@@ -23,6 +23,7 @@ import {
   getCustomerSessionTableColumns,
   transformCustomerSessionIntoPageGridData,
 } from '../../transformers/customerSession'
+import ContactCompanyRelationsTable from '../../components/ContactCompanyRelationsTable'
 
 const CompanyDetailPage = () => {
   const companyId = Number(useParams().id)
@@ -133,6 +134,7 @@ const CompanyDetailPage = () => {
           })}
         </Grid>
       </Grid>
+      <ContactCompanyRelationsTable companyId={companyId} />
       <Grid sx={{ width: '100%', mt: 1 }}>
         <ExpandableTable
           title={t('pageNamesAndActions.customerSessions')}

@@ -10,6 +10,7 @@ export const contactApi = crmApi.injectEndpoints({
         method: 'POST',
         body: contactData,
       }),
+      invalidatesTags: [CrmApiTags.CONTACT],
     }),
     updateContact: builder.mutation<{ message: string }, { id: number; contact: Partial<SaveContact> }>({
       query: ({ id, contact }) => ({

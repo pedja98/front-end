@@ -46,6 +46,7 @@ export const userApi = crmApi.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
+      invalidatesTags: [CrmApiTags.USER],
     }),
     changePassword: builder.mutation<{ message: string }, ChangePasswordRequest>({
       query: (credentials) => ({

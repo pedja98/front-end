@@ -10,6 +10,7 @@ export const shopApi = crmApi.injectEndpoints({
         method: 'POST',
         body: shopData,
       }),
+      invalidatesTags: [CrmApiTags.SHOP],
     }),
     updateShop: builder.mutation<{ message: string }, { id: string; shop: Partial<Shop> }>({
       query: ({ id, shop }) => ({

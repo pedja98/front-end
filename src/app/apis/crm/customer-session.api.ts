@@ -10,6 +10,7 @@ export const customerSessionsApi = crmApi.injectEndpoints({
         method: 'POST',
         body: customerSessionData,
       }),
+      invalidatesTags: [CrmApiTags.CUSTOMER_SESSION],
     }),
     updateCustomerSession: builder.mutation<
       { message: string },

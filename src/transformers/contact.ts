@@ -90,16 +90,33 @@ export const getSaveContactGridData = (
   documentId: { type: GridFieldTypes.STRING, required: true, value: contactData.documentId },
 })
 
-export const getCompanyContactRelationColumnLabels = (t: TFunction): GridLabel[] => [
-  { text: t('contacts:relatedCompany'), key: 'relatedCompany' },
-  { text: t('contacts:companyRelationType'), key: 'companyRelationType' },
-  { text: t('general:createdBy'), key: 'createdByUsername' },
-  { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
-  { text: t('general:dateCreated'), key: 'dateCreated' },
-  { text: t('general:dateModified'), key: 'dateModified' },
-  { text: t('general:edit'), key: 'edit' },
-  { text: t('general:delete'), key: 'delete' },
-]
+export const getCompanyContactRelationColumnLabels = (t: TFunction, isCompanyMode: boolean): GridLabel[] => {
+  const columns: GridLabel[] = []
+
+  if (!isCompanyMode) {
+    columns.push({ text: t('contacts:relatedCompany'), key: 'relatedCompany' })
+  }
+
+  if (isCompanyMode) {
+    columns.push({ text: t('contacts:relatedContact'), key: 'relatedContact' })
+  }
+
+  columns.push(
+    { text: t('contacts:companyRelationType'), key: 'companyRelationType' },
+    { text: t('general:createdBy'), key: 'createdByUsername' },
+    { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
+    { text: t('general:dateCreated'), key: 'dateCreated' },
+    { text: t('general:dateModified'), key: 'dateModified' },
+  )
+
+  if (!isCompanyMode) {
+    columns.push({ text: t('general:edit'), key: 'edit' })
+  }
+
+  columns.push({ text: t('general:delete'), key: 'delete' })
+
+  return columns
+}
 
 export const getUpdateContactRelationDialogFormLabels = (t: TFunction): GridLabel[] => [
   { text: t('contacts:relatedCompany'), key: 'companyId' },
@@ -134,6 +151,11 @@ export const transformCompanyContactRelationIntoPageGridData = (
   handleRelationDelete: (id: number) => void,
   handleUpdateRelationDialogOpen: (id: number) => void,
 ): PageElement => ({
+  relatedContact: {
+    value: relation.contactFullName,
+    link: `/index/contacts/${relation.contactId}`,
+    type: GridFieldTypes.LINK,
+  },
   relatedCompany: {
     value: relation.companyName,
     link: `/index/companies/${relation.companyId}`,

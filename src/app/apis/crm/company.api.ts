@@ -10,6 +10,7 @@ export const companyApi = crmApi.injectEndpoints({
         method: 'POST',
         body: companyData,
       }),
+      invalidatesTags: [CrmApiTags.COMPANY],
     }),
     updateCompany: builder.mutation<{ message: string }, { id: number; company: Partial<SaveCompany> }>({
       query: ({ id, company }) => ({

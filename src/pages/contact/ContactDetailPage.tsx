@@ -7,21 +7,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useTranslation } from 'react-i18next'
 import { useDeleteContactMutation, useGetContactQuery } from '../../app/apis/crm/contact.api'
-import {
-  getCompanyContactRelationColumnLabels,
-  getContactDetailListLabels,
-  transformCompanyContactRelationIntoPageGridData,
-  transformContactIntoPageGridData,
-} from '../../transformers/contact'
+import { getContactDetailListLabels, transformContactIntoPageGridData } from '../../transformers/contact'
 import { hideConfirm, showConfirm } from '../../features/confirm.slice'
 import { confirmEntityIsDeleted } from '../../features/common.slice'
 import DetailPageGridField from '../../components/DetailPageGridField'
-import ExpandableTable from '../../components/ExpandableTable'
-import {
-  useDeleteCompanyContractRelationMutation,
-  useGetCompanyContractRelationsByContactIdQuery,
-} from '../../app/apis/crm/company-contact-relation.api'
-import { EntityConfirmationDialogOptions } from '../../types/common'
+import ContactCompanyRelationsTable from '../../components/ContactCompanyRelationsTable'
 
 const ContactDetailPage = () => {
   const contactId = Number(useParams().id)
@@ -38,25 +28,16 @@ const ContactDetailPage = () => {
     error: errorGetContact,
   } = useGetContactQuery(contactId, { skip: !!entityIsDeleted })
 
-  const {
-    isLoading: isLoadingGetRelations,
-    data: relations,
-    isError: isErrorGetRelations,
-    error: errorGetRelations,
-  } = useGetCompanyContractRelationsByContactIdQuery(contactId)
-
   const [deleteContact, { isLoading: isDeleteContactLoading }] = useDeleteContactMutation()
-
-  const [deleteRelation, { isLoading: isDeleteRelationLoading }] = useDeleteCompanyContractRelationMutation()
 
   if (isGetContactLoading || isDeleteContactLoading) {
     return <Spinner />
   }
 
-  if (isErrorGetContact || isErrorGetRelations || !contact) {
+  if (isErrorGetContact || !contact) {
     dispatch(
       setNotification({
-        text: JSON.stringify(errorGetContact || errorGetRelations),
+        text: JSON.stringify(errorGetContact),
         type: NotificationType.Error,
       }),
     )
@@ -65,7 +46,6 @@ const ContactDetailPage = () => {
   }
 
   const detailPageContactGridData = transformContactIntoPageGridData(t, contact, true)
-
   const labels = getContactDetailListLabels(t)
 
   const handleEditRedirect = () => {
@@ -115,78 +95,6 @@ const ContactDetailPage = () => {
     }
   }
 
-  const handleCreateRelationDialogOpen = () => {
-    dispatch(
-      showConfirm({
-        confirmationTitle: (t('create') + ' ' + t('contacts:companyRelationsTitle')).toUpperCase(),
-        customConfirmComponentCode: EntityConfirmationDialogOptions.CompanyContactRelationCreateDialog,
-        customConfirmComponentAttributes: { contactId },
-      }),
-    )
-  }
-
-  const handleUpdateRelationDialogOpen = (id: number) => {
-    const relation = relations?.find((relation) => relation.id === id)
-    dispatch(
-      showConfirm({
-        confirmationTitle: (t('edit') + ' ' + t('contacts:companyRelationsTitle')).toUpperCase(),
-        customConfirmComponentCode: EntityConfirmationDialogOptions.CompanyContactRelationUpdateDialog,
-        customConfirmComponentAttributes: {
-          relationId: relation?.id,
-          relationType: relation?.relationType,
-          companyId: relation?.companyId,
-        },
-      }),
-    )
-  }
-
-  const handleConfirmRelationDelete = async (id: number) => {
-    try {
-      dispatch(confirmEntityIsDeleted())
-      await deleteRelation(id).unwrap()
-      dispatch(
-        setNotification({
-          text: t('contacts:relationDeleted'),
-          type: NotificationType.Success,
-        }),
-      )
-    } catch (error) {
-      dispatch(
-        setNotification({
-          text: JSON.stringify(error),
-          type: NotificationType.Error,
-        }),
-      )
-    } finally {
-      dispatch(hideConfirm())
-    }
-  }
-
-  const handleRelationDelete = (id: number) => {
-    dispatch(
-      showConfirm({
-        confirmationText: t('contacts:companyContactRelationDeletionText'),
-        confirmationTitle: t('general:confirmDeletionTitle'),
-        onConfirm: () => handleConfirmRelationDelete(id),
-        onCancel: handleConfirmClose,
-        confirmButtonLabel: t('dialogConfirmationButtonLabels.yes'),
-        denyButtonLabel: t('dialogConfirmationButtonLabels.no'),
-      }),
-    )
-  }
-
-  const relationTableGridData = Array.isArray(relations)
-    ? relations.map((relation) =>
-        transformCompanyContactRelationIntoPageGridData(
-          t,
-          relation,
-          handleRelationDelete,
-          handleUpdateRelationDialogOpen,
-        ),
-      )
-    : []
-  const relationTableColumLabels = getCompanyContactRelationColumnLabels(t)
-
   return (
     <>
       <Grid sx={{ width: '100%', mt: 1, mb: 1 }}>
@@ -208,17 +116,7 @@ const ContactDetailPage = () => {
             })}
           </Grid>
         </Grid>
-        <Grid sx={{ width: '100%' }}>
-          <ExpandableTable
-            title={t('contacts:companyRelationsTitle')}
-            hideActionSection={false}
-            expandableDialogAction={handleCreateRelationDialogOpen}
-            isLoading={isLoadingGetRelations || isDeleteRelationLoading}
-            columns={relationTableColumLabels}
-            rows={relationTableGridData}
-            actionText={t('general:create')}
-          />
-        </Grid>
+        <ContactCompanyRelationsTable contactId={contactId} />
       </Grid>
     </>
   )
