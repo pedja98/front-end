@@ -3,6 +3,11 @@ import { Contract } from '../../../../types/contract'
 import ContractTitle from '../ContractTitle'
 import Preamble from '../common/Preamble'
 import moment from 'moment'
+import ArticleOne from './ArticleOne'
+import ArticleTwo from './ArticleTwo'
+import ArticleThree from './ArticleThree'
+import ArticleFour from './ArticleFour'
+import Signatories from '../common/Signatories'
 
 const TerminationContractContent = ({ contract }: { contract: Contract }) => {
   return (
@@ -13,6 +18,11 @@ const TerminationContractContent = ({ contract }: { contract: Contract }) => {
         opportunityType={contract.opportunityType}
         dateSign={moment(contract.dateSigned || new Date()).format('MM/DD/YYYY')}
       />
+      <ArticleOne dateSign={moment(contract.dateSigned || new Date()).format('MM/DD/YYYY')} />
+      <ArticleTwo />
+      <ArticleThree />
+      <ArticleFour />
+      <Signatories dateSign={moment(contract.dateSigned || new Date()).format('MM/DD/YYYY')} />
     </Grid>
   )
 }

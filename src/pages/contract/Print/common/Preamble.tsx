@@ -22,7 +22,7 @@ const Preamble = ({
       <Typography variant='body1'>{'i'}</Typography>
       <Typography variant='body1'>{`Kompanija ${company?.name} sa sedištem u ${company?.hqAddress} PIB: ${company?.tin}, (u daljem tekstu Korisnik),`}</Typography>
       <Typography variant='body1'>{`zajedno: Strane, a pojedinačno: Strana`}</Typography>
-      {opportunityType === OpportunityType.RENEWAL && (
+      {[OpportunityType.RENEWAL, OpportunityType.CHANGE].includes(opportunityType) && (
         <Typography variant='body1'>{`kojima se obnavlja postojeći odnos poslovne saradnje, pod uslovima definisanim u ovom ugovoru`}</Typography>
       )}
     </Grid>
