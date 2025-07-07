@@ -8,6 +8,7 @@ import ArticleTwo from './ArticleTwo'
 import ArticleThree from './ArticleThree'
 import Signatories from '../common/Signatories'
 import TariffPlanAttachment from '../common/TariffPlanAttachment'
+import ArticleFour from './ArticleFour'
 
 const RenewalContractContent = ({ contract }: { contract: Contract }) => {
   return (
@@ -21,6 +22,7 @@ const RenewalContractContent = ({ contract }: { contract: Contract }) => {
       <ArticleOne />
       <ArticleTwo />
       <ArticleThree dateSign={contract.dateSigned} contractObligation={contract.contractObligation} />
+      <ArticleFour />
       <Signatories dateSign={moment(contract.dateSigned || new Date()).format('MM/DD/YYYY')} />
       <Grid style={{ pageBreakBefore: 'always' }}>
         <TariffPlanAttachment offerId={contract.offerId} />
