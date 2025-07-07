@@ -1,7 +1,11 @@
 import { Grid } from '@mui/material'
-import AcquisitionContractContent from './acquisition/AcquisitionContractContent'
-import { Contract } from '../../../types/contract'
 import { forwardRef } from 'react'
+import { Contract } from '../../../types/contract'
+import { OpportunityType } from '../../../types/opportunity'
+import AcquisitionContractContent from './acquisition/AcquisitionContractContent'
+import RenewalContractContent from './renewal/RenewalContractContent'
+import ChangeContractContent from './change/ChangeContractContent'
+import TerminationContractContent from './termination/TerminationContractContent'
 
 const PrintableContract = forwardRef<
   HTMLDivElement,
@@ -9,11 +13,22 @@ const PrintableContract = forwardRef<
     contract: Contract
   }
 >(({ contract }, ref) => {
-  return (
-    <Grid ref={ref}>
-      <AcquisitionContractContent contract={contract} />
-    </Grid>
-  )
+  const renderContractContent = () => {
+    switch (contract.opportunityType) {
+      case OpportunityType.ACQUISITION:
+        return <AcquisitionContractContent contract={contract} />
+      case OpportunityType.RENEWAL:
+        return <RenewalContractContent contract={contract} />
+      case OpportunityType.CHANGE:
+        return <ChangeContractContent contract={contract} />
+      case OpportunityType.TERMINATION:
+        return <TerminationContractContent contract={contract} />
+      default:
+        return null
+    }
+  }
+
+  return <Grid ref={ref}>{renderContractContent()}</Grid>
 })
 
 PrintableContract.displayName = 'PrintableContract'

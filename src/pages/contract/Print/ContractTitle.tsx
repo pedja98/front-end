@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material'
 import Barcode from 'react-barcode'
 
-const ContractTitle = ({ referenceNumber }: { referenceNumber: string }) => {
+const ContractTitle = ({ referenceNumber, title }: { referenceNumber: string; title: string }) => {
   return (
     <Grid>
       <Box
@@ -18,7 +18,7 @@ const ContractTitle = ({ referenceNumber }: { referenceNumber: string }) => {
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
-        <Typography variant='h4'>{'UGOVOR O POSLOVNOJ SARADNJI'}</Typography>
+        <Typography variant='h4'>{title}</Typography>
       </Box>
     </Grid>
   )

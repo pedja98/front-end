@@ -1,3 +1,5 @@
+import { OpportunityType } from './opportunity'
+
 export enum ContractStatus {
   CREATED = 'CREATED',
   CONTRACT_SIGNED = 'CONTRACT_SIGNED',
@@ -9,6 +11,7 @@ export enum ContractStatus {
 export interface Contract {
   id: number
   name: string
+  opportunityType: OpportunityType
   referenceNumber: string
   dateSigned: string
   contractObligation: number

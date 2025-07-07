@@ -8,3 +8,17 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+@media print {
+  .page-break-before {
+    page-break-before: always;
+  }
+  
+  .page-break-after {
+    page-break-after: always;
+  }
+  
+  .page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
+}

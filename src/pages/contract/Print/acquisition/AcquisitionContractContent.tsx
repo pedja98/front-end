@@ -21,8 +21,12 @@ const AcquisitionContractContent: React.FC<{
 }> = ({ contract }) => {
   return (
     <Grid sx={{ pl: 1 }}>
-      <ContractTitle referenceNumber={contract.referenceNumber} />
-      <Preamble companyId={contract.companyId} />
+      <ContractTitle referenceNumber={contract.referenceNumber} title='UGOVOR O POSLOVNOJ SARADNJI' />
+      <Preamble
+        companyId={contract.companyId}
+        opportunityType={contract.opportunityType}
+        dateSign={moment(contract.dateSigned || new Date()).format('MM/DD/YYYY')}
+      />
       <ArticleOne />
       <ArticleTwo />
       <ArticleThree />
@@ -31,7 +35,7 @@ const AcquisitionContractContent: React.FC<{
       <ArticleSix />
       <ArticleSeven />
       <ArticleEight />
-      <Signatories dateSign={contract.dateSigned || moment(new Date()).format('MM/DD/YYYY')} />
+      <Signatories dateSign={moment(contract.dateSigned || new Date()).format('MM/DD/YYYY')} />
       <TariffPlanAttachment offerId={contract.offerId} />
     </Grid>
   )
