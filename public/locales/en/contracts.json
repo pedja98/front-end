@@ -36,5 +36,6 @@
     "name": "Name",
     "status": "Status",
     "dateCreated": "Date created"
-  }
+  },
+  "thereIsAlreadySignedContract": "There is already contract in status Signed for this company"
 }

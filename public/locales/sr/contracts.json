@@ -36,5 +36,6 @@
     "name": "Ime",
     "status": "Status",
     "dateCreated": "Datum kreiranja"
-  }
+  },
+  "thereIsAlreadySignedContract": "Već postoji ugovor u statusu Potpisan kompaniju"
 }
