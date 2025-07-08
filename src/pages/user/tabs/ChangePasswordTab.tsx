@@ -5,13 +5,13 @@ import { ChangePasswordFormProps } from '../../../types/auth'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import { NotificationType } from '../../../types/notification'
 import { setNotification } from '../../../features/notifications.slice'
-import { useChangePasswordMutation } from '../../../app/apis/crm/user.api'
 import Spinner from '../../../components/Spinner'
 import { ApiException } from '../../../types/common'
 import { GridFieldTypes, PasswordPattern } from '../../../consts/common'
 import { useNavigate } from 'react-router-dom'
 import { ChangePasswordFormInitialState } from '../../../consts/user'
 import { getUserChangePasswordGridData, getUserChangePasswordLabels } from '../../../transformers/user'
+import { useChangePasswordMutation } from '../../../app/apis/gw/auth.api'
 
 const ChangePasswordTab = () => {
   const { t } = useTranslation()

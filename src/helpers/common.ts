@@ -3,6 +3,7 @@ import { AuthState } from '../types/auth'
 import Cookies from 'js-cookie'
 import { AutocompleteHashMap, AutocompleteEntity, ModuleOptions } from '../types/common'
 import { TFunction } from 'i18next'
+import * as CryptoJS from 'crypto-js'
 
 export const getRoutePrefixFromCodeString = (prefixText: string): string => {
   return prefixText
@@ -88,4 +89,8 @@ export const convertToBase64 = (file: File): Promise<string> => {
     }
     reader.onerror = (error) => reject(error)
   })
+}
+
+export const hashPasswordForTransmission = (password: string): string => {
+  return CryptoJS.AES.encrypt(password, String(process.env.REACT_APP_SECRET_AUTH_KEY)).toString()
 }

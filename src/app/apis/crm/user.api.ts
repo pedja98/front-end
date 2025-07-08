@@ -1,5 +1,4 @@
 import { AssignedToUserData, User, UserType } from '../../../types/user'
-import { ChangePasswordRequest } from '../../../types/auth'
 import { crmApi } from '../core/crm.api'
 import { CrmApiTags } from '../../../consts/common'
 
@@ -48,13 +47,6 @@ export const userApi = crmApi.injectEndpoints({
       }),
       invalidatesTags: [CrmApiTags.USER],
     }),
-    changePassword: builder.mutation<{ message: string }, ChangePasswordRequest>({
-      query: (credentials) => ({
-        url: '/auth/change-password',
-        method: 'PATCH',
-        body: credentials,
-      }),
-    }),
   }),
   overrideExisting: false,
 })
@@ -65,7 +57,6 @@ export const {
   useUpdateUserMutation,
   useDeleteUsersMutation,
   useCreateUserMutation,
-  useChangePasswordMutation,
   useGetAssignedToUserDataQuery,
   useSetUserShopMutation,
 } = userApi

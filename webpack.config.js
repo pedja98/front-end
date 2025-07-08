@@ -62,6 +62,7 @@ module.exports = {
       'process.env.REACT_APP_CRM_API': JSON.stringify(process.env.REACT_APP_CRM_API),
       'process.env.REACT_APP_OM_API': JSON.stringify(process.env.REACT_APP_OM_API),
       'process.env.REACT_APP_PC_API': JSON.stringify(process.env.REACT_APP_PC_API),
+      'process.env.REACT_APP_SECRET_AUTH_KEY': JSON.stringify(process.env.REACT_APP_SECRET_AUTH_KEY),
     }),
   ],
 }
