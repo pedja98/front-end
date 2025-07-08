@@ -13,7 +13,7 @@ export interface Contract {
   name: string
   opportunityType: OpportunityType
   referenceNumber: string
-  dateSigned: string
+  dateSigned: string | null
   contractObligation: number
   status: ContractStatus
   companyId: number

@@ -21,7 +21,10 @@ const RenewalContractContent = ({ contract }: { contract: Contract }) => {
       />
       <ArticleOne />
       <ArticleTwo />
-      <ArticleThree dateSign={contract.dateSigned} contractObligation={contract.contractObligation} />
+      <ArticleThree
+        dateSign={moment(contract.dateSigned || new Date()).format('MM/DD/YYYY')}
+        contractObligation={contract.contractObligation}
+      />
       <ArticleFour />
       <Signatories dateSign={moment(contract.dateSigned || new Date()).format('MM/DD/YYYY')} />
       <Grid style={{ pageBreakBefore: 'always' }}>
