@@ -26,19 +26,18 @@ export const getCurrentUser = (): AuthState => {
   return cookie ? (JSON.parse(cookie) as AuthState) : AuthInitialState
 }
 
-export const createQueryParamsForSearch = (searchData: Record<string, unknown>): string => {
-  const searchKeys = Object.keys(searchData)
-  if (!searchKeys.length) {
+export const createQueryParamsForSearch = (searchData: object): string => {
+  const entries = Object.entries(searchData)
+
+  if (entries.length === 0) {
     return ''
   }
-  let queryParams = '?'
-  searchKeys.forEach((key, index) => {
-    queryParams += key + '=' + String(searchData[key])
-    if (index !== searchKeys.length - 1) {
-      queryParams += '&'
-    }
-  })
-  return queryParams
+
+  const queryParams = entries
+    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`)
+    .join('&')
+
+  return `?${queryParams}`
 }
 
 export const dateFormatter = (dateString: string): string => {

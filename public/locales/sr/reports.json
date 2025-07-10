@@ -1,1 +1,8 @@
-{}
+{
+  "shops": "Prodavnice",
+  "regions": "Regioni",
+  "signatureStartDate": "Datum početka potpisa",
+  "signatureEndDate": "Datum kraja potpisa",
+  "getReport": "Dohvati .",
+  "opportunityTypes": "Tip poslovne prilike"
+}

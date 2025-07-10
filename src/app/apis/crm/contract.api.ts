@@ -1,5 +1,5 @@
 import { CrmApiTags } from '../../../consts/common'
-import { Contract, CreateContract } from '../../../types/contract'
+import { Contract, ContractReport, CreateContract } from '../../../types/contract'
 import { crmApi } from '../core/crm.api'
 
 export const contractApi = crmApi.injectEndpoints({
@@ -48,6 +48,10 @@ export const contractApi = crmApi.injectEndpoints({
         body: {},
       }),
       invalidatesTags: [CrmApiTags.CONTRACT],
+    }),
+    getContractReport: builder.query<ContractReport[], string>({
+      query: (queryParams) => `/contracts/report/${queryParams}`,
+      providesTags: [CrmApiTags.CONTRACT],
     }),
   }),
   overrideExisting: false,

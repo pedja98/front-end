@@ -113,7 +113,7 @@ const GridField = (props: GridFieldProps) => {
           <DateTimePicker
             name={label.key}
             label={label.text}
-            format='YYYY-MM-DD HH:mm'
+            format='DD/MM/YYYY HH:mm'
             ampm={false}
             disabled={gridFieldData.disabled}
             value={gridFieldData.value ? dayjs(gridFieldData.value) : null}

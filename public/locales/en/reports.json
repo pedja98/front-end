@@ -1,1 +1,8 @@
-{}
+{
+  "shops": "Shops",
+  "regions": "Regions",
+  "signatureStartDate": "Signature start date",
+  "signatureEndDate": "Signature end date",
+  "getReport": "Get report",
+  "opportunityTypes": "Opportunity types"
+}

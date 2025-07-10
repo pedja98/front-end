@@ -40,3 +40,16 @@ export interface ContractSearchFormProps {
   sortBy?: string
   sortOrder?: string
 }
+
+export interface ContractReport {
+  contractId: number
+  contractName: string
+  referenceNumber: string
+  dateSigned: string | null
+  contractStatus: ContractStatus
+  companyId: number
+  companyName: string
+  opportunityId: number
+  opportunityName: string
+  opportunityType: OpportunityType
+}
