@@ -9,10 +9,10 @@ import { useTranslation } from 'react-i18next'
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
-import { createQueryParamsForSearch } from '../../helpers/common'
+import { createQueryParams } from '../../helpers/common'
 
 const OpportunityListPage = () => {
-  const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
+  const queryParams = createQueryParams(useAppSelector((state) => state.search))
   const { isLoading, data: opportunities, isError, error } = useGetOpportunitiesQuery(queryParams)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

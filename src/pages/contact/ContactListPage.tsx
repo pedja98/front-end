@@ -6,13 +6,13 @@ import { setNotification } from '../../features/notifications.slice'
 import { NotificationType } from '../../types/notification'
 import { Grid, Typography } from '@mui/material'
 import CustomTable from '../../components/CustomTable'
-import { createQueryParamsForSearch } from '../../helpers/common'
+import { createQueryParams } from '../../helpers/common'
 import { useGetContactsQuery } from '../../app/apis/crm/contact.api'
 import { getContactDetailListLabels, transformContactIntoPageGridData } from '../../transformers/contact'
 import { TableRowPerPage } from '../../consts/common'
 
 const ContactListPage = () => {
-  const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
+  const queryParams = createQueryParams(useAppSelector((state) => state.search))
   const { isLoading, data: contacts, isError, error } = useGetContactsQuery(queryParams)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

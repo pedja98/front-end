@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useGetAllContractsQuery } from '../../app/apis/crm/contract.api'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { createQueryParamsForSearch } from '../../helpers/common'
+import { createQueryParams } from '../../helpers/common'
 import { useTranslation } from 'react-i18next'
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
@@ -12,7 +12,7 @@ import CustomTable from '../../components/CustomTable'
 import { TableRowPerPage } from '../../consts/common'
 
 const ContractListPage = () => {
-  const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
+  const queryParams = createQueryParams(useAppSelector((state) => state.search))
   const { isLoading, data: contracts, isError, error } = useGetAllContractsQuery(queryParams)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

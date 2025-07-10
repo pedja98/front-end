@@ -26,14 +26,15 @@ export const getCurrentUser = (): AuthState => {
   return cookie ? (JSON.parse(cookie) as AuthState) : AuthInitialState
 }
 
-export const createQueryParamsForSearch = (searchData: object): string => {
-  const entries = Object.entries(searchData)
+export const createQueryParams = (data: object): string => {
+  const entries = Object.entries(data)
 
   if (entries.length === 0) {
     return ''
   }
 
   const queryParams = entries
+    .filter(([key, value]) => value && (!Array.isArray(value) || value.length !== 0))
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`)
     .join('&')
 

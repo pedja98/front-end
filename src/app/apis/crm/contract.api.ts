@@ -50,7 +50,7 @@ export const contractApi = crmApi.injectEndpoints({
       invalidatesTags: [CrmApiTags.CONTRACT],
     }),
     getContractReport: builder.query<ContractReport[], string>({
-      query: (queryParams) => `/contracts/report/${queryParams}`,
+      query: (queryParams) => `/contracts/report${queryParams}`,
       providesTags: [CrmApiTags.CONTRACT],
     }),
   }),
@@ -64,4 +64,5 @@ export const {
   useCloseContractMutation,
   useSignedContractMutation,
   useVerifyContractMutation,
+  useGetContractReportQuery,
 } = contractApi

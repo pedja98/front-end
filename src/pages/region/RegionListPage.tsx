@@ -1,6 +1,6 @@
 import { useGetRegionsQuery } from '../../app/apis/crm/region.api'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { createQueryParamsForSearch } from '../../helpers/common'
+import { createQueryParams } from '../../helpers/common'
 import Spinner from '../../components/Spinner'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +12,7 @@ import CustomTable from '../../components/CustomTable'
 import { TableRowPerPage } from '../../consts/common'
 
 const RegionListPage = () => {
-  const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
+  const queryParams = createQueryParams(useAppSelector((state) => state.search))
   const { isLoading, data: regions, isError, error } = useGetRegionsQuery(queryParams)
 
   const dispatch = useAppDispatch()

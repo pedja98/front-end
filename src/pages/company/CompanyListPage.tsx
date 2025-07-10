@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { setNotification } from '../../features/notifications.slice'
-import { createQueryParamsForSearch } from '../../helpers/common'
+import { createQueryParams } from '../../helpers/common'
 import { NotificationType } from '../../types/notification'
 import Spinner from '../../components/Spinner'
 import CustomTable from '../../components/CustomTable'
@@ -12,7 +12,7 @@ import { getCompanyListColumns, transformCompanyDataIntoGridData } from '../../t
 import { TableRowPerPage } from '../../consts/common'
 
 const CompanyListPage = () => {
-  const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
+  const queryParams = createQueryParams(useAppSelector((state) => state.search))
   const { isLoading, data: companies, isError, error } = useGetCompaniesQuery(queryParams)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useGetShopsQuery } from '../../app/apis/crm/shop.api'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { createQueryParamsForSearch } from '../../helpers/common'
+import { createQueryParams } from '../../helpers/common'
 import { useTranslation } from 'react-i18next'
 import Spinner from '../../components/Spinner'
 import { setNotification } from '../../features/notifications.slice'
@@ -12,7 +12,7 @@ import CustomTable from '../../components/CustomTable'
 import { TableRowPerPage } from '../../consts/common'
 
 const ShopListPage = () => {
-  const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
+  const queryParams = createQueryParams(useAppSelector((state) => state.search))
   const { isLoading, data: shops, isError, error } = useGetShopsQuery(queryParams)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

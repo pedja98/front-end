@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { setNotification } from '../../features/notifications.slice'
-import { createQueryParamsForSearch } from '../../helpers/common'
+import { createQueryParams } from '../../helpers/common'
 import { NotificationType } from '../../types/notification'
 import Spinner from '../../components/Spinner'
 import CustomTable from '../../components/CustomTable'
@@ -12,7 +12,7 @@ import { getOfferListColumns, transformOfferDataIntoGridData } from '../../trans
 import { TableRowPerPage } from '../../consts/common'
 
 const OfferListPage = () => {
-  const queryParams = createQueryParamsForSearch(useAppSelector((state) => state.search))
+  const queryParams = createQueryParams(useAppSelector((state) => state.search))
   const { isLoading, data: offers, isError, error } = useGetOffersQuery(queryParams)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

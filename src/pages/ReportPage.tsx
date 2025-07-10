@@ -21,11 +21,18 @@ import { ReportFormProps } from '../types/report'
 import { ReportFormPropsInitialState } from '../consts/report'
 import { DatePicker } from '@mui/x-date-pickers'
 import { OpportunityType } from '../types/opportunity'
-import { createQueryParamsForSearch } from '../helpers/common'
+import { createQueryParams } from '../helpers/common'
+import { useGetContractReportQuery } from '../app/apis/crm/contract.api'
 
 const ReportPage = () => {
   const { t } = useTranslation()
   const [selectedData, setSelectedData] = useState<ReportFormProps>(ReportFormPropsInitialState)
+  const [skipGetReport, setSkipGetReport] = useState<boolean>(true)
+  const [reportQueryParams, setReportQueryParams] = useState<string>('')
+
+  const {} = useGetContractReportQuery(reportQueryParams, {
+    skip: skipGetReport,
+  })
 
   const { data: regions = [] } = useGetRegionsQuery('', {
     selectFromResult: ({ data }) => ({
@@ -63,8 +70,8 @@ const ReportPage = () => {
   }
 
   const handleGetReport = () => {
-    const queryParams = createQueryParamsForSearch(selectedData)
-    console.log('Getting report with filters:', queryParams)
+    setReportQueryParams(createQueryParams(selectedData))
+    setSkipGetReport(false)
   }
 
   const renderSelectedValues = (
@@ -146,11 +153,6 @@ const ReportPage = () => {
                 value={selectedData.regions}
                 onChange={handleChange}
                 renderValue={(selected) => renderSelectedValues(selected, regions)}
-                sx={{
-                  '& .MuiSelect-select': {
-                    fontSize: { xs: '0.875rem', sm: '1rem' },
-                  },
-                }}
               >
                 {regions.map(({ id, name }) => (
                   <MenuItem key={id} value={String(id)}>
@@ -172,11 +174,6 @@ const ReportPage = () => {
                 value={selectedData.shops}
                 onChange={handleChange}
                 renderValue={(selected) => renderSelectedValues(selected, shops)}
-                sx={{
-                  '& .MuiSelect-select': {
-                    fontSize: { xs: '0.875rem', sm: '1rem' },
-                  },
-                }}
               >
                 {shops.map(({ id, name }) => (
                   <MenuItem key={id} value={String(id)}>
@@ -204,8 +201,6 @@ const ReportPage = () => {
               />
             </LocalizationProvider>
           </Grid>
-
-          {/* End Date */}
           <Grid item xs={12} sm={6} md={4} lg={2}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
