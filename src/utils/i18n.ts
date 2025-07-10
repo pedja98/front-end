@@ -25,6 +25,7 @@ i18n
       'opportunities',
       'offers',
       'contracts',
+      'reports',
     ],
     defaultNS: 'general',
     interpolation: {

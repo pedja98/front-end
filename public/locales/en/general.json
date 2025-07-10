@@ -31,6 +31,7 @@
   "delete": "Delete",
   "pageNamesAndActions": {
     "home": "Home",
+    "reports": "Reports",
     "companies": "Companies",
     "contacts": "Contacts",
     "customerSessions": "Customer sessions",

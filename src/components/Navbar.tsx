@@ -1,12 +1,12 @@
 import React from 'react'
 import Grid from '@mui/material/Grid'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { NavbarFadeMenuAdminOptions, NavbarFadeMenuUserOptions, NavbarLinks } from '../consts/navbar'
+import { NavbarLinks } from '../consts/navbar'
 import { useTranslation } from 'react-i18next'
 import { NavbarLinkStyled } from '../styles/navbar'
 import NavbarFadeMenu from './NavbarFadeMenu'
 import { useAppSelector } from '../app/hooks'
-import { getRoutePrefixFromCodeString } from '../helpers/common'
+import { getNavbarFadeMenuOptions, getRoutePrefixFromCodeString } from '../helpers/common'
 import { UserType } from '../types/user'
 
 const Navbar = () => {
@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const auth = useAppSelector((state) => state.auth)
 
-  const navbarFadeMenuOptions = auth.type === UserType.ADMIN ? NavbarFadeMenuAdminOptions : NavbarFadeMenuUserOptions
+  const navbarFadeMenuOptions = getNavbarFadeMenuOptions(auth.type as UserType)
 
   return (
     <Grid container style={{ backgroundColor: 'black', width: '100%' }}>

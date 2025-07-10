@@ -4,6 +4,8 @@ import Cookies from 'js-cookie'
 import { AutocompleteHashMap, AutocompleteEntity, ModuleOptions } from '../types/common'
 import { TFunction } from 'i18next'
 import * as CryptoJS from 'crypto-js'
+import { UserType } from '../types/user'
+import { NavbarFadeMenuAdminOptions, NavbarFadeMenuL2ManagerOptions, NavbarFadeMenuUserOptions } from '../consts/navbar'
 
 export const getRoutePrefixFromCodeString = (prefixText: string): string => {
   return prefixText
@@ -93,4 +95,15 @@ export const convertToBase64 = (file: File): Promise<string> => {
 
 export const hashPasswordForTransmission = (password: string): string => {
   return CryptoJS.AES.encrypt(password, String(process.env.REACT_APP_SECRET_AUTH_KEY)).toString()
+}
+
+export const getNavbarFadeMenuOptions = (userType: UserType): ModuleOptions[] => {
+  switch (userType) {
+    case UserType.ADMIN:
+      return NavbarFadeMenuAdminOptions
+    case UserType.L2_MANAGER:
+      return NavbarFadeMenuL2ManagerOptions
+    default:
+      return NavbarFadeMenuUserOptions
+  }
 }

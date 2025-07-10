@@ -3,7 +3,7 @@ import Menu from '@mui/material/Menu'
 import Fade from '@mui/material/Fade'
 import { NavbarUserOptionsButtonStyled, NavbarUserOptionsMenuItemStyled } from '../styles/navbar'
 import { useTranslation } from 'react-i18next'
-import { ModuleOptions } from '../types/common'
+import { ModuleOptions, NavbarFadeMenuProps } from '../types/common'
 import Grid from '@mui/material/Grid'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { useNavigate } from 'react-router-dom'
@@ -14,12 +14,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { getRoutePrefixFromCodeString } from '../helpers/common'
 import { useLogoutMutation } from '../app/apis/gw/auth.api'
 
-interface Props {
-  menuOptions: ModuleOptions[]
-  mainComponentText: string
-}
-
-const NavbarFadeMenu: FC<Props> = (props): JSX.Element => {
+const NavbarFadeMenu: FC<NavbarFadeMenuProps> = (props): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const { t } = useTranslation()

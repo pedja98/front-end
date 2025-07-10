@@ -92,6 +92,7 @@ export enum ModuleOptions {
   EditProfile = 'editProfile',
   Catalogue = 'catalogue',
   Regions = 'regions',
+  Reports = 'reports',
   Users = 'users',
   Logout = 'logout',
 }
@@ -131,4 +132,9 @@ export interface ExpandableTypographyTableProps {
   columns: GridLabel[]
   rows: PageElement[]
   actionText?: string
+}
+
+export interface NavbarFadeMenuProps {
+  menuOptions: ModuleOptions[]
+  mainComponentText: string
 }

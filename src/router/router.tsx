@@ -43,6 +43,7 @@ import OfferListPage from '../pages/offer/OfferListPage'
 import AdminProtectedRoute from '../routes/AdminProtectedRoute'
 import ContractListPage from '../pages/contract/ContractListPage'
 import ContractDetailPage from '../pages/contract/ContractDetailPage'
+import ReportPage from '../pages/ReportPage'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -52,6 +53,7 @@ export default createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'home', element: <Navigate to='/index' /> },
+      { path: 'reports', element: <ReportPage /> },
       {
         path: 'companies',
         element: <CompanyPage />,
