@@ -6,4 +6,5 @@ export const ReportFormPropsInitialState: ReportFormProps = {
   signatureStartDate: null,
   signatureEndDate: null,
   opportunityTypes: [],
+  contractStatuses: [],
 }

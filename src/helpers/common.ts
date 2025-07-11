@@ -34,7 +34,7 @@ export const createQueryParams = (data: object): string => {
   }
 
   const queryParams = entries
-    .filter(([key, value]) => value && (!Array.isArray(value) || value.length !== 0))
+    .filter(([, value]) => value && (!Array.isArray(value) || value.length !== 0))
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`)
     .join('&')
 
@@ -106,4 +106,28 @@ export const getNavbarFadeMenuOptions = (userType: UserType): ModuleOptions[] =>
     default:
       return NavbarFadeMenuUserOptions
   }
+}
+
+export const createEnumMultiselectOptions = (
+  enumObject: Record<string, string>,
+  translationKey: string,
+  t: TFunction,
+) => {
+  return Object.keys(enumObject).reduce(
+    (acc, key) => {
+      acc[key] = t(`${translationKey}.${key.toLowerCase()}`)
+      return acc
+    },
+    {} as Record<string, string>,
+  )
+}
+
+export const createMultiselectOptions = (data: { id: number; name: string }[]) => {
+  return data.reduce(
+    (acc, item) => {
+      acc[String(item.id)] = item.name
+      return acc
+    },
+    {} as Record<string, string>,
+  )
 }

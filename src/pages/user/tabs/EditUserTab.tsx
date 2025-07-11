@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid'
-import { useGetUserQuery, useUpdateUserMutation } from '../../../app/apis/crm/user.api'
+import { useUpdateUserMutation } from '../../../app/apis/crm/user.api'
 import Spinner from '../../../components/Spinner'
 import { Button, SelectChangeEvent } from '@mui/material'
 import { EmailPattern, PhonePattern } from '../../../consts/common'
@@ -9,29 +9,19 @@ import { useAppDispatch } from '../../../app/hooks'
 import { ApiException } from '../../../types/common'
 import { setNotification } from '../../../features/notifications.slice'
 import { NotificationType } from '../../../types/notification'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { updateAuthAttribute } from '../../../features/auth.slice'
 import { User, UserType } from '../../../types/user'
 import { getEditUserPagesLabels, transformUserIntoEditPageGridData } from '../../../transformers/user'
 import { GridLabel } from '../../../types/common'
-import { getCurrentUser } from '../../../helpers/common'
 import { Languages, SaveUserFormInitialState } from '../../../consts/user'
 import GridField from '../../../components/GridField'
 
-const EditUserTab = () => {
+const EditUserTab = ({ fetchedUser }: { fetchedUser?: User }) => {
   const location = useLocation()
-  const params = useParams()
 
   const isEditProfile = location.pathname.includes('edit-profile')
 
-  const username = String(isEditProfile ? getCurrentUser().username : params.username)
-
-  const {
-    data: fetchedUser,
-    isLoading: getUserIsLoading,
-    isError: getUserIsError,
-    error: getUserError,
-  } = useGetUserQuery(username)
   const [updateUser, { isLoading: updateUserIsLoading, isError: updateUserIsError, error: updateUserError }] =
     useUpdateUserMutation()
 
@@ -54,10 +44,10 @@ const EditUserTab = () => {
     }))
   }, [])
 
-  if (getUserIsError || updateUserIsError) {
+  if (updateUserIsError) {
     dispatch(
       setNotification({
-        text: JSON.stringify(getUserError || updateUserError),
+        text: JSON.stringify(updateUserError),
         type: NotificationType.Error,
       }),
     )
@@ -141,7 +131,7 @@ const EditUserTab = () => {
     }
   }
 
-  if (getUserIsLoading || updateUserIsLoading || !userData) {
+  if (updateUserIsLoading || !userData) {
     return <Spinner />
   }
 

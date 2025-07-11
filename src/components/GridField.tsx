@@ -13,7 +13,7 @@ import {
 import { GridFieldProps, GridFieldType } from '../types/common'
 import { GridFieldTypes } from '../consts/common'
 import { ChangeEvent } from 'react'
-import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { DateTimePicker, DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs'
 
@@ -127,8 +127,37 @@ const GridField = (props: GridFieldProps) => {
                 fullWidth: true,
                 required: !!gridFieldData.required,
                 id: label.key,
+                variant: 'standard',
               },
               digitalClockItem: {},
+            }}
+          />
+        </LocalizationProvider>
+      </Grid>
+    )
+  }
+  if (gridFieldData.type === GridFieldTypes.DATE) {
+    return (
+      <Grid item sx={{ width: '100%', mb: 1 }} key={label.key}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            name={label.key}
+            label={label.text}
+            format='DD/MM/YYYY'
+            disabled={gridFieldData.disabled}
+            value={gridFieldData.value ? dayjs(gridFieldData.value) : null}
+            onChange={(newValue) => {
+              if (handleChangeDateTimePicker) {
+                handleChangeDateTimePicker(newValue, label.key)
+              }
+            }}
+            slotProps={{
+              textField: {
+                fullWidth: true,
+                required: !!gridFieldData.required,
+                id: label.key,
+                variant: 'standard',
+              },
             }}
           />
         </LocalizationProvider>

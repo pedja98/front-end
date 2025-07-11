@@ -4,4 +4,5 @@ export interface ReportFormProps {
   signatureStartDate: string | null
   signatureEndDate: string | null
   opportunityTypes: string[]
+  contractStatuses: string[]
 }

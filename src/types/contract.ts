@@ -52,4 +52,8 @@ export interface ContractReport {
   opportunityId: number
   opportunityName: string
   opportunityType: OpportunityType
+  shopId: number
+  shopName: string
+  regionId: number
+  regionName: string
 }

@@ -22,6 +22,7 @@ export const GridFieldTypes = {
   STRING: 'string',
   NUMBER: 'number',
   SELECT: 'select',
+  DATE: 'date',
   LINK: 'link',
   PASSWORD: 'password',
   MULTISELECT: 'multiselect',

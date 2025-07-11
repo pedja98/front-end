@@ -4,5 +4,6 @@
   "signatureStartDate": "Datum početka potpisa",
   "signatureEndDate": "Datum kraja potpisa",
   "getReport": "Dohvati .",
-  "opportunityTypes": "Tip poslovne prilike"
+  "opportunityTypes": "Tip poslovne prilike",
+  "contractStatuses": "Statusi ugovora"
 }

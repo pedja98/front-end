@@ -4,5 +4,6 @@
   "signatureStartDate": "Signature start date",
   "signatureEndDate": "Signature end date",
   "getReport": "Get report",
-  "opportunityTypes": "Opportunity types"
+  "opportunityTypes": "Opportunity types",
+  "contractStatuses": "Contract statuses"
 }

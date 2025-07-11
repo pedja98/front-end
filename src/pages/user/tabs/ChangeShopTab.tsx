@@ -10,9 +10,9 @@ import { NotificationType } from '../../../types/notification'
 import { ApiException } from '../../../types/common'
 import { useParams } from 'react-router-dom'
 
-const ChangeShopTab = () => {
+const ChangeShopTab = ({ shopId }: { shopId?: string }) => {
   const { data: shops, isLoading, isError } = useGetShopsQuery('')
-  const [selectedShopId, setSelectedShopId] = useState('')
+  const [selectedShopId, setSelectedShopId] = useState(shopId)
   const [setUserShop, { isLoading: isLoadingSetShop }] = useSetUserShopMutation()
   const { t } = useTranslation()
   const username = useParams().username as string

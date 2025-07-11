@@ -138,3 +138,8 @@ export interface NavbarFadeMenuProps {
   menuOptions: ModuleOptions[]
   mainComponentText: string
 }
+
+export interface MultipleSelectEntityItem {
+  id: number
+  name: string
+}
