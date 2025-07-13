@@ -1,4 +1,6 @@
 {
+  "companyAssignedToUserShopEmpty": "Prodavac mora da ima dodeljenu prodavnicu",
+  "companyTemporaryAssignedToUserError": "Privremeno dodeljena osoba mora da bude iz iste prodavnice kao i dodeljena",
   "name": "Ime kompanije",
   "hqAddress": "Adresa sedišta",
   "industry": "Industrija",

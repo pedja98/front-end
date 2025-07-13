@@ -1,4 +1,6 @@
 {
+  "companyAssignedToUserShopEmpty": "Salesman must have assigned shop",
+  "companyTemporaryAssignedToUserError": "Temporary responsible sales person must be from same shop as responsible sales person",
   "name": "Company name",
   "hqAddress": "HQ Address",
   "industry": "Industry",

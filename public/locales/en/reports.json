@@ -14,5 +14,7 @@
   "opportunity": "Opportunity",
   "opportunityType": "Opportunity type",
   "shop": "Shop",
-  "region": "Region"
+  "region": "Region",
+  "exportCSV": "Export CSV",
+  "exportXLS": "Export XLS"
 }

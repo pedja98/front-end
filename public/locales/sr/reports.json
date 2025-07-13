@@ -14,5 +14,7 @@
   "opportunity": "Poslovna prilika",
   "opportunityType": "Tip poslovne prilike",
   "shop": "Prodavnica",
-  "region": "Region"
+  "region": "Region",
+  "exportCSV": "Exportuj CSV",
+  "exportXLS": "Exportuj XLS"
 }
