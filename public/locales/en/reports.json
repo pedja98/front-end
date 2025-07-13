@@ -5,5 +5,14 @@
   "signatureEndDate": "Signature end date",
   "getReport": "Get report",
   "opportunityTypes": "Opportunity types",
-  "contractStatuses": "Contract statuses"
+  "contractStatuses": "Contract statuses",
+  "contract": "Contract",
+  "referenceNumber": "Reference number",
+  "dateSigned": "Date signed",
+  "contractStatus": "Contract status",
+  "company": "Company",
+  "opportunity": "Opportunity",
+  "opportunityType": "Opportunity type",
+  "shop": "Shop",
+  "region": "Region"
 }

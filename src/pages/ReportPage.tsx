@@ -19,9 +19,12 @@ const ReportPage = () => {
   const [skipGetReport, setSkipGetReport] = useState<boolean>(true)
   const [reportQueryParams, setReportQueryParams] = useState<string>('')
 
-  const { isLoading: isLoadingGetContractReports } = useGetContractReportQuery(reportQueryParams, {
-    skip: skipGetReport,
-  })
+  const { isLoading: isLoadingGetContractReports, data: contractReportData } = useGetContractReportQuery(
+    reportQueryParams,
+    {
+      skip: skipGetReport,
+    },
+  )
 
   const { data: regions = [] } = useGetRegionsQuery('', {
     selectFromResult: ({ data }) => ({
@@ -78,15 +81,17 @@ const ReportPage = () => {
       <Grid item xs={12}>
         <Grid
           container
-          spacing={{ xs: 2, md: 3 }}
+          spacing={2}
+          wrap='nowrap'
           sx={{
-            px: { xs: 1, sm: 1 },
+            overflowX: 'auto',
+            px: 1,
           }}
         >
           {labels.map((label) => {
             const gridFieldData = reportGridData[label.key]
             return (
-              <Grid item xs={12} sm={6} md={4} lg={2} key={label.key}>
+              <Grid item xs={2} key={label.key} sx={{ minWidth: 200 }}>
                 <GridField
                   gridFieldData={gridFieldData}
                   label={label}
@@ -99,14 +104,11 @@ const ReportPage = () => {
 
           <Grid
             item
-            xs={12}
-            sm={6}
-            md={4}
-            lg={2}
+            xs={2}
             sx={{
+              minWidth: 200,
               display: 'flex',
-              alignItems: { xs: 'center', lg: 'flex-end' },
-              justifyContent: { xs: 'center', sm: 'flex-start' },
+              alignItems: 'flex-end',
             }}
           >
             <Button
@@ -114,10 +116,9 @@ const ReportPage = () => {
               color='primary'
               onClick={handleGetReport}
               sx={{
-                width: { xs: '100%', sm: '100%' },
-                height: { xs: '48px', sm: '56px' },
-                fontSize: { xs: '0.875rem', sm: '1rem' },
-                mt: { xs: 2, lg: 0 },
+                width: '100%',
+                height: 56,
+                fontSize: '1rem',
               }}
             >
               {t('reports:getReport')}
@@ -126,8 +127,8 @@ const ReportPage = () => {
         </Grid>
       </Grid>
 
-      <Grid>
-        <ReportTable isLoadingReportData={isLoadingGetContractReports} />
+      <Grid item xs={12} sx={{ mt: 1 }}>
+        <ReportTable isLoadingReportData={isLoadingGetContractReports} contractReportData={contractReportData || []} />
       </Grid>
     </Grid>
   )

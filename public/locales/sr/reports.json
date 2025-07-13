@@ -3,7 +3,16 @@
   "regions": "Regioni",
   "signatureStartDate": "Datum početka potpisa",
   "signatureEndDate": "Datum kraja potpisa",
-  "getReport": "Dohvati .",
-  "opportunityTypes": "Tip poslovne prilike",
-  "contractStatuses": "Statusi ugovora"
+  "getReport": "Dohvati izveštaj",
+  "opportunityTypes": "Tipovi poslovne prilike",
+  "contractStatuses": "Statusi ugovora",
+  "contract": "Ugovor",
+  "referenceNumber": "Delovodni broj",
+  "dateSigned": "Datu potpisivanja",
+  "contractStatus": "Status ugovora",
+  "company": "Kompanija",
+  "opportunity": "Poslovna prilika",
+  "opportunityType": "Tip poslovne prilike",
+  "shop": "Prodavnica",
+  "region": "Region"
 }
