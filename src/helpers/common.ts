@@ -5,7 +5,13 @@ import { AutocompleteHashMap, AutocompleteEntity, ModuleOptions } from '../types
 import { TFunction } from 'i18next'
 import * as CryptoJS from 'crypto-js'
 import { UserType } from '../types/user'
-import { NavbarFadeMenuAdminOptions, NavbarFadeMenuL2ManagerOptions, NavbarFadeMenuUserOptions } from '../consts/navbar'
+import {
+  NavbarFadeMenuAdminOptions,
+  NavbarFadeMenuL2ManagerOptions,
+  NavbarFadeMenuUserOptions,
+  NavbarL1ManagerAndSalesmanLinks,
+  NavbarL2ManagerAndAdminLinks,
+} from '../consts/navbar'
 
 export const getRoutePrefixFromCodeString = (prefixText: string): string => {
   return prefixText
@@ -105,6 +111,19 @@ export const getNavbarFadeMenuOptions = (userType: UserType): ModuleOptions[] =>
       return NavbarFadeMenuL2ManagerOptions
     default:
       return NavbarFadeMenuUserOptions
+  }
+}
+
+export const getNavbarMenuOptions = (userType: UserType): ModuleOptions[] => {
+  switch (userType) {
+    case UserType.ADMIN:
+    case UserType.L2_MANAGER:
+      return NavbarL2ManagerAndAdminLinks
+    case UserType.L1_MANAGER:
+    case UserType.SALESMAN:
+      return NavbarL1ManagerAndSalesmanLinks
+    default:
+      return []
   }
 }
 

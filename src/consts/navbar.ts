@@ -1,6 +1,6 @@
 import { ModuleOptions } from '../types/common'
 
-export const NavbarLinks = [
+export const NavbarL2ManagerAndAdminLinks = [
   ModuleOptions.Home,
   ModuleOptions.Companies,
   ModuleOptions.Contacts,
@@ -9,6 +9,16 @@ export const NavbarLinks = [
   ModuleOptions.Offers,
   ModuleOptions.Contracts,
   ModuleOptions.Shops,
+]
+
+export const NavbarL1ManagerAndSalesmanLinks = [
+  ModuleOptions.Home,
+  ModuleOptions.Companies,
+  ModuleOptions.Contacts,
+  ModuleOptions.CustomerSessions,
+  ModuleOptions.Opportunities,
+  ModuleOptions.Offers,
+  ModuleOptions.Contracts,
 ]
 
 export const NavbarFadeMenuUserOptions = [ModuleOptions.EditProfile, ModuleOptions.Logout]

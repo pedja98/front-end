@@ -1,12 +1,10 @@
-import React from 'react'
 import Grid from '@mui/material/Grid'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { NavbarLinks } from '../consts/navbar'
 import { useTranslation } from 'react-i18next'
 import { NavbarLinkStyled } from '../styles/navbar'
 import NavbarFadeMenu from './NavbarFadeMenu'
 import { useAppSelector } from '../app/hooks'
-import { getNavbarFadeMenuOptions, getRoutePrefixFromCodeString } from '../helpers/common'
+import { getNavbarFadeMenuOptions, getNavbarMenuOptions, getRoutePrefixFromCodeString } from '../helpers/common'
 import { UserType } from '../types/user'
 
 const Navbar = () => {
@@ -19,18 +17,19 @@ const Navbar = () => {
   const auth = useAppSelector((state) => state.auth)
 
   const navbarFadeMenuOptions = getNavbarFadeMenuOptions(auth.type as UserType)
+  const navbarMenuOptions = getNavbarMenuOptions(auth.type as UserType)
 
   return (
     <Grid container style={{ backgroundColor: 'black', width: '100%' }}>
       <Grid container style={{ width: menuOptionsWidth }}>
         {isLargeScreen ? (
-          NavbarLinks.map((navbarLink) => (
+          navbarMenuOptions.map((navbarLink) => (
             <NavbarLinkStyled key={navbarLink} to={`/index/${getRoutePrefixFromCodeString(navbarLink)}`}>
               {t(`general:pageNamesAndActions.${navbarLink}`)}
             </NavbarLinkStyled>
           ))
         ) : (
-          <NavbarFadeMenu menuOptions={NavbarLinks} mainComponentText={t('general:moreOptions')} />
+          <NavbarFadeMenu menuOptions={navbarMenuOptions} mainComponentText={t('general:moreOptions')} />
         )}
       </Grid>
       <Grid style={{ width: userOptionsWidth }}>
