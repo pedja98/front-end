@@ -131,14 +131,14 @@ const CompanyContactRelationCreateDialog: FC<{ contactId: number }> = ({ contact
             }}
             renderValue={(selected) =>
               selected && selected.length > 0
-                ? selected.map((type) => CompanyContactRelationTypes[type as CompanyContactRelationType]).join(', ')
+                ? selected.map((type) => t(`contacts:companyContactRelationType.${type}`)).join(', ')
                 : ''
             }
           >
             {Object.keys(CompanyContactRelationTypes).map((type) => (
               <MenuItem key={type} value={type}>
                 <Checkbox checked={relationData.relationTypes?.includes(type as CompanyContactRelationType) || false} />
-                <ListItemText primary={CompanyContactRelationTypes[type as CompanyContactRelationType]} />
+                <ListItemText primary={t(`contacts:companyContactRelationType.${type}`)} />
               </MenuItem>
             ))}
           </Select>
