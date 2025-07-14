@@ -92,7 +92,7 @@ export const getEditUserPagesLabels = (t: TFunction, isEditProfile: boolean): Gr
     { text: t('users:email'), key: 'email' },
     { text: t('users:phone'), key: 'phone' },
     ...(!isEditProfile ? [{ text: t('users:type'), key: 'type' }] : []),
-    ...(!isEditProfile ? [{ text: t('users:language'), key: 'language' }] : []),
+    ...(isEditProfile ? [{ text: t('users:language'), key: 'language' }] : []),
   ]
   return labels
 }
