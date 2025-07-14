@@ -68,7 +68,7 @@ export const getAutocompleteHashMapFromEntityData = <T extends AutocompleteEntit
 }
 
 export const canCreateModule = (entityName: ModuleOptions, userType?: UserType): boolean => {
-  if (ModuleOptions.Shops) {
+  if (entityName === ModuleOptions.Shops) {
     return userType === UserType.ADMIN
   }
   return ![ModuleOptions.Opportunities, ModuleOptions.Contracts, ModuleOptions.Offers].includes(entityName)
