@@ -1,10 +1,10 @@
+import { UserType } from './../types/user'
 import { InitialState as AuthInitialState } from '../consts/auth'
 import { AuthState } from '../types/auth'
 import Cookies from 'js-cookie'
 import { AutocompleteHashMap, AutocompleteEntity, ModuleOptions } from '../types/common'
 import { TFunction } from 'i18next'
 import * as CryptoJS from 'crypto-js'
-import { UserType } from '../types/user'
 import {
   NavbarFadeMenuAdminOptions,
   NavbarFadeMenuL2ManagerOptions,
@@ -67,7 +67,10 @@ export const getAutocompleteHashMapFromEntityData = <T extends AutocompleteEntit
   }, {} as AutocompleteHashMap)
 }
 
-export const canCreateModule = (entityName: ModuleOptions): boolean => {
+export const canCreateModule = (entityName: ModuleOptions, userType?: UserType): boolean => {
+  if (ModuleOptions.Shops) {
+    return userType === UserType.ADMIN
+  }
   return ![ModuleOptions.Opportunities, ModuleOptions.Contracts, ModuleOptions.Offers].includes(entityName)
 }
 

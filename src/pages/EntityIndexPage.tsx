@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import SearchDialog from '../components/SearchDialog'
-import { useAppDispatch } from '../app/hooks'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { cleanSearch } from '../features/search.slice'
 import { canCreateModule, getCamelCaseFromKebabString } from '../helpers/common'
 import { cleanCommonState } from '../features/common.slice'
@@ -18,6 +18,8 @@ const EntityIndexPage = () => {
   const [isDialogOpen, setDialogOpen] = useState(false)
 
   const entityName = String(location.pathname.split('/').pop()) as ModuleOptions
+
+  const userType = useAppSelector((state) => state.auth).type
 
   useEffect(() => {
     dispatch(cleanCommonState())
@@ -44,7 +46,7 @@ const EntityIndexPage = () => {
         </Typography>
       </Grid>
       <Grid container direction='row' spacing={2}>
-        {canCreateModule(entityName) && (
+        {canCreateModule(entityName, userType) && (
           <Grid item>
             <Button variant='contained' color='primary' sx={{ marginTop: 2 }} onClick={handleNavigateToCreatePage}>
               {t('general:create')}
