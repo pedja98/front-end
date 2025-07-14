@@ -85,18 +85,15 @@ export const getCreateUserPagesLabels = (t: TFunction): GridLabel[] => [
   { text: t('users:type'), key: 'type' },
 ]
 
-export const getEditUserPagesLabels = (t: TFunction, removeType: boolean): GridLabel[] => {
-  const labels = [
+export const getEditUserPagesLabels = (t: TFunction, isEditProfile: boolean): GridLabel[] => {
+  const labels: GridLabel[] = [
     { text: t('users:firstName'), key: 'firstName' },
     { text: t('users:lastName'), key: 'lastName' },
     { text: t('users:email'), key: 'email' },
     { text: t('users:phone'), key: 'phone' },
-    { text: t('users:type'), key: 'type' },
-    { text: t('users:language'), key: 'language' },
-  ] as GridLabel[]
-  if (removeType) {
-    labels.splice(4, 1)
-  }
+    ...(!isEditProfile ? [{ text: t('users:type'), key: 'type' }] : []),
+    ...(!isEditProfile ? [{ text: t('users:language'), key: 'language' }] : []),
+  ]
   return labels
 }
 
