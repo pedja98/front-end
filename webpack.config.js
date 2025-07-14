@@ -17,6 +17,7 @@ module.exports = {
       rewrites: [
         { from: /^\/index\/catalogue/, to: '/index.html' },
         { from: /^\/index/, to: '/index.html' },
+        { from: /^\/$/, to: '/index.html' },
       ],
     },
   },

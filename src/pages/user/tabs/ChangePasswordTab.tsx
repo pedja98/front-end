@@ -18,6 +18,7 @@ const ChangePasswordTab = () => {
   const currentUsername = String(useAppSelector((state) => state.auth.username))
   const [changePassword, { isLoading }] = useChangePasswordMutation()
   const navigate = useNavigate()
+  const isEditProfile = location.pathname.includes('edit-profile')
 
   const [changePasswordFormProps, setChangePasswordFormProps] =
     useState<ChangePasswordFormProps>(ChangePasswordFormInitialState)
@@ -108,7 +109,7 @@ const ChangePasswordTab = () => {
   }
 
   const changePasswordGridData = getUserChangePasswordGridData()
-  const labels = getUserChangePasswordLabels(t)
+  const labels = getUserChangePasswordLabels(t, isEditProfile)
 
   return (
     <Grid container sx={{ width: '100%' }} direction='column' spacing={2}>
