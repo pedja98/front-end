@@ -23,7 +23,7 @@ export const NavbarL1ManagerAndSalesmanLinks = [
 
 export const NavbarFadeMenuUserOptions = [ModuleOptions.EditProfile, ModuleOptions.Logout]
 
-export const NavbarFadeMenuL2ManagerOptions = [ModuleOptions.EditProfile, ModuleOptions.Logout]
+export const NavbarFadeMenuL2ManagerOptions = [ModuleOptions.EditProfile, ModuleOptions.Reports, ModuleOptions.Logout]
 
 export const NavbarFadeMenuAdminOptions = [
   ModuleOptions.EditProfile,
