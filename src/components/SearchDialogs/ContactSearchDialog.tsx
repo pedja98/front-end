@@ -6,9 +6,8 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { updateSearchAttribute } from '../../features/search.slice'
 import { ContactSortedByFields } from '../../consts/search'
 import SearchDialogSort from '../SearchDialogSort'
-import { ContactDocumentType, ContactSearchFormProps } from '../../types/contact'
+import { ContactSearchFormProps } from '../../types/contact'
 import { ModuleOptions } from '../../types/common'
-import { getEnumTranslations } from '../../helpers/common'
 import { getContactSearchGridData, getContactSearchLabels } from '../../transformers/contact'
 import GridField from '../GridField'
 
@@ -24,10 +23,7 @@ const ContactSearchDialog = () => {
   }
 
   const labels = getContactSearchLabels(t)
-  const contactSearchGridData = getContactSearchGridData(
-    contactSearchData,
-    getEnumTranslations(ContactDocumentType, t, 'contacts:documentTypes'),
-  )
+  const contactSearchGridData = getContactSearchGridData(contactSearchData)
 
   return (
     <Grid container sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

@@ -9,7 +9,6 @@
   "email": "Email",
   "phone": "Phone",
   "documentType": "Document type",
-  "contactDocumentType": "Document types",
   "companyRelationsTitle": "Company relations",
   "documentId": "Document id",
   "contactUpdated": "Contact data has been successfully updated",

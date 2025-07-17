@@ -3,7 +3,6 @@ import { AutocompleteHashMap, GridLabel, PageElement } from '../types/common'
 import {
   CompanyContactRelation,
   Contact,
-  ContactDocumentType,
   ContactSearchFormProps,
   SaveContact,
   UpdateCompanyContactRelation,
@@ -186,14 +185,10 @@ export const getContactSearchLabels = (t: TFunction): GridLabel[] => [
   { text: t('contacts:lastName'), key: 'lastName' },
   { text: t('contacts:email'), key: 'email' },
   { text: t('contacts:phone'), key: 'phone' },
-  { text: t('contacts:contactDocumentType'), key: 'documentType' },
   { text: t('contacts:documentId'), key: 'documentId' },
 ]
 
-export const getContactSearchGridData = (
-  contactSearchData: Partial<ContactSearchFormProps>,
-  documentTypes: Record<ContactDocumentType, string>,
-): PageElement => ({
+export const getContactSearchGridData = (contactSearchData: Partial<ContactSearchFormProps>): PageElement => ({
   firstName: {
     type: GridFieldTypes.STRING,
     value: contactSearchData.firstName,
@@ -204,12 +199,5 @@ export const getContactSearchGridData = (
   },
   email: { type: GridFieldTypes.STRING, value: contactSearchData.email },
   phone: { type: GridFieldTypes.STRING, value: contactSearchData.phone },
-  documentType: {
-    type: GridFieldTypes.MULTISELECT,
-    multiselectOptions: documentTypes,
-    multiselectOptionValues: ContactDocumentType,
-    multiselectValue: contactSearchData.documentType,
-    dialogField: true,
-  },
   documentId: { type: GridFieldTypes.STRING, value: contactSearchData.documentId },
 })
