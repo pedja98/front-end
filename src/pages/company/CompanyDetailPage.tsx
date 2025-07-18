@@ -105,7 +105,7 @@ const CompanyDetailPage = () => {
   )
 
   const offerTableRows = (offers || []).map((offer) => transformOfferDataIntoGridData(t, offer))
-  const offerTableColumns = getOfferListColumns(t)
+  const offerTableColumns = getOfferListColumns(t, undefined, true)
 
   const opportunityTableRows = (opportunities || []).map((opportunity) =>
     transformOpportunityDataIntoGridData(t, opportunity),

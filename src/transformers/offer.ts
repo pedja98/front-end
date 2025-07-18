@@ -68,12 +68,16 @@ export const getOfferSearchGridData = (
   },
 })
 
-export const getOfferListColumns = (t: TFunction, hideOpportunity?: boolean): GridLabel[] =>
+export const getOfferListColumns = (
+  t: TFunction,
+  hideOpportunity?: boolean,
+  isCompanyDetailPage?: boolean,
+): GridLabel[] =>
   [
     { text: t('offers:name'), key: 'name' },
-    { text: t('offers:company'), key: 'companyName' },
-    !hideOpportunity && { text: t('offers:opportunity'), key: 'opportunityName' },
-    { text: t('offers:contract'), key: 'contractName' },
+    !isCompanyDetailPage && { text: t('offers:company'), key: 'companyName' },
+    !hideOpportunity && !isCompanyDetailPage && { text: t('offers:opportunity'), key: 'opportunityName' },
+    !isCompanyDetailPage && { text: t('offers:contract'), key: 'contractName' },
     { text: t('offers:status'), key: 'status' },
     { text: t('general:createdBy'), key: 'createdByUsername' },
     { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
