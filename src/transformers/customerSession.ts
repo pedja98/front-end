@@ -24,7 +24,7 @@ export const getCustomerSessionDetailPageLabels = (t: TFunction): GridLabel[] =>
   { text: t('general:modifiedBy'), key: 'modifiedByUsername' },
   { text: t('general:dateCreated'), key: 'dateCreated' },
   { text: t('general:dateModified'), key: 'dateModified' },
-  { text: t('general:description'), key: 'description' },
+  { text: t('customerSessions:description'), key: 'description' },
 ]
 
 export const getCustomerSessionTableColumns = (t: TFunction): GridLabel[] => [
