@@ -164,7 +164,7 @@ const OpportunityDetailPage = () => {
   )
 
   const offerTableRows = (offers || []).map((offer) => transformOfferDataIntoGridData(t, offer))
-  const offerTableColumns = getOfferListColumns(t)
+  const offerTableColumns = getOfferListColumns(t, true)
 
   const contractExpandableTableColumns = getContractColumnsForExpandableTable(t)
   const contractExpandableTableColumnsRows = (contracts || []).map((contract) =>
