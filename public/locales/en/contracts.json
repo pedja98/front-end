@@ -12,7 +12,7 @@
   "selectFileToUpload": "Please select to upload",
   "opportunity": "Opportunity",
   "offer": "Offer",
-  "signed": "Signed",
+  "signed": "Sign",
   "verify": "Verify",
   "close": "Close",
   "contractClosed": "You have successfully closed contract",
@@ -37,5 +37,6 @@
     "status": "Status",
     "dateCreated": "Date created"
   },
-  "thereIsAlreadySignedContract": "There is already contract in status Signed for this company"
+  "thereIsAlreadySignedContract": "There is already contract in status Signed for this company",
+  "selectDocument": "Select document"
 }

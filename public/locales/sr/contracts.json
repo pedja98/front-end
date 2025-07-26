@@ -37,5 +37,6 @@
     "status": "Status",
     "dateCreated": "Datum kreiranja"
   },
-  "thereIsAlreadySignedContract": "Već postoji ugovor u statusu Potpisan kompaniju"
+  "thereIsAlreadySignedContract": "Već postoji ugovor u statusu Potpisan kompaniju",
+  "selectDocument": "Odaberi dokument"
 }
