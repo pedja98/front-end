@@ -44,6 +44,7 @@ import AdminProtectedRoute from '../routes/AdminProtectedRoute'
 import ContractListPage from '../pages/contract/ContractListPage'
 import ContractDetailPage from '../pages/contract/ContractDetailPage'
 import ReportPage from '../pages/ReportPage'
+import AdminL2ProtectedRoute from '../routes/AdminL2ProtectedRoute'
 
 export default createBrowserRouter([
   { path: '/', element: <LoginProtectedRoute element={<LoginPage />} /> },
@@ -53,7 +54,7 @@ export default createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'home', element: <Navigate to='/index' /> },
-      { path: 'reports', element: <ReportPage /> },
+      { path: 'reports', element: <AdminL2ProtectedRoute element={<ReportPage />} /> },
       {
         path: 'companies',
         element: <CompanyPage />,
@@ -139,10 +140,10 @@ export default createBrowserRouter([
       },
       {
         path: 'shops',
-        element: <ShopPage />,
+        element: <AdminL2ProtectedRoute element={<ShopPage />} />,
         children: [
           { index: true, element: <EntityIndexPage /> },
-          { path: 'create', element: <ShopSavePage /> },
+          { path: 'create', element: <AdminL2ProtectedRoute element={<ShopSavePage />} /> },
           { path: ':id/edit', element: <ShopSavePage /> },
           { path: 'list', element: <ShopListPage /> },
           { path: ':id', element: <ShopDetailPage /> },
