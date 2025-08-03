@@ -36,7 +36,8 @@ const authSlice = createSlice({
         state.username = payload.username
         state.type = payload.type
         state.language = payload.language
-        Cookies.set('currentUser', JSON.stringify(state), { expires: 0.5, sameSite: 'None', secure: true })
+        const inFourHours = new Date(new Date().getTime() + 4 * 60 * 60 * 1000)
+        Cookies.set('currentUser', JSON.stringify(state), { expires: inFourHours, sameSite: 'None', secure: true })
       })
       .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
         Object.assign(state, {
